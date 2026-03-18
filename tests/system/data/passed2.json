@@ -1,0 +1,10 @@
+[
+    "Morfeus3DBondLocalForceConstant",
+    "Morfeus3DBondLocalFrequency",
+    "Multiwfn3DAtomCdftCondensedFukuiDual",
+    "Multiwfn3DAtomCdftCondensedFukuiMinus",
+    "Multiwfn3DAtomCdftCondensedFukuiPlus",
+    "Multiwfn3DAtomCdftCondensedFukuiZero",
+    "Qmdesc2DAtomPartialCharge",
+    "Qmdesc2DBondBondLength"
+]

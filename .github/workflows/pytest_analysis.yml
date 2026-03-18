@@ -1,0 +1,59 @@
+# This workflow does not cover the testing of the explicit calculation of atom and bond features
+# as well as additional tests that are explicitly dependent on Multiwfn. To run the full test
+# suite, Multiwfn and the additional ALFABET environment must be available. To complete this
+# workflow successfully, all available features that cannot be calculated without the additional
+# dependencies must be marked as successfully tested in tests/system/data/passed*.json. For further
+# details on testing, see the CONTRIBUTING.md file.
+
+name: Pytest-quick
+
+on: [push, workflow_dispatch, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  run-pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+    - name: Free disk space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf /opt/hostedtoolcache
+        df -h
+
+    - uses: actions/checkout@v4
+
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: "3.12"
+        miniconda-version: latest
+        environment-file: bonafide_env_dev.yml
+        activate-environment: bonafide_env_dev
+        channels: conda-forge
+
+    - name: Cache conda environment
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/conda_pkgs_dir
+          ~/.cache/pip
+        key: ${{ runner.os }}-conda-${{ hashFiles('bonafide_env_dev') }}
+        restore-keys: |
+          ${{ runner.os }}-conda-
+
+    - name: Install bonafide
+      shell: bash -el {0}
+      run: |
+        pip install kallisto --no-deps
+        pip install --no-deps .
+        python post_install_setup.py
+
+    - name: Run pytest
+      shell: bash -el {0}
+      run: |
+        pytest -s tests/ -m "not get_fmo_energies_multiwfn and not multiwfn_driver"

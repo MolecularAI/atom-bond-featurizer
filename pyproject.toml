@@ -1,0 +1,20 @@
+[project]
+name = "bonafide"
+version = "0.1.0"
+description = "A Python package for calculating features for atoms and bonds in molecules"
+readme = "README.md"
+authors = [
+    {name = "Lukas M. Sigmund"},
+    {name = "Matthew Ball"},
+    {name = "Michele Assante"},
+]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+bonafide = ["_feature_config.toml", "_feature_info.json", "utils/SMARTS_RX.txt"]

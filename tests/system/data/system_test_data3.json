@@ -1,0 +1,5271 @@
+{
+    "Multiwfn3DAtomCdftCondensedFukuiDual": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.006314,
+            "7": -0.000673,
+            "11": -0.002248,
+            "12": -0.007953
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedFukuiMinus": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.071223,
+            "7": 0.061734,
+            "11": 0.028966,
+            "12": 0.024019
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedFukuiPlus": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.077537,
+            "7": 0.061061,
+            "11": 0.026717,
+            "12": 0.016067
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedFukuiZero": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.07438,
+            "7": 0.061398,
+            "11": 0.027842,
+            "12": 0.020043
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiDual": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "32": "_inaccessible",
+            "27": "_inaccessible",
+            "1": "_inaccessible",
+            "0": "_inaccessible",
+            "6": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiMinus": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "32": "_inaccessible",
+            "27": "_inaccessible",
+            "1": "_inaccessible",
+            "6": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiPlus": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": "_inaccessible",
+            "0": "_inaccessible",
+            "6": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiZero": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "32": "_inaccessible",
+            "27": "_inaccessible",
+            "6": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalElectrophilicityFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 3.6558,
+            "7": 2.878972,
+            "11": 1.259683,
+            "12": 0.757545
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalElectrophilicityRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 1.243363,
+            "7": 0.979158,
+            "11": 0.428427,
+            "12": 0.257646
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHardnessMinusFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.074545,
+            "7": 0.064613,
+            "11": 0.030317,
+            "12": 0.025139
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHardnessMinusRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.219598,
+            "7": 0.190341,
+            "11": 0.089309,
+            "12": 0.074056
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHardnessPlusFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.081153,
+            "7": 0.063909,
+            "11": 0.027963,
+            "12": 0.016816
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHardnessPlusRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.239065,
+            "7": 0.188266,
+            "11": 0.082375,
+            "12": 0.049538
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHardnessZeroFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.077849,
+            "7": 0.064262,
+            "11": 0.029141,
+            "12": 0.020978
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHardnessZeroRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.229331,
+            "7": 0.189305,
+            "11": 0.085844,
+            "12": 0.061797
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHyperhardnessFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.006917,
+            "7": -0.000737,
+            "11": -0.002463,
+            "12": -0.008712
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHyperhardnessRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.060023,
+            "7": -0.006398,
+            "11": -0.02137,
+            "12": -0.075604
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHypersoftnessFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.005764,
+            "7": -0.000614,
+            "11": -0.002052,
+            "12": -0.00726
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalHypersoftnessRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.000664,
+            "7": -7.1e-05,
+            "11": -0.000236,
+            "12": -0.000837
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalNucleophilicityFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.001511,
+            "7": 0.001309,
+            "11": 0.000614,
+            "12": 0.000509
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalNucleophilicityRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": -0.927843,
+            "7": -0.804227,
+            "11": -0.377348,
+            "12": -0.312902
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalRelativeElectrophilicity": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 1.088651138,
+            "7": 0.98909839,
+            "11": 0.922357246,
+            "12": 0.668928765
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalRelativeNucleophilicity": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.91856791,
+            "7": 1.011021765,
+            "11": 1.084178613,
+            "12": 1.494927491
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalSoftnessMinusFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.068049,
+            "7": 0.058983,
+            "11": 0.027675,
+            "12": 0.022949
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalSoftnessMinusRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.0231,
+            "7": 0.020022,
+            "11": 0.009395,
+            "12": 0.00779
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalSoftnessPlusFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.074082,
+            "7": 0.05834,
+            "11": 0.025526,
+            "12": 0.015351
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalSoftnessPlusRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.025148,
+            "7": 0.019804,
+            "11": 0.008665,
+            "12": 0.005211
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalSoftnessZeroFmo": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.071065,
+            "7": 0.058662,
+            "11": 0.026601,
+            "12": 0.01915
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftLocalSoftnessZeroRedox": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ],
+            [
+                "radical_cation-conf_01_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "radical_cation-conf_01_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [
+            [
+                [
+                    -777.989295,
+                    "eh"
+                ],
+                "n"
+            ],
+            [
+                [
+                    -778.241425,
+                    "eh"
+                ],
+                "n+1"
+            ],
+            [
+                [
+                    -777.510551,
+                    "eh"
+                ],
+                "n-1"
+            ]
+        ],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.024124,
+            "7": 0.019913,
+            "11": 0.00903,
+            "12": 0.006501
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomConnectivityIndex": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 3.301,
+            "9": 1.0098
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomConnectivityIndexInteger": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 3,
+            "9": 1
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomEnergyIndex": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": -0.64172,
+            "9": -0.730756,
+            "12": -0.596784
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomForceHellmannFeynman": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 0.11033885,
+            "9": 0.05241114
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomForceHellmannFeynmanElectrons": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 3.19650558,
+            "9": 3.34415249
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomForceHellmannFeynmanNuclearCharges": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 3.30641081,
+            "9": 3.39635959
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceAtomicElectronicSpatialExtent": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "12": 1.083629,
+            "13": 0.945514
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceAtomicValence": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.fuzzy.integration_grid",
+                "Molecular "
+            ]
+        ],
+        "expected_data": {
+            "32": 1.02844411,
+            "27": 0.99137497,
+            "1": 5.2373837,
+            "0": 3.94129468,
+            "6": 7.21043682
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceAtomicValenceAlpha": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.fuzzy.integration_grid",
+                "Molecular "
+            ]
+        ],
+        "expected_data": {
+            "32": 0.51333511,
+            "27": 0.49580281,
+            "1": 2.64188977,
+            "0": 1.96998361,
+            "6": 3.66976866
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceAtomicValenceBeta": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.fuzzy.integration_grid",
+                "Molecular "
+            ]
+        ],
+        "expected_data": {
+            "32": 0.515109,
+            "27": 0.49557216,
+            "1": 2.59549393,
+            "0": 1.97131107,
+            "6": 3.54066816
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceCondensedLinearResponseKernelMatrixElement": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "32": "_inaccessible",
+            "27": "_inaccessible",
+            "1": "_inaccessible",
+            "6": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceContributionToSystemDipoleMoment": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "12": "1.280928,-0.287027,0.451402",
+            "13": "0.343784,1.219852,-0.030566"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomFuzzySpaceContributionToSystemDipoleMomentNorm": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "12": 1.388137,
+            "13": 1.267738
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceDipoleMoment": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "12": "0.006414,0.028887,-0.167733",
+            "13": "-0.034174,-0.135131,-0.002257"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomFuzzySpaceDipoleMomentNorm": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "12": 0.170323,
+            "13": 0.139404
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceIntegrationDescriptor": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 16.21216105,
+            "8": 6.32941106
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceIntegrationDescriptorAbsRelative": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 21.616234,
+            "8": 8.439222
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceIntegrationDescriptorRelative": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 21.616234,
+            "8": 8.439222
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceLocalizationIndex": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "32": 0.343,
+            "27": 0.266,
+            "1": 12.691,
+            "0": 4.317,
+            "6": 22.036
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceLocalizationIndexAlpha": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "32": 0.172,
+            "27": 0.133,
+            "1": 6.316,
+            "0": 2.159,
+            "6": 12.476
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceLocalizationIndexBeta": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "32": 0.172,
+            "27": 0.133,
+            "1": 6.375,
+            "0": 2.158,
+            "6": 9.559
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceMonopoleMoment": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "11": -0.76302,
+            "12": -0.769532
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceOctopoleMomentMagnitude": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "11": 0.176129,
+            "12": 0.142645
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceQuadrupoleMomentMagnitude": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "11": 0.100357,
+            "12": 0.075299
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomFuzzySpaceTracelessQuadrupoleMomentTensorMagnitude": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "11": 0.091953,
+            "12": 0.051721
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomHilbertSpaceContributionToSystemDipoleMoment": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": "0.137968,-0.125930,0.184436",
+            "22": "1.956694,-1.486433,2.293948"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomHilbertSpaceContributionToSystemDipoleMomentElectrons": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": "-5.488162,12.376365,-23.771090",
+            "22": "-2.268233,1.723099,-2.659184"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomHilbertSpaceContributionToSystemDipoleMomentElectronsNorm": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 27.356152,
+            "22": 3.896821
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomHilbertSpaceContributionToSystemDipoleMomentNorm": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.262507,
+            "22": 3.361597
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomHilbertSpaceContributionToSystemDipoleMomentNuclearCharge": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": "5.626129,-12.502294,23.955526",
+            "22": "4.224928,-3.209532,4.953132"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomHilbertSpaceContributionToSystemDipoleMomentNuclearChargeNorm": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 27.601231,
+            "22": 7.258418
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomHilbertSpaceDipoleMoment": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": "0.195163,-0.253028,0.427969",
+            "22": "0.000000,0.000000,0.000000"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomHilbertSpaceDipoleMomentNorm": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.534107,
+            "22": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomHilbertSpaceLocalPopulationNumber": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 7.071162,
+            "22": 0.536869
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMulliken": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": "_inaccessible",
+            "5": "_inaccessible",
+            "13": "_inaccessible",
+            "16": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMullikenAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.orbital.homo_minus",
+                2
+            ]
+        ],
+        "expected_data": {
+            "0": 0.3271261,
+            "5": 0.0410101,
+            "10": 0.0449607,
+            "16": 0.0002513
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMullikenBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.orbital.homo_minus",
+                0
+            ]
+        ],
+        "expected_data": {
+            "0": 0.8889047,
+            "1": 0.054692,
+            "14": 3.46e-05
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMullikenRosSchuit": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": "_inaccessible",
+            "5": "_inaccessible",
+            "13": "_inaccessible",
+            "16": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMullikenRosSchuitAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 0.0349511,
+            "5": 0.0074259,
+            "13": 2.84e-05,
+            "16": 6e-07
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMullikenRosSchuitBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 0.0374616,
+            "5": 0.0001564,
+            "13": 0.0011667,
+            "16": 0.0014929
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMullikenStoutPolitzer": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": "_inaccessible",
+            "5": "_inaccessible",
+            "13": "_inaccessible",
+            "16": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMullikenStoutPolitzerAlpha": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.orbital.homo_minus",
+                3
+            ]
+        ],
+        "expected_data": {
+            "7": 0.4176629,
+            "8": 0.4253124,
+            "0": 0.0013107,
+            "31": 0.0003020
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionOccupiedMullikenStoutPolitzerBeta": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "32": 0.0179419,
+            "12": 0.1471275,
+            "2": 0.0281595
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMulliken": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": "_inaccessible",
+            "5": "_inaccessible",
+            "13": "_inaccessible",
+            "16": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMullikenAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.orbital.lumo_plus",
+                2
+            ]
+        ],
+        "expected_data": {
+            "1": 0.0019941,
+            "5": 0.0136915,
+            "13": 0.0652278,
+            "16": 0.0024788
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMullikenBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 0.0126792,
+            "5": 0.0030008,
+            "13": 4e-07,
+            "16": 1.1e-06
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMullikenRosSchuit": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": "_inaccessible",
+            "5": "_inaccessible",
+            "13": "_inaccessible",
+            "16": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMullikenRosSchuitAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 0.4594158,
+            "5": 0.0047962,
+            "13": 0.0001961,
+            "16": 5.55e-05
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMullikenRosSchuitBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 0.0105687,
+            "5": 0.0071971,
+            "13": 5.35e-05,
+            "16": 2e-06
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMullikenStoutPolitzer": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": "_inaccessible",
+            "5": "_inaccessible",
+            "13": "_inaccessible",
+            "16": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMullikenStoutPolitzerAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 0.30011,
+            "5": 0.0,
+            "13": 0.0001188,
+            "16": 0.0001147
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomMoContributionUnoccupiedMullikenStoutPolitzerBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "1": 0.013826,
+            "5": 0.0024224,
+            "13": 6.87e-05,
+            "16": 3.8e-06
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeBecke": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "11": 0.12848991,
+            "12": 0.10215446
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeChelpg": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.5476716794,
+            "7": 0.123851063,
+            "11": 0.1350713822,
+            "12": 0.0561472239
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeCm5": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.25999274,
+            "7": -0.20419048,
+            "11": 0.13918564,
+            "12": 0.11714693
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeCm5Scaled1point2": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.29678272,
+            "7": -0.26440032,
+            "11": 0.16479556,
+            "12": 0.1382784
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeCorrectedHirshfeld": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.08679649,
+            "7": -0.08329564,
+            "11": 0.17721377,
+            "12": 0.11718861
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeEem": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.5163510727,
+            "7": -0.3648571809,
+            "11": 0.2703425868,
+            "12": 0.2462162408
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeHirshfeld": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.16379316,
+            "7": 0.04752092,
+            "11": 0.08008717,
+            "12": 0.05685033
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeLowdin": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.17139,
+            "7": 0.04726,
+            "11": 0.19794,
+            "12": 0.16987
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeMerzKollmann": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.population.n_points_angstrom2_merz_kollmann",
+                6.1
+            ]
+        ],
+        "expected_data": {
+            "3": 0.542769919,
+            "7": 0.2366099951,
+            "11": 0.159323127,
+            "12": 0.0847605505
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeMulliken": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.59952,
+            "7": -0.39399,
+            "11": 0.23769,
+            "12": 0.19785
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeMullikenBickelhaupt": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.51537728,
+            "7": -0.28617216,
+            "11": 0.2913712,
+            "12": 0.21598472
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeMullikenRosSchuit": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.42457514,
+            "7": -0.9194056,
+            "11": 0.50209497,
+            "12": 0.42824924
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeMullikenStoutPolitzer": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.73678453,
+            "7": -0.50567089,
+            "11": 0.31114528,
+            "12": 0.26318811
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeRespChelpgOneStage": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.population.grid_spacing_chelpg",
+                0.542
+            ]
+        ],
+        "expected_data": {
+            "3": 0.32531518,
+            "7": 0.1277948687,
+            "11": 0.1158823768,
+            "12": 0.1158823768
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeRespChelpgTwoStage": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.5385168837,
+            "7": 0.1182123728,
+            "11": 0.0682169555,
+            "12": 0.0682169555
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeRespMerzKollmannOneStage": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.267742653,
+            "7": 0.2376823182,
+            "11": 0.1488038289,
+            "12": 0.1488038289
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeRespMerzKollmannTwoStage": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.5266483667,
+            "7": 0.2236252214,
+            "11": 0.0884632353,
+            "12": 0.0884632353
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPartialChargeVdd": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.15511347,
+            "7": 0.04156327,
+            "11": 0.0895421,
+            "12": 0.06937319
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdin": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 15.86953,
+            "13": 0.77677,
+            "4": 8.14052,
+            "1": 6.03758
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 8.20732,
+            "13": 0.38554,
+            "4": 4.09598,
+            "1": 2.98015
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 7.66221,
+            "13": 0.39123,
+            "4": 4.04454,
+            "1": 3.05743
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinD": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.7869,
+            "13": 0.0,
+            "4": 0.5447,
+            "1": 0.56932
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinDAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.39482,
+            "13": 0.0,
+            "4": 0.27305,
+            "1": 0.28774
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinDBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.39208,
+            "13": 0.0,
+            "4": 0.27165,
+            "1": 0.28158
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinF": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinFAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinFBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinG": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinGAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinGBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinH": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinHAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinHBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinP": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 10.02171,
+            "13": 0.0,
+            "4": 4.48597,
+            "1": 2.84265
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinPAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 5.28127,
+            "13": 0.0,
+            "4": 2.2672,
+            "1": 1.38151
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinPBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 4.74045,
+            "13": 0.0,
+            "4": 2.21877,
+            "1": 1.46114
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinS": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 5.06091,
+            "13": 0.77676,
+            "4": 3.10985,
+            "1": 2.6256
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinSAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 2.53123,
+            "13": 0.38554,
+            "4": 1.55573,
+            "1": 1.3109
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationLowdinSBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 2.52968,
+            "13": 0.39123,
+            "4": 1.55412,
+            "1": 1.3147
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMulliken": {
+        "input_string": "Cr_III_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "6": 23.62547,
+            "32": 0.92129,
+            "1": 14.47444
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 8.22767,
+            "13": 0.36724,
+            "4": 4.25117
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 7.65721,
+            "13": 0.37702,
+            "4": 4.20301
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenBickelhaupt": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 16.07923534,
+            "4": 8.40249979,
+            "13": 0.68594
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenBickelhauptAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 8.32851141,
+            "4": 4.2213208,
+            "13": 0.33527806
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenBickelhauptBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 7.75072393,
+            "4": 4.18117899,
+            "13": 0.3506581
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenD": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.05236,
+            "7": 0.01618,
+            "11": 0.0,
+            "12": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenDAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.00432,
+            "3": 0.02747,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenDBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": -0.00212,
+            "3": 0.02489,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenF": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "4": 0.0,
+            "6": 0.01257,
+            "11": 0.0,
+            "12": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenFAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "3": 0.0,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenFBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "3": 0.0,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenG": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.0,
+            "7": 0.0,
+            "11": 0.0,
+            "12": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenGAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "3": 0.0,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenGBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "3": 0.0,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenH": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.0,
+            "7": 0.0,
+            "11": 0.0,
+            "12": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenHAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "3": 0.0,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenHBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "3": 0.0,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenP": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 2.35317,
+            "7": 3.74054,
+            "11": 0.0,
+            "12": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenPAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 5.23728,
+            "3": 1.22643,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenPBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 4.68201,
+            "3": 1.12674,
+            "13": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenRosSchuit": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 16.92432903,
+            "3": 5.57542,
+            "13": 0.50185
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenRosSchuitAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 8.79381879,
+            "3": 2.83634633,
+            "13": 0.24603407
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenRosSchuitBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 8.13051024,
+            "3": 2.73907853,
+            "13": 0.25581108
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenS": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 2.99495,
+            "7": 3.63727,
+            "11": 0.76231,
+            "12": 0.80215
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenSAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 2.98607,
+            "3": 1.49957,
+            "11": 0.38104
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenSBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 1.49538,
+            "7": 1.81504,
+            "11": 0.38127
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenStoutPolitzer": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 5.2632154700000005,
+            "7": 7.505670889999999,
+            "11": 0.68885
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenStoutPolitzerAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 2.67439931,
+            "7": 3.83370196,
+            "11": 0.34581752
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomPopulationMullikenStoutPolitzerBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 2.58881616,
+            "7": 3.67196893,
+            "11": 0.3430372
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationLowdin": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.10112,
+            "7": 0.14217,
+            "11": -0.00015,
+            "12": 0.00322
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationLowdinD": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.00274,
+            "13": 0.0,
+            "4": 0.0014,
+            "1": 0.00616
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationLowdinF": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationLowdinG": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationLowdinH": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "13": 0.0,
+            "4": 0.0,
+            "1": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationLowdinP": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.54082,
+            "13": 0.0,
+            "4": 0.04843,
+            "1": -0.07964
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationLowdinS": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.00155,
+            "13": -0.00569,
+            "4": 0.00161,
+            "1": -0.0038
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMulliken": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.10645,
+            "7": 0.14473,
+            "11": -0.00023,
+            "12": 0.00459
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenBickelhaupt": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.11430182,
+            "7": 0.14175073,
+            "11": -0.00061068,
+            "12": 0.0076071
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenD": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.00644,
+            "7": -0.00054,
+            "11": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenF": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "7": 0.0,
+            "11": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenG": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "7": 0.0,
+            "11": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenH": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.0,
+            "7": 0.0,
+            "11": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenP": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.55527,
+            "7": 0.13808,
+            "11": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenRosSchuit": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.09726781,
+            "7": 0.19786322,
+            "11": -0.00184415,
+            "12": 0.00316101
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenS": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.00419,
+            "7": 0.00719,
+            "11": -0.00023
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSpinPopulationMullikenStoutPolitzer": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.08558314,
+            "7": 0.16173303,
+            "11": 0.00278032,
+            "12": -4.98e-05
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceAverageLocalIonizationEnergyMax": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 16.597833,
+            "32": 16.430815
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceAverageLocalIonizationEnergyMean": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 15.470317,
+            "32": 14.659234
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceAverageLocalIonizationEnergyMin": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 13.293901,
+            "32": 11.955838
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectronDelocalizationRangeFunctionMax": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 0.109058387,
+            "32": 0.108402192
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectronDelocalizationRangeFunctionMean": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 0.107141,
+            "32": 0.106031
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectronDelocalizationRangeFunctionMin": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 0.105377287,
+            "32": 0.104026892
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectronDensityMax": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 0.001002821,
+            "32": 0.001002038
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectronDensityMean": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 0.00100014,
+            "32": 0.0010001
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectronDensityMin": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 0.00099548,
+            "32": 0.000995888
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectrostaticPotentialBalanceOfCharges": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": "_inaccessible",
+            "32": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectrostaticPotentialBalanceOfChargesTimesVariance": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": "_inaccessible",
+            "32": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectrostaticPotentialInternalChargeSeparation": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 9.404904,
+            "32": 6.235522
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectrostaticPotentialMax": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 114.43935307,
+            "32": 107.10694813
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectrostaticPotentialMean": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 83.72683,
+            "32": 83.51909
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceElectrostaticPotentialMin": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "13": 66.57727745,
+            "32": 50.30031138
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceLocalElectronAffinityMax": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": -15.09951815,
+            "15": -10.48108756
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceLocalElectronAffinityMean": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": -24.56013,
+            "15": -14.16452
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceLocalElectronAffinityMin": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": -30.34077941,
+            "15": -28.28923474
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceLocalElectronAttachmentEnergyMax": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": -0.29634666,
+            "15": -0.84217517
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceLocalElectronAttachmentEnergyMean": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": -1.3135,
+            "15": -2.97379
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceLocalElectronAttachmentEnergyMin": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": -3.67716576,
+            "15": -5.57060355
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceOrbitalOverlapLengthFunctionMax": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": 3.298403967,
+            "15": 3.441324362
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceOrbitalOverlapLengthFunctionMean": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": 2.97121,
+            "15": 3.18493
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceOrbitalOverlapLengthFunctionMin": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": 2.878597231,
+            "15": 2.983062305
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceSignSecondLargestEigenvalueElectronDensityHessianMax": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": 0.001000929,
+            "15": 0.00100117
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceSignSecondLargestEigenvalueElectronDensityHessianMean": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": 0.000601524,
+            "15": -0.000400569
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomSurfaceSignSecondLargestEigenvalueElectronDensityHessianMin": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "7": -0.00100079,
+            "15": -0.001002642
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyAverageLocalIonizationEnergy": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 82.79473546,
+            "3": 10.16129823,
+            "13": 0.704380928
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyDeltaGHirshfeld": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.01088187866,
+            "3": 0.04117727719,
+            "13": 0.08557230276
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyDeltaGPromolecular": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 1.98597888e-05,
+            "3": 0.04666710858,
+            "13": 0.0002533592651
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyElectronDensity": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 2503.135133,
+            "3": 117.5799702,
+            "13": 0.4073597095
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyElectronDensityAlpha": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 1251.58987,
+            "3": 58.791777,
+            "13": 0.2018093447
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyElectronDensityBeta": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 1251.545263,
+            "3": 58.78819321,
+            "13": 0.2055503648
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyElectronDensityEllipticity": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 2e-06,
+            "3": 4e-06,
+            "13": 0.001099
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyElectronLocalizationFunction": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.9999510426,
+            "3": 0.9999996009,
+            "13": 0.9999724841
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyElectrostaticPotential": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 931.3633834,
+            "3": 968.4147223,
+            "13": 984.7743617
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyElectrostaticPotentialElectrons": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": -68.63661661,
+            "3": -31.58527766,
+            "13": -15.22563833
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyElectrostaticPotentialNuclearCharges": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 1000.0,
+            "3": 1000.0,
+            "13": 1000.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyEnergyDensity": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": -16574615.19,
+            "3": -108642.5618,
+            "13": -4.664674133
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyEtaIndex": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": -1.000015,
+            "3": -1.000009,
+            "13": -1.075382
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyGradientComponentsXYZ": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": "-0.1457766301,-0.6665168712E-01,-0.9140638806E-01",
+            "9": "-0.7202204410,0.9865946470,-0.1673270243E+01",
+            "12": "-0.1147088011E+02,-0.7592758407,-0.5939536620"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomTopologyGradientNorm": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.1845220883,
+            "9": 2.071694907,
+            "12": 11.51131492
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyHamiltonianKineticEnergy": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 108691.9568,
+            "9": 240597.2327,
+            "12": 11976817.78
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyHessianDeterminant": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": -3043311888000000.0,
+            "9": -3.300611591e+16,
+            "12": -4.066086753e+21
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyHessianEigenvalues": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": "-0.1449159610E+06,-0.1449157012E+06,-0.1449154864E+06",
+            "9": "-0.3207753949E+06,-0.3207748363E+06,-0.3207695096E+06",
+            "12": "-0.1596098968E+08,-0.1596098067E+08,-0.1596089542E+08"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomTopologyInteractionRegionIndicator": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.0009741645912,
+            "9": 0.006427494666,
+            "12": 0.002620891745
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyLagrangianKineticEnergy": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 5.169620251,
+            "9": 17.29755951,
+            "12": 6101.34133
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyLaplacianComponentsXYZ": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": "-0.2208710050E+08, -0.2208707063E+08, -0.2208720530E+08",
+            "3": "-0.1448502453E+06, -0.1448495557E+06, -0.1448499692E+06",
+            "13": "-0.6315023625E+01, -0.5928844600E+01, -0.6337330961E+01"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DAtomTopologyLaplacianOfElectronDensity": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": -66261376.43,
+            "3": -434549.7702,
+            "13": -18.58119919
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyLaplacianTotal": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": -66261376.43,
+            "3": -434549.7702,
+            "13": -18.58119919
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyLocalInformationEntropy": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": -117.0736716,
+            "3": -0.704900679,
+            "13": 0.02832804834
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyLocalizedOrbitalLocator": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 0.9930514692,
+            "3": 0.999368595,
+            "13": 0.9707397997
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyPotentialEnergyDensity": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": -16583886.27,
+            "3": -108647.6811,
+            "13": -4.68404847
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyReducedDensityGradient": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 100.0,
+            "3": 100.0,
+            "13": 100.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyReducedDensityGradientPromolecular": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 100.0,
+            "3": 100.0,
+            "13": 100.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologySignSecondLargestEigenvalueElectronDensityHessian": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": -117.5921148,
+            "9": -190.6594117,
+            "12": -2048.912925
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologySignSecondLargestEigenvalueElectronDensityHessianPromolecular": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 121.3928784,
+            "9": 193.1706397,
+            "12": 2159.171138
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologySpinDensity": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 0.004237363592,
+            "9": -0.03721636287,
+            "12": -0.06422419631
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomTopologyVdwPotential": {
+        "input_string": "Cr_III_cation-conf_00.xyz",
+        "electronic_structure_data": [
+            [
+                "Cr_III_cation-conf_00.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "3": 1.117047017e+126,
+            "9": 6.673393737e+125,
+            "12": 2.968860719e+126
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondBondOrderFuzzy": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 1.313265,
+            "7": 1.229079,
+            "8": 1.143202
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondBondOrderLaplacian": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 1.088217,
+            "7": 0.887375,
+            "8": 0.704715
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondBondOrderMayer": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 1.109201,
+            "7": 1.068415,
+            "8": 0.890884
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondBondOrderMulliken": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 0.543201,
+            "7": 0.542025,
+            "8": 0.519615
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondBondOrderWiberg": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 1.32178,
+            "7": 1.233862,
+            "8": 1.06659
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondCoordinatesCenterOfMass": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": "0.59801100,-0.46012858,0.18895436",
+            "7": "-1.17345347,-0.24155485,0.49788701",
+            "8": "-2.08188132,0.24200102,-0.09511489"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DBondCoordinatesCenterOfNuclearCharges": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": "0.5979892,-0.4601877,0.1890808",
+            "7": "-1.1735138,-0.2414854,0.4977738",
+            "8": "-2.0817385,0.2419623,-0.0950954"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DBondElectrostaticInteractionEnergyNuclearCharges": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 42670.95689,
+            "7": 41317.22949,
+            "8": 40367.90495
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondFuzzySpaceCondensedLinearResponseKernelMatrixElement": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": "_inaccessible",
+            "7": "_inaccessible",
+            "8": "_inaccessible"
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondFuzzySpaceOverlapIntegrationDescriptor": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 0.27315711,
+            "7": 0.24740532,
+            "8": 0.27199052
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondFuzzySpaceOverlapIntegrationDescriptorNegative": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 0.0,
+            "7": 0.0,
+            "8": 0.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondFuzzySpaceOverlapIntegrationDescriptorPositive": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 0.27315711,
+            "7": 0.24740532,
+            "8": 0.27199052
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondGyrationRadius": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 0.68173924,
+            "7": 0.7040759,
+            "8": 0.72063352
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondHilbertSpaceContributionToSystemDipoleMoment": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "9": "-0.856392,1.810298,0.309827",
+            "13": "-0.837562,-3.123254,0.060385"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DBondHilbertSpaceContributionToSystemDipoleMomentNorm": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "9": 2.026469,
+            "13": 3.234172
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondHilbertSpaceDipoleMoment": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "9": "-0.129100,0.351304,0.044738",
+            "13": "-0.068333,-0.422070,-0.021503"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DBondHilbertSpaceDipoleMomentNorm": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "9": 0.376938,
+            "13": 0.428107
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondHilbertSpaceOverlapPopulation": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "9": 0.616645,
+            "13": 0.734411
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondIntrinsicBondStrengthIndex": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 1.22735,
+            "7": 1.10358,
+            "8": 1.01868
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpAverageLocalIonizationEnergy": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 1.068077287,
+            "8": 1.028472885
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpCoordinates": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": "0.971689113914,-0.054664871413,-0.177419321772",
+            "8": "-1.635423818320,1.578277103664,0.119618659696"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DBondTopologyBcpDeltaGHirshfeld": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 0.4141312618,
+            "8": 0.2757276226
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpDeltaGPromolecular": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 0.2588701298,
+            "8": 0.1957390577
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpDistanceEndAtom": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 1.1304981290032208,
+            "10": 1.455270277538359
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpDistanceStartAtom": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 1.6209211099727983,
+            "10": 0.653230692695627
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpElectronDensity": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.3549230675,
+            "10": 0.2780000318
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpElectronDensityAlpha": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.1769727981,
+            "10": 0.1391400637
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpElectronDensityBeta": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.1779502694,
+            "10": 0.1388599682
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpElectronDensityEllipticity": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.339108,
+            "10": 0.052563
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpElectronLocalizationFunction": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.9436335205,
+            "10": 0.9900265347
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpElectrostaticPotential": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 1.24026699,
+            "10": 1.004654855
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpElectrostaticPotentialElectrons": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": -22.10647954,
+            "10": -15.66766969
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpElectrostaticPotentialNuclearCharges": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 23.34674653,
+            "10": 16.67232454
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpEnergyDensity": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": -0.4082383255,
+            "10": -0.2760344148
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpEtaIndex": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 2.84166,
+            "10": 1.448719
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpGradientComponentsXYZ": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": "-0.2775557562E-16, -0.1387778781E-15, -0.5984795992E-16",
+            "8": "-0.2619432449E-15,  0.0000000000E+00, -0.6938893904E-17"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DBondTopologyBcpGradientNorm": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 1.536601761e-16,
+            "8": 2.620351346e-16
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpHamiltonianKineticEnergy": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.4082383255,
+            "10": 0.2760344148
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpHessianDeterminant": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.1410468193,
+            "10": 0.2972048515
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpHessianEigenvalues": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": "-0.8126751990E+00,-0.6068780220E+00,0.2859860708E+00",
+            "10": "-0.7681206553E+00,-0.7297620582E+00,0.5302066506E+00"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DBondTopologyBcpInteractionRegionIndicator": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 5.38425295e-16,
+            "8": 9.681960369e-16
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpLagrangianKineticEnergy": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.124846538,
+            "10": 0.03411539909
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpLaplacianComponentsXYZ": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": "-0.4007757873E+00,-0.1332076229E+00,-0.5995837399E+00",
+            "10": "-0.7130327528E+00,0.2492943077E+00,-0.5039376177E+00"
+        },
+        "split_str": true
+    },
+    "Multiwfn3DBondTopologyBcpLaplacianOfElectronDensity": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": -1.13356715,
+            "10": -0.9676760628
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpLaplacianTotal": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": -1.13356715,
+            "10": -0.9676760628
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpLocalInformationEntropy": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.02533366245,
+            "10": 0.02074852186
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpLocalizedOrbitalLocator": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 0.8036069702,
+            "10": 0.9088101091
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpPotentialEnergyDensity": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": -0.5330848635,
+            "10": -0.3101498139
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpReducedDensityGradient": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 100.0,
+            "8": 100.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpReducedDensityGradientPromolecular": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 100.0,
+            "8": 100.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpRelativeBondPosition": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 1.209302436281783,
+            "10": 0.5966755936937536
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpSignSecondLargestEigenvalueElectronDensityHessian": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": -0.3549230675,
+            "10": -0.2780000318
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpSignSecondLargestEigenvalueElectronDensityHessianPromolecular": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": -0.2393351757,
+            "10": -0.1766049616
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpSpinDensity": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": -0.0009774713095,
+            "10": 0.0002800955069
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyBcpVdwPotential": {
+        "input_string": "radical_cation-conf_01.xyz",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "2": 7153428209.0,
+            "8": 5724599940.0
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyCpIndex": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": 29,
+            "10": 20
+        },
+        "split_str": false
+    },
+    "Multiwfn3DBondTopologyCpType": {
+        "input_string": "radical_cation-conf_01.sdf",
+        "electronic_structure_data": [
+            [
+                "radical_cation-conf_01.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": "(3,-1)",
+            "10": "(3,-1)"
+        },
+        "split_str": false
+    }
+}

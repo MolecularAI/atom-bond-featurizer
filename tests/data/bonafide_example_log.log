@@ -1,0 +1,84 @@
+2026-02-24 17:41:04 | INFO | =======================================================================
+                                         ____   __   __ _   __   ____  ___  ____  ____
+                                        (  _ \ /  \ (  ( \ / _\ (  __)(   )(    \(  __)
+                                         ) B ((  O )/  N // A  \ )F_)  )I(  ) D ( )E_)
+                                        (____/ \__/ \_)__)\_/\_/(__)  (___)(____/(____)
+
+                                            Features for Atoms and Bonds in Molecules
+                             =======================================================================
+                             * Version:       0.1.0
+                             * Documentation:  <link to doc>
+                             * GitHub:         <link to repo>
+
+2026-02-24 17:41:04 | INFO | 'None' | AtomBondFeaturizer.__init__()
+                             Default feature configuration settings successfully loaded from '_feature_config.toml'.
+2026-02-24 17:41:04 | INFO | 'None' | AtomBondFeaturizer.__init__()
+                             Feature information file successfully loaded from '_feature_info.json'.
+
+2026-02-24 17:41:04 | INFO | 'cr-complex' | AtomBondFeaturizer.read_input() | START
+                             > 'input_string':
+                             [H]C(P1(C([H])([H])[H])->[Cr+]2(Cl)(<-N([H])([H])C([H])(C(P->2([H])[H])([H])[H])[H])(<-N(C(C1([H])[H])([H])[H])([H])[H])Cl)([H])[H]
+                             > 'namespace':         cr-complex
+                             > 'input_format':      smiles
+                             > 'read_energy':       False
+                             > 'prune_by_energy':   None
+                             > 'output_directory':  None
+                             -----
+2026-02-24 17:41:04 | WARNING | 'cr-complex' | AtomBondFeaturizer.read_input()
+                                The input to 'output_directory' is None (default value). Therefore, all output files potentially generated during the
+                                feature calculations will not be kept. Provide a valid input to 'output_directory' if the output files should be
+                                stored.
+2026-02-24 17:41:04 | INFO | 'cr-complex' | AtomBondFeaturizer.read_input()
+                             Reading SMILES string successful.
+2026-02-24 17:41:04 | INFO | 'cr-complex' | MolVault.initialize_mol()
+                             Generation of RDKit mol object from SMILES string successful.
+2026-02-24 17:41:04 | INFO | 'cr-complex' | AtomBondFeaturizer.read_input() | DONE
+
+2026-02-24 17:41:04 | INFO | 'cr-complex' | AtomBondFeaturizer.show_molecule() | START
+                             > 'index_type':  atom
+                             > 'in_3D':       False
+                             > 'image_size':  (500, 500)
+                             -----
+2026-02-24 17:41:04 | INFO | 'cr-complex' | AtomBondFeaturizer.show_molecule()
+                             Molecule was rendered in 2D with 'atom' indices.
+2026-02-24 17:41:04 | INFO | 'cr-complex' | AtomBondFeaturizer.show_molecule() | DONE
+
+2026-02-24 17:41:11 | INFO | 'cr-complex' | AtomBondFeaturizer.determine_bonds() | START
+                             > 'connectivity_method':      connect_the_dots
+                             > 'covalent_radius_factor':   1.3
+                             > 'allow_charged_fragments':  True
+                             > 'embed_chiral':             True
+                             -----
+2026-02-24 17:41:11 | ERROR | 'cr-complex' | AtomBondFeaturizer.determine_bonds()
+                              The initialized molecule vault is of dimensionality '2D'. All bonds are already defined.
+2026-02-24 17:41:14 | INFO | 'cr-complex' | AtomBondFeaturizer.featurize_atoms() | START
+                             > 'atom_indices':     [7, 27, 8]
+                             > 'feature_indices':  131
+                             -----
+2026-02-24 17:41:14 | INFO | 'cr-complex' | AtomBondFeaturizer.featurize_atoms()
+                             Considered features: [(131, 'mendeleev2D-atom-en_sanderson')].
+2026-02-24 17:41:14 | INFO | 'cr-complex' | AtomBondFeaturizer.featurize_atoms()
+                             Calculating atom features now ...
+2026-02-24 17:41:14 | INFO | 'cr-complex' | config_data_validator()
+                             Validating configuration settings from 'mendeleev'.
+2026-02-24 17:41:14 | INFO | 'cr-complex' | config_data_validator()
+                             Validated configuration settings: {'method': 'slater', 'alle': False}.
+2026-02-24 17:41:15 | INFO | 'cr-complex' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 7) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 17:41:15 | INFO | 'cr-complex' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 27) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 17:41:15 | INFO | 'cr-complex' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 8) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 17:41:15 | INFO | 'cr-complex' | AtomBondFeaturizer.featurize_atoms() | DONE
+
+2026-02-24 17:41:32 | INFO | 'cr-complex' | AtomBondFeaturizer.calculate_electronic_structure() | START
+                             > 'engine':           xtb
+                             > 'redox':            n
+                             > 'prune_by_energy':  None
+                             -----
+2026-02-24 17:41:32 | ERROR | 'cr-complex' | AtomBondFeaturizer.calculate_electronic_structure()
+                              The initialized molecule vault is of dimensionality '2D'. Electronic structure calculations are not feasible for 2D
+                              ensembles. Please provide a 3D ensemble.

@@ -1,0 +1,6 @@
+line-length = 100
+
+[format]
+quote-style = "double"
+docstring-code-format = true
+docstring-code-line-length = 100

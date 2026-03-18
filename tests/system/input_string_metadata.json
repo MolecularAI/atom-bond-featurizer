@@ -1,0 +1,97 @@
+{
+    "clopidogrel-conf_01.xyz": {
+        "input_format": "file",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "clopidogrel-conf_05.xyz": {
+        "input_format": "file",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "clopidogrel-conf_05.sdf": {
+        "input_format": "file",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "COC([C@@H](N1CCC2=C(C1)C=CS2)C3=CC=CC=C3Cl)=O": {
+        "input_format": "smiles",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "N1([C@](c2c([H])c(c([H])c(c2Cl)[H])[H])([H])C(OC([H])([H])[H])=O)C(C(c2sc([H])c([H])c2C1([H])[H])([H])[H])([H])[H]": {
+        "input_format": "smiles",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "spiro_mol-conf_02.xyz": {
+        "input_format": "file",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "spiro_mol-conf_04.xyz": {
+        "input_format": "file",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "O=C1C=CCC2(C1)CN(CCC1CC1)CC(F)(F)O2": {
+        "input_format": "smiles",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "fluoromethanol.xyz": {
+        "input_format": "file",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "[H][C:3]([H])(F)[O:5][H]": {
+        "input_format": "smiles",
+        "charge": 0,
+        "multiplicity": 1
+    },
+    "radical_cation-conf_00.sdf": {
+        "input_format": "file",
+        "charge": 1,
+        "multiplicity": 2
+    },
+    "radical_cation-conf_01.sdf": {
+        "input_format": "file",
+        "charge": 1,
+        "multiplicity": 2
+    },
+    "radical_cation-conf_01.xyz": {
+        "input_format": "file",
+        "charge": 1,
+        "multiplicity": 2
+    },
+    "C1(=S)[N+]([H])C(OC([H])([H])[H])=C(N1C([H])([H])[H])[H]": {
+        "input_format": "smiles",
+        "charge": 1,
+        "multiplicity": 2
+    },
+    "Cr_III_cation-conf_00.xyz": {
+        "input_format": "file",
+        "charge": 1,
+        "multiplicity": 4
+    },
+    "Cr_III_cation-conf_01.sdf": {
+        "input_format": "file",
+        "charge": 1,
+        "multiplicity": 4
+    },
+    "Cr_III_cation-conf_01.xyz": {
+        "input_format": "file",
+        "charge": 1,
+        "multiplicity": 4
+    },
+    "[H]C(P1(C([H])([H])[H])->[Cr+]2(Cl)(<-N([H])([H])C([H])(C(P->2([H])[H])([H])[H])[H])(<-N(C(C1([H])[H])([H])[H])([H])[H])Cl)([H])[H]": {
+        "input_format": "smiles",
+        "charge": 1,
+        "multiplicity": 4
+    },
+    "O=C1CCOP2(C34CC4)1C5=CC6=C(C=C5C3CC2)N(C[Ge]7(C/86)CC7)C8=C9CCC/9": {
+        "input_format": "smiles",
+        "charge": 0,
+        "multiplicity": 1
+    }
+}

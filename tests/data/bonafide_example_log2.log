@@ -1,0 +1,408 @@
+2026-02-24 18:08:16 | INFO | =======================================================================
+                                         ____   __   __ _   __   ____  ___  ____  ____
+                                        (  _ \ /  \ (  ( \ / _\ (  __)(   )(    \(  __)
+                                         ) B ((  O )/  N // A  \ )F_)  )I(  ) D ( )E_)
+                                        (____/ \__/ \_)__)\_/\_/(__)  (___)(____/(____)
+
+                                            Features for Atoms and Bonds in Molecules
+                             =======================================================================
+                             * Version:       0.1.0
+                             * Documentation:  <link to doc>
+                             * GitHub:         <link to repo>
+
+2026-02-24 18:08:16 | INFO | 'None' | AtomBondFeaturizer.__init__()
+                             Default feature configuration settings successfully loaded from '_feature_config.toml'.
+2026-02-24 18:08:16 | INFO | 'None' | AtomBondFeaturizer.__init__()
+                             Feature information file successfully loaded from '_feature_info.json'.
+
+2026-02-24 18:08:16 | INFO | 'clopidogrel' | AtomBondFeaturizer.read_input() | START
+                             > 'input_string':      COC([C@@H](N1CCC2=C(C1)C=CS2)C3=CC=CC=C3Cl)=O
+                             > 'namespace':         clopidogrel
+                             > 'input_format':      smiles
+                             > 'read_energy':       False
+                             > 'prune_by_energy':   None
+                             > 'output_directory':  None
+                             -----
+2026-02-24 18:08:16 | WARNING | 'clopidogrel' | AtomBondFeaturizer.read_input()
+                                The input to 'output_directory' is None (default value). Therefore, all output files potentially generated during the
+                                feature calculations will not be kept. Provide a valid input to 'output_directory' if the output files should be
+                                stored.
+2026-02-24 18:08:16 | INFO | 'clopidogrel' | AtomBondFeaturizer.read_input()
+                             Reading SMILES string successful.
+2026-02-24 18:08:16 | INFO | 'clopidogrel' | MolVault.initialize_mol()
+                             Generation of RDKit mol object from SMILES string successful.
+2026-02-24 18:08:16 | INFO | 'clopidogrel' | AtomBondFeaturizer.read_input() | DONE
+
+2026-02-24 18:08:16 | INFO | 'clopidogrel' | AtomBondFeaturizer.show_molecule() | START
+                             > 'index_type':  atom
+                             > 'in_3D':       False
+                             > 'image_size':  (500, 500)
+                             -----
+2026-02-24 18:08:16 | INFO | 'clopidogrel' | AtomBondFeaturizer.show_molecule()
+                             Molecule was rendered in 2D with 'atom' indices.
+2026-02-24 18:08:16 | INFO | 'clopidogrel' | AtomBondFeaturizer.show_molecule() | DONE
+
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms() | START
+                             > 'atom_indices':     all
+                             > 'feature_indices':  [131, 485]
+                             -----
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Considered features: [(131, 'mendeleev2D-atom-en_sanderson'), (485, 'qmdesc2D-atom-fukui_minus')].
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Calculating atom features now ...
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | config_data_validator()
+                             Validating configuration settings from 'mendeleev'.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | config_data_validator()
+                             Validated configuration settings: {'method': 'slater', 'alle': False}.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 0) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 1) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 2) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 3) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 4) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 5) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 6) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 7) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 8) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 9) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 10) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:30 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 11) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 12) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 13) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 14) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 15) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 16) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 17) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 18) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 19) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'mendeleev2D-atom-en_sanderson' of feature type 'atom' (index = 20) and data type 'float'
+                             successful for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | config_data_validator()
+                             Validating configuration settings from 'qmdesc'.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | config_data_validator()
+                             Validated configuration settings: {}.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 0) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 1) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 2) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 3) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 4) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 5) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 6) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 7) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 8) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 9) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 10) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 11) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 12) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 13) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 14) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 15) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 16) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 17) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 18) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 19) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms()
+                             Feature calculation for 'qmdesc2D-atom-fukui_minus' of feature type 'atom' (index = 20) and data type 'float' successful
+                             for conformer with index 0.
+2026-02-24 18:09:31 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_atoms() | DONE
+
+2026-02-24 18:10:00 | INFO | 'clopidogrel' | AtomBondFeaturizer.show_molecule() | START
+                             > 'index_type':  bond
+                             > 'in_3D':       False
+                             > 'image_size':  (500, 500)
+                             -----
+2026-02-24 18:10:00 | INFO | 'clopidogrel' | AtomBondFeaturizer.show_molecule()
+                             Molecule was rendered in 2D with 'bond' indices.
+2026-02-24 18:10:00 | INFO | 'clopidogrel' | AtomBondFeaturizer.show_molecule() | DONE
+
+2026-02-24 18:10:18 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds() | START
+                             > 'bond_indices':     all
+                             > 'feature_indices':  [0, 1]
+                             -----
+2026-02-24 18:10:18 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Considered features: [(0, 'alfabet2D-bond-bond_dissociation_energy'), (1,
+                             'alfabet2D-bond-bond_dissociation_free_energy')].
+2026-02-24 18:10:18 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Calculating bond features now ...
+2026-02-24 18:10:18 | INFO | 'clopidogrel' | config_data_validator()
+                             Validating configuration settings from 'alfabet'.
+2026-02-24 18:10:18 | INFO | 'clopidogrel' | config_data_validator()
+                             Validated configuration settings: {'python_interpreter_path': '~/miniconda3/envs/alfabet_env/bin/python'}.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 0) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 1) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 2) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 3) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 4) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 5) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 6) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 7) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 8) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 9) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 10) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 11) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 12) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 13) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 14) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 15) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 16) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 17) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 18) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 19) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 20) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 21) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_energy' of feature type 'bond' (index = 22) and data type
+                                'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably the
+                                feature is not defined for the requested bond.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | config_data_validator()
+                             Validating configuration settings from 'alfabet'.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | config_data_validator()
+                             Validated configuration settings: {'python_interpreter_path': '~/miniconda3/envs/alfabet_env/bin/python'}.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 0) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 1) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 2) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 3) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 4) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 5) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 6) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 7) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 8) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 9) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 10) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 11) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 12) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 13) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 14) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 15) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 16) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 17) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                             Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 18) and data type
+                             'float' successful for conformer with index 0.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 19) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 20) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 21) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | WARNING | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds()
+                                Feature calculation for 'alfabet2D-bond-bond_dissociation_free_energy' of feature type 'bond' (index = 22) and data
+                                type 'float' terminated without error but the feature value is '_inaccessible' for conformer with index 0. Probably
+                                the feature is not defined for the requested bond.
+2026-02-24 18:10:26 | INFO | 'clopidogrel' | AtomBondFeaturizer.featurize_bonds() | DONE
+
+2026-02-24 18:10:52 | INFO | 'clopidogrel' | AtomBondFeaturizer.return_atom_features() | START
+                             > 'feature_type':        atom
+                             > 'atom_indices':        all
+                             > 'output_format':       df
+                             > 'reduce':              False
+                             -----
+2026-02-24 18:10:52 | INFO | 'clopidogrel' | AtomBondFeaturizer.return_atom_features()
+                             Fetching 'atom' features from molecule vault.
+2026-02-24 18:10:52 | INFO | 'clopidogrel' | AtomBondFeaturizer.return_atom_features() | DONE
+
+2026-02-24 18:11:02 | INFO | 'clopidogrel' | AtomBondFeaturizer.return_bond_features() | START
+                             > 'feature_type':        bond
+                             > 'bond_indices':        all
+                             > 'output_format':       df
+                             > 'reduce':              False
+                             -----
+2026-02-24 18:11:02 | INFO | 'clopidogrel' | AtomBondFeaturizer.return_bond_features()
+                             Fetching 'bond' features from molecule vault.
+2026-02-24 18:11:02 | INFO | 'clopidogrel' | AtomBondFeaturizer.return_bond_features() | DONE
+

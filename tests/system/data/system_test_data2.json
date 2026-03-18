@@ -1,0 +1,181 @@
+{
+    "Morfeus3DBondLocalForceConstant": {
+        "input_string": "spiro_mol-conf_04.xyz",
+        "electronic_structure_data": [
+            [
+                "spiro_mol-conf_04_freq.fchk",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "morfeus.local_force.method",
+                "compliance"
+            ]
+        ],
+        "expected_data": {
+            "0": 11.353341473861427,
+            "33": 5.427368535782246,
+            "17": 3.5838419463716
+        },
+        "split_str": false
+    },
+    "Morfeus3DBondLocalFrequency": {
+        "input_string": "spiro_mol-conf_04.xyz",
+        "electronic_structure_data": [
+            [
+                "spiro_mol-conf_04_freq.log",
+                "n"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": 1695.4168066595842,
+            "33": 3205.3663137898757,
+            "17": 955.2586237873187
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedFukuiDual": {
+        "input_string": "spiro_mol-conf_04.xyz",
+        "electronic_structure_data": [
+            [
+                "spiro_mol-conf_04.fchk",
+                "n"
+            ],
+            [
+                "spiro_mol-conf_04_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "spiro_mol-conf_04_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.cdft.iterable_option",
+                "mulliken"
+            ]
+        ],
+        "expected_data": {
+            "0": 0.02664,
+            "17": -0.04325,
+            "37": 0.052358,
+            "1": 0.077463
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedFukuiMinus": {
+        "input_string": "spiro_mol-conf_04.xyz",
+        "electronic_structure_data": [
+            [
+                "spiro_mol-conf_04.fchk",
+                "n"
+            ],
+            [
+                "spiro_mol-conf_04_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.cdft.iterable_option",
+                "mulliken"
+            ]
+        ],
+        "expected_data": {
+            "0": 0.144245,
+            "17": 0.02345,
+            "37": 0.023921,
+            "1": 0.025328
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedFukuiPlus": {
+        "input_string": "spiro_mol-conf_04.xyz",
+        "electronic_structure_data": [
+            [
+                "spiro_mol-conf_04.fchk",
+                "n"
+            ],
+            [
+                "spiro_mol-conf_04_nplus1.fchk",
+                "n+1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.cdft.iterable_option",
+                "mulliken"
+            ]
+        ],
+        "expected_data": {
+            "0": 0.170885,
+            "17": -0.0198,
+            "37": 0.076279,
+            "1": 0.102792
+        },
+        "split_str": false
+    },
+    "Multiwfn3DAtomCdftCondensedFukuiZero": {
+        "input_string": "spiro_mol-conf_04.xyz",
+        "electronic_structure_data": [
+            [
+                "spiro_mol-conf_04.fchk",
+                "n"
+            ],
+            [
+                "spiro_mol-conf_04_nplus1.fchk",
+                "n+1"
+            ],
+            [
+                "spiro_mol-conf_04_nminus1.fchk",
+                "n-1"
+            ]
+        ],
+        "energy_data": [],
+        "configuration_settings": [
+            [
+                "multiwfn.cdft.iterable_option",
+                "mulliken"
+            ]
+        ],
+        "expected_data": {
+            "0": 0.157565,
+            "17": 0.001825,
+            "37": 0.0501,
+            "1": 0.06406
+        },
+        "split_str": false
+    },
+    "Qmdesc2DAtomPartialCharge": {
+        "input_string": "clopidogrel-conf_01.xyz",
+        "electronic_structure_data": [],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "12": 0.07124223,
+            "19": -0.022667848,
+            "4": -0.08377215
+        },
+        "split_str": false
+    },
+    "Qmdesc2DBondBondLength": {
+        "input_string": "clopidogrel-conf_01.xyz",
+        "electronic_structure_data": [],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "22": 1.2021996,
+            "3": 1.453444,
+            "21": 1.7290574
+        },
+        "split_str": false
+    }
+}

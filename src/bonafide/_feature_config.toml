@@ -1,0 +1,310 @@
+[alfabet] #########################################################################################
+python_interpreter_path = "~/miniconda3/envs/alfabet_env/bin/python"
+
+[bonafide] ########################################################################################
+[bonafide.autocorrelation]
+depth = 5
+iterable_option = [130] # The index of every atom feature of type int or float can be included 
+                        # here. The feature with index 130 is the default and corresponds to the 
+                        # Pauling electronegativity.
+
+[bonafide.constant]
+atom_constant = "atom_constant" # Must be of type str
+bond_constant = "bond_constant" # Must be of type str
+
+[bonafide.distance]
+n_bonds_cutoff = 3   # Number of bonds
+radius_cutoff = 4.5  # in Angstrom
+
+[bonafide.functional_group]
+key_level = "l1"    # Available: "l0", "l1", "l2"
+custom_groups = []  # Must be a list of lists with length 2, with the fist entry being the name of 
+                    # the custom functional group and the second entry being the SMARTS pattern 
+                    # defining the group; for example:
+                    # custom_groups = [["AromaticCH", "[c;H1]"]]
+
+[bonafide.misc]
+
+[bonafide.oxidation_state]
+en_scale = "Allen" # Available: "allen", "pauling", "ghosh", "allred-rochow", "cottrell-sutton",
+                   #            "gordy", "martynov-batsanov", "nagle", "sanderson"
+
+[bonafide.symmetry]
+reduce_to_canonical = false
+includeChirality = true
+includeIsotopes = true
+includeAtomMaps = false
+includeChiralPresence = false
+
+[dbstep] ##########################################################################################
+r = 3.5
+scan = []         # e.g., [2.0, 4.0, 0.5], [start, stop, step size], in Angstrom
+exclude = []      # e.g., [5, 8, 9, 12]
+noH = false
+addmetals = false
+grid = 0.05
+vshell = false
+scalevdw = 1.0
+
+[dscribe] #########################################################################################
+[dscribe.acsf]
+r_cut = 4.0
+species = "auto" # Available: "auto" or list of chemical elements to consider,
+                 #            e.g., ["H", "C", "N", "O", "F"]
+g2_params = "none"
+g3_params = "none"
+g4_params = "none"
+g5_params = "none"
+
+[dscribe.lmbtr]
+species = "auto" # Available: "auto" or list of chemical elements to consider,
+                 #            e.g., ["H", "C", "N", "O", "F"]
+geometry_function = "inverse_distance" # Available: "distance", "inverse_distance", "angle",
+                                       #            "cosine"
+grid_min = 0.1
+grid_max = 2
+grid_sigma = 0.1
+grid_n = 50
+weighting_function = "exp" # Available: "exp", "unity", "inverse_square", "smooth_cutoff"
+weighting_scale = 0.75
+weighting_threshold = 0.01
+normalize_gaussians = true
+normalization = "none" # Available: "none", "l2"
+
+[dscribe.coulomb_matrix]
+scaling_exponent = 3
+
+[dscribe.soap]
+r_cut = 4.0
+n_max = 3
+l_max = 3
+species = "auto" # Available: "auto" or list of chemical elements to consider,
+                 #            e.g., ["H", "C", "N", "O", "F"]
+sigma = 1.0
+rbf = "gto" # Available: "gto", "polynomial"
+average = "off" # Available: "off", "inner", "outer"
+
+
+[kallisto] ########################################################################################
+cntype = "cov"    # Only relevant for the coordination number feature 
+                  # Available: "cov", "exp", "erf".
+size = [2, 3]     # Only relevant for the proximity shell features.
+                  # Defines inner (first number) and outer (second number) border for proximity
+                  # shells, outer must be larger than inner
+vdwtype = "rahm"  # Only relevant for the van-der-Waals radius feature
+                  # Available: "rahm", "truhlar".
+angstrom = false  # Only relevant for the van-der-Waals radius feature
+
+[mendeleev] #######################################################################################
+# Options for the zeff method for calculating the effective nuclear charge
+method = "slater" # Available: "slater", "clementi"
+alle = false
+
+[morfeus] #########################################################################################
+# Important note: Morfeus is 1-indexed but BONAFIDE is 0-indexed. All atom indices provided here
+#                 for morfeus features must be 0-indexed.
+[morfeus.buried_volume]
+excluded_atoms = []
+radii = []
+include_hs = true
+radius = 3.5
+radii_type = "bondi" # Available: "alvarez", "bondi", "crc", "truhlar"
+radii_scale = 1.17
+density = 0.001
+z_axis_atoms = []
+xz_plane_atoms = []
+distal_volume_method = "sasa"
+distal_volume_sasa_density = 0.01
+
+[morfeus.cone_and_solid_angle]
+radii = []
+radii_type = "crc" # Available: "alvarez", "bondi", "crc", "truhlar"
+density = 0.001    # Only relevant for solid angle calculation
+
+[morfeus.dispersion]
+radii = []
+radii_type = "rahm" # Available: "alvarez", "bondi", "crc", "rahm", "truhlar"
+density = 0.1
+excluded_atoms = []
+included_atoms = []
+
+[morfeus.local_force]
+# Important note: Gaussian calculations must be run with freq=intmodes iop(7/75=-1) iop(1/33=3)
+method = "local_modes" # Available: "compliance", "local_modes"
+project_imag = true
+imag_cutoff = 0.001
+save_hessian = false
+
+[morfeus.pyramidalization]
+radii=[]
+excluded_atoms=[]
+method="distance"
+scale_factor=1.2
+
+[morfeus.sasa]
+radii = []
+radii_type = "crc" # Available: "bondi", "crc"
+probe_radius = 1.4
+density = 0.01
+
+[multiwfn] ########################################################################################
+# Environment variables for Multiwfn. They can be changed if necessary. It is also possible to
+# comment these lines out or remove them and set the environment variables in the terminal before 
+# running the script or run it without setting the environment variables. 'NUM_THREADS' is set in
+# the setting.ini file of Multiwfn. Additional changes to the Multiwfn settings can be made through
+# the 'settings.ini' file in the Multiwfn installation directory.
+OMP_STACKSIZE = "1G"
+NUM_THREADS = 4
+[multiwfn.bond_analysis]
+ibis_igm_type = "promolecular"  # Available: "promolecular", "hirshfeld"
+ibsi_grid = "high"           # Available: "medium", "high", "ultrafine", "perfect"
+connectivity_index_threshold = 0.1
+
+[multiwfn.cdft]
+iterable_option = ["hirshfeld"] 
+                # Available: "becke", "chelpg", "cm5", "scaled_cm5", "corrected_hirshfeld",
+                #            "hirshfeld", "lowdin", "merz_kollmann", "mulliken", 
+                #            "mulliken_bickelhaupt", "mulliken_ros_schuit",
+                #            "mulliken_stout_politzer", "resp_chelpg_one_stage",
+                #            "resp_chelpg_two_stage", "resp_merz_kollmann_one_stage", 
+                #            "resp_merz_kollmann_two_stage", "vdd"
+ow_delta = 0.1  # only relevant for the calculation of orbital-weighted Fukui coefficients
+
+[multiwfn.fuzzy]
+integration_grid = "atomic" # Available: "atomic", "molecular"
+exclude_atoms = []
+n_iterations_becke_partition = 3
+radius_becke_partition = "csd_tian_lu" # Available: "csd_tian_lu", "csd", "pyykko", "suresh",
+                                       #            "hugo"
+partitioning_scheme = "becke"          # Available: "becke", "hirshfeld", "hirshfeld-i"
+real_space_function = "electron_density" 
+# Available: "electron_density", "electron_density_gradient_norm", "electron_density_laplacian",
+#            "orbital_wavefunction", "spin_density", "hamiltonian_kinetic_energy_density",
+#            "lagrangian_kinetic_energy_density", "electrostatic_potential_from_nuclear_charges",
+#            "electron_localization_function", "localized_orbital_locator",
+#            "local_information_entropy", "total_electrostatic_potential",
+#            "reduced_density_gradient", "reduced_density_gradient_promolecular",
+#            "sign_of_the_second_largest_eigenvalue_electron_density_hessian_matrix",
+#            "sign_of_the_second_largest_eigenvalue_electron_density_hessian_matrix_promolecular",
+#            "average_local_ionization_energy", "electron_delocalization_range_function",
+#            "orbital_overlap_distance_function", "delta_g_promolecular", "delta_g_hirshfeld",
+#            "interaction_region_indicator", "van_der_waals_potential"
+
+[multiwfn.misc]
+
+[multiwfn.orbital]
+homo_minus = 0  # 0 requests the data for the HOMO (default); 2, for example, the data for HOMO-2
+lumo_plus = 0   # 0 requests the data for the LUMO (default); 1, for example, the data for LUMO+1
+
+[multiwfn.population]
+n_iterations_becke_partition = 3
+radius_becke_partition = "csd_tian_lu"  # Available: "csd_tian_lu", "csd", "pyykko", "suresh", "hugo"
+grid_spacing_chelpg = 0.567
+box_extension_chelpg = 5.291
+exclude_atoms = []
+esp_type = "nuclear_electronic"         # Available: "nuclear_electronic", "electronic", 
+                                        #            "transition_electronic"
+atomic_radii = "automatic"              # Available: "automatic", "scaled_uff"
+n_points_angstrom2_merz_kollmann = 6.0
+fitting_points_settings_merz_kollmann = [1.4, 1.6, 1.8, 2.0]
+eem_parameters = "b3lyp_6-311g*_npa"    # Available: "hf_sto-3g_mulliken", "b3lyp_6-31g*_chelpg"
+                                        #            "hf_6-31g*_chelpg", "b3lyp_6-311g*_npa"
+tightness_resp = 0.1
+restraint_one_stage_resp = 0.0005
+restraint_stage1_resp = 0.0005
+restraint_stage2_resp = 0.001
+n_iterations_resp = 300
+convergence_threshold_resp = 0.000001
+ch_equivalence_constraint_resp = true
+
+[multiwfn.surface]
+surface_definition = "electron_density" 
+# Available: "electron_density", "electron_density_gradient_norm", "electron_density_laplacian",
+#            "orbital_wavefunction", "spin_density", "hamiltonian_kinetic_energy_density",
+#            "lagrangian_kinetic_energy_density", "electrostatic_potential_from_nuclear_charges",
+#            "electron_localization_function", "localized_orbital_locator",
+#            "local_information_entropy", "total_electrostatic_potential",
+#            "reduced_density_gradient", "reduced_density_gradient_promolecular",
+#            "sign_of_the_second_largest_eigenvalue_electron_density_hessian_matrix",
+#            "sign_of_the_second_largest_eigenvalue_electron_density_hessian_matrix_promolecular",
+#            "average_local_ionization_energy", "electron_delocalization_range_function",
+#            "orbital_overlap_distance_function", "delta_g_promolecular", "delta_g_hirshfeld",
+#            "interaction_region_indicator", "van_der_waals_potential"                                       
+            
+surface_iso_value = 0.001
+grid_point_spacing = 0.25
+length_scale = 0.85 # only relevant for
+                    # 'multiwfn3D-atom-surface_electron_delocalization_range_function'
+orbital_overlap_edr_option = [20, 2.5, 1.5] # total number, start, and increment in EDR exponents
+                                            # only relevant for
+                                            # 'multiwfn3D-atom-surface_orbital_overlap_length_function'
+
+[multiwfn.topology]
+step_size = 0.03
+neighbor_distance_cutoff = 0.05
+
+[psi4] ############################################################################################
+method = "b3lyp-d3(bj)"
+basis = "def2-msvp"
+maxiter = 250
+memory = "2 gb"
+num_threads = 4
+solvent = "none" # Available: "none", "acetone", "acetonitrile", "aniline", "benzene", 
+                 #            "carbon tetrachloride", "chlorobenzene", "chloroform", 
+                 #            "cyclohexane","dimethylsulfoxide", "ethanol", "methanol", 
+                 #            "methylenechloride", "n-heptane", "nitromethane", 
+                 #            "tetrahydrofurane", "toluene", "water"
+solvent_model_solver = "iefpcm"  # Available: "iefpcm", "cpcm"
+
+[qmdesc] ##########################################################################################
+
+[rdkit] ###########################################################################################
+[rdkit.fingerprint]
+radius = 3
+countSimulation = false
+includeChirality = false
+useBondTypes = true
+countBounds = "none"
+fpSize = 2048
+torsionAtomCount = 4
+minDistance = 1
+maxDistance = 30
+use2D = true
+minPath = 1
+maxPath = 7
+useHs = true
+branchedPaths = true
+useBondOrder = true
+numBitsPerFeature = 2
+
+[rdkit.misc]
+
+[xtb] #############################################################################################
+# Environment variables for xtb calculations. They should only be changed if necessary.
+# It is also possible to comment these lines out or remove them and set the environment variables
+# in the terminal before running the script or run it without setting the environment variables.
+OMP_STACKSIZE = "3g"
+OMP_NUM_THREADS = 1
+OMP_MAX_ACTIVE_LEVELS = 1
+MKL_NUM_THREADS = 1
+XTBHOME = "auto"  # "auto" will result in automatically pointing the environment variable XTBHOME
+                  # to the /share/xtb directory of the xtb installation within the environment. 
+                  # Any other path specified here will be passed to XTBHOME. If an invalid path is
+                  # passed, the automatically generated XTBHOME path will be used.
+
+# xtb calculation parameters
+method = "gfn2-xtb" # Available: "gfn2-xtb", "gfn1-xtb", or "gfn0-xtb"
+iterations = 500
+acc = 1     # Accuracy, must be between 0.0001 to 1000
+etemp = 0   # The value of 0 disables Fermi-smearing and therefore ensures integer
+            # occupation numbers in the molden files generated from xtb. This is important
+            # for reading in the molden files into Multiwfn (which cannot handle fractional
+            # occupation numbers). This temperature is used for calculating electronic structure
+            # data with xtb.
+etemp_native = 300  # This is used for calculating the features with origin="xtb"
+solvent_model = "none"  # Available: "none", "alpb", "cosmo"
+solvent = "acetonitrile"  # Available: "acetone", "acetonitrile", "aniline", "benzaldehyde",
+                          #            "benzene", "ch2cl2", "chcl3", "cs2", "dioxane", "dmf",
+                          #            "dmso", "ether", "ethylacetate", "furane", "hexadecane",
+                          #            "hexane", "methanol", "nitromethane", "octanol", "phenol",
+                          #            "toluene", "thf", "water"

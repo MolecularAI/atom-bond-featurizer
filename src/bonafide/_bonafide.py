@@ -961,70 +961,75 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
         _init_charge = self.mol_vault.charge
         _init_multiplicity = self.mol_vault.multiplicity
 
-        assert isinstance(self.mol_vault.charge, int)  # for type checker
-        assert isinstance(self.mol_vault.multiplicity, int)  # for type checker
-        if state == "n+1":
-            self.mol_vault.charge -= 1
-        if state == "n-1":
-            self.mol_vault.charge += 1
-        if state in ["n+1", "n-1"]:
-            if self.mol_vault.multiplicity == 1:
-                self.mol_vault.multiplicity = 2
-            else:
-                self.mol_vault.multiplicity -= 1
+        try:
+            assert isinstance(self.mol_vault.charge, int)  # for type checker
+            assert isinstance(self.mol_vault.multiplicity, int)  # for type checker
+            if state == "n+1":
+                self.mol_vault.charge -= 1
+            if state == "n-1":
+                self.mol_vault.charge += 1
+            if state in ["n+1", "n-1"]:
+                if self.mol_vault.multiplicity == 1:
+                    self.mol_vault.multiplicity = 2
+                else:
+                    self.mol_vault.multiplicity -= 1
 
-        # Initialize respective class for sp calculation(s)
-        sp: Union[Psi4SP, XtbSP]
-        if engine == "psi4":
-            sp = Psi4SP(**params)
-        if engine == "xtb":
-            sp = XtbSP(**params)
+            # Initialize respective class for sp calculation(s)
+            sp: Union[Psi4SP, XtbSP]
+            if engine == "psi4":
+                sp = Psi4SP(**params)
+            if engine == "xtb":
+                sp = XtbSP(**params)
 
-        # Change current working directory to the output files directory
-        assert self._output_directory is not None  # for type checker
-        os.chdir(self._output_directory)
+            # Change current working directory to the output files directory
+            assert self._output_directory is not None  # for type checker
+            os.chdir(self._output_directory)
 
-        # Run the calculation(s)
-        _write_el_struc_file = False
-        if self._keep_output_files is True:
-            _write_el_struc_file = True
-        energies, electronic_strucs = sp.run(state=state, write_el_struc_file=_write_el_struc_file)
+            try:
+                # Run the calculation(s)
+                _write_el_struc_file = False
+                if self._keep_output_files is True:
+                    _write_el_struc_file = True
+                energies, electronic_strucs = sp.run(
+                    state=state, write_el_struc_file=_write_el_struc_file
+                )
+            finally:
+                # Always reset current working directory to the path where the featurizer was initialized
+                os.chdir(self._init_directory)
 
-        # Reset current working directory to the path where the featurizer was initialized
-        os.chdir(self._init_directory)
-
-        # Save the results to the molecule vault
-        _init_log = self._loc
-        logging.info(
-            f"'{self._namespace}' | {self._loc}()\nSingle-point energy calculations done for "
-            f"state '{state}'. The calculated energy data for all conformers is automatically "
-            f"attached to the molecule vault for state '{state}'."
-        )
-        self.attach_energy(energy_data=energies, state=state)  # type: ignore[attr-defined]
-        self._loc = _init_log
-
-        # Automatically attach electronic structure to the molecule vault
-        if self._keep_output_files is True:
+            # Save the results to the molecule vault
+            _init_log = self._loc
             logging.info(
-                f"'{self._namespace}' | {self._loc}()\nThe calculated electronic structure "
-                f"data files are automatically attached to the molecule vault for state '{state}'."
+                f"'{self._namespace}' | {self._loc}()\nSingle-point energy calculations done for "
+                f"state '{state}'. The calculated energy data for all conformers is automatically "
+                f"attached to the molecule vault for state '{state}'."
             )
-            self.attach_electronic_structure(
-                electronic_structure_data=electronic_strucs,  # type: ignore[arg-type]
-                state=state,
-            )
-        else:
-            logging.warning(
-                f"'{self._namespace}' | {self._loc}()\nThe electronic structure data files were "
-                "calculated but not attached to the molecule vault because the output files were "
-                "deleted after the calculations. Specify an output directory in the read_input() "
-                "method ('output_directory' parameter) to keep the output files and automatically "
-                "attach them to the molecule vault."
-            )
+            self.attach_energy(energy_data=energies, state=state)  # type: ignore[attr-defined]
+            self._loc = _init_log
 
-        # Reset charge and multiplicity to initial values
-        self.mol_vault.charge = _init_charge
-        self.mol_vault.multiplicity = _init_multiplicity
+            # Automatically attach electronic structure to the molecule vault
+            if self._keep_output_files is True:
+                logging.info(
+                    f"'{self._namespace}' | {self._loc}()\nThe calculated electronic structure "
+                    f"data files are automatically attached to the molecule vault for state '{state}'."
+                )
+                self.attach_electronic_structure(
+                    electronic_structure_data=electronic_strucs,  # type: ignore[arg-type]
+                    state=state,
+                )
+            else:
+                logging.warning(
+                    f"'{self._namespace}' | {self._loc}()\nThe electronic structure data files were "
+                    "calculated but not attached to the molecule vault because the output files were "
+                    "deleted after the calculations. Specify an output directory in the read_input() "
+                    "method ('output_directory' parameter) to keep the output files and automatically "
+                    "attach them to the molecule vault."
+                )
+
+        finally:
+            # Always reset charge and multiplicity to initial values
+            self.mol_vault.charge = _init_charge
+            self.mol_vault.multiplicity = _init_multiplicity
 
     def _run_featurization(self, feature_indices: List[int], atom_bond_indices: List[int]) -> None:
         """Calculate the requested atom or bond features.
@@ -1240,12 +1245,13 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
                         assert self._output_directory is not None  # for type checker
                         os.chdir(self._output_directory)
 
-                        # Calculate feature with callable factory class
-                        calc_feature = FEATURE_FACTORIES[factory]()
-                        feature_value, error_message = calc_feature(**params)
-
-                        # Reset current working directory to path where featurizer was initialized
-                        os.chdir(self._init_directory)
+                        try:
+                            # Calculate feature with callable factory class
+                            calc_feature = FEATURE_FACTORIES[factory]()
+                            feature_value, error_message = calc_feature(**params)
+                        finally:
+                            # Always reset current working directory to path where featurizer was initialized
+                            os.chdir(self._init_directory)
 
                         # Adjust feature name in case the feature class modified it
                         # (when iterable options are used)

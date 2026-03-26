@@ -10,6 +10,8 @@
 
 This is the documentation of the **BOnd aNd Atom FeaturIzer and Descriptor Extractor** (BONAFIDE)!
 
+**Latest version:** |release|
+
 BONAFIDE is a Python-based package for calculating :doc:`features <feature_list>` for atoms and
 bonds in molecules by providing a consistent API to popular featurization libraries and packages. It
 can calculate descriptors based on both 2D and 3D molecular representations depending on the

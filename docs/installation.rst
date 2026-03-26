@@ -13,7 +13,7 @@ Please complete the following steps to install ``BONAFIDE`` and its :doc:`depend
 
 .. code:: shell
 
-   $ git clone https://github.com/MolecularAI/atom-bond-featurizer
+   $ git clone https://github.com/MolecularAI/atom-bond-featurizer.git
    $ cd atom-bond-featurizer
 
 2. Create a new **conda environment** and activate it.

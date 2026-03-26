@@ -2,9 +2,9 @@
 
 ![image](docs/_static/doc_image_light.png)
 
-![Maturity](https://img.shields.io/badge/Maturity%20level-ML--1-%231d7b87)
 ![Version Badge](https://img.shields.io/badge/Version-0.1.1-%231d7b87)
 [![DOI](https://img.shields.io/badge/DOI-...-%231d7b87)](https://doi.org/10.1002/anie.202510533)
+![Maturity](https://img.shields.io/badge/Maturity%20level-ML--1-%231d7b87)
 ![Mypy](https://github.com/MolecularAI/atom-bond-featurizer/actions/workflows/mypy_analysis.yml/badge.svg?branch=main)
 ![Pytest-quick](https://github.com/MolecularAI/atom-bond-featurizer/actions/workflows/pytest_analysis.yml/badge.svg?branch=main)
 ![Test coverage](https://img.shields.io/badge/Test%20coverage-93%25-success)
@@ -28,7 +28,7 @@ For any further details, please visit the
 -   Optional external programs: Multiwfn, Psi4, xtb
 
 For further details, please see the
-[installation guide](https://molecularai.github.io/atom-bond-featurizer/docs/installation.html) and
+[installation guide](https://molecularai.github.io/atom-bond-featurizer/installation.html) and
 the environment `.yml` files.
 
 ## Quick Start
@@ -51,7 +51,7 @@ f.return_atom_features()
 ```
 
 For more details and examples, see the [examples](examples/) folder and the
-[documentation](https://molecularai.github.io/atom-bond-featurizer/docs/features.html).
+[documentation](https://molecularai.github.io/atom-bond-featurizer/features.html).
 
 ## Reference
 

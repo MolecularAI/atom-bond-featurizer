@@ -1,0 +1,65 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+    - name: Free disk space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf /opt/hostedtoolcache
+        df -h
+
+    - uses: actions/checkout@v4
+
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: "3.12"
+        miniconda-version: latest
+        environment-file: bonafide_env_dev.yml
+        activate-environment: bonafide_env_dev
+        channels: conda-forge
+
+    - name: Cache conda environment
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/miniconda3/pkgs
+          ~/conda_pkgs_dir
+          ~/.cache/pip
+        key: ${{ runner.os }}-conda-${{ hashFiles('bonafide_env_dev.yml') }}
+        restore-keys: |
+          ${{ runner.os }}-conda-
+
+    - name: Install bonafide
+      shell: bash -el {0}
+      run: |
+        pip install kallisto --no-deps
+        pip install --no-deps .
+        python post_install_setup.py
+
+    - name: Build documentation
+      shell: bash -el {0}
+      run: |
+        cd docs
+        make html
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/_build/html
+        publish_branch: gh-pages

@@ -1,0 +1,1138 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="bonafide package" href="modules.html"><link rel="prev" title="bonafide" href="modules_user.html">
+        <link rel="prefetch" href="_static/doc_logo_light.png" as="image">
+        <link rel="prefetch" href="_static/doc_logo_dark.png" as="image">
+
+    <link rel="shortcut icon" href="_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>AtomBondFeaturizer - BONAFIDE</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom_datatable.css?v=470af658" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">BONAFIDE</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/doc_logo_light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/doc_logo_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes.html">Notes on usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_list.html">List of features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General functionality</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config_settings.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input.html">User input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bonds.html">Definition of chemical bonds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electronic_structure.html">Energy and electronic structure data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Feature calculation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Feature calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Feature output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom.html">Custom features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_environment.html">External programs and environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_notes.html">Notes on features</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Source</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/MolecularAI/atom-bond-featurizer">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User API</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules_user.html">bonafide</a><input aria-label="Toggle navigation of bonafide" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">AtomBondFeaturizer</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Full API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">bonafide package</a><input aria-label="Toggle navigation of bonafide package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="bonafide.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="bonafide.features.html">bonafide.features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bonafide.utils.html">bonafide.utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/bonafide_user.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-bonafide.bonafide">
+<span id="atombondfeaturizer"></span><h1>AtomBondFeaturizer<a class="headerlink" href="#module-bonafide.bonafide" title="Link to this heading">¶</a></h1>
+<p>BONAFIDE main module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide.bonafide.</span></span><span class="sig-name descname"><span class="pre">AtomBondFeaturizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bonafide.log'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="bonafide.html#bonafide._bonafide._AtomBondFeaturizer" title="bonafide._bonafide._AtomBondFeaturizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">_AtomBondFeaturizer</span></code></a></p>
+<p>Main class of the Bond and Atom Featurizer and Descriptor Extractor (BONAFIDE).</p>
+<p>It implements all the methods available to the user to calculate atom and or bond-specific
+features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_file_name</strong><span class="classifier">str, optional</span></dt><dd><p>The name of the log file to which all logging messages are written, by default
+“bonafide.log”. A file with this name cannot already exists.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>_atom_feature_indices_2D</strong><span class="classifier">List[int]</span></dt><dd><p>The list of atom feature indices that can be calculated for molecules for which only 2D
+information is available.</p>
+</dd>
+<dt><strong>_atom_feature_indices_3D</strong><span class="classifier">List[int]</span></dt><dd><p>The list of atom feature indices that can be calculated for molecules for which 3D
+information is available.</p>
+</dd>
+<dt><strong>_bond_feature_indices_2D</strong><span class="classifier">List[int]</span></dt><dd><p>The list of bond feature indices that can be calculated for molecules for which only 2D
+information is available.</p>
+</dd>
+<dt><strong>_bond_feature_indices_3D</strong><span class="classifier">List[int]</span></dt><dd><p>The list of bond feature indices that can be calculated for molecules for which 3D
+information is available.</p>
+</dd>
+<dt><strong>_feature_config</strong><span class="classifier">Dict[str, Any]</span></dt><dd><p>The configuration settings for the individual programs used for feature calculation. The
+default settings are loaded from the <code class="docutils literal notranslate"><span class="pre">_feature_config.toml</span></code> file. The current settings
+can be inspected with the <code class="docutils literal notranslate"><span class="pre">print_options()</span></code> method and changed using the
+<code class="docutils literal notranslate"><span class="pre">set_options()</span></code> method.</p>
+</dd>
+<dt><strong>_feature_info</strong><span class="classifier">Dict[int, Dict[str, Any]]</span></dt><dd><p>The metadata of all implemented atom and bond features, e.g., the name of the feature, its
+dimensionality requirements (either 2D or 3D), or the program it is calculated with
+(origin). The data is loaded from the <code class="docutils literal notranslate"><span class="pre">_feature_info.json</span></code> file and should not be
+manually modified.</p>
+</dd>
+<dt><strong>_feature_info_df</strong><span class="classifier">pd.DataFrame</span></dt><dd><p>A pandas DataFrame containing the feature indices (as index of the DataFrame) and their key
+characteristics of all implemented atom and bond features.</p>
+</dd>
+<dt><strong>_functional_groups_smarts</strong><span class="classifier">Dict[str, List[Tuple[str, Chem.rdchem.Mol]]]</span></dt><dd><p>A dictionary containing the names and SMARTS patterns of different functional groups.</p>
+</dd>
+<dt><strong>_init_directory</strong><span class="classifier">str</span></dt><dd><p>The path to the directory where the <code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer</span></code> object was initialized.</p>
+</dd>
+<dt><strong>_keep_output_files</strong><span class="classifier">bool</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, all output files created during the feature calculations are kept. If
+<code class="docutils literal notranslate"><span class="pre">False</span></code>, they are removed when the calculation is done.</p>
+</dd>
+<dt><strong>_loc</strong><span class="classifier">str</span></dt><dd><p>The location string representing the current class and method for logging purposes.</p>
+</dd>
+<dt><strong>_namespace</strong><span class="classifier">Optional[str]</span></dt><dd><p>The namespace for the molecule as defined by the user when reading in the molecule.</p>
+</dd>
+<dt><strong>_output_directory</strong><span class="classifier">Optional[str]</span></dt><dd><p>The path to the directory where all output files created during the feature calculations
+are stored (if requested).</p>
+</dd>
+<dt><strong>_periodic_table</strong><span class="classifier">Dict[str, element]</span></dt><dd><p>A dictionary representing the periodic table with element symbols as keys and mendeleev
+<code class="docutils literal notranslate"><span class="pre">element</span></code> objects as values.</p>
+</dd>
+<dt><strong>mol_vault</strong><span class="classifier">Optional[MolVault]</span></dt><dd><p>Dataclass object for storing all relevant data on the molecule for which features should be
+calculated.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.add_custom_featurizer">
+<span class="sig-name descname"><span class="pre">add_custom_featurizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.add_custom_featurizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.add_custom_featurizer" title="Link to this definition">¶</a></dt>
+<dd><p>Add a custom featurizer to the BONAFIDE framework.</p>
+<p>After successfully calling this method, the custom feature is assigned its own feature
+index and can be used like any other built-in feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>custom_metadata</strong><span class="classifier">Dict[str, Any]</span></dt><dd><p>A dictionary containing the required information on the custom featurizer. It must
+contain the following data:</p>
+<ul class="simple">
+<li><p>name (str): The name of the custom feature.</p></li>
+<li><p>origin (str): The origin program of the custom feature (e.g., “custom”)</p></li>
+<li><p>feature_type (str): The type of the custom feature (either “atom” or “bond”).</p></li>
+<li><p>dimensionality (str): The dimensionality of the custom feature (either “2D” or “3D”).</p></li>
+<li><p>data_type (str): The data type of the custom feature specified as string (either
+“str”, “int”, “float”, or “bool”).</p></li>
+<li><p>requires_electronic_structure_data (bool): Whether electronic structure data is
+required for calculating the custom feature.</p></li>
+<li><p>requires_bond_data (bool): Whether bond data is required for calculating the
+custom feature.</p></li>
+<li><p>requires_charge (bool): Whether the charge of the molecule is required for
+calculating the custom feature.</p></li>
+<li><p>requires_multiplicity (bool): Whether the multiplicity of the molecule is
+required for calculating the custom feature.</p></li>
+<li><p>config_path (dict): Dictionary of optional parameters passed to the custom
+featurizer. The keys of this dictionary will be available as attributes in the
+custom featurizer class.</p></li>
+<li><p>factory (callable): The factory class for calculating the custom feature. It
+must inherit from <code class="docutils literal notranslate"><span class="pre">BaseFeaturizer</span></code> from <code class="docutils literal notranslate"><span class="pre">bonafide/utils/base_featurizer.py</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure">
+<span class="sig-name descname"><span class="pre">attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_structure_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure" title="Link to this definition">¶</a></dt>
+<dd><p>Attach electronic structure data files to a molecule vault hosting a 3D molecule.</p>
+<p>The input can either be a single file path or a list of file paths. The <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter
+allows to specify to which redox state of the molecule the electronic structure data
+should be attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>electronic_structure_data</strong><span class="classifier">Union[str, List[str]]</span></dt><dd><p>A list of file paths to the electronic structure files or a single file path.</p>
+</dd>
+<dt><strong>state</strong><span class="classifier">str, optional</span></dt><dd><p>The redox state of the electronic structure data to be attached, by default “n”. Can
+either be</p>
+<ul class="simple">
+<li><p>“n” (actual molecule),</p></li>
+<li><p>“n+1” (actual molecule plus one electron), or</p></li>
+<li><p>“n-1” (actual molecule minus one electron).</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.attach_energy">
+<span class="sig-name descname"><span class="pre">attach_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_by_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.attach_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.attach_energy" title="Link to this definition">¶</a></dt>
+<dd><p>Attach molecular energy values to a molecule vault hosting a 3D molecule.</p>
+<p>The input to <code class="docutils literal notranslate"><span class="pre">energy_data</span></code> can either be a single 2-tuple or a list of 2-tuples. Each
+2-tuple must contain the energy value (first entry) and the respective energy unit (second
+entry). Supported energy units are “Eh”, “kcal/mol”, and “kJ/mol”.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter allows to specify to which redox state of the molecule the energy
+values should be attached to.</p>
+<p>If desired, the conformer ensemble can be pruned based on the attached energy values for
+state “n” (actual molecule) through the <code class="docutils literal notranslate"><span class="pre">prune_by_energy</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>energy_data</strong><span class="classifier">Union[Tuple[Union[int, float], str], List[Tuple[Union[int, float], str]]]</span></dt><dd><p>A 2-tuple or a list of 2-tuples containing the energy values and respective units.</p>
+</dd>
+<dt><strong>state</strong><span class="classifier">str, optional</span></dt><dd><p>The redox state of the electronic structure data to be attached, by default “n”. Can
+either be</p>
+<ul class="simple">
+<li><p>“n” (actual molecule),</p></li>
+<li><p>“n+1” (actual molecule plus one electron), or</p></li>
+<li><p>“n-1” (actual molecule minus one electron).</p></li>
+</ul>
+</dd>
+<dt><strong>prune_by_energy</strong><span class="classifier">Optional[Tuple[Union[int, float], str]], optional</span></dt><dd><p>If a value other than <code class="docutils literal notranslate"><span class="pre">None</span></code> is provided, all conformers with a relative energy above
+this value are set to be invalid and ignored during feature calculation and any
+further processing. The input must be a 2-tuple in which the first entry is the
+relative energy cutoff value and the second entry is the respective energy unit.
+Supported units are “Eh”, “kcal/mol”, and “kJ/mol”. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no pruning is
+performed, by default <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.attach_smiles">
+<span class="sig-name descname"><span class="pre">attach_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connectivity_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'connect_the_dots'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covalent_radius_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.attach_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.attach_smiles" title="Link to this definition">¶</a></dt>
+<dd><p>Attach a SMILES string to a molecule vault that is hosting a 3D molecule.</p>
+<p>Before attaching a SMILES string, the compatibility of the SMILES string with the already
+existing molecule in the vault is checked. The <code class="docutils literal notranslate"><span class="pre">align</span></code> parameter allows to decide whether
+to keep the initial atom order (<code class="docutils literal notranslate"><span class="pre">align=True</span></code>) or apply the one of the SMILES string
+(<code class="docutils literal notranslate"><span class="pre">align=False</span></code>).</p>
+<p>The additional optional parameters <code class="docutils literal notranslate"><span class="pre">connectivity_method</span></code> and <code class="docutils literal notranslate"><span class="pre">covalent_radius_factor</span></code>
+influence how the atom connectivity of the RDKit molecule object(s) initially hosted in the
+molecule vault is determined (required for attaching the SMILES string).</p>
+<p>A SMILES string can only be attached to a molecule vault for which the bonds are not
+determined yet. This also means that once a SMILES string is attached to a molecule
+vault, it cannot be changed anymore. A SMILES string cannot be attached to a molecule vault
+hosting a 2D molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>smiles</strong><span class="classifier">str</span></dt><dd><p>The SMILES string that should be attached to the molecule vault.</p>
+</dd>
+<dt><strong>align</strong><span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the atom indices of the initially provided 3D structures are preserved, if
+<code class="docutils literal notranslate"><span class="pre">False</span></code>, the atoms are re-ordered according to the order in the SMILES string, by
+default <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>connectivity_method</strong><span class="classifier">str</span></dt><dd><p>The name of the method that is used to determine the atom connectivity. Available
+options are “connect_the_dots”, “van_der_waals”, and “hueckel”.</p>
+</dd>
+<dt><strong>covalent_radius_factor</strong><span class="classifier">float</span></dt><dd><p>A scaling factor that is applied to the covalent radii of the atoms when determining the
+bonds with the van-der-Waals method.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.calculate_electronic_structure">
+<span class="sig-name descname"><span class="pre">calculate_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redox</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_by_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.calculate_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.calculate_electronic_structure" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the electronic structure of all conformers of a molecule vault hosting
+a 3D molecule.</p>
+<p>The calculation can be performed with either the Psi4 or xtb engine. The <code class="docutils literal notranslate"><span class="pre">redox</span></code>
+parameter allows to select for which redox states the electronic structure should be
+calculated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>engine</strong><span class="classifier">str</span></dt><dd><p>The name of the electronic structure program to be used, either “psi4” or “xtb”.</p>
+</dd>
+<dt><strong>redox</strong><span class="classifier">str, optional</span></dt><dd><p>The redox state for which the electronic structure should be calculated. Can either be</p>
+<ul class="simple">
+<li><p>“n” (only the actual molecule is calculated),</p></li>
+<li><p>“n-1” (the actual molecule and its one-electron-oxidized form are calculated),</p></li>
+<li><p>“n+1” (the actual molecule and its one-electron-reduced form are calculated), or</p></li>
+<li><p>“all” (the actual molecule and both, its one-electron-reduced and -oxidized form are
+calculated), by default “n”.</p></li>
+</ul>
+</dd>
+<dt><strong>prune_by_energy</strong><span class="classifier">Optional[Tuple[Union[int, float], str]], optional</span></dt><dd><p>If a value other than <code class="docutils literal notranslate"><span class="pre">None</span></code> is provided, all conformers with a relative energy above
+this value are set to be invalid and ignored during feature calculation and any
+further processing. The input must be a 2-tuple in which the first entry is the
+relative energy cutoff value and the second entry is the respective energy unit.
+Supported units are “Eh”, “kcal/mol”, and “kJ/mol”. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no pruning is
+performed, by default <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.clear_atom_feature_cache">
+<span class="sig-name descname"><span class="pre">clear_atom_feature_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.clear_atom_feature_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.clear_atom_feature_cache" title="Link to this definition">¶</a></dt>
+<dd><p>Clear the atom feature cache of the molecule vault.</p>
+<p>This method can be used to clear previously calculated atom features from the feature
+cache of the molecule vault to recalculate them (e.g., after changing the configuration
+settings of a featurizer, see the <code class="docutils literal notranslate"><span class="pre">set_options()</span></code> method).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>origin</strong><span class="classifier">Optional[Union[str, List[str]]]</span></dt><dd><p>The name or a list of the names of the program(s) of the feature(s) to be cleared
+(e.g., “rdkit”, “xtb”), by default <code class="docutils literal notranslate"><span class="pre">None</span></code>. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, all features are cleared.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.clear_bond_feature_cache">
+<span class="sig-name descname"><span class="pre">clear_bond_feature_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.clear_bond_feature_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.clear_bond_feature_cache" title="Link to this definition">¶</a></dt>
+<dd><p>Clear the bond feature cache of the molecule vault.</p>
+<p>This method can be used to clear previously calculated bond features from the feature
+cache of the molecule vault to recalculate them (e.g., after changing the configuration
+settings of a featurizer, see the <code class="docutils literal notranslate"><span class="pre">set_options()</span></code> method).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>origin</strong><span class="classifier">Optional[Union[str, List[str]]]</span></dt><dd><p>The name or a list of the names of the program(s) of the feature(s) to be cleared
+(e.g., “rdkit”, “xtb”), by default <code class="docutils literal notranslate"><span class="pre">None</span></code>. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, all features are cleared.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.determine_bonds">
+<span class="sig-name descname"><span class="pre">determine_bonds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connectivity_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'connect_the_dots'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covalent_radius_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_charged_fragments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_chiral</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.determine_bonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.determine_bonds" title="Link to this definition">¶</a></dt>
+<dd><p>Determine the chemical bonds of each conformer of a molecule vault hosting a
+3D molecule.</p>
+<p>This method can be used to define the chemical bonds of a molecule that was provided
+without information on the bonds (connectivity and bond type). Bond information is
+required for the calculation of certain atom and all bond features.</p>
+<p>The optional parameters <code class="docutils literal notranslate"><span class="pre">connectivity_method</span></code>, <code class="docutils literal notranslate"><span class="pre">covalent_radius_factor</span></code>,
+<code class="docutils literal notranslate"><span class="pre">allow_charged_fragments</span></code>, and <code class="docutils literal notranslate"><span class="pre">embed_chiral</span></code> influence how the bonds of the
+individual RDKit molecule object(s) are.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>connectivity_method</strong><span class="classifier">str</span></dt><dd><p>The name of the method that is used to determine the atom connectivity and bond type.
+Available options are “connect_the_dots”, “van_der_waals”, and “hueckel”.</p>
+</dd>
+<dt><strong>covalent_radius_factor</strong><span class="classifier">float</span></dt><dd><p>A scaling factor that is applied to the covalent radii of the atoms when determining
+the bonds with the van-der-Waals method.</p>
+</dd>
+<dt><strong>allow_charged_fragments</strong><span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, fragments with a net charge are allowed when determining the bonds of the
+molecule, by default <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>embed_chiral</strong><span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, chiral centers are embedded when determining the bonds of the molecule,
+by default <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.featurize_atoms">
+<span class="sig-name descname"><span class="pre">featurize_atoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.featurize_atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.featurize_atoms" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate one or multiple features for selected or all atoms.</p>
+<p>A list of all available atom features can be obtained with the <code class="docutils literal notranslate"><span class="pre">list_atom_features()</span></code>
+method. For certain features, 3D information, electronic structure data or information on
+the chemical bonds in the molecule is required.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>atom_indices</strong><span class="classifier">Union[str, int, List[int]]</span></dt><dd><p>The indices of the atoms to be featurized. Can be a single index, a list of indices, or
+“all” to consider all atoms.</p>
+</dd>
+<dt><strong>feature_indices</strong><span class="classifier">Union[str, int, List[int]]</span></dt><dd><p>The indices of the features to be calculated. Can be a single index, a list of indices,
+or “all” to consider all atom features.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.featurize_bonds">
+<span class="sig-name descname"><span class="pre">featurize_bonds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.featurize_bonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.featurize_bonds" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate one or multiple features for selected or all bonds.</p>
+<p>A list of all available bond features can be obtained with the <code class="docutils literal notranslate"><span class="pre">list_bond_features()</span></code>
+method. For all bond features, information on the chemical bonds in the molecule is
+required. Some bond features further require 3D information or electronic structure data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>bond_indices</strong><span class="classifier">Union[str, int, List[int]]</span></dt><dd><p>The indices of the bonds to be featurized. Can be a single index, a list of indices, or
+“all” to consider all bonds.</p>
+</dd>
+<dt><strong>feature_indices</strong><span class="classifier">Union[str, int, List[int]]</span></dt><dd><p>The indices of the features to be calculated. Can be a single index, a list of indices,
+or “all” to consider all bond features.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.list_atom_features">
+<span class="sig-name descname"><span class="pre">list_atom_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.list_atom_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.list_atom_features" title="Link to this definition">¶</a></dt>
+<dd><p>Display all available atom features.</p>
+<p>The DataFrame can be filtered with the following optional keyword arguments:</p>
+<ul class="simple">
+<li><p>name</p></li>
+<li><p>origin</p></li>
+<li><p>dimensionality</p></li>
+<li><p>data_type</p></li>
+<li><p>requires_electronic_structure_data</p></li>
+<li><p>requires_bond_data</p></li>
+<li><p>requires_charge</p></li>
+<li><p>requires_multiplicity</p></li>
+<li><p>config_path</p></li>
+<li><p>factory</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">Any</span></dt><dd><p>Additional optional keyword arguments for filtering the feature DataFrame. If empty,
+all atom features are returned.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>pd.DataFrame</dt><dd><p>A pandas DataFrame containing the selected atom features and their characteristics.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.list_bond_features">
+<span class="sig-name descname"><span class="pre">list_bond_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.list_bond_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.list_bond_features" title="Link to this definition">¶</a></dt>
+<dd><p>Display all available bond features.</p>
+<p>The DataFrame can be filtered with the following optional keyword arguments:</p>
+<ul class="simple">
+<li><p>name</p></li>
+<li><p>origin</p></li>
+<li><p>dimensionality</p></li>
+<li><p>data_type</p></li>
+<li><p>requires_electronic_structure_data</p></li>
+<li><p>requires_bond_data</p></li>
+<li><p>requires_charge</p></li>
+<li><p>requires_multiplicity</p></li>
+<li><p>config_path</p></li>
+<li><p>factory</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">Any</span></dt><dd><p>Additional optional keyword arguments for filtering the feature DataFrame. If empty,
+all bond features are returned.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>pd.DataFrame</dt><dd><p>A pandas DataFrame containing the selected bond features and their characteristics.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.print_options">
+<span class="sig-name descname"><span class="pre">print_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.print_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.print_options" title="Link to this definition">¶</a></dt>
+<dd><p>Print the configuration settings of the individual programs for feature calculation.</p>
+<p>By providing input to the <code class="docutils literal notranslate"><span class="pre">origin</span></code> parameter, it can be selected which program’s settings
+are printed. Valid origins are:</p>
+<ul class="simple">
+<li><p>alfabet</p></li>
+<li><p>bonafide</p></li>
+<li><p>dbstep</p></li>
+<li><p>dscribe</p></li>
+<li><p>kallisto</p></li>
+<li><p>mendeleev</p></li>
+<li><p>morfeus</p></li>
+<li><p>multiwfn</p></li>
+<li><p>psi4</p></li>
+<li><p>qmdesc</p></li>
+<li><p>rdkit</p></li>
+<li><p>xtb</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>origin</strong><span class="classifier">Optional[Union[str, List[str]]], optional</span></dt><dd><p>The name(s) of the program(s) for which the configuration settings should be printed.
+Can either be given as string or list of multiple programs, by default <code class="docutils literal notranslate"><span class="pre">None</span></code>. If
+kept <code class="docutils literal notranslate"><span class="pre">None</span></code>, the settings of all programs are printed.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.read_input">
+<span class="sig-name descname"><span class="pre">read_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'smiles'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_by_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.read_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.read_input" title="Link to this definition">¶</a></dt>
+<dd><p>Read in a SMILES string, an input file (either XYZ or SDF), or an RDKit molecule object.</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">input_format</span></code> parameter is set to “smiles”, meaning that a SMILES string
+can be passed to the method without specifying <code class="docutils literal notranslate"><span class="pre">input_format</span></code>. If a file should be read
+in, <code class="docutils literal notranslate"><span class="pre">input_format</span></code> must be set to “file”; for an RDKit molecule object, it must be set to
+“mol_object”.</p>
+<p>If it is intended to read in energies from the input file or the RDKit molecule object (if
+available), the <code class="docutils literal notranslate"><span class="pre">read_energy</span></code> parameter must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. This will set the
+energies in the molecule vault for state “n” (actual molecule). Alternatively, the
+<code class="docutils literal notranslate"><span class="pre">attach_energy()</span></code> method can be used to attach energy data to the molecule vault after
+reading in the molecule. This method also allows to attach energies for different redox
+states (“n” (actual molecule), “n+1” (one-electron reduced molecule), “n-1”
+(one-electron oxidized molecule)).</p>
+<p>Energy data must always be specified as strings containing the value and the respective
+unit separated by a space, for example, <code class="docutils literal notranslate"><span class="pre">&quot;-10.5</span> <span class="pre">kcal/mol&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;-1254.21548</span> <span class="pre">Eh&quot;</span></code>.
+Supported energy units are “Eh”, “kcal/mol”, and “kJ/mol”.</p>
+<p>It is possible to prune the conformer ensemble through the <code class="docutils literal notranslate"><span class="pre">prune_by_energy</span></code> parameter.
+Pruning is done based on relative energies (of state “n”) with respect to the lowest-energy
+conformer in the molecule vault.</p>
+<p>Passing an input to <code class="docutils literal notranslate"><span class="pre">output_directory</span></code> allows to specify where all output files created
+during the feature calculations are stored. If kept <code class="docutils literal notranslate"><span class="pre">None</span></code>, all output files are deleted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input_value</strong><span class="classifier">Union[str, Chem.rdchem.Mol]</span></dt><dd><p>The path to the input file, a SMILES string, or an RDKit molecule object.</p>
+</dd>
+<dt><strong>namespace</strong><span class="classifier">str</span></dt><dd><p>The namespace for the molecule that is read in. This identifier is used throughout all
+following BONAFIDE processes including logging.</p>
+</dd>
+<dt><strong>input_format</strong><span class="classifier">str, optional</span></dt><dd><p>The type of input. Can either be “file” or “smiles”, by default “smiles”.</p>
+</dd>
+<dt><strong>read_energy</strong><span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, it is attempted to read in energies from the input file (if available), by
+default <code class="docutils literal notranslate"><span class="pre">False</span></code>. These energies are set for state “n” (actual molecule).</p>
+</dd>
+<dt><strong>prune_by_energy</strong><span class="classifier">Optional[Tuple[Union[int, float], str]], optional</span></dt><dd><p>If a value other than <code class="docutils literal notranslate"><span class="pre">None</span></code> is provided, all conformers with a relative energy above
+this value are set to be invalid and ignored during feature calculation and any
+further processing. The input must be a 2-tuple in which the first entry is the
+relative energy cutoff value and the second entry is the respective energy unit.
+Supported units are “Eh”, “kcal/mol”, and “kJ/mol”. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no pruning is
+performed, by default <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><strong>output_directory</strong><span class="classifier">Optional[str], optional</span></dt><dd><p>The path to the directory where all output files created during the feature
+calculations are stored. If kept <code class="docutils literal notranslate"><span class="pre">None</span></code>, no output files folder is created and all
+output files are deleted after data extraction.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.return_atom_features">
+<span class="sig-name descname"><span class="pre">return_atom_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'df'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_invalid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.return_atom_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.return_atom_features" title="Link to this definition">¶</a></dt>
+<dd><p>Return the calculated atom features after feature calculation.</p>
+<p>The features of selected or all atoms can be returned as a pandas DataFrame, a hierarchical
+dictionary, or as one or multiple RDKit molecule objects with the features embedded as
+atom properties.</p>
+<p>If a dictionary is requested as output format, the outer dictionary keys correspond to the
+atom indices. The values are dictionaries in which the keys are the feature names and the
+values are the respective feature values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>atom_indices</strong><span class="classifier">Union[str, int, List[int]], optional</span></dt><dd><p>The indices of the atoms for which features should be returned. If features are
+requested for atoms for which no data was calculated, the feature value will be
+<code class="docutils literal notranslate"><span class="pre">NaN</span></code>. The input to <code class="docutils literal notranslate"><span class="pre">atom_indices</span></code> can be a single index, a list of indices, or
+“all” to consider all atoms, by default “all”.</p>
+</dd>
+<dt><strong>output_format</strong><span class="classifier">str, optional</span></dt><dd><p>The name of the desired output format, can be “df”, “dict”, or “mol_object”. If “df” is
+selected, a pandas DataFrame is returned. If “dict” is selected, the features are
+returned as a hierarchical dictionary. If “mol_object” is selected, one or multiple
+RDKit molecule objects with the features embedded as atom properties are returned, by
+default “df”.</p>
+</dd>
+<dt><strong>reduce</strong><span class="classifier">bool, optional</span></dt><dd><p>This is only relevant for molecule vaults hosting a 3D molecule with more than one
+conformer. If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the features are reduced to a single value per atom across all
+conformers reporting the minimum, maximum, and mean value for each feature. In
+addition, if energy data is available in the molecule vault, the Boltzmann-weighted
+average value at the provided temperature is reported as well as the data for the
+lowest- and highest-energy conformer. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the features are returned for each
+conformer separately, by default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt><strong>temperature</strong><span class="classifier">Union[int, float], optional</span></dt><dd><p>The temperature in Kelvin at which the Boltzmann-weighted values are calculated, by
+default 298.15.</p>
+</dd>
+<dt><strong>ignore_invalid</strong><span class="classifier">bool, optional</span></dt><dd><p>If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the presence of any invalid conformer in the molecule vault will
+be ignored during feature reduction. If is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, the presence of any
+invalid conformer will lead to returning the unreduced features. Note that in both
+cases, invalid conformers are ignored when calculating the mean, min, and max feature
+values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Union[pd.DataFrame, Dict[int, Dict[str, Any]], List[Chem.rdchem.Mol], Chem.rdchem.Mol]</dt><dd><p>The atom features in the desired output format.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.return_bond_features">
+<span class="sig-name descname"><span class="pre">return_bond_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'df'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_invalid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.return_bond_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.return_bond_features" title="Link to this definition">¶</a></dt>
+<dd><p>Return the calculated bond features after feature calculation.</p>
+<p>The features of selected or all bonds can be returned as a pandas DataFrame, a hierarchical
+dictionary, or as one or multiple RDKit molecule objects with the features embedded as
+bond properties.</p>
+<p>If a dictionary is requested as output format, the outer dictionary keys correspond to the
+bond indices. The values are dictionaries in which the keys are the feature names and the
+values are the respective feature values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>bond_indices</strong><span class="classifier">Union[str, int, List[int]], optional</span></dt><dd><p>The indices of the bonds for which features should be returned. If features are
+requested for bonds for which no data was calculated, the feature value will be
+<code class="docutils literal notranslate"><span class="pre">NaN</span></code>. The input to <code class="docutils literal notranslate"><span class="pre">bond_indices</span></code> can be a single index, a list of indices, or
+“all” to consider all bonds, by default “all”.</p>
+</dd>
+<dt><strong>output_format</strong><span class="classifier">str, optional</span></dt><dd><p>The name of the desired output format, can be “df”, “dict”, or “mol_object”. If “df” is
+selected, a pandas DataFrame is returned. If “dict” is selected, the features are
+returned as a hierarchical dictionary. If “mol_object” is selected, one or multiple
+RDKit molecule objects with the features embedded as bond properties are returned, by
+default “df”.</p>
+</dd>
+<dt><strong>reduce</strong><span class="classifier">bool, optional</span></dt><dd><p>This is only relevant for molecule vaults hosting a 3D molecule with more than one
+conformer. If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the features are reduced to a single value per bond across all
+conformers reporting the minimum, maximum, and mean value for each feature. In
+addition, if energy data is available in the molecule vault, the Boltzmann-weighted
+average value at the provided temperature is reported as well as the data for the
+lowest- and highest-energy conformer. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the features are returned for each
+conformer separately, by default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt><strong>temperature</strong><span class="classifier">Union[int, float], optional</span></dt><dd><p>The temperature in Kelvin at which the Boltzmann-weighted values are calculated, by
+default 298.15.</p>
+</dd>
+<dt><strong>ignore_invalid</strong><span class="classifier">bool, optional</span></dt><dd><p>If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the presence of any invalid conformer in the molecule vault will
+be ignored during feature reduction. If is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, the presence of any
+invalid conformer will lead to returning the unreduced features. Note that in both
+cases, invalid conformers are ignored when calculating the mean, min, and max feature
+values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Union[pd.DataFrame, Dict[int, Dict[str, Any]], List[Chem.rdchem.Mol], Chem.rdchem.Mol]</dt><dd><p>The bond features in the desired output format.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.set_charge">
+<span class="sig-name descname"><span class="pre">set_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">charge</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.set_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.set_charge" title="Link to this definition">¶</a></dt>
+<dd><p>Set the charge of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>charge</strong><span class="classifier">int</span></dt><dd><p>The total charge of the molecule that is used for feature calculation.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.set_multiplicity">
+<span class="sig-name descname"><span class="pre">set_multiplicity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multiplicity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.set_multiplicity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.set_multiplicity" title="Link to this definition">¶</a></dt>
+<dd><p>Set the multiplicity of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>multiplicity</strong><span class="classifier">int</span></dt><dd><p>The spin multiplicity of the molecule that is used for feature calculation.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.set_options">
+<span class="sig-name descname"><span class="pre">set_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.set_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.set_options" title="Link to this definition">¶</a></dt>
+<dd><p>Change configuration settings for the individual programs used for feature calculation.</p>
+<p>The input to this method must be a 2-tuples (or a list thereof), where the first entry is
+the path to the configuration setting that should be changed (point-separated) and the
+second entry is the new value.</p>
+<p>For listing all available configuration settings and their current values, see the
+<code class="docutils literal notranslate"><span class="pre">print_options()</span></code> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>configs</strong><span class="classifier">Union[Tuple[str, Any], List[Tuple[str, Any]]]</span></dt><dd><p>A 2-tuple or a list of 2-tuples containing the configuration paths and their new
+values, e.g.: (“bonafide.autocorrelation.depth”, 3)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.show_molecule">
+<span class="sig-name descname"><span class="pre">show_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'atom'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(500,</span> <span class="pre">500)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.show_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.show_molecule" title="Link to this definition">¶</a></dt>
+<dd><p>Display the molecule with atom, bond or no indices.</p>
+<p>Molecules can either be shown in an interactive 3D view (if 3D information is available)
+or in 2D as a Lewis structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>index_type</strong><span class="classifier">str, optional</span></dt><dd><p>The type of indices to add to the structure, either “atom”, “bond”, or <code class="docutils literal notranslate"><span class="pre">None</span></code>. By
+default “atom”.</p>
+</dd>
+<dt><strong>in_3D</strong><span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the molecule is shown in 3D (if 3D information is available), by default
+<code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt><strong>image_size</strong><span class="classifier">Tuple[int, int], optional</span></dt><dd><p>The size of the displayed image in pixels (width, height), by default (500, 500).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Union[PngImagePlugin.PngImageFile, ipywidgets.VBox]</dt><dd><p>A 2D or 3D depiction of the molecule, either as an image or an interactive 3D view.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="modules.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">bonafide package</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="modules_user.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">bonafide</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Molecular AI, AstraZeneca Gothenburg
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Mar 26, 2026</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">AtomBondFeaturizer</a><ul>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer</span></code></a><ul>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.add_custom_featurizer"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.add_custom_featurizer()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.attach_electronic_structure()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.attach_energy"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.attach_energy()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.attach_smiles"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.attach_smiles()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.calculate_electronic_structure"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.calculate_electronic_structure()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.clear_atom_feature_cache"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.clear_atom_feature_cache()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.clear_bond_feature_cache"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.clear_bond_feature_cache()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.determine_bonds"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.determine_bonds()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.featurize_atoms"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.featurize_atoms()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.featurize_bonds"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.featurize_bonds()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.list_atom_features"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.list_atom_features()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.list_bond_features"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.list_bond_features()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.print_options"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.print_options()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.read_input"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.read_input()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.return_atom_features"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.return_atom_features()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.return_bond_features"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.return_bond_features()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.set_charge"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.set_charge()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.set_multiplicity"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.set_multiplicity()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.set_options"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.set_options()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.bonafide.AtomBondFeaturizer.show_molecule"><code class="docutils literal notranslate"><span class="pre">AtomBondFeaturizer.show_molecule()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.js"></script>
+    <script src="_static/activate_datatables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
+    </body>
+</html>

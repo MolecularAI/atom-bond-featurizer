@@ -1,0 +1,1888 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html">
+        <link rel="prefetch" href="../../../_static/doc_logo_light.png" as="image">
+        <link rel="prefetch" href="../../../_static/doc_logo_dark.png" as="image">
+
+    <link rel="shortcut icon" href="../../../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>bonafide.features.mendeleev_ - BONAFIDE</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_datatable.css?v=470af658" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">BONAFIDE</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/doc_logo_light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/doc_logo_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes.html">Notes on usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature_list.html">List of features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dependencies.html">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General functionality</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../config_settings.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../input.html">User input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bonds.html">Definition of chemical bonds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../electronic_structure.html">Energy and electronic structure data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Feature calculation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Feature calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../output.html">Feature output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom.html">Custom features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../external_environment.html">External programs and environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature_notes.html">Notes on features</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Source</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/MolecularAI/atom-bond-featurizer">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../modules_user.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../bonafide_user.html">AtomBondFeaturizer</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Full API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../modules.html">bonafide package</a><input aria-label="Toggle navigation of bonafide package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../bonafide.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../bonafide.features.html">bonafide.features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../bonafide.utils.html">bonafide.utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for bonafide.features.mendeleev_</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Features from ``mendeleev``.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mendeleev</span><span class="w"> </span><span class="kn">import</span> <span class="n">element</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.base_featurizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseFeaturizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.helper_functions_chemistry</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_periodic_table</span>
+
+
+<div class="viewcode-block" id="_Mendeleev2DAtom">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_._Mendeleev2DAtom">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">_Mendeleev2DAtom</span><span class="p">(</span><span class="n">BaseFeaturizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parent feature factory for the 2D atom mendeleev features.</span>
+
+<span class="sd">    For details, please refer to the Mendeleev documentation</span>
+<span class="sd">    (https://mendeleev.readthedocs.io/en/stable/, last accessed on 09.09.2025).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_periodic_table</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">element</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extraction_mode</span> <span class="o">=</span> <span class="s2">&quot;single&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="_Mendeleev2DAtom._pull_from_periodic_table">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_._Mendeleev2DAtom._pull_from_periodic_table">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pull_from_periodic_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">element</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the element data from the periodic table.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        element</span>
+<span class="sd">            The mendeleev element object for the atom of interest.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_element_symbol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">)</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_periodic_table</span><span class="p">,</span> <span class="n">element_data</span> <span class="o">=</span> <span class="n">from_periodic_table</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_periodic_table</span><span class="p">,</span> <span class="n">_element_symbol</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">element_data</span></div>
+
+
+<div class="viewcode-block" id="_Mendeleev2DAtom._get_attribute_data">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_._Mendeleev2DAtom._get_attribute_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_attribute_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">none_to_false</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an atom property as an attribute from the mendeleev element object and write it to</span>
+<span class="sd">        the results dictionary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        none_to_false : bool, optional</span>
+<span class="sd">            Whether to convert ``None`` values to ``False``, by default ``False``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">element_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_from_periodic_table</span><span class="p">()</span>
+        <span class="n">_mendeleev_feature_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">element_data</span><span class="p">,</span> <span class="n">_mendeleev_feature_name</span><span class="p">)</span>
+
+        <span class="c1"># Convert numpy float64 to Python float</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="c1"># Convert None to False if requested (relevant for Mendeleev2DAtomIsMonoisotopic)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">none_to_false</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;_inaccessible&quot;</span>
+
+        <span class="c1"># Save results in the results dictionary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="_Mendeleev2DAtom._get_en_data">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_._Mendeleev2DAtom._get_en_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_en_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the electronegativity data from the mendeleev element object and write it to the</span>
+<span class="sd">        results dictionary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        **kwargs: Union[str, int]</span>
+<span class="sd">            Optional keyword arguments to pass to the ``electronegativity()`` method of the</span>
+<span class="sd">            mendeleev ``element`` object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;set_as_inaccessible&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="s2">&quot;_inaccessible&quot;</span><span class="p">}</span>
+            <span class="k">return</span>
+
+        <span class="n">element_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_from_periodic_table</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">element_data</span><span class="o">.</span><span class="n">electronegativity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomAtomicRadius">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomAtomicRadius">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomAtomicRadius</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;atomic_radius&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 103 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomAtomicRadius.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomAtomicRadius.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-atomic_radius`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomAtomicRadiusRahm">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomAtomicRadiusRahm">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomAtomicRadiusRahm</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;atomic_radius_rahm&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 104 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomAtomicRadiusRahm.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomAtomicRadiusRahm.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-atomic_radius_rahm`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomAtomicVolume">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomAtomicVolume">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomAtomicVolume</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;atomic_volume&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 105 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomAtomicVolume.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomAtomicVolume.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-atomic_volume`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomAtomicWeight">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomAtomicWeight">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomAtomicWeight</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;atomic_weight&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 106 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomAtomicWeight.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomAtomicWeight.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-atomic_weight`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomBlock">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomBlock">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomBlock</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;block&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 107 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomBlock.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomBlock.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-block`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomC6">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomC6">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomC6</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;c6&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 108 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomC6.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomC6.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-c6`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomC6Gb">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomC6Gb">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomC6Gb</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;c6_gb&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 109 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomC6Gb.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomC6Gb.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-c6_gb`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomCas">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCas">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomCas</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;cas&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 110 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomCas.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCas.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-cas`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusBragg">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusBragg">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomCovalentRadiusBragg</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;covalent_radius_bragg&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 111 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusBragg.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusBragg.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-covalent_radius_bragg`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusCordero">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusCordero">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomCovalentRadiusCordero</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;covalent_radius_cordero&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 112 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusCordero.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusCordero.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-covalent_radius_cordero`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusPyykko">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusPyykko">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomCovalentRadiusPyykko</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;covalent_radius_pyykko&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 113 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusPyykko.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusPyykko.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-covalent_radius_pyykko`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusPyykkoDouble">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusPyykkoDouble">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomCovalentRadiusPyykkoDouble</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;covalent_radius_pyykko_double&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 114 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusPyykkoDouble.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusPyykkoDouble.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-covalent_radius_pyykko_double`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusPyykkoTriple">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusPyykkoTriple">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomCovalentRadiusPyykkoTriple</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;covalent_radius_pyykko_triple&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 115 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomCovalentRadiusPyykkoTriple.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomCovalentRadiusPyykkoTriple.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-covalent_radius_pyykko_triple`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomDensity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomDensity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomDensity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;density&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 116 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomDensity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomDensity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-density`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomDipolePolarizability">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomDipolePolarizability">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomDipolePolarizability</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;dipole_polarizability&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 117 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomDipolePolarizability.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomDipolePolarizability.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-dipole_polarizability`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEconf">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEconf">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEconf</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;econf&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 118 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEconf.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEconf.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-econf`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomElectronAffinity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomElectronAffinity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomElectronAffinity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;electron_affinity&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 119 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomElectronAffinity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomElectronAffinity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-electron_affinity`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomElectrophilicity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomElectrophilicity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomElectrophilicity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;electrophilicity&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 120 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomElectrophilicity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomElectrophilicity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-electrophilicity`` feature.&quot;&quot;&quot;</span>
+        <span class="n">element_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_from_periodic_table</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">element_data</span><span class="o">.</span><span class="n">electrophilicity</span><span class="p">()}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnAllen">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnAllen">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnAllen</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_allen&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 121 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnAllen.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnAllen.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_allen`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnAllredRochow">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnAllredRochow">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnAllredRochow</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_allred_rochow&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 122 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnAllredRochow.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnAllredRochow.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_allred_rochow`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_en_data</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="s2">&quot;allred-rochow&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnCottrellSutton">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnCottrellSutton">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnCottrellSutton</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_cottrell_sutton&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 123 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnCottrellSutton.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnCottrellSutton.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_cottrell_sutton`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_en_data</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="s2">&quot;cottrell-sutton&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnGhosh">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnGhosh">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnGhosh</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_ghosh&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 124 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnGhosh.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnGhosh.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_ghosh`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnGordy">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnGordy">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnGordy</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_gordy&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 125 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnGordy.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnGordy.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_gordy`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_en_data</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="s2">&quot;gordy&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnMartynovBatsanov">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnMartynovBatsanov">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnMartynovBatsanov</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_martynov_batsanov&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 126 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnMartynovBatsanov.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnMartynovBatsanov.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_martynov_batsanov`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_en_data</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="s2">&quot;martynov-batsanov&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnMiedema">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnMiedema">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnMiedema</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_miedema&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 127 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnMiedema.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnMiedema.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_miedema`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnMulliken">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnMulliken">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnMulliken</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_mulliken&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 128 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnMulliken.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnMulliken.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_mulliken`` feature.&quot;&quot;&quot;</span>
+        <span class="n">_formal_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">)</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span>
+
+        <span class="c1"># Not defined for atoms with formal negative charge</span>
+        <span class="k">if</span> <span class="n">_formal_charge</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_en_data</span><span class="p">(</span><span class="n">set_as_inaccessible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_en_data</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="s2">&quot;mulliken&quot;</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="n">_formal_charge</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnNagle">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnNagle">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnNagle</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_nagle&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 129 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnNagle.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnNagle.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_nagle`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_en_data</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="s2">&quot;nagle&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnPauling">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnPauling">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnPauling</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_pauling&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 130 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnPauling.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnPauling.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_pauling`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnSanderson">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnSanderson">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEnSanderson</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;en_sanderson&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 131 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEnSanderson.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEnSanderson.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-en_sanderson`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_en_data</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="s2">&quot;sanderson&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomEvaporationHeat">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEvaporationHeat">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomEvaporationHeat</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;evaporation_heat&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 132 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomEvaporationHeat.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomEvaporationHeat.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-evaporation_heat`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomFirstIonizationEnergy">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomFirstIonizationEnergy">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomFirstIonizationEnergy</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;first_ionization_energy&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 133 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomFirstIonizationEnergy.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomFirstIonizationEnergy.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-first_ionization_energy`` feature.&quot;&quot;&quot;</span>
+        <span class="n">element_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_from_periodic_table</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">element_data</span><span class="o">.</span><span class="n">ionenergies</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomFusionHeat">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomFusionHeat">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomFusionHeat</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;fusion_heat&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 134 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomFusionHeat.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomFusionHeat.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-fusion_heat`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomGasBasicity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomGasBasicity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomGasBasicity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;gas_basicity&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 135 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomGasBasicity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomGasBasicity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-gas_basicity`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomGroupId">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomGroupId">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomGroupId</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;group_id&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 136 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomGroupId.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomGroupId.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-group_id`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomHardness">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomHardness">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomHardness</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;hardness&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 137 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomHardness.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomHardness.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-hardness`` feature.&quot;&quot;&quot;</span>
+        <span class="n">_formal_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">)</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span>
+
+        <span class="c1"># Not defined for atoms with formal negative charge</span>
+        <span class="k">if</span> <span class="n">_formal_charge</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="s2">&quot;_inaccessible&quot;</span><span class="p">}</span>
+            <span class="k">return</span>
+
+        <span class="n">element_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_from_periodic_table</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">element_data</span><span class="o">.</span><span class="n">hardness</span><span class="p">(</span><span class="n">charge</span><span class="o">=</span><span class="n">_formal_charge</span><span class="p">)</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomHeatOfFormation">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomHeatOfFormation">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomHeatOfFormation</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;heat_of_formation&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 138 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomHeatOfFormation.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomHeatOfFormation.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-heat_of_formation`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomInchi">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomInchi">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomInchi</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;inchi&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 139 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomInchi.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomInchi.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-inchi`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomIsMonoisotopic">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomIsMonoisotopic">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomIsMonoisotopic</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;is_monoisotopic&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 140 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomIsMonoisotopic.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomIsMonoisotopic.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-is_monoisotopic`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">(</span><span class="n">none_to_false</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomIsRadioactive">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomIsRadioactive">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomIsRadioactive</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;is_radioactive&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 141 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomIsRadioactive.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomIsRadioactive.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-is_radioactive`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomLatticeConstant">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomLatticeConstant">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomLatticeConstant</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;lattice_constant&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 142 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomLatticeConstant.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomLatticeConstant.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-lattice_constant`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomLatticeStructure">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomLatticeStructure">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomLatticeStructure</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;lattice_structure&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 143 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomLatticeStructure.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomLatticeStructure.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-lattice_structure`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomMeltingPoint">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMeltingPoint">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomMeltingPoint</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;melting_point&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 144 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomMeltingPoint.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMeltingPoint.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-melting_point`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomMetallicRadius">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMetallicRadius">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomMetallicRadius</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;metallic_radius&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 145 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomMetallicRadius.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMetallicRadius.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-metallic_radius`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomMetallicRadiusC12">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMetallicRadiusC12">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomMetallicRadiusC12</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;metallic_radius_c12&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 146 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomMetallicRadiusC12.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMetallicRadiusC12.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-metallic_radius_c12`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomMiedemaElectronDensity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMiedemaElectronDensity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomMiedemaElectronDensity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;miedema_electron_density&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 147 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomMiedemaElectronDensity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMiedemaElectronDensity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-miedema_electron_density`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomMiedemaMolarVolume">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMiedemaMolarVolume">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomMiedemaMolarVolume</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;miedema_molar_volume&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 148 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomMiedemaMolarVolume.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMiedemaMolarVolume.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-miedema_molar_volume`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomMolarHeatCapacity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMolarHeatCapacity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomMolarHeatCapacity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;molar_heat_capacity&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 149 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomMolarHeatCapacity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomMolarHeatCapacity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-molar_heat_capacity`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomNValenceElectrons">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomNValenceElectrons">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomNValenceElectrons</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;n_valence_electrons&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 150 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomNValenceElectrons.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomNValenceElectrons.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-n_valence_electrons`` feature.&quot;&quot;&quot;</span>
+        <span class="n">element_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_from_periodic_table</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">element_data</span><span class="o">.</span><span class="n">nvalence</span><span class="p">()}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomName">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomName">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomName</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;name&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 151 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomName.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomName.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-name`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomPeriod">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomPeriod">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomPeriod</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;period&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 152 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomPeriod.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomPeriod.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-period`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomPettiforNumber">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomPettiforNumber">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomPettiforNumber</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;pettifor_number&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 153 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomPettiforNumber.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomPettiforNumber.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-pettifor_number`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomProtonAffinity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomProtonAffinity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomProtonAffinity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;proton_affinity&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 154 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomProtonAffinity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomProtonAffinity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-proton_affinity`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomSoftness">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomSoftness">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomSoftness</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;softness&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 155 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomSoftness.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomSoftness.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-softness`` feature.&quot;&quot;&quot;</span>
+        <span class="n">_formal_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">)</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span>
+
+        <span class="c1"># Not defined for atoms with formal negative charge</span>
+        <span class="k">if</span> <span class="n">_formal_charge</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="s2">&quot;_inaccessible&quot;</span><span class="p">}</span>
+            <span class="k">return</span>
+
+        <span class="n">element_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_from_periodic_table</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">element_data</span><span class="o">.</span><span class="n">softness</span><span class="p">(</span><span class="n">charge</span><span class="o">=</span><span class="n">_formal_charge</span><span class="p">)</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomSpecificHeatCapacity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomSpecificHeatCapacity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomSpecificHeatCapacity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;specific_heat_capacity&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 156 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomSpecificHeatCapacity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomSpecificHeatCapacity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-specific_heat_capacity`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomThermalConductivity">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomThermalConductivity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomThermalConductivity</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;thermal_conductivity&quot;, calculated with</span>
+<span class="sd">    mendeleev.</span>
+
+<span class="sd">    The index of this feature is 157 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomThermalConductivity.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomThermalConductivity.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-thermal_conductivity`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadius">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadius">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomVdwRadius</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;vdw_radius&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 158 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadius.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadius.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-vdw_radius`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusAlvarez">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusAlvarez">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomVdwRadiusAlvarez</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;vdw_radius_alvarez&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 159 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusAlvarez.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusAlvarez.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-vdw_radius_alvarez`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusBatsanov">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusBatsanov">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomVdwRadiusBatsanov</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;vdw_radius_batsanov&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 160 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusBatsanov.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusBatsanov.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-vdw_radius_batsanov`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusBondi">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusBondi">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomVdwRadiusBondi</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;vdw_radius_bondi&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 161 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusBondi.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusBondi.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-vdw_radius_bondi`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusDreiding">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusDreiding">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomVdwRadiusDreiding</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;vdw_radius_dreiding&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 162 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusDreiding.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusDreiding.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-vdw_radius_dreiding`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusMm3">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusMm3">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomVdwRadiusMm3</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;vdw_radius_mm3&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 163 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusMm3.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusMm3.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-vdw_radius_mm3`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusRt">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusRt">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomVdwRadiusRt</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;vdw_radius_rt&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 164 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusRt.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusRt.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-vdw_radius_rt`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusUff">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusUff">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomVdwRadiusUff</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;vdw_radius_uff&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 165 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomVdwRadiusUff.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomVdwRadiusUff.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-vdw_radius_uff`` feature.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute_data</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Mendeleev2DAtomZeff">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomZeff">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mendeleev2DAtomZeff</span><span class="p">(</span><span class="n">_Mendeleev2DAtom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 2D atom feature &quot;zeff&quot;, calculated with mendeleev.</span>
+
+<span class="sd">    The index of this feature is 166 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;mendeleev&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">alle</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mendeleev2DAtomZeff.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.mendeleev_.Mendeleev2DAtomZeff.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``mendeleev2D-atom-zeff`` feature.&quot;&quot;&quot;</span>
+        <span class="n">element_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_from_periodic_table</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">element_data</span><span class="o">.</span><span class="n">zeff</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">alle</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alle</span><span class="p">)</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<span class="c1"># Easter egg</span>
+<span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Today is a good day, and it is time for a smiles.&quot;</span><span class="p">)</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Molecular AI, AstraZeneca Gothenburg
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Mar 26, 2026</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.js"></script>
+    <script src="../../../_static/activate_datatables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,526 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Configuration" href="config_settings.html"><link rel="prev" title="List of features" href="feature_list.html">
+        <link rel="prefetch" href="_static/doc_logo_light.png" as="image">
+        <link rel="prefetch" href="_static/doc_logo_dark.png" as="image">
+
+    <link rel="shortcut icon" href="_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Dependencies - BONAFIDE</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom_datatable.css?v=470af658" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">BONAFIDE</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/doc_logo_light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/doc_logo_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes.html">Notes on usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_list.html">List of features</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General functionality</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config_settings.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input.html">User input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bonds.html">Definition of chemical bonds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electronic_structure.html">Energy and electronic structure data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Feature calculation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Feature calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Feature output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom.html">Custom features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_environment.html">External programs and environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_notes.html">Notes on features</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Source</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/MolecularAI/atom-bond-featurizer">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules_user.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="bonafide_user.html">AtomBondFeaturizer</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Full API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">bonafide package</a><input aria-label="Toggle navigation of bonafide package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="bonafide.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="bonafide.features.html">bonafide.features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bonafide.utils.html">bonafide.utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/dependencies.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h1>
+<section id="alfabet">
+<h2>ALFABET<a class="headerlink" href="#alfabet" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ALFABET</span></code> is a <strong>graph neural network model</strong> for predicting <strong>bond dissociation energies</strong> and
+<strong>free energies</strong> of non-cyclic bonds in organic molecules. It was trained on a large dataset of
+DFT-calculated data obtained at the M06-2X/def2-TZVP level of theory. The training dataset contained
+neutral closed-shell molecules composed of C, H, N, and O. <a class="footnote-reference brackets" href="#footcite-stjohn-alfabet-2020" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="dbstep">
+<h2>DBSTEP<a class="headerlink" href="#dbstep" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">DBSTEP</span></code> is a software package for calculating <strong>steric descriptors</strong> from 3D molecular
+structures. It can be used through BONAFIDE to calculate the buried volume and buried shell volume
+descriptors. <a class="footnote-reference brackets" href="#footcite-luchini-dbstep-2022" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="dscribe">
+<h2>DScribe<a class="headerlink" href="#dscribe" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">DScribe</span></code> is a Python library that converts 3D atomic or molecular structures into <strong>fixed-length
+numerical fingerprints</strong>, <em>e.g.</em>, as input for machine learning models.
+<a class="footnote-reference brackets" href="#footcite-himanen-dscribe-2020" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#footcite-laakso-dscribe-2023" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> Within BONAFIDE, DScribe was used to implement Atom-centered
+Symmetry Functions, Smooth Overlap of Atomic Positions, Local Many-body Tensor Representation, and
+an atomic Coulomb Matrix-based descriptor. <a class="footnote-reference brackets" href="#footcite-surajit-atomic-coulomb-matrix-2025" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="kallisto">
+<h2>kallisto<a class="headerlink" href="#kallisto" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">kallisto</span></code> is a command-line tool for rapidly calculating various atomic features from 3D
+molecular structures, that is, <strong>coordination number</strong>, <strong>partial charge</strong>, (relative)
+<strong>polarizability</strong>, the <strong>proximity shell</strong> descriptor, and the <strong>van der Waals radius</strong>.
+<a class="footnote-reference brackets" href="#footcite-caldeweyher-kallisto-2021" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="mendeleev">
+<h2>mendeleev<a class="headerlink" href="#mendeleev" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">mendeleev</span></code> is a Python package that provides access to an extensive database of the <strong>properties
+of the chemical elements</strong> (<em>e.g.</em>, various atomic radii or electronegativity scales), which can be
+accessed through BONAFIDE. <a class="footnote-reference brackets" href="#footcite-mentel-mendeleev-2014" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="morfeus">
+<h2>MORFEUS<a class="headerlink" href="#morfeus" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">MORFEUS</span></code> is a software package that provides a broad range of molecular as well as atom and bond
+descriptors calculated from 3D molecular structures. BONAFIDE implements MORFEUS’ <strong>buried volume</strong>,
+<strong>dispersion</strong>, <strong>local force constant</strong>, and <strong>solvent-accessible surface area</strong> as well as several
+<strong>angle-based</strong> atom and bond descriptors, respectively. <a class="footnote-reference brackets" href="#footcite-jacot-morfeus-2022" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="multiwfn">
+<h2>Multiwfn<a class="headerlink" href="#multiwfn" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Multiwfn</span></code> is a multifunctional stand-alone program for the <strong>analysis of the electronic structure
+of a molecule after a quantum chemical calculation</strong>. <a class="footnote-reference brackets" href="#footcite-lu-multiwfn-2012" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>
+<a class="footnote-reference brackets" href="#footcite-lu-multiwfn-2024" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> It provides access to a large number of atom- and bond-level features
+that can be calculated through BONAFIDE. For an overview of the available features, see
+<a class="reference internal" href="feature_list.html"><span class="doc">List of features</span></a>.</p>
+</section>
+<section id="psi4">
+<h2>Psi4<a class="headerlink" href="#psi4" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Psi4</span></code> is an open-source quantum chemistry software package that is used in BONAFIDE to perform
+<strong>single-point energy calculations</strong> - <em>e.g.</em>, with density functional theory (DFT), including
+dispersion corrections and implicit solvation models. <a class="footnote-reference brackets" href="#footcite-turney-psi4-2012" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>
+<a class="footnote-reference brackets" href="#footcite-parrish-psi4-2017" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#footcite-smith-psi4-2020" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="qmdesc">
+<h2>qmdesc<a class="headerlink" href="#qmdesc" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">qmdesc</span></code> is a graph neural network model for predicting atom and bond property descriptors that
+are typically obtained through quantum chemical calculations. This includes <strong>Hirshfeld partial
+charges</strong>, <strong>Fukui indices</strong>, <strong>NMR shielding constants</strong>, as well as <strong>bond orders</strong> and
+<strong>lengths</strong>. The large training dataset contained neutral closed-shell molecules composed of C, H,
+O, N, P, S, F, Cl, Br, and I and was obtained at the B3LYP/def2-SVP level of theory.
+<a class="footnote-reference brackets" href="#footcite-guan-qmdesc-2021" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="rdkit">
+<h2>RDKit<a class="headerlink" href="#rdkit" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">RDKit</span></code> is the general cheminformatics package used in BONAFIDE. It also implements a number of
+atom and bond descriptors which can be calculated through BONAFIDE. For the full list, see the
+<a class="reference internal" href="feature_list.html"><span class="doc">List of features</span></a>. <a class="footnote-reference brackets" href="#footcite-rdkit" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="xtb">
+<h2>xtb<a class="headerlink" href="#xtb" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">xtb</span></code> is a semi-empirical quantum chemistry software package that is used in BONAFIDE to perform
+<strong>single-point energy calculations</strong> as well as for the calculation of various <strong>atom features</strong>
+such as reactivity indices from conceptual DFT (C-DFT). <a class="footnote-reference brackets" href="#footcite-bannwarth-xtb-2021" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></a></p>
+<hr class="docutils" />
+<div class="docutils container" id="id17">
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-stjohn-alfabet-2020" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Peter C. St. John, Yanfei Guan, Yeonjoon Kim, Seonah Kim, and Robert S. Paton. Prediction of organic homolytic bond dissociation enthalpies at near chemical accuracy with sub-second computational cost. <em>Nature Communications</em>, 11(1):2328, 2020. <a class="reference external" href="https://doi.org/10.1038/s41467-020-16201-z">doi:10.1038/s41467-020-16201-z</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-luchini-dbstep-2022" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Guilian Luchini, Toby Patterson, and Robert S. Paton. Dbstep: dft based steric parameters. 2022. <a class="reference external" href="https://doi.org/10.5281/zenodo.4702097">doi:10.5281/zenodo.4702097</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-himanen-dscribe-2020" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Lauri Himanen, Marc O. J. Jäger, Eiaki V. Morooka, Filippo Federici Canova, Yashasvi S. Ranawat, David Z. Gao, Patrick Rinke, and Adam S. Foster. Dscribe: library of descriptors for machine learning in materials science. <em>Computer Physics Communications</em>, 247:106949, 2020. <a class="reference external" href="https://doi.org/https://doi.org/10.1016/j.cpc.2019.106949">doi:https://doi.org/10.1016/j.cpc.2019.106949</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-laakso-dscribe-2023" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Jarno Laakso, Lauri Himanen, Henrietta Homm, Eiaki V. Morooka, Marc O. J. Jäger, Milica Todorović, and Patrick Rinke. Updates to the dscribe library: new descriptors and derivatives. <em>The Journal of Chemical Physics</em>, 2023. <a class="reference external" href="https://doi.org/10.1063/5.0151031">doi:10.1063/5.0151031</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-surajit-atomic-coulomb-matrix-2025" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p>Surajit Das and Raghunathan Ramakrishnan. Enhancing nmr shielding predictions of atoms-in-molecules machine learning models with neighborhood-informed representations. <em>arXiv (preprint)</em>, 2025. <a class="reference external" href="https://doi.org/10.48550/arXiv.2510.05623">doi:10.48550/arXiv.2510.05623</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-caldeweyher-kallisto-2021" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<p>Eike Caldeweyher. Kallisto: a command-line interface to simplify computational modelling and the generation of atomic features. <em>J. Open Source Softw.</em>, 6(60):3050, 2021. <a class="reference external" href="https://doi.org/10.21105/joss.03050">doi:10.21105/joss.03050</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-mentel-mendeleev-2014" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
+<p>Łukasz Mentel. mendeleev – a python package with properties of chemical elements, ions, isotopes and methods to manipulate and visualize periodic table. URL: <a class="reference external" href="https://github.com/lmmentel/mendeleev">https://github.com/lmmentel/mendeleev</a>, <a class="reference external" href="https://doi.org/10.5281/zenodo.5233823">doi:10.5281/zenodo.5233823</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-jacot-morfeus-2022" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">8</a><span class="fn-bracket">]</span></span>
+<p>Lauriane Jacot-Descombes, Lucas Turcani, and Kjell Jorner. Morfeus. URL: <a class="reference external" href="https://digital-chemistry-laboratory.github.io/morfeus/">https://digital-chemistry-laboratory.github.io/morfeus/</a>, <a class="reference external" href="https://doi.org/10.5281/zenodo.6685218">doi:10.5281/zenodo.6685218</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-lu-multiwfn-2012" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">9</a><span class="fn-bracket">]</span></span>
+<p>Tian Lu and Feiwu Chen. Multiwfn: a multifunctional wavefunction analyzer. <em>Journal of Computational Chemistry</em>, 33(5):580–592, 2012. <a class="reference external" href="https://doi.org/https://doi.org/10.1002/jcc.22885">doi:https://doi.org/10.1002/jcc.22885</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-lu-multiwfn-2024" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
+<p>Tian Lu. A comprehensive electron wavefunction analysis toolbox for chemists, multiwfn. <em>The Journal of Chemical Physics</em>, 161(8):082503, 2024. <a class="reference external" href="https://doi.org/10.1063/5.0216272">doi:10.1063/5.0216272</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-turney-psi4-2012" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">11</a><span class="fn-bracket">]</span></span>
+<p>Justin M. Turney, Andrew C. Simmonett, Robert M. Parrish, Edward G. Hohenstein, Francesco A. Evangelista, Justin T. Fermann, Benjamin J. Mintz, Lori A. Burns, Jeremiah J. Wilke, Micah L. Abrams, Nicholas J. Russ, Matthew L. Leininger, Curtis L. Janssen, Edward T. Seidl, Wesley D. Allen, Henry F. Schaefer, Rollin A. King, Edward F. Valeev, C. David Sherrill, and T. Daniel Crawford. Psi4: an open-source ab initio electronic structure program. <em>WIREs Computational Molecular Science</em>, 2(4):556–565, 2012. <a class="reference external" href="https://doi.org/https://doi.org/10.1002/wcms.93">doi:https://doi.org/10.1002/wcms.93</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-parrish-psi4-2017" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">12</a><span class="fn-bracket">]</span></span>
+<p>Robert M. Parrish, Lori A. Burns, Daniel G. A. Smith, Andrew C. Simmonett, III DePrince, A. Eugene, Edward G. Hohenstein, Uğur Bozkaya, Alexander Yu Sokolov, Roberto Di Remigio, Ryan M. Richard, Jérôme F. Gonthier, Andrew M. James, Harley R. McAlexander, Ashutosh Kumar, Masaaki Saitow, Xiao Wang, Benjamin P. Pritchard, Prakash Verma, III Schaefer, Henry F., Konrad Patkowski, Rollin A. King, Edward F. Valeev, Francesco A. Evangelista, Justin M. Turney, T. Daniel Crawford, and C. David Sherrill. Psi4 1.1: an open-source electronic structure program emphasizing automation, advanced libraries, and interoperability. <em>Journal of Chemical Theory and Computation</em>, 13(7):3185–3197, 2017. <a class="reference external" href="https://doi.org/10.1021/acs.jctc.7b00174">doi:10.1021/acs.jctc.7b00174</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-smith-psi4-2020" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">13</a><span class="fn-bracket">]</span></span>
+<p>Daniel G. A. Smith, Lori A. Burns, Andrew C. Simmonett, Robert M. Parrish, Matthew C. Schieber, Raimondas Galvelis, Peter Kraus, Holger Kruse, Roberto Di Remigio, Asem Alenaizan, Andrew M. James, Susi Lehtola, Jonathon P. Misiewicz, Maximilian Scheurer, Robert A. Shaw, Jeffrey B. Schriber, Yi Xie, Zachary L. Glick, Dominic A. Sirianni, Joseph Senan O’Brien, Jonathan M. Waldrop, Ashutosh Kumar, Edward G. Hohenstein, Benjamin P. Pritchard, Bernard R. Brooks, III Schaefer, Henry F., Alexander Yu. Sokolov, Konrad Patkowski, III DePrince, A. Eugene, Uğur Bozkaya, Rollin A. King, Francesco A. Evangelista, Justin M. Turney, T. Daniel Crawford, and C. David Sherrill. Psi4 1.4: open-source software for high-throughput quantum chemistry. <em>The Journal of Chemical Physics</em>, 2020. <a class="reference external" href="https://doi.org/10.1063/5.0006002">doi:10.1063/5.0006002</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-guan-qmdesc-2021" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">14</a><span class="fn-bracket">]</span></span>
+<p>Yanfei Guan, Connor W. Coley, Haoyang Wu, Duminda Ranasinghe, Esther Heid, Thomas J. Struble, Lagnajit Pattanaik, William H. Green, and Klavs F. Jensen. Regio-selectivity prediction with a machine-learned reaction representation and on-the-fly quantum mechanical descriptors. <em>Chemical Science</em>, 12(6):2198–2208, 2021. <a class="reference external" href="https://doi.org/10.1039/D0SC04823B">doi:10.1039/D0SC04823B</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-rdkit" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">15</a><span class="fn-bracket">]</span></span>
+<p>Rdkit: open-source cheminformatics. URL: <a class="reference external" href="https://www.rdkit.org">https://www.rdkit.org</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-bannwarth-xtb-2021" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">16</a><span class="fn-bracket">]</span></span>
+<p>Christoph Bannwarth, Eike Caldeweyher, Sebastian Ehlert, Andreas Hansen, Philipp Pracht, Jakob Seibert, Sebastian Spicher, and Stefan Grimme. Extended tight-binding quantum chemistry methods. <em>WIREs Computational Molecular Science</em>, 11(2):e1493, 2021. <a class="reference external" href="https://doi.org/https://doi.org/10.1002/wcms.1493">doi:https://doi.org/10.1002/wcms.1493</a>.</p>
+</aside>
+</aside>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="config_settings.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Configuration</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="feature_list.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">List of features</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Molecular AI, AstraZeneca Gothenburg
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Mar 26, 2026</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Dependencies</a><ul>
+<li><a class="reference internal" href="#alfabet">ALFABET</a></li>
+<li><a class="reference internal" href="#dbstep">DBSTEP</a></li>
+<li><a class="reference internal" href="#dscribe">DScribe</a></li>
+<li><a class="reference internal" href="#kallisto">kallisto</a></li>
+<li><a class="reference internal" href="#mendeleev">mendeleev</a></li>
+<li><a class="reference internal" href="#morfeus">MORFEUS</a></li>
+<li><a class="reference internal" href="#multiwfn">Multiwfn</a></li>
+<li><a class="reference internal" href="#psi4">Psi4</a></li>
+<li><a class="reference internal" href="#qmdesc">qmdesc</a></li>
+<li><a class="reference internal" href="#rdkit">RDKit</a></li>
+<li><a class="reference internal" href="#xtb">xtb</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.js"></script>
+    <script src="_static/activate_datatables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
+    </body>
+</html>

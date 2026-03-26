@@ -1,0 +1,1178 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html">
+        <link rel="prefetch" href="../../../_static/doc_logo_light.png" as="image">
+        <link rel="prefetch" href="../../../_static/doc_logo_dark.png" as="image">
+
+    <link rel="shortcut icon" href="../../../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>bonafide.features.multiwfn_fukui - BONAFIDE</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_datatable.css?v=470af658" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">BONAFIDE</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/doc_logo_light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/doc_logo_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes.html">Notes on usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature_list.html">List of features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dependencies.html">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General functionality</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../config_settings.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../input.html">User input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bonds.html">Definition of chemical bonds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../electronic_structure.html">Energy and electronic structure data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Feature calculation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Feature calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../output.html">Feature output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom.html">Custom features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../external_environment.html">External programs and environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature_notes.html">Notes on features</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Source</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/MolecularAI/atom-bond-featurizer">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../modules_user.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../bonafide_user.html">AtomBondFeaturizer</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Full API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../modules.html">bonafide package</a><input aria-label="Toggle navigation of bonafide package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../bonafide.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../bonafide.features.html">bonafide.features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../bonafide.utils.html">bonafide.utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for bonafide.features.multiwfn_fukui</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Fukui indices calculated with ``Multiwfn``.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.features.multiwfn_partial_charge</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Multiwfn3DAtomPartialChargeBecke</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeChelpg</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeCm5</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeCm5Scaled1point2</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeCorrectedHirshfeld</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeHirshfeld</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeLowdin</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeMerzKollmann</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeMulliken</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeMullikenBickelhaupt</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeMullikenRosSchuit</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeMullikenStoutPolitzer</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeRespChelpgOneStage</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeRespChelpgTwoStage</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeRespMerzKollmannOneStage</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeRespMerzKollmannTwoStage</span><span class="p">,</span>
+    <span class="n">Multiwfn3DAtomPartialChargeVdd</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.base_featurizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseFeaturizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">PROGRAM_ENVIRONMENT_VARIABLES</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.driver</span><span class="w"> </span><span class="kn">import</span> <span class="n">multiwfn_driver</span>
+
+
+<div class="viewcode-block" id="_Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui._Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">_Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui</span><span class="p">(</span><span class="n">BaseFeaturizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parent feature factory for the 3D atom Multiwfn condensed orbital-weighted Fukui index</span>
+<span class="sd">    features.</span>
+
+<span class="sd">    For details, please refer to the Multiwfn manual (http://sobereva.com/multiwfn/, last accessed</span>
+<span class="sd">    on 12.09.2025).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ow_delta</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extraction_mode</span> <span class="o">=</span> <span class="s2">&quot;multi&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="_Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui._run_multiwfn">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui._Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui._run_multiwfn">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run_multiwfn</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run Multiwfn.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Select C-DFT analysis</span>
+        <span class="n">multiwfn_commands</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span>
+        <span class="n">multiwfn_commands</span> <span class="o">=</span> <span class="p">[</span><span class="mi">22</span><span class="p">]</span>
+
+        <span class="c1"># Set delta parameter for orbital weighting</span>
+        <span class="n">multiwfn_commands</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ow_delta</span><span class="p">])</span>
+
+        <span class="c1"># Run analysis</span>
+        <span class="n">multiwfn_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+        <span class="c1"># Exit program</span>
+        <span class="n">multiwfn_commands</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Set up environment variables</span>
+        <span class="n">environment_variables</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">var</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">PROGRAM_ENVIRONMENT_VARIABLES</span><span class="p">[</span><span class="s2">&quot;multiwfn&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Run Multiwfn</span>
+        <span class="n">multiwfn_driver</span><span class="p">(</span>
+            <span class="n">cmds</span><span class="o">=</span><span class="n">multiwfn_commands</span><span class="p">,</span>
+            <span class="n">input_file_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n</span><span class="p">),</span>
+            <span class="n">output_file_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">__</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">environment_variables</span><span class="o">=</span><span class="n">environment_variables</span><span class="p">,</span>
+            <span class="n">namespace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui._read_output_file">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui._Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui._read_output_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the output file from Multiwfn and write the results to the ``results`` dictionary.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if the output file exists</span>
+        <span class="n">_opath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">__</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">.out&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">_opath</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Multiwfn output file &#39;</span><span class="si">{</span><span class="n">_opath</span><span class="si">}</span><span class="s2">&#39; not found; probably the calculation &quot;</span>
+                <span class="s2">&quot;did not run. Check your input&quot;</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Open output file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_opath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">multiwfn_output</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+        <span class="c1"># Find relevant position in the file</span>
+        <span class="n">start_idx</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">line_idx</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">multiwfn_output</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="s2">&quot;Atom index&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">,</span>
+                    <span class="s2">&quot;OW f+&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">,</span>
+                    <span class="s2">&quot;OW f-&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">,</span>
+                    <span class="s2">&quot;OW f0&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">,</span>
+                    <span class="s2">&quot;OW DD&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">):</span>
+                <span class="n">start_idx</span> <span class="o">=</span> <span class="n">line_idx</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># Check if start_idx was found</span>
+        <span class="k">if</span> <span class="n">start_idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;output file generated through &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39; does not &quot;</span>
+                <span class="s2">&quot;contain the requested data; probably the calculation failed. Check the &quot;</span>
+                <span class="s2">&quot;output file&quot;</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Save values to results dictionary</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">multiwfn_output</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:]:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">atom_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="n">splitted</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">ow_f_plus</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">ow_f_minus</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">ow_f_zero</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">ow_f_dual</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">atom_idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;multiwfn3D-atom-cdft_condensed_orbital_weighted_fukui_plus&quot;</span><span class="p">:</span> <span class="n">ow_f_plus</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-cdft_condensed_orbital_weighted_fukui_minus&quot;</span><span class="p">:</span> <span class="n">ow_f_minus</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-cdft_condensed_orbital_weighted_fukui_zero&quot;</span><span class="p">:</span> <span class="n">ow_f_zero</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-cdft_condensed_orbital_weighted_fukui_dual&quot;</span><span class="p">:</span> <span class="n">ow_f_dual</span><span class="p">,</span>
+            <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiDual">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiDual">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiDual</span><span class="p">(</span>
+    <span class="n">_Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 3D atom feature &quot;cdft_condensed_orbital_weighted_fukui_dual&quot;,</span>
+<span class="sd">    calculated with multiwfn.</span>
+
+<span class="sd">    The index of this feature is 204 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;multiwfn.cdft&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiDual.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiDual.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``multiwfn3D-atom-cdft_condensed_orbital_weighted_fukui_dual``</span>
+<span class="sd">        feature.&quot;&quot;&quot;</span>
+        <span class="c1"># Feature is not defined for open-shell molecules</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="s2">&quot;_inaccessible&quot;</span><span class="p">}</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_multiwfn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_output_file</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiMinus">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiMinus">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiMinus</span><span class="p">(</span>
+    <span class="n">_Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 3D atom feature &quot;cdft_condensed_orbital_weighted_fukui_minus&quot;,</span>
+<span class="sd">    calculated with multiwfn.</span>
+
+<span class="sd">    The index of this feature is 205 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;multiwfn.cdft&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiMinus.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiMinus.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``multiwfn3D-atom-cdft_condensed_orbital_weighted_fukui_minus``</span>
+<span class="sd">        feature.&quot;&quot;&quot;</span>
+        <span class="c1"># Feature is not defined for open-shell molecules</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="s2">&quot;_inaccessible&quot;</span><span class="p">}</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_multiwfn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_output_file</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiPlus">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiPlus">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiPlus</span><span class="p">(</span>
+    <span class="n">_Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 3D atom feature &quot;cdft_condensed_orbital_weighted_fukui_plus&quot;,</span>
+<span class="sd">    calculated with multiwfn.</span>
+
+<span class="sd">    The index of this feature is 206 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;multiwfn.cdft&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiPlus.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiPlus.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``multiwfn3D-atom-cdft_condensed_orbital_weighted_fukui_plus``</span>
+<span class="sd">        feature.&quot;&quot;&quot;</span>
+        <span class="c1"># Feature is not defined for open-shell molecules</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="s2">&quot;_inaccessible&quot;</span><span class="p">}</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_multiwfn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_output_file</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiZero">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiZero">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiZero</span><span class="p">(</span>
+    <span class="n">_Multiwfn3DAtomCdftCondensedOrbitalWeightedFukui</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 3D atom feature &quot;cdft_condensed_orbital_weighted_fukui_zero&quot;,</span>
+<span class="sd">    calculated with multiwfn.</span>
+
+<span class="sd">    The index of this feature is 207 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;multiwfn.cdft&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiZero.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedOrbitalWeightedFukuiZero.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``multiwfn3D-atom-cdft_condensed_orbital_weighted_fukui_zero``</span>
+<span class="sd">        feature.&quot;&quot;&quot;</span>
+        <span class="c1"># Feature is not defined for open-shell molecules</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="s2">&quot;_inaccessible&quot;</span><span class="p">}</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_multiwfn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_output_file</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Multiwfn3DAtomCdftCondensedFukui">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui._Multiwfn3DAtomCdftCondensedFukui">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">_Multiwfn3DAtomCdftCondensedFukui</span><span class="p">(</span><span class="n">BaseFeaturizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parent feature factory for the 3D atom Multiwfn Fukui index features.</span>
+
+<span class="sd">    For details, please refer to the Multiwfn manual (http://sobereva.com/multiwfn/, last accessed</span>
+<span class="sd">    on 12.09.2025).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ensemble_dimensionality</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">feature_cache_n_minus1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]]]</span>
+    <span class="n">feature_cache_n_plus1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]]]</span>
+    <span class="n">feature_dimensionality</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">iterable_option</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">multiplicity</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">NUM_THREADS</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="n">OMP_STACKSIZE</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extraction_mode</span> <span class="o">=</span> <span class="s2">&quot;single&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="_Multiwfn3DAtomCdftCondensedFukui._check_electronic_structure_data">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui._Multiwfn3DAtomCdftCondensedFukui._check_electronic_structure_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_electronic_structure_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">el_struc_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the required electronic structure data is available.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        el_struc_data : Optional[str]</span>
+<span class="sd">            The electronic structure data to check. It is either ``None`` (not available) or the</span>
+<span class="sd">            path to the electronic structure data file.</span>
+<span class="sd">        data_name : str</span>
+<span class="sd">            The identification string of the electronic structure data to check (used for logging).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">el_struc_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;for requesting data from &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;, electronic structure &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;data for the </span><span class="si">{</span><span class="n">data_name</span><span class="si">}</span><span class="s2"> is required but is not available. Attach precomputed &quot;</span>
+                <span class="s2">&quot;electronic structure data or calculate it from scratch&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Multiwfn3DAtomCdftCondensedFukui._run_calculation">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui._Multiwfn3DAtomCdftCondensedFukui._run_calculation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run_calculation</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run Multiwfn to calculate the atomic partial charges required to calculate the Fukui</span>
+<span class="sd">        indices.</span>
+
+<span class="sd">        This is done by initializing a &quot;child&quot; feature calculation pipeline as for all other</span>
+<span class="sd">        features. After this is completed, the Fukui indices are calculated.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        **kwargs : Any</span>
+<span class="sd">            Additional keyword arguments passed to the ``calculate()`` method of the feature</span>
+<span class="sd">            factory for calculating the partial charges. These parameters are set as attributes</span>
+<span class="sd">            of the &quot;child&quot; feature factory instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Tuple[Optional[Union[int, float, bool, str]], Optional[str]]</span>
+<span class="sd">            The calculated partial charge and the error message from the &quot;child&quot; feature factory</span>
+<span class="sd">            call. The error message is ``None`` if the &quot;child&quot; feature factory did not encounter</span>
+<span class="sd">            an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if the &quot;child&quot; output files folder already exists</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s2">&quot;_temp_out_files_child_dir&quot;</span><span class="p">):</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">&quot;_temp_out_files_child_dir&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;_temp_out_files_child_dir&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Mapping dictionary to use the correct feature factory of the selected charge scheme.</span>
+        <span class="n">charge_scheme_mapping</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;becke&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">Multiwfn3DAtomPartialChargeBecke</span><span class="p">,</span> <span class="s2">&quot;multiwfn3D-atom-partial_charge_becke&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;chelpg&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">Multiwfn3DAtomPartialChargeChelpg</span><span class="p">,</span> <span class="s2">&quot;multiwfn3D-atom-partial_charge_chelpg&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;cm5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">Multiwfn3DAtomPartialChargeCm5</span><span class="p">,</span> <span class="s2">&quot;multiwfn3D-atom-partial_charge_cm5&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;scaled_cm5&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeCm5Scaled1point2</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_cm5_scaled_1point2&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;corrected_hirshfeld&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeCorrectedHirshfeld</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_corrected_hirshfeld&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;hirshfeld&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeHirshfeld</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_hirshfeld&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;lowdin&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">Multiwfn3DAtomPartialChargeLowdin</span><span class="p">,</span> <span class="s2">&quot;multiwfn3D-atom-partial_charge_lowdin&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;merz_kollmann&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeMerzKollmann</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_merz_kollmann&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;mulliken&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeMulliken</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_mulliken&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;mulliken_bickelhaupt&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeMullikenBickelhaupt</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_mulliken_bickelhaupt&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;mulliken_ros_schuit&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeMullikenRosSchuit</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_mulliken_ros_schuit&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;mulliken_stout_politzer&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeMullikenStoutPolitzer</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_mulliken_stout_politzer&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;resp_chelpg_one_stage&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeRespChelpgOneStage</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_resp_chelpg_one_stage&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;resp_chelpg_two_stage&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeRespChelpgTwoStage</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_resp_chelpg_two_stage&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;resp_merz_kollmann_one_stage&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeRespMerzKollmannOneStage</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_resp_merz_kollmann_one_stage&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;resp_merz_kollmann_two_stage&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">Multiwfn3DAtomPartialChargeRespMerzKollmannTwoStage</span><span class="p">,</span>
+                <span class="s2">&quot;multiwfn3D-atom-partial_charge_resp_kollmann_two_stage&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;vdd&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">Multiwfn3DAtomPartialChargeVdd</span><span class="p">,</span> <span class="s2">&quot;multiwfn3D-atom-partial_charge_vdd&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Calculate the atomic charges required to get the Fukui indices</span>
+        <span class="n">feature_factory</span><span class="p">,</span> <span class="n">feature_name</span> <span class="o">=</span> <span class="n">charge_scheme_mapping</span><span class="p">[</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;charge_scheme&quot;</span><span class="p">]]</span>
+        <span class="n">new_params</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">new_params</span><span class="p">[</span><span class="s2">&quot;feature_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_name</span>
+
+        <span class="n">calc_feature</span> <span class="o">=</span> <span class="n">feature_factory</span><span class="p">()</span>
+        <span class="n">feature_value</span><span class="p">,</span> <span class="n">error_message</span> <span class="o">=</span> <span class="n">calc_feature</span><span class="p">(</span><span class="o">**</span><span class="n">new_params</span><span class="p">)</span>
+
+        <span class="c1"># Handle the output files</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;_keep_output_files&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_output_files2</span><span class="p">()</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">&quot;_temp_out_files_child_dir&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Return the feature value and the error message of the &quot;child&quot; feature calculation</span>
+        <span class="c1"># process, which is the calculation of the partial atomic charges</span>
+        <span class="k">return</span> <span class="n">feature_value</span><span class="p">,</span> <span class="n">error_message</span></div>
+
+
+<div class="viewcode-block" id="_Multiwfn3DAtomCdftCondensedFukui._save_output_files2">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui._Multiwfn3DAtomCdftCondensedFukui._save_output_files2">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_save_output_files2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the generated output files of the &quot;child&quot; feature factory.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;_temp_out_files_child_dir&quot;</span><span class="p">):</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;_temp_out_files_child_dir&quot;</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+            <span class="n">dest</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()),</span> <span class="n">item</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedFukuiDual">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedFukuiDual">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Multiwfn3DAtomCdftCondensedFukuiDual</span><span class="p">(</span><span class="n">_Multiwfn3DAtomCdftCondensedFukui</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 3D atom feature &quot;cdft_condensed_fukui_dual&quot;, calculated with</span>
+<span class="sd">    multiwfn.</span>
+
+<span class="sd">    The index of this feature is 200 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;multiwfn.cdft&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedFukuiDual.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedFukuiDual.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``multiwfn3D-atom-cdft_condensed_fukui_dual`` feature.&quot;&quot;&quot;</span>
+        <span class="c1"># Check if both (radical anion and cation) electronic structure data is available</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_electronic_structure_data</span><span class="p">(</span>
+            <span class="n">el_struc_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_plus1</span><span class="p">,</span>
+            <span class="n">data_name</span><span class="o">=</span><span class="s2">&quot;radical anion (actual molecule plus one electron)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_electronic_structure_data</span><span class="p">(</span>
+            <span class="n">el_struc_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_minus1</span><span class="p">,</span>
+            <span class="n">data_name</span><span class="o">=</span><span class="s2">&quot;radical cation (actual molecule minus one electron)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Modify feature_name to also include the name of the charge scheme</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">__</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Get charges of the actual molecule</span>
+        <span class="n">feature_value_n</span><span class="p">,</span> <span class="n">error_message_n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n</span><span class="p">,</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate multiplicity of radical anion</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Get charges of the radical anion (n+1 state)</span>
+        <span class="n">feature_value_n_plus1</span><span class="p">,</span> <span class="n">error_message_n_plus1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache_n_plus1</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">__n+1&quot;</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_plus1</span><span class="p">,</span>  <span class="c1"># pass electronic structure data for n+1 state to Multiwfn</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n_plus1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n_plus1</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate multiplicity of radical cation</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Get charges of the radical cation (n-1 state)</span>
+        <span class="n">feature_value_n_minus1</span><span class="p">,</span> <span class="n">error_message_n_minus1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache_n_minus1</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">__n-1&quot;</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_minus1</span><span class="p">,</span>  <span class="c1"># pass electronic structure data for n-1 state to Multiwfn</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n_minus1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n_minus1</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate desired value and save it to the results dictionary</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n_minus1</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n_plus1</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+
+        <span class="n">fukui_dual</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+            <span class="n">number</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">feature_value_n</span> <span class="o">-</span> <span class="n">feature_value_n_plus1</span> <span class="o">-</span> <span class="n">feature_value_n_minus1</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">6</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">fukui_dual</span><span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedFukuiMinus">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedFukuiMinus">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Multiwfn3DAtomCdftCondensedFukuiMinus</span><span class="p">(</span><span class="n">_Multiwfn3DAtomCdftCondensedFukui</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 3D atom feature &quot;cdft_condensed_fukui_minus&quot;, calculated with</span>
+<span class="sd">    multiwfn.</span>
+
+<span class="sd">    The index of this feature is 201 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;multiwfn.cdft&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedFukuiMinus.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedFukuiMinus.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``multiwfn3D-atom-cdft_condensed_fukui_minus`` feature.&quot;&quot;&quot;</span>
+        <span class="c1"># Check if all electronic structure data is available</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_electronic_structure_data</span><span class="p">(</span>
+            <span class="n">el_struc_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_minus1</span><span class="p">,</span>
+            <span class="n">data_name</span><span class="o">=</span><span class="s2">&quot;actual molecule minus one electron&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Modify feature_name to also include the name of the charge scheme</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">__</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Get charges of the actual molecule</span>
+        <span class="n">feature_value_n</span><span class="p">,</span> <span class="n">error_message_n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n</span><span class="p">,</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate multiplicity of radical cation</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Get charges of the radical cation (n-1 state)</span>
+        <span class="n">feature_value_n_minus1</span><span class="p">,</span> <span class="n">error_message_n_minus1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache_n_minus1</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">__n-1&quot;</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_minus1</span><span class="p">,</span>  <span class="c1"># pass electronic structure data for n-1 state to Multiwfn</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n_minus1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n_minus1</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate desired value and save it to the results dictionary</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n_minus1</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+
+        <span class="n">fukui_minus</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="n">feature_value_n_minus1</span> <span class="o">-</span> <span class="n">feature_value_n</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">fukui_minus</span><span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedFukuiPlus">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedFukuiPlus">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Multiwfn3DAtomCdftCondensedFukuiPlus</span><span class="p">(</span><span class="n">_Multiwfn3DAtomCdftCondensedFukui</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 3D atom feature &quot;cdft_condensed_fukui_plus&quot;, calculated with</span>
+<span class="sd">    multiwfn.</span>
+
+<span class="sd">    The index of this feature is 202 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;multiwfn.cdft&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedFukuiPlus.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedFukuiPlus.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``multiwfn3D-atom-cdft_condensed_fukui_plus`` feature.&quot;&quot;&quot;</span>
+        <span class="c1"># Check if the second electronic structure data is available</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_electronic_structure_data</span><span class="p">(</span>
+            <span class="n">el_struc_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_plus1</span><span class="p">,</span>
+            <span class="n">data_name</span><span class="o">=</span><span class="s2">&quot;actual molecule plus one electron&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Modify feature_name to also include the name of the charge scheme</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">__</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Get charges of the actual molecule</span>
+        <span class="n">feature_value_n</span><span class="p">,</span> <span class="n">error_message_n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n</span><span class="p">,</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate multiplicity of radical anion</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Get charges of the radical anion (n+1 state)</span>
+        <span class="n">feature_value_n_plus1</span><span class="p">,</span> <span class="n">error_message_n_plus1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache_n_plus1</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">__n+1&quot;</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_plus1</span><span class="p">,</span>  <span class="c1"># pass electronic structure data for n+1 state to Multiwfn</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n_plus1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n_plus1</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate desired value and save it to the results dictionary</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n_plus1</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+
+        <span class="n">fukui_plus</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="n">feature_value_n</span> <span class="o">-</span> <span class="n">feature_value_n_plus1</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">fukui_plus</span><span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedFukuiZero">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedFukuiZero">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Multiwfn3DAtomCdftCondensedFukuiZero</span><span class="p">(</span><span class="n">_Multiwfn3DAtomCdftCondensedFukui</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature factory for the 3D atom feature &quot;cdft_condensed_fukui_zero&quot;, calculated with</span>
+<span class="sd">    multiwfn.</span>
+
+<span class="sd">    The index of this feature is 203 (see the ``list_atom_features()`` and</span>
+<span class="sd">    ``list_bond_features()`` method). The corresponding configuration settings can be found</span>
+<span class="sd">    under &quot;multiwfn.cdft&quot; in the _feature_config.toml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Multiwfn3DAtomCdftCondensedFukuiZero.calculate">
+<a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.multiwfn_fukui.Multiwfn3DAtomCdftCondensedFukuiZero.calculate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``multiwfn3D-atom-cdft_condensed_fukui_zero`` feature.&quot;&quot;&quot;</span>
+        <span class="c1"># Check if both (radical anion and cation) electronic structure data is available</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_electronic_structure_data</span><span class="p">(</span>
+            <span class="n">el_struc_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_plus1</span><span class="p">,</span>
+            <span class="n">data_name</span><span class="o">=</span><span class="s2">&quot;actual molecule plus one electron&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_electronic_structure_data</span><span class="p">(</span>
+            <span class="n">el_struc_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_minus1</span><span class="p">,</span>
+            <span class="n">data_name</span><span class="o">=</span><span class="s2">&quot;actual molecule minus one electron&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Modify feature_name to also include the name of the charge scheme</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">__</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Calculate multiplicity of radical anion</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Get charges of the radical anion (n+1 state)</span>
+        <span class="n">feature_value_n_plus1</span><span class="p">,</span> <span class="n">error_message_n_plus1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache_n_plus1</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">__n+1&quot;</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_plus1</span><span class="p">,</span>  <span class="c1"># pass electronic structure data for n+1 state to Multiwfn</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n_plus1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n_plus1</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate multiplicity of radical cation</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">multiplicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Get charges of the radical cation (n-1 state)</span>
+        <span class="n">feature_value_n_minus1</span><span class="p">,</span> <span class="n">error_message_n_minus1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_calculation</span><span class="p">(</span>
+            <span class="n">OMP_STACKSIZE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">OMP_STACKSIZE</span><span class="p">,</span>
+            <span class="n">NUM_THREADS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_THREADS</span><span class="p">,</span>
+            <span class="n">charge_scheme</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterable_option</span><span class="p">,</span>
+            <span class="n">feature_cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_cache_n_minus1</span><span class="p">,</span>
+            <span class="n">feature_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">,</span>
+            <span class="n">ensemble_dimensionality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_dimensionality</span><span class="p">,</span>
+            <span class="n">conformer_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_idx</span><span class="p">,</span>
+            <span class="n">conformer_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">__n-1&quot;</span><span class="p">,</span>
+            <span class="n">electronic_struc_n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">electronic_struc_n_minus1</span><span class="p">,</span>  <span class="c1"># pass electronic structure data for n-1 state to Multiwfn</span>
+            <span class="n">feature_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_type</span><span class="p">,</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">multiplicity</span><span class="o">=</span><span class="n">multiplicity</span><span class="p">,</span>
+            <span class="n">atom_bond_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">,</span>
+            <span class="n">_keep_output_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_keep_output_files</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message_n_minus1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="n">error_message_n_minus1</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate desired value and save it to the results dictionary</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n_minus1</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feature_value_n_plus1</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>  <span class="c1"># for type checker</span>
+
+        <span class="n">fukui_zero</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="p">(</span><span class="n">feature_value_n_minus1</span> <span class="o">-</span> <span class="n">feature_value_n_plus1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_bond_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_name</span><span class="p">:</span> <span class="n">fukui_zero</span><span class="p">}</span></div>
+</div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Molecular AI, AstraZeneca Gothenburg
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Mar 26, 2026</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.js"></script>
+    <script src="../../../_static/activate_datatables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
+    </body>
+</html>

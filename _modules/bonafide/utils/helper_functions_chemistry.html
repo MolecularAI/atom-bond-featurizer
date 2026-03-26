@@ -1,0 +1,824 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html">
+        <link rel="prefetch" href="../../../_static/doc_logo_light.png" as="image">
+        <link rel="prefetch" href="../../../_static/doc_logo_dark.png" as="image">
+
+    <link rel="shortcut icon" href="../../../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>bonafide.utils.helper_functions_chemistry - BONAFIDE</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_datatable.css?v=470af658" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">BONAFIDE</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/doc_logo_light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/doc_logo_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes.html">Notes on usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature_list.html">List of features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dependencies.html">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General functionality</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../config_settings.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../input.html">User input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bonds.html">Definition of chemical bonds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../electronic_structure.html">Energy and electronic structure data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Feature calculation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Feature calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../output.html">Feature output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom.html">Custom features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../external_environment.html">External programs and environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature_notes.html">Notes on features</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Source</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/MolecularAI/atom-bond-featurizer">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../modules_user.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../bonafide_user.html">AtomBondFeaturizer</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Full API</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../modules.html">bonafide package</a><input aria-label="Toggle navigation of bonafide package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../bonafide.html">bonafide</a><input aria-label="Toggle navigation of bonafide" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../bonafide.features.html">bonafide.features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../bonafide.utils.html">bonafide.utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for bonafide.utils.helper_functions_chemistry</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Helper functions for chemistry-related operations.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mendeleev</span><span class="w"> </span><span class="kn">import</span> <span class="n">element</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">rdDetermineBonds</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.helper_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean_up</span>
+
+
+<div class="viewcode-block" id="_get_renumbering_list">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry._get_renumbering_list">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_renumbering_list</span><span class="p">(</span>
+    <span class="n">template</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">to_be_renumbered</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">invert</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a renumbering list to reorder atoms in a molecule based on a template.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    template : Chem.rdchem.Mol</span>
+<span class="sd">        The RDKit molecule object that serves as the template for the atom order.</span>
+<span class="sd">    to_be_renumbered : Chem.rdchem.Mol</span>
+<span class="sd">        The RDKit molecule object that needs to be renumbered.</span>
+<span class="sd">    invert : bool, optional</span>
+<span class="sd">        Whether to invert the mapping dictionary, by default ``False``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List[int]</span>
+<span class="sd">        A list of integers representing the new atom order based on the template.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">GetSubstructMatch</span><span class="p">(</span><span class="n">to_be_renumbered</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">invert</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">match</span><span class="p">)}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">match</span><span class="p">)}</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+    <span class="n">renumbering_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">renumbering_list</span></div>
+
+
+
+<div class="viewcode-block" id="_check_renumbering_list">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry._check_renumbering_list">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_renumbering_list</span><span class="p">(</span><span class="n">renum_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">num_atoms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a renumbering list is valid.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    renum_list : List[int]</span>
+<span class="sd">        The renumbering list to be checked.</span>
+<span class="sd">    num_atoms : int</span>
+<span class="sd">        The number of atoms in the respective molecule.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Optional[str]</span>
+<span class="sd">        An error message if the renumbering list is invalid, otherwise ``None``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_errmsg</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">renum_list</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_len</span> <span class="o">!=</span> <span class="n">num_atoms</span><span class="p">:</span>
+        <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;the substructure matching required for SMILES string attachment failed. The expected &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;number of matches (</span><span class="si">{</span><span class="n">num_atoms</span><span class="si">}</span><span class="s2">) does not match the number of matches found &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">_len</span><span class="si">}</span><span class="s2">). Obtained matching atom indices list: </span><span class="si">{</span><span class="n">renum_list</span><span class="si">}</span><span class="s2">. Check the input &quot;</span>
+            <span class="s2">&quot;data or try different parameters for determining atom connectivity (input to &quot;</span>
+            <span class="s2">&quot;the &#39;connectivity_method&#39; and &#39;covalent_radius_factor&#39; parameters)&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_errmsg</span></div>
+
+
+
+<div class="viewcode-block" id="_set_atom_bond_properties">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry._set_atom_bond_properties">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_set_atom_bond_properties</span><span class="p">(</span>
+    <span class="n">source_obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Atom</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Bond</span><span class="p">],</span>
+    <span class="n">target_obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Atom</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Bond</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set properties from a source RDKit atom or bond object to a target RDKit atom or bond object.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    source_obj : Union[Chem.rdchem.Atom, Chem.rdchem.Bond]</span>
+<span class="sd">        The RDKit atom or bond object from which to transfer properties.</span>
+<span class="sd">    target_obj : Union[Chem.rdchem.Atom, Chem.rdchem.Bond]</span>
+<span class="sd">        The RDKit atom or bond object to which to transfer properties.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">properties</span> <span class="o">=</span> <span class="n">source_obj</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">property_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="n">target_obj</span><span class="o">.</span><span class="n">SetBoolProp</span><span class="p">(</span><span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="n">target_obj</span><span class="o">.</span><span class="n">SetIntProp</span><span class="p">(</span><span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+            <span class="n">target_obj</span><span class="o">.</span><span class="n">SetDoubleProp</span><span class="p">(</span><span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">target_obj</span><span class="o">.</span><span class="n">SetProp</span><span class="p">(</span><span class="n">property_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_transfer_atom_bond_properties">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry._transfer_atom_bond_properties">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_transfer_atom_bond_properties</span><span class="p">(</span>
+    <span class="n">source_mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">target_mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transfer atom and bond properties from a source RDKit molecule object to a target RDKit</span>
+<span class="sd">    molecule object.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    source_mol : Chem.rdchem.Mol</span>
+<span class="sd">        The RDKit molecule object from which to transfer properties.</span>
+<span class="sd">    target_mol : Chem.rdchem.Mol</span>
+<span class="sd">        The RDKit molecule object to which to transfer properties.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Chem.rdchem.Mol</span>
+<span class="sd">        The target RDKit molecule object with transferred atom and bond properties.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Transfer atom properties</span>
+    <span class="k">for</span> <span class="n">source_atom</span><span class="p">,</span> <span class="n">target_atom</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">source_mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">(),</span> <span class="n">target_mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()):</span>
+        <span class="n">_set_atom_bond_properties</span><span class="p">(</span><span class="n">source_obj</span><span class="o">=</span><span class="n">source_atom</span><span class="p">,</span> <span class="n">target_obj</span><span class="o">=</span><span class="n">target_atom</span><span class="p">)</span>
+
+    <span class="c1"># Transfer bond properties</span>
+    <span class="k">for</span> <span class="n">source_bond</span><span class="p">,</span> <span class="n">target_bond</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">source_mol</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">(),</span> <span class="n">target_mol</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">()):</span>
+        <span class="n">_set_atom_bond_properties</span><span class="p">(</span><span class="n">source_obj</span><span class="o">=</span><span class="n">source_bond</span><span class="p">,</span> <span class="n">target_obj</span><span class="o">=</span><span class="n">target_bond</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">target_mol</span></div>
+
+
+
+<div class="viewcode-block" id="bind_smiles_with_xyz">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry.bind_smiles_with_xyz">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">bind_smiles_with_xyz</span><span class="p">(</span>
+    <span class="n">smiles_mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">xyz_mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">align</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">connectivity_method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">covalent_radius_factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">charge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Redefine an RDKit molecule object created from an XYZ file with a new RDKit molecule object</span>
+<span class="sd">    created from a SMILES string.</span>
+
+<span class="sd">    This allows to introduce the data on the chemical bonds defined in the SMILES string to the</span>
+<span class="sd">    initial molecule object created from the XYZ file. The ``align`` parameter controls whether</span>
+<span class="sd">    the atom order of the initial molecule object is maintained.</span>
+
+<span class="sd">    The ``connectivity_method``, ``covalent_radius_factor``, and ``charge`` parameters define how</span>
+<span class="sd">    the atom connectivity is determined in the RDKit molecule object created from the XYZ file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    smiles_mol : Chem.rdchem.Mol</span>
+<span class="sd">        The RDKit molecule object created from a SMILES string.</span>
+<span class="sd">    xyz_mol : Chem.rdchem.Mol</span>
+<span class="sd">        The RDKit molecule object created from an XYZ file.</span>
+<span class="sd">    align : bool</span>
+<span class="sd">        If ``True``, the atom order of the ``xyz_mol`` will be maintained, if ``False``, the atom</span>
+<span class="sd">        order of the ``smiles_mol`` will be applied.</span>
+<span class="sd">    connectivity_method : str</span>
+<span class="sd">        The name of the method that is used to determine atom connectivity. Available options are</span>
+<span class="sd">        &quot;connect_the_dots&quot;, &quot;van_der_waals&quot;, and &quot;hueckel&quot;.</span>
+<span class="sd">    covalent_radius_factor : float</span>
+<span class="sd">        A scaling factor that is applied to the covalent radii of the atoms when determining the</span>
+<span class="sd">        atom connectivity with the van-der-Waals method.</span>
+<span class="sd">    charge : Optional[int]</span>
+<span class="sd">        The formal charge of the molecule, which is required when using the Hueckel method for</span>
+<span class="sd">        determining atom connectivity.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[Optional[Chem.rdchem.Mol], Optional[str]]</span>
+<span class="sd">        A tuple containing:</span>
+
+<span class="sd">        * An RDKit molecule object containing the data from the ``smiles_mol`` applied to the</span>
+<span class="sd">          ``xyz_mol``; ``None`` if the operation was unsuccessful.</span>
+<span class="sd">        * An error message if the operation was unsuccessful, otherwise ``None``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_errmsg</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Prepare input to RDKit (which method to use)</span>
+    <span class="n">_use_hueckel</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">_use_vdw</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">connectivity_method</span> <span class="o">==</span> <span class="s2">&quot;hueckel&quot;</span><span class="p">:</span>
+        <span class="n">_use_hueckel</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">connectivity_method</span> <span class="o">==</span> <span class="s2">&quot;connect_the_dots&quot;</span><span class="p">:</span>
+        <span class="n">_use_vdw</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Get params to make substructure matches only based on atom type and connectivity</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AdjustQueryParameters</span><span class="o">.</span><span class="n">NoAdjustments</span><span class="p">()</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">makeBondsGeneric</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Helper mol object for doing the substructure matching</span>
+    <span class="n">smiles_mol_helper</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AdjustQueryProperties</span><span class="p">(</span><span class="n">smiles_mol</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># Reset atom properties of the helper smiles mol to only have the atom types and</span>
+    <span class="c1"># connectivity for substructure matching</span>
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">smiles_mol_helper</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
+        <span class="n">atom</span><span class="o">.</span><span class="n">SetFormalCharge</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">atom</span><span class="o">.</span><span class="n">SetNumRadicalElectrons</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">atom</span><span class="o">.</span><span class="n">SetChiralTag</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">ChiralType</span><span class="o">.</span><span class="n">CHI_UNSPECIFIED</span><span class="p">)</span>
+        <span class="n">atom</span><span class="o">.</span><span class="n">SetHybridization</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">HybridizationType</span><span class="o">.</span><span class="n">UNSPECIFIED</span><span class="p">)</span>
+        <span class="n">atom</span><span class="o">.</span><span class="n">SetIsAromatic</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Determine atom connectivity in the XYZ mol</span>
+    <span class="k">if</span> <span class="n">_use_hueckel</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">rdDetermineBonds</span><span class="o">.</span><span class="n">DetermineConnectivity</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">useHueckel</span><span class="o">=</span><span class="n">_use_hueckel</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="n">charge</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rdDetermineBonds</span><span class="o">.</span><span class="n">DetermineConnectivity</span><span class="p">(</span>
+            <span class="n">mol</span><span class="o">=</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">covFactor</span><span class="o">=</span><span class="n">covalent_radius_factor</span><span class="p">,</span> <span class="n">useVdw</span><span class="o">=</span><span class="n">_use_vdw</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check if number of bonds matches</span>
+    <span class="n">_n_bonds_xyz</span> <span class="o">=</span> <span class="n">xyz_mol</span><span class="o">.</span><span class="n">GetNumBonds</span><span class="p">()</span>
+    <span class="n">_n_bonds_smiles</span> <span class="o">=</span> <span class="n">smiles_mol</span><span class="o">.</span><span class="n">GetNumBonds</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">_n_bonds_xyz</span> <span class="o">!=</span> <span class="n">_n_bonds_smiles</span><span class="p">:</span>
+        <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;the number of atom connectivities (</span><span class="si">{</span><span class="n">_n_bonds_xyz</span><span class="si">}</span><span class="s2">) determined in the &quot;</span>
+            <span class="s2">&quot;RDKit mol object generated from the XYZ block does not match the number of bonds &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">_n_bonds_smiles</span><span class="si">}</span><span class="s2">) in the RDKit mol object generated from the SMILES string. Check &quot;</span>
+            <span class="s2">&quot;the input data or try different parameters for determining atom connectivity &quot;</span>
+            <span class="s2">&quot;(input to the &#39;connectivity_method&#39; and &#39;covalent_radius_factor&#39; parameters)&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_errmsg</span>
+
+    <span class="c1"># Reference xyz_mol for storing the initial atom order</span>
+    <span class="n">xyz_mol_ref</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">(</span><span class="n">xyz_mol</span><span class="p">)</span>
+
+    <span class="c1"># Renumber the atoms of the XYZ mol to match the order of the smiles_mol</span>
+    <span class="n">xyz_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AdjustQueryProperties</span><span class="p">(</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># In case of the Hueckel method, the substructure matching needs to be inverted as</span>
+    <span class="c1"># it is not working the other way round</span>
+    <span class="k">if</span> <span class="n">connectivity_method</span> <span class="o">==</span> <span class="s2">&quot;hueckel&quot;</span><span class="p">:</span>
+        <span class="n">renumbering_list</span> <span class="o">=</span> <span class="n">_get_renumbering_list</span><span class="p">(</span>
+            <span class="n">template</span><span class="o">=</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">to_be_renumbered</span><span class="o">=</span><span class="n">smiles_mol_helper</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">renumbering_list</span> <span class="o">=</span> <span class="n">_get_renumbering_list</span><span class="p">(</span>
+            <span class="n">template</span><span class="o">=</span><span class="n">smiles_mol_helper</span><span class="p">,</span> <span class="n">to_be_renumbered</span><span class="o">=</span><span class="n">xyz_mol</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check if the renumbering list is valid</span>
+    <span class="n">error_message</span> <span class="o">=</span> <span class="n">_check_renumbering_list</span><span class="p">(</span>
+        <span class="n">renum_list</span><span class="o">=</span><span class="n">renumbering_list</span><span class="p">,</span> <span class="n">num_atoms</span><span class="o">=</span><span class="n">xyz_mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">error_message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">error_message</span>
+
+    <span class="c1"># Reorder the atoms of the xyz_mol to align with the order of the smiles_mol</span>
+    <span class="n">xyz_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">renumbering_list</span><span class="p">)</span>
+
+    <span class="c1"># Add the conformer to the real smiles mol and transfer the atom and bond properties</span>
+    <span class="n">smiles_mol</span><span class="o">.</span><span class="n">AddConformer</span><span class="p">(</span><span class="n">xyz_mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">smiles_mol</span> <span class="o">=</span> <span class="n">_transfer_atom_bond_properties</span><span class="p">(</span><span class="n">source_mol</span><span class="o">=</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">target_mol</span><span class="o">=</span><span class="n">smiles_mol</span><span class="p">)</span>
+
+    <span class="c1"># Apply the atom order of xyz_mol_ref (restore the initial atom order)</span>
+    <span class="k">if</span> <span class="n">align</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">renumbering_list</span> <span class="o">=</span> <span class="n">_get_renumbering_list</span><span class="p">(</span>
+            <span class="n">template</span><span class="o">=</span><span class="n">xyz_mol_ref</span><span class="p">,</span> <span class="n">to_be_renumbered</span><span class="o">=</span><span class="n">smiles_mol_helper</span>
+        <span class="p">)</span>
+        <span class="c1"># Check if the renumbering list is valid</span>
+        <span class="n">error_message</span> <span class="o">=</span> <span class="n">_check_renumbering_list</span><span class="p">(</span>
+            <span class="n">renum_list</span><span class="o">=</span><span class="n">renumbering_list</span><span class="p">,</span> <span class="n">num_atoms</span><span class="o">=</span><span class="n">xyz_mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">error_message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">error_message</span>
+
+        <span class="n">smiles_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">smiles_mol</span><span class="p">,</span> <span class="n">renumbering_list</span><span class="p">)</span>
+
+    <span class="c1"># Clean up (after Hueckel calculation)</span>
+    <span class="n">clean_up</span><span class="p">(</span><span class="n">to_be_removed</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;nul&quot;</span><span class="p">,</span> <span class="s2">&quot;run.out&quot;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">smiles_mol</span><span class="p">,</span> <span class="n">_errmsg</span></div>
+
+
+
+<div class="viewcode-block" id="get_atom_bond_mapping_dicts">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry.get_atom_bond_mapping_dicts">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_atom_bond_mapping_dicts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get index mapping dictionaries for atoms and bonds to map between two atom and bond orders</span>
+<span class="sd">    that emerge when the SMILES string is canonicalized.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : Chem.rdchem.Mol</span>
+<span class="sd">        An RDKit molecule object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[Dict[int, int], Dict[int, int], str]</span>
+<span class="sd">        A tuple containing:</span>
+
+<span class="sd">        * A dictionary mapping from the canonical atom indices (keys) to the original atom</span>
+<span class="sd">          indices (values).</span>
+<span class="sd">        * A dictionary mapping from the canonical bond indices (keys) to the original bond</span>
+<span class="sd">          indices (values).</span>
+<span class="sd">        * The canonical SMILES string of the molecule (without hydrogen atoms).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    When reading in a SMILES string with explicit hydrogen atoms with ``sanitize=False`` (followed</span>
+<span class="sd">    by ``Chem.SanitizeMol()``), the atom order is different from when reading in the SMILES string</span>
+<span class="sd">    with ``sanitize=True`` followed by ``Chem.AddHs()``. This becomes a problem when external</span>
+<span class="sd">    programs read SMILES strings with hydrogen atoms without setting ``sanitize=False``.</span>
+
+<span class="sd">    This means:</span>
+
+<span class="sd">    * When an RDKit mol object generated from a canonical SMILES string without hydrogen atoms is</span>
+<span class="sd">      passed to this function, no change in atom or bond order will be observed.</span>
+<span class="sd">    * When an RDKit mol object generated from a canonical SMILES string WITH hydrogen atoms is</span>
+<span class="sd">      passed to this function, a change in atom or bond order will be observed, even though the</span>
+<span class="sd">      initial SMILES string was canonical.</span>
+
+<span class="sd">    Essentially, a mapping of the input mol object to a mol object generated from</span>
+<span class="sd">    ``Chem.MolFromSmiles()`` (optionally followed by ``Chem.AddHs()``) is performed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">helper_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="c1"># Generate canonical smiles</span>
+    <span class="n">canonical_smiles</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">CanonSmiles</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">helper_mol</span><span class="p">))</span>
+
+    <span class="c1"># Generate canonical mol object</span>
+    <span class="n">canonical_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">canonical_smiles</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">helper_mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span> <span class="o">!=</span> <span class="n">canonical_mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">():</span>
+        <span class="n">canonical_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">canonical_mol</span><span class="p">)</span>
+
+    <span class="c1"># Atoms</span>
+    <span class="n">renumbering_list</span> <span class="o">=</span> <span class="n">_get_renumbering_list</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="n">helper_mol</span><span class="p">,</span> <span class="n">to_be_renumbered</span><span class="o">=</span><span class="n">canonical_mol</span><span class="p">)</span>
+    <span class="n">mapping_dict_atoms</span> <span class="o">=</span> <span class="p">{</span><span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">renumbering_list</span><span class="p">)}</span>
+    <span class="n">mapping_dict_atoms</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">mapping_dict_atoms</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+
+    <span class="c1"># Bonds</span>
+    <span class="n">mapping_dict_bonds</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="n">canonical_mol</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">():</span>
+        <span class="n">begin_atom_idx</span> <span class="o">=</span> <span class="n">bond</span><span class="o">.</span><span class="n">GetBeginAtomIdx</span><span class="p">()</span>
+        <span class="n">end_atom_idx</span> <span class="o">=</span> <span class="n">bond</span><span class="o">.</span><span class="n">GetEndAtomIdx</span><span class="p">()</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">helper_mol</span><span class="o">.</span><span class="n">GetBondBetweenAtoms</span><span class="p">(</span>
+            <span class="n">mapping_dict_atoms</span><span class="p">[</span><span class="n">begin_atom_idx</span><span class="p">],</span> <span class="n">mapping_dict_atoms</span><span class="p">[</span><span class="n">end_atom_idx</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">mapping_dict_bonds</span><span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()]</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">mapping_dict_atoms</span><span class="p">,</span> <span class="n">mapping_dict_bonds</span><span class="p">,</span> <span class="n">canonical_smiles</span></div>
+
+
+
+<div class="viewcode-block" id="get_charge_from_mol_object">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry.get_charge_from_mol_object">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_charge_from_mol_object</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the formal charge of an RDKit molecule object.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : Chem.rdchem.Mol</span>
+<span class="sd">        An RDKit molecule object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        The formal charge of the molecule.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">(</span><span class="n">mol</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="from_periodic_table">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry.from_periodic_table">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">from_periodic_table</span><span class="p">(</span>
+    <span class="n">periodic_table</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">element</span><span class="p">],</span> <span class="n">element_symbol</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">element</span><span class="p">],</span> <span class="n">element</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve element data from the periodic table or create a new entry if it doesn&#39;t exist.</span>
+
+<span class="sd">    The data is retrieved from the ``mendeleev`` library.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    periodic_table : Dict[str, element]</span>
+<span class="sd">        A dictionary representing the periodic table with element symbols as keys and mendeleev</span>
+<span class="sd">        ``element`` objects as values.</span>
+<span class="sd">    element_symbol : str</span>
+<span class="sd">        The symbol of the element to retrieve.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[Dict[str, element], element]</span>
+<span class="sd">        A tuple containing the updated periodic table and the requested element data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">element_data</span> <span class="o">=</span> <span class="n">periodic_table</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">element_symbol</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">element_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">periodic_table</span><span class="p">[</span><span class="n">element_symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="p">(</span><span class="n">element_symbol</span><span class="p">)</span>
+        <span class="n">element_data</span> <span class="o">=</span> <span class="n">periodic_table</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">element_symbol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">periodic_table</span><span class="p">,</span> <span class="n">element_data</span></div>
+
+
+
+<div class="viewcode-block" id="get_ring_classification">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry.get_ring_classification">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_ring_classification</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">ring_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">idx_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Classify a ring based on its aromaticity and atom types either based on atom or bond</span>
+<span class="sd">    indices.</span>
+
+<span class="sd">    Possible classifications are:</span>
+
+<span class="sd">    * &quot;aromatic_carbocycle&quot;</span>
+<span class="sd">    * &quot;aromatic_heterocycle&quot;</span>
+<span class="sd">    * &quot;nonaromatic_carbocycle&quot;</span>
+<span class="sd">    * &quot;nonaromatic_heterocycle&quot;</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : Chem.rdchem.Mol</span>
+<span class="sd">        An RDKit molecule object.</span>
+<span class="sd">    ring_indices : List[int]</span>
+<span class="sd">        A list of indices representing the atoms or bonds in the ring.</span>
+<span class="sd">    idx_type : str</span>
+<span class="sd">        The type of indices used, either &quot;atom&quot; or &quot;bond&quot;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        A string representing the classification of the ring.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get atom or bond objects</span>
+    <span class="k">if</span> <span class="n">idx_type</span> <span class="o">==</span> <span class="s2">&quot;atom&quot;</span><span class="p">:</span>
+        <span class="n">ring_obs</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">ring_indices</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">idx_type</span> <span class="o">==</span> <span class="s2">&quot;bond&quot;</span><span class="p">:</span>
+        <span class="n">ring_obs</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">GetBondWithIdx</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">ring_indices</span><span class="p">]</span>
+
+    <span class="c1"># Analyze atoms or bonds</span>
+    <span class="n">aromaticity_info</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">atom_type_info</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ring_info</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">ring_obs</span><span class="p">:</span>
+        <span class="n">aromaticity_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">idx_type</span> <span class="o">==</span> <span class="s2">&quot;atom&quot;</span><span class="p">:</span>
+            <span class="n">atom_type_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">())</span>
+            <span class="n">ring_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">idx_type</span> <span class="o">==</span> <span class="s2">&quot;bond&quot;</span><span class="p">:</span>
+            <span class="n">atom_type_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">GetBeginAtom</span><span class="p">()</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">())</span>
+            <span class="n">atom_type_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">GetEndAtom</span><span class="p">()</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">())</span>
+            <span class="n">ring_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">())</span>
+
+    <span class="c1"># Check if all atoms are in a ring (should always be true, but just to be sure)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">ring_info</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;None&quot;</span>
+
+    <span class="c1"># Make classification</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">aromaticity_info</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">atom_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;aromatic_carbocycle&quot;</span>
+    <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="n">aromaticity_info</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">atom_type_info</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;aromatic_heterocycle&quot;</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">aromaticity_info</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">atom_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;nonaromatic_carbocycle&quot;</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">aromaticity_info</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">atom_type_info</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;nonaromatic_heterocycle&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;None&quot;</span>  <span class="c1"># This should never happen, but just to be sure</span></div>
+
+
+
+<div class="viewcode-block" id="get_molecular_formula">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry.get_molecular_formula">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_molecular_formula</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the molecular formula of an RDKit molecule object.</span>
+
+<span class="sd">    Only atoms within the molecule object are considered. No hydrogen atoms are added.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : Chem.rdchem.Mol</span>
+<span class="sd">        An RDKit molecule object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The molecular formula of the molecule.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">counter_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
+        <span class="n">counter_dict</span><span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">()]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">counter_dict_new</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">counter_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">counter_dict_new</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="n">formula_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">formula_str</span></div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Molecular AI, AstraZeneca Gothenburg
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Mar 26, 2026</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-2.3.0/datatables.min.js"></script>
+    <script src="../../../_static/activate_datatables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
+    </body>
+</html>

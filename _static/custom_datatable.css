@@ -1,0 +1,79 @@
+/* Custom styling for DataTables controls - Force horizontal layout */
+
+/* Create a flex container for all top controls */
+.dataTables_wrapper .dataTables_length {
+    float: left !important;
+    display: inline-block !important;
+    margin-right: 15px !important;
+    margin-bottom: 0 !important;
+}
+
+.dataTables_wrapper .dt-buttons {
+    float: left !important;
+    display: inline-block !important;
+    margin-right: 15px !important;
+    margin-bottom: 0 !important;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right !important;
+    display: inline-block !important;
+    margin-bottom: 0 !important;
+}
+
+/* Clear floats after controls */
+.dataTables_wrapper .dataTables_filter::after,
+.dataTables_wrapper > div:first-of-type::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Add spacing below the controls row */
+.dataTables_wrapper > div:first-of-type {
+    margin-bottom: 15px !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* Prevent stacking by targeting the row containing controls */
+.dataTables_wrapper .row:first-child {
+    display: block !important;
+}
+
+.dataTables_wrapper .row:first-child > div {
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+.dataTables_wrapper .row:first-child .col-sm-12 {
+    width: auto !important;
+    float: none !important;
+}
+
+.dataTables_wrapper .row:first-child .col-md-6:first-child {
+    float: left !important;
+}
+
+.dataTables_wrapper .row:first-child .col-md-6:last-child {
+    float: right !important;
+}
+
+/* Make column visibility dropdown wider for long column names */
+.dt-button-collection {
+    min-width: 400px !important;
+    max-width: 600px !important;
+}
+
+.dt-button-collection .dt-button {
+    white-space: normal !important;
+    text-align: left !important;
+    padding: 8px 12px !important;
+    line-height: 1.4 !important;
+}
+
+/* Allow text wrapping in dropdown items */
+.dt-button-collection .dt-button span {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+}

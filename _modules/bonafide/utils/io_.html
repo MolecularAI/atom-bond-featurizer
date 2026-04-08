@@ -298,7 +298,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Process an RDKit molecule object for incorporation into a molecule vault.</span>
 
 <span class="sd">    The conformer molecule-level properties are moved to properties of the processed molecule</span>
-<span class="sd">    objects.</span>
+<span class="sd">    objects. The mol objects are not sanitized.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -307,7 +307,7 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    Tuple[Chem.rdchem.Mol, List[Chem.rdchem.Mol]]</span>
+<span class="sd">    Tuple[Chem.rdchem.Mol, List[Chem.rdchem.Mol], Optional[str]]</span>
 <span class="sd">        A tuple containing:</span>
 
 <span class="sd">        * The initial input RDKit molecule object.</span>
@@ -362,11 +362,9 @@
 <a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.io_.read_smiles">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">read_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a SMILES string and return an RDKit molecule object and an error message</span>
-<span class="sd">    (``None`` if no error).</span>
+<span class="sd">    (``None`` if no error occurs).</span>
 
-<span class="sd">    Initially, ``sanitize=False`` is set in ``Chem.MolFromSmiles()`` to preserve the hydrogen atoms</span>
-<span class="sd">    if they are given in the SMILES string. If the molecule object is successfully created, it is</span>
-<span class="sd">    tried to be sanitized.</span>
+<span class="sd">    Explicit hydrogen atoms are not removed. Sanitization is performed.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -385,27 +383,20 @@
     <span class="n">_errmsg</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">mol</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="c1"># Try to generate RDKit mol object without sanitization first</span>
+    <span class="c1"># Set params such that hydrogens are not removed and sanitization is performed</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SmilesParserParams</span><span class="p">()</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">removeHs</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">sanitize</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Generate mol object</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">SMILES</span><span class="o">=</span><span class="n">smiles</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">SMILES</span><span class="o">=</span><span class="n">smiles</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">_errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Generation of RDKit mol object failed for SMILES string &#39;</span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">_errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Generation of RDKit mol object from SMILES string failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">.&quot;</span>
         <span class="k">return</span> <span class="n">mol</span><span class="p">,</span> <span class="n">_errmsg</span>
 
-    <span class="c1"># Try to sanitize the mol object</span>
-    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">Chem</span><span class="o">.</span><span class="n">SanitizeMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Sanitization of the RDKit mol object generated from SMILES string &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">&#39; failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">.&quot;</span>
-            <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Generation of RDKit mol object failed for SMILES string &#39;</span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">&#39; as it &quot;</span>
-            <span class="s2">&quot;resulted in None.&quot;</span>
-        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_errmsg</span> <span class="o">=</span> <span class="s2">&quot;Generation of RDKit mol object from SMILES string failed as it resulted in None.&quot;</span>
 
     <span class="k">return</span> <span class="n">mol</span><span class="p">,</span> <span class="n">_errmsg</span></div>
 
@@ -681,7 +672,7 @@
 
 <div class="viewcode-block" id="_validate_sdf">
 <a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.io_._validate_sdf">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">_validate_sdf</span><span class="p">(</span><span class="n">sdf_mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_sdf</span><span class="p">(</span><span class="n">sdf_mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate the individual RDKit molecule objects generated from an SD file with one or more</span>
 <span class="sd">    conformers.</span>
 
@@ -690,8 +681,9 @@
 <span class="sd">    * All conformers could be successfully converted to RDKit molecule objects that are not</span>
 <span class="sd">      ``None``.</span>
 <span class="sd">    * All elements in the conformers represent valid element symbols.</span>
-<span class="sd">    * All conformers represent the same molecule (checked by comparing their SMILES and InChIKey</span>
-<span class="sd">      string as well as their chemical element symbols).</span>
+<span class="sd">    * All conformers represent the same molecule (checked by comparing their SMILES string and</span>
+<span class="sd">      chemical element symbols). Stereochemistry is not considered for this check, but a warning</span>
+<span class="sd">      is issued if the conformers have different stereochemical information.</span>
 <span class="sd">    * All conformers possess 3D coordinates.</span>
 
 <span class="sd">    Parameters</span>
@@ -703,13 +695,19 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    Optional[str]</span>
-<span class="sd">        An error message if the molecule objects are not valid, otherwise ``None``.</span>
+<span class="sd">    Tuple[Optional[str], Optional[str]]</span>
+<span class="sd">        A tuple containing:</span>
+
+<span class="sd">        * An error message if the molecule objects are not valid, otherwise ``None``.</span>
+<span class="sd">        * A warning message if the conformers have different stereochemical information, otherwise</span>
+<span class="sd">          ``None``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_errmsg</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_stereomsg</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_stereowarn</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="n">_smiles</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">_inchikey</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_smiles_no_stereo</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">_elements</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sdf_mols</span><span class="p">):</span>
@@ -719,7 +717,7 @@
                 <span class="sa">f</span><span class="s2">&quot;generation of RDKit mol object from SDF block failed for conformer &quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;with index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> as it resulted in None&quot;</span>
             <span class="p">)</span>
-            <span class="k">return</span> <span class="n">_errmsg</span>
+            <span class="k">return</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span>
 
         <span class="c1"># Validate elements</span>
         <span class="n">els</span> <span class="o">=</span> <span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()]</span>
@@ -729,34 +727,37 @@
                     <span class="sa">f</span><span class="s2">&quot;element symbol &#39;</span><span class="si">{</span><span class="n">el</span><span class="si">}</span><span class="s2">&#39; in SDF block with index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> is not a valid &quot;</span>
                     <span class="s2">&quot;element symbol&quot;</span>
                 <span class="p">)</span>
-                <span class="k">return</span> <span class="n">_errmsg</span>
+                <span class="k">return</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span>
 
-        <span class="c1"># Compare conformers by SMILES, InChIKey, and elements</span>
-        <span class="n">smi</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-        <span class="n">ikey</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToInchiKey</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="c1"># Compare conformers by elements and SMILES</span>
+        <span class="c1"># The try/except block is necessary as the base mol objects are not sanitized and might</span>
+        <span class="c1"># contain issues that cause the generation of the SMILES string to fail.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">smi</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">smi_no_stereo</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;the generation of the SMILES string from the RDKit mol object for conformer &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;validation failed for conformer with index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span>
 
         <span class="k">if</span> <span class="n">_smiles</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_smiles</span> <span class="o">=</span> <span class="n">smi</span>
-            <span class="n">_inchikey</span> <span class="o">=</span> <span class="n">ikey</span>
+            <span class="n">_smiles_no_stereo</span> <span class="o">=</span> <span class="n">smi_no_stereo</span>
             <span class="n">_elements</span> <span class="o">=</span> <span class="n">els</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># SMILES</span>
-            <span class="k">if</span> <span class="n">smi</span> <span class="o">!=</span> <span class="n">_smiles</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">smi_no_stereo</span> <span class="o">!=</span> <span class="n">_smiles_no_stereo</span><span class="p">:</span>
                 <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;the generated SMILES string of the conformer with index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">smi</span><span class="si">}</span><span class="s2">&#39;) does not match the SMILES string of the conformer with index 0 &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">_smiles</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">smi_no_stereo</span><span class="si">}</span><span class="s2">&#39;) does not match the SMILES string of the conformer with &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;index 0 (&#39;</span><span class="si">{</span><span class="n">_smiles_no_stereo</span><span class="si">}</span><span class="s2">&#39;); stereochemical information excluded&quot;</span>
                 <span class="p">)</span>
-                <span class="k">return</span> <span class="n">_errmsg</span>
+                <span class="k">return</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span>
 
-            <span class="c1"># InChIKey</span>
-            <span class="k">if</span> <span class="n">ikey</span> <span class="o">!=</span> <span class="n">_inchikey</span><span class="p">:</span>
-                <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;the generated InChIKey of the conformer with index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">ikey</span><span class="si">}</span><span class="s2">&#39;) does not match the InChIKey of the conformer with index 0 &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">_inchikey</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
-                <span class="p">)</span>
-                <span class="k">return</span> <span class="n">_errmsg</span>
+            <span class="k">if</span> <span class="n">smi_no_stereo</span> <span class="o">==</span> <span class="n">_smiles_no_stereo</span> <span class="ow">and</span> <span class="n">smi</span> <span class="o">!=</span> <span class="n">_smiles</span><span class="p">:</span>
+                <span class="n">_stereowarn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
 
             <span class="c1"># Elements</span>
             <span class="k">if</span> <span class="n">els</span> <span class="o">!=</span> <span class="n">_elements</span><span class="p">:</span>
@@ -764,7 +765,7 @@
                     <span class="sa">f</span><span class="s2">&quot;the elements of the conformer with index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> are not identical &quot;</span>
                     <span class="s2">&quot;and/or in the same order as found in the conformer with index 0&quot;</span>
                 <span class="p">)</span>
-                <span class="k">return</span> <span class="n">_errmsg</span>
+                <span class="k">return</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span>
 
         <span class="c1"># Ensure that conformer is 3D</span>
         <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">()</span><span class="o">.</span><span class="n">Is3D</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
@@ -772,9 +773,17 @@
                 <span class="sa">f</span><span class="s2">&quot;the conformer with index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> is not 3D. Only SD files containing 3D &quot;</span>
                 <span class="s2">&quot;information are supported&quot;</span>
             <span class="p">)</span>
-            <span class="k">return</span> <span class="n">_errmsg</span>
+            <span class="k">return</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span>
 
-    <span class="k">return</span> <span class="n">_errmsg</span></div>
+    <span class="c1"># Format stereochemistry warning message if applicable</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_stereowarn</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">_stereomsg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;File validation: the conformers with the following indices have different &quot;</span>
+            <span class="s2">&quot;stereochemical information than the conformer with index 0 (but identical atom &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;connectivity): </span><span class="si">{</span><span class="n">_stereowarn</span><span class="si">}</span><span class="s2">. Ensure that this is intended.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span></div>
 
 
 
@@ -782,50 +791,57 @@
 <a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.io_.read_sd_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">read_sd_file</span><span class="p">(</span>
     <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]]],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read an SD file with one or more conformers.</span>
 
-<span class="sd">    The file must comply with the SD file format (see</span>
-<span class="sd">    https://en.wikipedia.org/wiki/Chemical_table_file, last accessed on 23.09.2025).</span>
+<span class="sd">    Explicit hydrogen atoms are not removed. Sanitization is not performed at this stage. Instead,</span>
+<span class="sd">    it is done for every conformer separately in</span>
+<span class="sd">    ``bonafide.utils.molecule_vault.MolVault.initialize_mol``. The file must comply with the SD</span>
+<span class="sd">    file format (see https://en.wikipedia.org/wiki/Chemical_table_file, last accessed on</span>
+<span class="sd">    23.09.2025).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    file_path : str</span>
-<span class="sd">        Path to the SD file.</span>
+<span class="sd">        The path to the SD file.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    Tuple[Optional[List[Optional[Chem.rdchem.Mol]]], Optional[str]]</span>
+<span class="sd">    Tuple[Optional[List[Chem.rdchem.Mol]], Optional[str], Optional[str]]</span>
 <span class="sd">        A tuple containing:</span>
 
-<span class="sd">        * A list of RDKit molecule objects if the file could be read , otherwise ``None``. The</span>
-<span class="sd">          mol objects can also be ``None`` if individual conformers could not be parsed.</span>
+<span class="sd">        * A list of RDKit molecule objects if the file could be read and validated, otherwise</span>
+<span class="sd">          ``None``.</span>
 <span class="sd">        * An error message if the file could not be read or is not valid, otherwise ``None``.</span>
+<span class="sd">        * A warning message if the conformers have different stereochemical information, otherwise</span>
+<span class="sd">          ``None``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sdf_mols</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">_errmsg</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_stereomsg</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># Ensure correct file extension (just for double-checking)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">file_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.sdf&quot;</span><span class="p">):</span>
         <span class="n">_errmsg</span> <span class="o">=</span> <span class="s2">&quot;the file does not have the expected .sdf file extension&quot;</span>
-        <span class="k">return</span> <span class="n">sdf_mols</span><span class="p">,</span> <span class="n">_errmsg</span>
+        <span class="k">return</span> <span class="n">sdf_mols</span><span class="p">,</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span>
 
     <span class="c1"># Try to open the file</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">suppl</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDMolSupplier</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">suppl</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDMolSupplier</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">removeHs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">_errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;opening of the file failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">return</span> <span class="n">sdf_mols</span><span class="p">,</span> <span class="n">_errmsg</span>
+        <span class="k">return</span> <span class="n">sdf_mols</span><span class="p">,</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span>
 
     <span class="c1"># Get mol objects</span>
     <span class="n">sdf_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">suppl</span><span class="p">]</span>
 
     <span class="c1"># Validate the mol objects</span>
-    <span class="n">_errmsg</span> <span class="o">=</span> <span class="n">_validate_sdf</span><span class="p">(</span><span class="n">sdf_mols</span><span class="p">)</span>
+    <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span> <span class="o">=</span> <span class="n">_validate_sdf</span><span class="p">(</span><span class="n">sdf_mols</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">_errmsg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;validation of the file failed: </span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">sdf_mols</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">return</span> <span class="n">sdf_mols</span><span class="p">,</span> <span class="n">_errmsg</span></div>
+    <span class="k">return</span> <span class="n">sdf_mols</span><span class="p">,</span> <span class="n">_errmsg</span><span class="p">,</span> <span class="n">_stereomsg</span></div>
 
 
 
@@ -966,7 +982,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Mar 31, 2026</div>
+              Last updated on Apr 08, 2026</div>
           </div>
           <div class="right-details">
             
@@ -983,7 +999,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="../../../_static/documentation_options.js?v=92734c54"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

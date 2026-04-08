@@ -5051,8 +5051,9 @@ conformers.</p>
 <li><p>All conformers could be successfully converted to RDKit molecule objects that are not
 <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 <li><p>All elements in the conformers represent valid element symbols.</p></li>
-<li><p>All conformers represent the same molecule (checked by comparing their SMILES and InChIKey
-string as well as their chemical element symbols).</p></li>
+<li><p>All conformers represent the same molecule (checked by comparing their SMILES string and
+chemical element symbols). Stereochemistry is not considered for this check, but a warning
+is issued if the conformers have different stereochemical information.</p></li>
 <li><p>All conformers possess 3D coordinates.</p></li>
 </ul>
 <dl class="field-list simple">
@@ -5066,7 +5067,12 @@ parsed.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Optional[str]</dt><dd><p>An error message if the molecule objects are not valid, otherwise <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<dt>Tuple[Optional[str], Optional[str]]</dt><dd><p>A tuple containing:</p>
+<ul class="simple">
+<li><p>An error message if the molecule objects are not valid, otherwise <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>A warning message if the conformers have different stereochemical information, otherwise
+<code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
 </dd>
 </dl>
 </dd>
@@ -5147,7 +5153,7 @@ that the individual structure blocks represent conformers of the same molecule.<
 <span class="sig-prename descclassname"><span class="pre">bonafide.utils.io_.</span></span><span class="sig-name descname"><span class="pre">read_mol_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/io_.html#read_mol_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.io_.read_mol_object" title="Link to this definition">¶</a></dt>
 <dd><p>Process an RDKit molecule object for incorporation into a molecule vault.</p>
 <p>The conformer molecule-level properties are moved to properties of the processed molecule
-objects.</p>
+objects. The mol objects are not sanitized.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -5157,7 +5163,7 @@ objects.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Tuple[Chem.rdchem.Mol, List[Chem.rdchem.Mol]]</dt><dd><p>A tuple containing:</p>
+<dt>Tuple[Chem.rdchem.Mol, List[Chem.rdchem.Mol], Optional[str]]</dt><dd><p>A tuple containing:</p>
 <ul class="simple">
 <li><p>The initial input RDKit molecule object.</p></li>
 <li><p>A list of RDKit molecule objects, each containing one conformer of the input molecule.</p></li>
@@ -5173,22 +5179,27 @@ objects.</p>
 <dt class="sig sig-object py" id="bonafide.utils.io_.read_sd_file">
 <span class="sig-prename descclassname"><span class="pre">bonafide.utils.io_.</span></span><span class="sig-name descname"><span class="pre">read_sd_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/io_.html#read_sd_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.io_.read_sd_file" title="Link to this definition">¶</a></dt>
 <dd><p>Read an SD file with one or more conformers.</p>
-<p>The file must comply with the SD file format (see
-<a class="reference external" href="https://en.wikipedia.org/wiki/Chemical_table_file">https://en.wikipedia.org/wiki/Chemical_table_file</a>, last accessed on 23.09.2025).</p>
+<p>Explicit hydrogen atoms are not removed. Sanitization is not performed at this stage. Instead,
+it is done for every conformer separately in
+<code class="docutils literal notranslate"><span class="pre">bonafide.utils.molecule_vault.MolVault.initialize_mol</span></code>. The file must comply with the SD
+file format (see <a class="reference external" href="https://en.wikipedia.org/wiki/Chemical_table_file">https://en.wikipedia.org/wiki/Chemical_table_file</a>, last accessed on
+23.09.2025).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Path to the SD file.</p>
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>The path to the SD file.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Tuple[Optional[List[Optional[Chem.rdchem.Mol]]], Optional[str]]</dt><dd><p>A tuple containing:</p>
+<dt>Tuple[Optional[List[Chem.rdchem.Mol]], Optional[str], Optional[str]]</dt><dd><p>A tuple containing:</p>
 <ul class="simple">
-<li><p>A list of RDKit molecule objects if the file could be read , otherwise <code class="docutils literal notranslate"><span class="pre">None</span></code>. The
-mol objects can also be <code class="docutils literal notranslate"><span class="pre">None</span></code> if individual conformers could not be parsed.</p></li>
+<li><p>A list of RDKit molecule objects if the file could be read and validated, otherwise
+<code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 <li><p>An error message if the file could not be read or is not valid, otherwise <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>A warning message if the conformers have different stereochemical information, otherwise
+<code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -5225,10 +5236,8 @@ mol objects can also be <code class="docutils literal notranslate"><span class="
 <dt class="sig sig-object py" id="bonafide.utils.io_.read_smiles">
 <span class="sig-prename descclassname"><span class="pre">bonafide.utils.io_.</span></span><span class="sig-name descname"><span class="pre">read_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/io_.html#read_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.io_.read_smiles" title="Link to this definition">¶</a></dt>
 <dd><p>Read a SMILES string and return an RDKit molecule object and an error message
-(<code class="docutils literal notranslate"><span class="pre">None</span></code> if no error).</p>
-<p>Initially, <code class="docutils literal notranslate"><span class="pre">sanitize=False</span></code> is set in <code class="docutils literal notranslate"><span class="pre">Chem.MolFromSmiles()</span></code> to preserve the hydrogen atoms
-if they are given in the SMILES string. If the molecule object is successfully created, it is
-tried to be sanitized.</p>
+(<code class="docutils literal notranslate"><span class="pre">None</span></code> if no error occurs).</p>
+<p>Explicit hydrogen atoms are not removed. Sanitization is performed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -6142,7 +6151,7 @@ generated.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Mar 31, 2026</div>
+              Last updated on Apr 08, 2026</div>
           </div>
           <div class="right-details">
             
@@ -6805,7 +6814,7 @@ generated.</p>
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="_static/documentation_options.js?v=92734c54"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

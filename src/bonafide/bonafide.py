@@ -510,11 +510,16 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
 
             # Read SD file
             if file_type == "sdf":
-                mol_inputs, error_message = read_sd_file(file_path=input_value)
+                mol_inputs, error_message, stereo_message = read_sd_file(file_path=input_value)
+
                 if error_message is not None:
                     _errmsg = f"Reading data from SD file failed: {error_message}."
                     logging.error(f"'{self._namespace}' | {self._loc}()\n{_errmsg}")
                     raise ValueError(f"{self._loc}(): {_errmsg}")
+
+                if stereo_message is not None:
+                    logging.warning(f"'{self._namespace}' | {self._loc}()\n{stereo_message}")
+
                 logging.info(
                     f"'{self._namespace}' | {self._loc}()\nReading data from SD file successful."
                 )

@@ -342,6 +342,10 @@ def test__from_cache(
 # Tests for the _to_cache() method. #
 #####################################
 
+SMILES_READING_PARAMS = Chem.SmilesParserParams()
+SMILES_READING_PARAMS.removeHs = False
+SMILES_READING_PARAMS.sanitize = True
+
 
 @pytest.mark.base_featurizer_to_cache
 @pytest.mark.parametrize(
@@ -488,8 +492,7 @@ def test__to_cache(
     """Test for the ``_to_cache()`` method."""
     # Dummy parameters for testing
     _cache = [{}]
-    _mol = Chem.MolFromSmiles("[H]OC([H])([H])F", sanitize=False)
-    Chem.SanitizeMol(_mol)
+    _mol = Chem.MolFromSmiles("[H]OC([H])([H])F", params=SMILES_READING_PARAMS)
 
     # Patch requirement checking
     mock = mocker.patch("bonafide.utils.base_featurizer.BaseFeaturizer._check_requirements")

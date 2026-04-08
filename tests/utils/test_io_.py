@@ -150,11 +150,10 @@ def test_read_smiles3() -> None:
     """
     smiles = "COC([C@@H](N1CCC2=C(C1)C=CS2)C3=CC=CC=C3Cl)#O"
     mol, error_message = read_smiles(smiles)
-    assert mol is not None
-    isinstance(mol, Chem.Mol)
-    assert error_message.startswith(
-        "Sanitization of the RDKit mol object generated from SMILES string "
-        f"'{smiles}' failed: Explicit valence for atom # 2"
+    assert mol is None
+    assert (
+        error_message
+        == "Generation of RDKit mol object from SMILES string failed as it resulted in None."
     )
 
 
@@ -164,8 +163,9 @@ def test_read_smiles4() -> None:
     smiles = "Gartenlaube"
     mol, error_message = read_smiles(smiles)
     assert mol is None
-    assert error_message == (
-        f"Generation of RDKit mol object failed for SMILES string '{smiles}' as it resulted in None."
+    assert (
+        error_message
+        == "Generation of RDKit mol object from SMILES string failed as it resulted in None."
     )
 
 
@@ -176,8 +176,8 @@ def test_read_smiles5() -> None:
     mol, error_message = read_smiles(smiles)
     assert mol is None
     assert error_message.startswith(
-        f"Generation of RDKit mol object failed for SMILES string '{smiles}': No registered "
-        "converter was able to produce a C++ rvalue"
+        "Generation of RDKit mol object from SMILES string failed: No registered converter was able "
+        "to produce a C++ rvalue"
     )
 
 
@@ -396,11 +396,12 @@ def test_read_xyz_file12(fetch_data_file: Callable[[str], str]) -> None:
 def test_read_sd_file(fetch_data_file: Callable[[str], str]) -> None:
     """Test for the ``read_sd_file()`` function: valid SD file with 5 conformers."""
     input_file = fetch_data_file(file_name="spiro_mol.sdf")
-    sdf_mols, error_message = read_sd_file(input_file)
+    sdf_mols, error_message, stereo_message = read_sd_file(input_file)
     assert type(sdf_mols) == list
     assert None not in sdf_mols
     assert len(sdf_mols) == 5
     assert error_message is None
+    assert stereo_message is None
 
     for mol in sdf_mols:
         _mol = Chem.Mol(mol)
@@ -418,11 +419,12 @@ def test_read_sd_file(fetch_data_file: Callable[[str], str]) -> None:
 def test_read_sd_file2(fetch_data_file: Callable[[str], str]) -> None:
     """Test for the ``read_sd_file()`` function: valid SD file with 1 conformer."""
     input_file = fetch_data_file(file_name="radical_cation-conf_00.sdf")
-    sdf_mols, error_message = read_sd_file(input_file)
+    sdf_mols, error_message, stereo_message = read_sd_file(input_file)
     assert type(sdf_mols) == list
     assert None not in sdf_mols
     assert len(sdf_mols) == 1
     assert error_message is None
+    assert stereo_message is None
 
     mol = sdf_mols[0]
     _mol = Chem.Mol(mol)
@@ -441,12 +443,12 @@ def test_read_sd_file3(fetch_data_file: Callable[[str], str]) -> None:
     different molecules.
     """
     input_file = fetch_data_file(file_name="mixture.sdf")
-    sdf_mols, error_message = read_sd_file(input_file)
-    assert None not in sdf_mols
-    assert len(sdf_mols) == 2
+    sdf_mols, error_message, stereo_message = read_sd_file(input_file)
+    assert sdf_mols is None
     assert error_message.startswith(
         "validation of the file failed: the generated SMILES string of the conformer with index 1"
     )
+    assert stereo_message is None
 
 
 @pytest.mark.read_sd_file
@@ -455,12 +457,13 @@ def test_read_sd_file4(fetch_data_file: Callable[[str], str]) -> None:
     orders are shuffled.
     """
     input_file = fetch_data_file(file_name="shuffled_atom_order.sdf")
-    _, error_message = read_sd_file(input_file)
+    _, error_message, stereo_message = read_sd_file(input_file)
     assert (
         error_message
         == "validation of the file failed: the elements of the conformer with index 1 are not "
         "identical and/or in the same order as found in the conformer with index 0"
     )
+    assert stereo_message is None
 
 
 @pytest.mark.read_sd_file
@@ -469,22 +472,24 @@ def test_read_sd_file5(fetch_data_file: Callable[[str], str]) -> None:
     an invalid element.
     """
     input_file = fetch_data_file(file_name="invalid_element.sdf")
-    _, error_message = read_sd_file(input_file)
+    _, error_message, stereo_message = read_sd_file(input_file)
     assert (
         error_message == "validation of the file failed: element symbol '*' in SDF block with "
         "index 1 is not a valid element symbol"
     )
+    assert stereo_message is None
 
 
 @pytest.mark.read_sd_file
 def test_read_sd_file6(fetch_data_file: Callable[[str], str]) -> None:
     """Test for the ``read_sd_file()`` function: invalid SD file of a 2D molecule."""
     input_file = fetch_data_file(file_name="invalid_2d_mol.sdf")
-    _, error_message = read_sd_file(input_file)
+    _, error_message, stereo_message = read_sd_file(input_file)
     assert (
         error_message == "validation of the file failed: the conformer with index 0 is not 3D. "
         "Only SD files containing 3D information are supported"
     )
+    assert stereo_message is None
 
 
 @pytest.mark.read_sd_file
@@ -493,11 +498,12 @@ def test_read_sd_file7(fetch_data_file: Callable[[str], str]) -> None:
     non-numeric coordinate.
     """
     input_file = fetch_data_file(file_name="invalid_nan_contained.sdf")
-    _, error_message = read_sd_file(input_file)
+    _, error_message, stereo_message = read_sd_file(input_file)
     assert (
         error_message == "validation of the file failed: generation of RDKit mol object from "
         "SDF block failed for conformer with index 1 as it resulted in None"
     )
+    assert stereo_message is None
 
 
 @pytest.mark.read_sd_file
@@ -506,11 +512,12 @@ def test_read_sd_file8(fetch_data_file: Callable[[str], str]) -> None:
     the header lines.
     """
     input_file = fetch_data_file(file_name="invalid_missing_header.sdf")
-    _, error_message = read_sd_file(input_file)
+    _, error_message, stereo_message = read_sd_file(input_file)
     assert (
         error_message == "validation of the file failed: generation of RDKit mol object from "
         "SDF block failed for conformer with index 0 as it resulted in None"
     )
+    assert stereo_message is None
 
 
 @pytest.mark.read_sd_file
@@ -519,29 +526,59 @@ def test_read_sd_file9(fetch_data_file: Callable[[str], str]) -> None:
     with the wrong extension.
     """
     input_file = fetch_data_file(file_name="invalid_xyz_mocking_sdf.sdf")
-    _, error_message = read_sd_file(input_file)
+    _, error_message, stereo_message = read_sd_file(input_file)
     assert (
         error_message == "validation of the file failed: generation of RDKit mol object from SDF "
         "block failed for conformer with index 0 as it resulted in None"
     )
+    assert stereo_message is None
 
 
 @pytest.mark.read_sd_file
 def test_read_sd_file10(fetch_data_file: Callable[[str], str]) -> None:
     """Test for the ``read_sd_file()`` function: invalid SD file that is empty."""
     input_file = fetch_data_file(file_name="invalid_empty.sdf")
-    _, error_message = read_sd_file(input_file)
+    _, error_message, stereo_message = read_sd_file(input_file)
     assert error_message.startswith("opening of the file failed: File error: Invalid input file")
+    assert stereo_message is None
 
 
 @pytest.mark.read_sd_file
 def test_read_sd_file11(fetch_data_file: Callable[[str], str]) -> None:
-    """Test for the ``read_sd_file()`` function: invalid SD file that has a wrong number of
-    atoms specified.
+    """Test for the ``read_sd_file()`` function: SD file with conformers of mixed
+    stereochemistry (E/Z mixture).
     """
-    input_file = fetch_data_file(file_name="invalid_empty.sdf")
-    _, error_message = read_sd_file(input_file)
-    assert error_message.startswith("opening of the file failed: File error:")
+    input_file = fetch_data_file(file_name="e_z_mixture.sdf")
+    sdf_mols, error_message, stereo_message = read_sd_file(input_file)
+    assert type(sdf_mols) == list
+    assert None not in sdf_mols
+    assert len(sdf_mols) == 3
+    assert error_message is None
+    assert (
+        stereo_message
+        == "File validation: the conformers with the following indices have different "
+        "stereochemical information than the conformer with index 0 (but identical atom "
+        "connectivity): [1, 2]. Ensure that this is intended."
+    )
+
+
+@pytest.mark.read_sd_file
+def test_read_sd_file12(fetch_data_file: Callable[[str], str]) -> None:
+    """Test for the ``read_sd_file()`` function: SD file with conformers of mixed
+    stereochemistry (R/S mixture).
+    """
+    input_file = fetch_data_file(file_name="r_s_mixture.sdf")
+    sdf_mols, error_message, stereo_message = read_sd_file(input_file)
+    assert type(sdf_mols) == list
+    assert None not in sdf_mols
+    assert len(sdf_mols) == 2
+    assert error_message is None
+    assert (
+        stereo_message
+        == "File validation: the conformers with the following indices have different "
+        "stereochemical information than the conformer with index 0 (but identical atom "
+        "connectivity): [1]. Ensure that this is intended."
+    )
 
 
 ###########################################
@@ -571,8 +608,9 @@ def test_write_sd_file() -> None:
     write_sd_file(mol, _sd_file_path)
 
     # Read in written SD file
-    sdf_mols, error_message = read_sd_file(_sd_file_path)
+    sdf_mols, error_message, stereo_message = read_sd_file(_sd_file_path)
     assert error_message is None
+    assert stereo_message is None
     assert type(sdf_mols) == list
     assert len(sdf_mols) == 1
 

@@ -288,7 +288,10 @@ class MolVault:
                 self.mol_inputs[idx] = _sdf_string
 
                 try:
-                    Chem.SanitizeMol(mol)
+                    Chem.SanitizeMol(mol=mol)
+                    Chem.AssignStereochemistry(
+                        mol=mol, cleanIt=True, force=True, flagPossibleStereoCenters=True
+                    )
                 except Exception as e:
                     _errmsg = (
                         f"Sanitization of the RDKit mol object generated from the SDF block "

@@ -15,6 +15,10 @@ from bonafide.utils.helper_functions_chemistry import (
     get_ring_classification,
 )
 
+SMILES_READING_PARAMS = Chem.SmilesParserParams()
+SMILES_READING_PARAMS.removeHs = False
+SMILES_READING_PARAMS.sanitize = True
+
 ##################################################
 # Tests for the bind_smiles_with_xyz() function. #
 ##################################################
@@ -48,9 +52,8 @@ def test_bind_smiles_with_xyz(
     smiles_mol = Chem.MolFromSmiles(
         "[H]c1sc2c(c1[H])C([H])([H])N([C@]([H])(C(=O)OC([H])([H])[H])c1c([H])c([H])c([H])c([H])"
         "c1Cl)C([H])([H])C2([H])[H]",
-        sanitize=False,
+        params=SMILES_READING_PARAMS,
     )
-    Chem.SanitizeMol(smiles_mol)
     assert smiles_mol.GetNumBonds() == 39
 
     assert smiles_mol.GetAtomWithIdx(0).GetSymbol() == "H"
@@ -116,9 +119,8 @@ def test_bind_smiles_with_xyz2(
     smiles_mol = Chem.MolFromSmiles(
         "Cl[Cr+]12(Cl)(<-N(C(C(P->1([H])[H])([H])[H])([H])[H])([H])[H])<-N(C(C([H])([H])P->2"
         "(C([H])([H])[H])C([H])([H])[H])([H])[H])([H])[H]",
-        sanitize=False,
+        params=SMILES_READING_PARAMS,
     )
-    Chem.SanitizeMol(smiles_mol)
     assert smiles_mol.GetNumBonds() == 34
 
     assert smiles_mol.GetAtomWithIdx(0).GetSymbol() == "Cl"
@@ -177,9 +179,8 @@ def test_bind_smiles_with_xyz3(
 
     # Generate RDKit mol object from SMILES string
     smiles_mol = Chem.MolFromSmiles(
-        "[H]C1=C(OC([H])([H])[H])[N+](C(N1C([H])([H])[H])=S)[H]", sanitize=False
+        "[H]C1=C(OC([H])([H])[H])[N+](C(N1C([H])([H])[H])=S)[H]", params=SMILES_READING_PARAMS
     )
-    Chem.SanitizeMol(smiles_mol)
     assert smiles_mol.GetNumBonds() == 17
 
     assert smiles_mol.GetAtomWithIdx(3).GetSymbol() == "O"
@@ -249,9 +250,8 @@ def test_bind_smiles_with_xyz4(
         "c12[c:1]([s:2][c:3]([H:4])[c:5]1[H:6])[C:7]([H:8])([H:36])[C:9]([H:10])([H:11])[N:12]"
         "([C@@:16]([c:17]1[c:18]([H:27])[c:19]([H:20])[c:21]([H:26])[c:22]([H:25])[c:23]1[Cl:24])"
         "([C:28](=[O:29])[O:30][C:31]([H:32])([H:33])[H:34])[H:35])[C:13]2([H:14])[H:15]",
-        sanitize=False,
+        params=SMILES_READING_PARAMS,
     )
-    Chem.SanitizeMol(smiles_mol)
     assert smiles_mol.GetNumBonds() == 39
 
     assert smiles_mol.GetAtomWithIdx(2).GetSymbol() == "S"
@@ -312,9 +312,8 @@ def test_bind_smiles_with_xyz5(fetch_data_file: Callable[[str], str]) -> None:
     smiles_mol = Chem.MolFromSmiles(
         "[H]c1sc2c(c1[H])C([H])([H])N([C@]([H])(C(=O)OC([H])([H])[H])c1c([H])c([H])c([H])c([H])"
         "c1Cl)C([H])([H])C2([H])[H]",
-        sanitize=False,
+        params=SMILES_READING_PARAMS,
     )
-    Chem.SanitizeMol(smiles_mol)
     assert smiles_mol.GetNumBonds() == 39
 
     # Generate RDKit mol object from XYZ file
@@ -594,8 +593,7 @@ def test_get_atom_bond_mapping_dicts(
 ) -> None:
     """Test for the ``get_atom_bond_mapping_dicts()`` function."""
     # Generate RDKit mol object
-    mol = Chem.MolFromSmiles(smiles, sanitize=False)
-    Chem.SanitizeMol(mol)
+    mol = Chem.MolFromSmiles(smiles, params=SMILES_READING_PARAMS)
 
     # Calculate mapping dicts and canonical SMILES
     (
@@ -648,8 +646,7 @@ def test_get_atom_bond_mapping_dicts(
 def test_get_charge_from_mol_object(smiles: str, expected_charge: int) -> None:
     """Test for the ``get_charge_from_mol_object()`` function."""
     # Generate RDKit mol object
-    mol = Chem.MolFromSmiles(smiles, sanitize=False)
-    Chem.SanitizeMol(mol)
+    mol = Chem.MolFromSmiles(smiles, params=SMILES_READING_PARAMS)
 
     # Calculate multiplicity
     assert get_charge_from_mol_object(mol) == expected_charge
@@ -782,8 +779,7 @@ def test_get_ring_classification(
 ) -> None:
     """Test for the ``get_ring_classification()`` function."""
     # Generate RDKit mol object
-    mol = Chem.MolFromSmiles(smiles, sanitize=False)
-    Chem.SanitizeMol(mol)
+    mol = Chem.MolFromSmiles(smiles, params=SMILES_READING_PARAMS)
 
     # Calculate ring classification
     assert get_ring_classification(mol, indices, idx_type) == expected_ring_class
@@ -811,8 +807,7 @@ def test_get_ring_classification(
 def test_get_molecular_formula(smiles: str, expected_formula: str) -> None:
     """Test for the ``get_molecular_formula()`` function."""
     # Generate RDKit mol object
-    mol = Chem.MolFromSmiles(smiles, sanitize=False)
-    Chem.SanitizeMol(mol)
+    mol = Chem.MolFromSmiles(smiles, params=SMILES_READING_PARAMS)
 
     # Calculate molecular formula
     assert get_molecular_formula(mol) == expected_formula

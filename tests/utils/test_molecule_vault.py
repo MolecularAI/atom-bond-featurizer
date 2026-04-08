@@ -148,7 +148,8 @@ def test_initialize_mol2(
     if _file_type == "xyz":
         mol_inputs, error_message = read_xyz_file(file_path=input_file)
     if _file_type == "sdf":
-        mol_inputs, error_message = read_sd_file(file_path=input_file)
+        mol_inputs, error_message, stereo_message = read_sd_file(file_path=input_file)
+        assert stereo_message is None
 
     assert error_message is None
 
@@ -616,7 +617,8 @@ def test_get_elements2(
     if _file_type == "xyz":
         mol_inputs, error_message = read_xyz_file(file_path=input_file)
     if _file_type == "sdf":
-        mol_inputs, error_message = read_sd_file(file_path=input_file)
+        mol_inputs, error_message, stereo_message = read_sd_file(file_path=input_file)
+        assert stereo_message is None
 
     assert error_message is None
 
@@ -700,7 +702,8 @@ def test_read_mol_energies(
     if _file_type == "xyz":
         mol_inputs, error_message = read_xyz_file(file_path=input_file)
     if _file_type == "sdf":
-        mol_inputs, error_message = read_sd_file(file_path=input_file)
+        mol_inputs, error_message, stereo_message = read_sd_file(file_path=input_file)
+        assert stereo_message is None
 
     assert error_message is None
 
@@ -794,7 +797,8 @@ def test_read_mol_energies2(
     if _file_type == "xyz":
         mol_inputs, error_message = read_xyz_file(file_path=input_file)
     if _file_type == "sdf":
-        mol_inputs, error_message = read_sd_file(file_path=input_file)
+        mol_inputs, error_message, stereo_message = read_sd_file(file_path=input_file)
+        assert stereo_message is None
 
     assert error_message is None
 
@@ -953,7 +957,8 @@ def test_prune_ensemble_by_energy(
     if _file_type == "xyz":
         mol_inputs, error_message = read_xyz_file(file_path=input_file)
     if _file_type == "sdf":
-        mol_inputs, error_message = read_sd_file(file_path=input_file)
+        mol_inputs, error_message, stereo_message = read_sd_file(file_path=input_file)
+        assert stereo_message is None
 
     assert error_message is None
 

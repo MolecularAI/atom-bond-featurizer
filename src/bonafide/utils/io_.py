@@ -20,7 +20,7 @@ def read_mol_object(
     """Process an RDKit molecule object for incorporation into a molecule vault.
 
     The conformer molecule-level properties are moved to properties of the processed molecule
-    objects.
+    objects. The mol objects are not sanitized.
 
     Parameters
     ----------
@@ -29,7 +29,7 @@ def read_mol_object(
 
     Returns
     -------
-    Tuple[Chem.rdchem.Mol, List[Chem.rdchem.Mol]]
+    Tuple[Chem.rdchem.Mol, List[Chem.rdchem.Mol], Optional[str]]
         A tuple containing:
 
         * The initial input RDKit molecule object.
@@ -81,11 +81,9 @@ def read_mol_object(
 
 def read_smiles(smiles: str) -> Tuple[Optional[Chem.rdchem.Mol], Optional[str]]:
     """Read a SMILES string and return an RDKit molecule object and an error message
-    (``None`` if no error).
+    (``None`` if no error occurs).
 
-    Initially, ``sanitize=False`` is set in ``Chem.MolFromSmiles()`` to preserve the hydrogen atoms
-    if they are given in the SMILES string. If the molecule object is successfully created, it is
-    tried to be sanitized.
+    Explicit hydrogen atoms are not removed. Sanitization is performed.
 
     Parameters
     ----------
@@ -104,27 +102,20 @@ def read_smiles(smiles: str) -> Tuple[Optional[Chem.rdchem.Mol], Optional[str]]:
     _errmsg = None
     mol = None
 
-    # Try to generate RDKit mol object without sanitization first
+    # Set params such that hydrogens are not removed and sanitization is performed
+    params = Chem.SmilesParserParams()
+    params.removeHs = False
+    params.sanitize = True
+
+    # Generate mol object
     try:
-        mol = Chem.MolFromSmiles(SMILES=smiles, sanitize=False)
+        mol = Chem.MolFromSmiles(SMILES=smiles, params=params)
     except Exception as e:
-        _errmsg = f"Generation of RDKit mol object failed for SMILES string '{smiles}': {e}."
+        _errmsg = f"Generation of RDKit mol object from SMILES string failed: {e}."
         return mol, _errmsg
 
-    # Try to sanitize the mol object
-    if mol is not None:
-        try:
-            Chem.SanitizeMol(mol)
-        except Exception as e:
-            _errmsg = (
-                f"Sanitization of the RDKit mol object generated from SMILES string "
-                f"'{smiles}' failed: {e}."
-            )
-    else:
-        _errmsg = (
-            f"Generation of RDKit mol object failed for SMILES string '{smiles}' as it "
-            "resulted in None."
-        )
+    if mol is None:
+        _errmsg = "Generation of RDKit mol object from SMILES string failed as it resulted in None."
 
     return mol, _errmsg
 
@@ -388,7 +379,7 @@ def read_xyz_file(file_path: str) -> Tuple[Optional[List[str]], Optional[str]]:
     return xyz_blocks, _errmsg
 
 
-def _validate_sdf(sdf_mols: List[Optional[Chem.rdchem.Mol]]) -> Optional[str]:
+def _validate_sdf(sdf_mols: List[Optional[Chem.rdchem.Mol]]) -> Tuple[Optional[str], Optional[str]]:
     """Validate the individual RDKit molecule objects generated from an SD file with one or more
     conformers.
 
@@ -397,8 +388,9 @@ def _validate_sdf(sdf_mols: List[Optional[Chem.rdchem.Mol]]) -> Optional[str]:
     * All conformers could be successfully converted to RDKit molecule objects that are not
       ``None``.
     * All elements in the conformers represent valid element symbols.
-    * All conformers represent the same molecule (checked by comparing their SMILES and InChIKey
-      string as well as their chemical element symbols).
+    * All conformers represent the same molecule (checked by comparing their SMILES string and
+      chemical element symbols). Stereochemistry is not considered for this check, but a warning
+      is issued if the conformers have different stereochemical information.
     * All conformers possess 3D coordinates.
 
     Parameters
@@ -410,13 +402,19 @@ def _validate_sdf(sdf_mols: List[Optional[Chem.rdchem.Mol]]) -> Optional[str]:
 
     Returns
     -------
-    Optional[str]
-        An error message if the molecule objects are not valid, otherwise ``None``.
+    Tuple[Optional[str], Optional[str]]
+        A tuple containing:
+
+        * An error message if the molecule objects are not valid, otherwise ``None``.
+        * A warning message if the conformers have different stereochemical information, otherwise
+          ``None``.
     """
     _errmsg = None
+    _stereomsg = None
+    _stereowarn = []
 
     _smiles = None
-    _inchikey = None
+    _smiles_no_stereo = None
     _elements = None
 
     for idx, mol in enumerate(sdf_mols):
@@ -426,7 +424,7 @@ def _validate_sdf(sdf_mols: List[Optional[Chem.rdchem.Mol]]) -> Optional[str]:
                 f"generation of RDKit mol object from SDF block failed for conformer "
                 f"with index {idx} as it resulted in None"
             )
-            return _errmsg
+            return _errmsg, _stereomsg
 
         # Validate elements
         els = [atom.GetSymbol() for atom in mol.GetAtoms()]
@@ -436,34 +434,37 @@ def _validate_sdf(sdf_mols: List[Optional[Chem.rdchem.Mol]]) -> Optional[str]:
                     f"element symbol '{el}' in SDF block with index {idx} is not a valid "
                     "element symbol"
                 )
-                return _errmsg
+                return _errmsg, _stereomsg
 
-        # Compare conformers by SMILES, InChIKey, and elements
-        smi = Chem.MolToSmiles(mol)
-        ikey = Chem.MolToInchiKey(mol)
+        # Compare conformers by elements and SMILES
+        # The try/except block is necessary as the base mol objects are not sanitized and might
+        # contain issues that cause the generation of the SMILES string to fail.
+        try:
+            smi = Chem.MolToSmiles(mol)
+            smi_no_stereo = Chem.MolToSmiles(mol, isomericSmiles=False)
+        except Exception as e:
+            _errmsg = (
+                "the generation of the SMILES string from the RDKit mol object for conformer "
+                f"validation failed for conformer with index {idx}: {e}"
+            )
+            return _errmsg, _stereomsg
 
         if _smiles is None:
             _smiles = smi
-            _inchikey = ikey
+            _smiles_no_stereo = smi_no_stereo
             _elements = els
         else:
             # SMILES
-            if smi != _smiles:
+            if smi_no_stereo != _smiles_no_stereo:
                 _errmsg = (
                     f"the generated SMILES string of the conformer with index {idx} "
-                    f"('{smi}') does not match the SMILES string of the conformer with index 0 "
-                    f"('{_smiles}')"
+                    f"('{smi_no_stereo}') does not match the SMILES string of the conformer with "
+                    f"index 0 ('{_smiles_no_stereo}'); stereochemical information excluded"
                 )
-                return _errmsg
+                return _errmsg, _stereomsg
 
-            # InChIKey
-            if ikey != _inchikey:
-                _errmsg = (
-                    f"the generated InChIKey of the conformer with index {idx} "
-                    f"('{ikey}') does not match the InChIKey of the conformer with index 0 "
-                    f"('{_inchikey}')"
-                )
-                return _errmsg
+            if smi_no_stereo == _smiles_no_stereo and smi != _smiles:
+                _stereowarn.append(idx)
 
             # Elements
             if els != _elements:
@@ -471,7 +472,7 @@ def _validate_sdf(sdf_mols: List[Optional[Chem.rdchem.Mol]]) -> Optional[str]:
                     f"the elements of the conformer with index {idx} are not identical "
                     "and/or in the same order as found in the conformer with index 0"
                 )
-                return _errmsg
+                return _errmsg, _stereomsg
 
         # Ensure that conformer is 3D
         if mol.GetConformer().Is3D() is False:
@@ -479,57 +480,72 @@ def _validate_sdf(sdf_mols: List[Optional[Chem.rdchem.Mol]]) -> Optional[str]:
                 f"the conformer with index {idx} is not 3D. Only SD files containing 3D "
                 "information are supported"
             )
-            return _errmsg
+            return _errmsg, _stereomsg
 
-    return _errmsg
+    # Format stereochemistry warning message if applicable
+    if len(_stereowarn) > 0:
+        _stereomsg = (
+            f"File validation: the conformers with the following indices have different "
+            "stereochemical information than the conformer with index 0 (but identical atom "
+            f"connectivity): {_stereowarn}. Ensure that this is intended."
+        )
+
+    return _errmsg, _stereomsg
 
 
 def read_sd_file(
     file_path: str,
-) -> Tuple[Optional[List[Optional[Chem.rdchem.Mol]]], Optional[str]]:
+) -> Tuple[Optional[List[Chem.rdchem.Mol]], Optional[str], Optional[str]]:
     """Read an SD file with one or more conformers.
 
-    The file must comply with the SD file format (see
-    https://en.wikipedia.org/wiki/Chemical_table_file, last accessed on 23.09.2025).
+    Explicit hydrogen atoms are not removed. Sanitization is not performed at this stage. Instead,
+    it is done for every conformer separately in
+    ``bonafide.utils.molecule_vault.MolVault.initialize_mol``. The file must comply with the SD
+    file format (see https://en.wikipedia.org/wiki/Chemical_table_file, last accessed on
+    23.09.2025).
 
     Parameters
     ----------
     file_path : str
-        Path to the SD file.
+        The path to the SD file.
 
     Returns
     -------
-    Tuple[Optional[List[Optional[Chem.rdchem.Mol]]], Optional[str]]
+    Tuple[Optional[List[Chem.rdchem.Mol]], Optional[str], Optional[str]]
         A tuple containing:
 
-        * A list of RDKit molecule objects if the file could be read , otherwise ``None``. The
-          mol objects can also be ``None`` if individual conformers could not be parsed.
+        * A list of RDKit molecule objects if the file could be read and validated, otherwise
+          ``None``.
         * An error message if the file could not be read or is not valid, otherwise ``None``.
+        * A warning message if the conformers have different stereochemical information, otherwise
+          ``None``.
     """
     sdf_mols = None
     _errmsg = None
+    _stereomsg = None
 
     # Ensure correct file extension (just for double-checking)
     if not file_path.endswith(".sdf"):
         _errmsg = "the file does not have the expected .sdf file extension"
-        return sdf_mols, _errmsg
+        return sdf_mols, _errmsg, _stereomsg
 
     # Try to open the file
     try:
-        suppl = Chem.SDMolSupplier(file_path, sanitize=False)
+        suppl = Chem.SDMolSupplier(fileName=file_path, sanitize=False, removeHs=False)
     except Exception as e:
         _errmsg = f"opening of the file failed: {e}"
-        return sdf_mols, _errmsg
+        return sdf_mols, _errmsg, _stereomsg
 
     # Get mol objects
     sdf_mols = [mol for mol in suppl]
 
     # Validate the mol objects
-    _errmsg = _validate_sdf(sdf_mols)
+    _errmsg, _stereomsg = _validate_sdf(sdf_mols)
     if _errmsg is not None:
         _errmsg = f"validation of the file failed: {_errmsg}"
+        sdf_mols = None
 
-    return sdf_mols, _errmsg
+    return sdf_mols, _errmsg, _stereomsg
 
 
 def write_sd_file(mol: Chem.rdchem.Mol, file_path: str) -> None:

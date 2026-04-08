@@ -26,7 +26,7 @@ The codebase complies with [mypy](https://mypy.readthedocs.io/en/stable/)'s stat
 specified in `mypy.ini`. Type checking is executed as follows.
 
 ```shell
-mypy scr/ > mypy.out
+mypy src/ > mypy.out
 ```
 
 [Ruff](https://docs.astral.sh/ruff/formatter/) was used for Python code formatting and was

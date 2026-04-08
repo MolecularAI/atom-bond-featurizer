@@ -2,7 +2,7 @@
 project = "BONAFIDE"
 copyright = "2026, Molecular AI, AstraZeneca Gothenburg"
 author = "Lukas M. Sigmund"
-release = "0.1.1"
+release = "0.1.2"
 
 # General configuration ###########################################################################
 extensions = [

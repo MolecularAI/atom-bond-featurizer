@@ -37,7 +37,7 @@ html_theme_options = {
 }
 
 html_favicon = "_static/favicon.png"
-html_title = "BONAFIDE"
+html_title = "Atom & Bond Featurizer"
 
 html_last_updated_fmt = "%b %d, %Y"
 

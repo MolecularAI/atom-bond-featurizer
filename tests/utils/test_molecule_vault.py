@@ -15,11 +15,7 @@ from PIL import PngImagePlugin
 from rdkit import Chem, RDLogger
 from rdkit.Chem import AllChem, rdPartialCharges
 
-from bonafide.utils.constants import (
-    EH_TO_KJ_MOL,
-    KCAL_MOL_TO_KJ_MOL,
-    UNDESIRED_ATOM_BOND_PROPERTIES,
-)
+from bonafide.utils.constants import EH_TO_KJ_MOL, KCAL_MOL_TO_KJ_MOL
 from bonafide.utils.io_ import read_sd_file, read_xyz_file
 
 if TYPE_CHECKING:
@@ -1129,8 +1125,8 @@ def test_clean_properties(fresh_mol_vault: MolVault) -> None:
     assert all([isinstance(mol, Chem.rdchem.Mol) for mol in mol_vault.mol_objects])
 
     # Inject artificial mol objects
-    mol0 = Chem.MolFromSmiles("COC(=O)[C@H](c1ccccc1Cl)N1CCc2sccc2C1")
-    mol1 = Chem.MolFromSmiles("COC(=O)[C@H](c1ccccc1Cl)N1CCc2sccc2C1")
+    mol0 = Chem.MolFromSmiles("Cc1nc(N)nc2c1cc(-c1cnn(C)c1)c(=O)n2[C@H]1CC[C@@H](OCO)CC1")
+    mol1 = Chem.MolFromSmiles("Cc1nc(N)nc2c1cc(-c1cnn(C)c1)c(=O)n2[C@H]1CC[C@@H](OCO)CC1")
 
     # Calculate Gasteiger charges for getting undesired properties
     rdPartialCharges.ComputeGasteigerCharges(mol0)
@@ -1169,18 +1165,21 @@ def test_clean_properties(fresh_mol_vault: MolVault) -> None:
     # Clear properties
     mol_vault.clean_properties()
 
+    # Check that undesired properties are gone and desired properties are still there
     for mol in mol_vault.mol_objects:
-        # Check that undesired properties are gone
         for atom in mol.GetAtoms():
-            for prop in UNDESIRED_ATOM_BOND_PROPERTIES:
-                assert atom.HasProp(prop) == 0
-        for bond in mol.GetBonds():
-            for prop in UNDESIRED_ATOM_BOND_PROPERTIES:
-                assert bond.HasProp(prop) == 0
+            prop_dict = atom.GetPropsAsDict()
+            if atom.GetIdx() == _idx:
+                assert prop_dict == {_prop: _value}
+            else:
+                assert prop_dict == {}
 
-        # Check that desired properties are still there
-        assert mol.GetAtomWithIdx(_idx).GetProp(_prop) == _value
-        assert mol.GetBondWithIdx(_idx).GetProp(_prop) == _value
+        for bond in mol.GetBonds():
+            prop_dict = bond.GetPropsAsDict()
+            if bond.GetIdx() == _idx:
+                assert prop_dict == {_prop: _value}
+            else:
+                assert prop_dict == {}
 
 
 ################################################

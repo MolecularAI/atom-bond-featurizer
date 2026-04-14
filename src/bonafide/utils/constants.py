@@ -558,6 +558,7 @@ UNDESIRED_ATOM_BOND_PROPERTIES = [
     "_MolFileBondStereo",
     "molParity",
     "_chiralPermutation",
+    "_ringStereoAtoms",
 ]
 
 UNDESIRED_ATOM_BOND_PROPERTIES2 = ["molAtomMapNumber"]

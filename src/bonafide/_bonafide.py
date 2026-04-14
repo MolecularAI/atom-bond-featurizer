@@ -231,8 +231,8 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
             f"* Version:                 {version(distribution_name='bonafide')}\n"
             "* Documentation:           https://molecularai.github.io/atom-bond-featurizer\n"
             "* GitHub:                  https://github.com/MolecularAI/atom-bond-featurizer\n"
-            f"* Reference:               ...\n"
-            f"* DOI:                     ...\n"
+            f"* DOI:                     10.26434/chemrxiv.15001386/v1\n"
+            f"* Reference:               ChemRXiv 2026\n"
             "\n"
             f"* Installation directory:  {os.path.dirname(__file__)}\n"
         )

@@ -1,12 +1,25 @@
 # Changelog
 
+## Version 0.1.3
+
+### Changes
+
+-   Update of the information printed in the log file header.
+
+### Fixes
+
+-   The RDKit internal atom property `_ringStereoAtoms` was added to the list of undesired atom
+    properties. The absence of this property in the undesired properties list resulted in unexpected
+    errors in the `AtomBondFeaturizer.return_atom_features()` method for molecules with chiral ring
+    atoms.
+
 ## Version 0.1.2
 
 ### Changes
 
 -   SD files that contain multiple conformers with different stereochemistry (e.g., E/Z isomerism)
-    are now accepted and a warning message is logged when they are read in. This allows to calculate
-    features for stereoisomers together in one conformer ensemble.
+    are now accepted, and a warning message is logged when they are read in. This allows to
+    calculate features for stereoisomers together in one conformer ensemble.
 
 ### Fixes
 

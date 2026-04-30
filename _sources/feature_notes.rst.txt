@@ -33,6 +33,11 @@ combined with the :mod:`is_symmetric_to <bonafide.features.symmetric_sites>` fea
 :mod:`distance <bonafide.features.distance>` features to explore the vicinity around the identified
 functional group or its structural relation to other parts of the molecule.
 
+By default, :mod:`is_symmetric_to <bonafide.features.symmetric_sites>` considers symmetry due to
+**resonance**, that is, the two oxygen atoms of a carboxylate group will be labeled as symmetric.
+The configuration settings under ``bonafide.symmetry`` allow to modify and customize how resonance
+is handled during the symmetry analysis (see :doc:`config_settings`).
+
 **********************************************
  Conceptual density functional theory (C-DFT)
 **********************************************

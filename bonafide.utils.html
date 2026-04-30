@@ -1546,6 +1546,27 @@ lowercase or uppercase.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="bonafide.utils.helper_functions_chemistry._get_is_meso">
+<span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">_get_is_meso</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#_get_is_meso"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry._get_is_meso" title="Link to this definition">¶</a></dt>
+<dd><p>Check if a molecule is meso based on its InChI information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">Chem.rdchem.Mol</span></dt><dd><p>An RDKit molecule object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the molecule is meso, otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code> (also if RDKit was built without
+InChI support or if the analysis fails for any reason).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="bonafide.utils.helper_functions_chemistry._get_renumbering_list">
 <span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">_get_renumbering_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_be_renumbered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#_get_renumbering_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry._get_renumbering_list" title="Link to this definition">¶</a></dt>
 <dd><p>Get a renumbering list to reorder atoms in a molecule based on a template.</p>
@@ -1563,6 +1584,53 @@ lowercase or uppercase.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>List[int]</dt><dd><p>A list of integers representing the new atom order based on the template.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_enumeration">
+<span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">_get_resonance_symmetries_by_enumeration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags_enum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_chirality</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#_get_resonance_symmetries_by_enumeration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_enumeration" title="Link to this definition">¶</a></dt>
+<dd><p>Enumerate the resonance forms of a molecule and analyze them to find out which atoms are
+symmetric to each other through substructure matching.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">Chem.rdchem.Mol</span></dt><dd><p>An RDKit molecule object.</p>
+</dd>
+<dt><strong>flags_enum</strong><span class="classifier">int</span></dt><dd><p>An integer representing the combination of optional flags for
+<code class="docutils literal notranslate"><span class="pre">Chem.ResonanceMolSupplier</span></code>.</p>
+</dd>
+<dt><strong>use_chirality</strong><span class="classifier">bool</span></dt><dd><p>Whether to consider chirality when doing the substructure matching of the resonance forms.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Dict[int, List[int]]</dt><dd><p>A dictionary with the atom indices as keys and lists of symmetric atom indices as values.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_substructure">
+<span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">_get_resonance_symmetries_by_substructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#_get_resonance_symmetries_by_substructure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_substructure" title="Link to this definition">¶</a></dt>
+<dd><p>Identify symmetry-equivalent atoms due to resonance based on predefined functional groups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">Chem.rdchem.Mol</span></dt><dd><p>An RDKit molecule object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Dict[int, List[int]]</dt><dd><p>A dictionary in which the keys are atom indices and the values are lists of atom indices
+that are symmetric to the key atom due to resonance.</p>
 </dd>
 </dl>
 </dd>
@@ -1792,6 +1860,60 @@ indices.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>str</dt><dd><p>A string representing the classification of the ring.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bonafide.utils.helper_functions_chemistry.get_symmetric_atom_sites">
+<span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">get_symmetric_atom_sites</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_chirality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_isotopes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_atom_maps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_chiral_presence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consider_resonance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_ALLOW_CHARGE_SEPARATION</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_ALLOW_INCOMPLETE_OCTETS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_KEKULE_ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_UNCONSTRAINED_ANIONS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_UNCONSTRAINED_CATIONS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#get_symmetric_atom_sites"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry.get_symmetric_atom_sites" title="Link to this definition">¶</a></dt>
+<dd><p>Find out which atoms in a molecule are symmetric to each other.</p>
+<p>This is achieved by ranking the atoms based on their canonical ranks (symmetry) and then, if
+requested, by considering resonance forms of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">Chem.rdchem.Mol</span></dt><dd><p>An RDKit molecule object.</p>
+</dd>
+<dt><strong>include_chirality</strong><span class="classifier">bool</span></dt><dd><p>Whether to include the chiral tag of the atoms when ranking the atoms based on their
+canonical ranks.</p>
+</dd>
+<dt><strong>include_isotopes</strong><span class="classifier">bool</span></dt><dd><p>Whether to include the isotope information of the atoms when ranking the atoms based on
+their canonical ranks.</p>
+</dd>
+<dt><strong>include_atom_maps</strong><span class="classifier">bool</span></dt><dd><p>Whether to include the atom map numbers of the atoms when ranking the atoms based on their
+canonical ranks.</p>
+</dd>
+<dt><strong>include_chiral_presence</strong><span class="classifier">bool</span></dt><dd><p>Whether to include the presence of chiral centers in the molecule when ranking the atoms based
+on their canonical ranks.</p>
+</dd>
+<dt><strong>consider_resonance</strong><span class="classifier">bool</span></dt><dd><p>Whether to consider resonance forms of the molecule when finding out which atoms are
+symmetric to each other.</p>
+</dd>
+<dt><strong>resonance_ALLOW_CHARGE_SEPARATION</strong><span class="classifier">bool</span></dt><dd><p>Whether to allow resonance forms with charge separation when considering resonance forms of
+the molecule. This does only apply if <code class="docutils literal notranslate"><span class="pre">consider_resonance</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>resonance_ALLOW_INCOMPLETE_OCTETS</strong><span class="classifier">bool</span></dt><dd><p>Whether to allow resonance forms with incomplete octets when considering resonance forms of
+the molecule. This does only apply if <code class="docutils literal notranslate"><span class="pre">consider_resonance</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>resonance_KEKULE_ALL</strong><span class="classifier">bool</span></dt><dd><p>Whether to generate all possible Kekule resonance forms when considering resonance forms of
+the molecule. This does only apply if <code class="docutils literal notranslate"><span class="pre">consider_resonance</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>resonance_UNCONSTRAINED_ANIONS</strong><span class="classifier">bool</span></dt><dd><p>Whether to allow unconstrained anions when considering resonance forms of the molecule.
+This does only apply if <code class="docutils literal notranslate"><span class="pre">consider_resonance</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>resonance_UNCONSTRAINED_CATIONS</strong><span class="classifier">bool</span></dt><dd><p>Whether to allow unconstrained cations when considering resonance forms of the molecule.
+This does only apply if <code class="docutils literal notranslate"><span class="pre">consider_resonance</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Dict[int, List[int]]</dt><dd><p>A dictionary in which the keys are the lowest atom indices from each symmetry-equivalent
+group, used to represent the full symmetry information of the molecule, and the values are
+lists of atom indices that are symmetric to each other (including the key index itself).</p>
 </dd>
 </dl>
 </dd>
@@ -2150,7 +2272,7 @@ SMARTS pattern.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide.utils.input_validation.</span></span><span class="sig-name descname"><span class="pre">ValidateBonafideSymmetry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_to_canonical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeChirality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeIsotopes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeAtomMaps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeChiralPresence</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/input_validation.html#ValidateBonafideSymmetry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide.utils.input_validation.</span></span><span class="sig-name descname"><span class="pre">ValidateBonafideSymmetry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_to_canonical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeChirality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeIsotopes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeAtomMaps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeChiralPresence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consider_resonance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_ALLOW_CHARGE_SEPARATION</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_ALLOW_INCOMPLETE_OCTETS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_KEKULE_ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_UNCONSTRAINED_ANIONS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resonance_UNCONSTRAINED_CATIONS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/input_validation.html#ValidateBonafideSymmetry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Validate the configuration settings for the symmetry feature.</p>
 <p>For further details, please refer to the RDKit documentation
@@ -2170,12 +2292,33 @@ canonical rank atom list.</p>
 </dd>
 <dt><strong>includeChiralPresence</strong><span class="classifier">StrictBool</span></dt><dd><p>Whether to include the presence of chiral centers when calculating the symmetry feature.</p>
 </dd>
+<dt><strong>consider_resonance</strong><span class="classifier">StrictBool</span></dt><dd><p>Whether to consider resonance forms of the molecule when finding out which atoms are
+symmetric to each other.</p>
+</dd>
+<dt><strong>resonance_ALLOW_CHARGE_SEPARATION</strong><span class="classifier">StrictBool</span></dt><dd><p>Whether to allow resonance forms with charge separation when considering resonance forms of
+the molecule.</p>
+</dd>
+<dt><strong>resonance_ALLOW_INCOMPLETE_OCTETS</strong><span class="classifier">StrictBool</span></dt><dd><p>Whether to allow resonance forms with incomplete octets when considering resonance forms of
+the molecule.</p>
+</dd>
+<dt><strong>resonance_KEKULE_ALL</strong><span class="classifier">StrictBool</span></dt><dd><p>Whether to generate all possible Kekule resonance forms when considering resonance forms of
+the molecule.</p>
+</dd>
+<dt><strong>resonance_UNCONSTRAINED_ANIONS</strong><span class="classifier">StrictBool</span></dt><dd><p>Whether to allow unconstrained anions when considering resonance forms of the molecule.</p>
+</dd>
+<dt><strong>resonance_UNCONSTRAINED_CATIONS</strong><span class="classifier">StrictBool</span></dt><dd><p>Whether to allow unconstrained cations when considering resonance forms of the molecule.</p>
+</dd>
 </dl>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry._abc_impl">
 <span class="sig-name descname"><span class="pre">_abc_impl</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry.consider_resonance">
+<span class="sig-name descname"><span class="pre">consider_resonance</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.consider_resonance" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2207,6 +2350,31 @@ canonical rank atom list.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry.reduce_to_canonical">
 <span class="sig-name descname"><span class="pre">reduce_to_canonical</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.reduce_to_canonical" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_ALLOW_CHARGE_SEPARATION">
+<span class="sig-name descname"><span class="pre">resonance_ALLOW_CHARGE_SEPARATION</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_ALLOW_CHARGE_SEPARATION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_ALLOW_INCOMPLETE_OCTETS">
+<span class="sig-name descname"><span class="pre">resonance_ALLOW_INCOMPLETE_OCTETS</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_ALLOW_INCOMPLETE_OCTETS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_KEKULE_ALL">
+<span class="sig-name descname"><span class="pre">resonance_KEKULE_ALL</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_KEKULE_ALL" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_UNCONSTRAINED_ANIONS">
+<span class="sig-name descname"><span class="pre">resonance_UNCONSTRAINED_ANIONS</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_UNCONSTRAINED_ANIONS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_UNCONSTRAINED_CATIONS">
+<span class="sig-name descname"><span class="pre">resonance_UNCONSTRAINED_CATIONS</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_UNCONSTRAINED_CATIONS" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -4390,7 +4558,7 @@ accessed on 05.09.2025).</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidatePsi4">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide.utils.input_validation.</span></span><span class="sig-name descname"><span class="pre">ValidatePsi4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solvent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solvent_model_solver</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/input_validation.html#ValidatePsi4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.input_validation.ValidatePsi4" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide.utils.input_validation.</span></span><span class="sig-name descname"><span class="pre">ValidatePsi4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">PSI_SCRATCH</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/tmp/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CLEAN_SCRATCH_AFTER_CALCULATION</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solvent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solvent_model_solver</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/input_validation.html#ValidatePsi4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.input_validation.ValidatePsi4" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#bonafide.utils.input_validation._StandardizeStrMixin" title="bonafide.utils.input_validation._StandardizeStrMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">_StandardizeStrMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Validate the configuration settings for Psi4.</p>
 <p>For further details, please refer to the Psi4 documentation
@@ -4398,15 +4566,19 @@ accessed on 05.09.2025).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>method</strong><span class="classifier">StrictStr</span></dt><dd><p>The quantum chemistry method.</p>
-</dd>
 <dt><strong>basis</strong><span class="classifier">str</span></dt><dd><p>The basis set.</p>
 </dd>
-<dt><strong>maxiter</strong><span class="classifier">int</span></dt><dd><p>The maximum number of SCF iterations.</p>
+<dt><strong>CLEAN_SCRATCH_AFTER_CALCULATION</strong><span class="classifier">StrictBool</span></dt><dd><p>Whether to clean the scratch directory after the calculation.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">StrictStr</span></dt><dd><p>The quantum chemistry method.</p>
 </dd>
 <dt><strong>memory</strong><span class="classifier">str</span></dt><dd><p>The amount of memory, e.g., “2 gb”.</p>
 </dd>
+<dt><strong>maxiter</strong><span class="classifier">int</span></dt><dd><p>The maximum number of SCF iterations.</p>
+</dd>
 <dt><strong>num_threads</strong><span class="classifier">int</span></dt><dd><p>The number of threads.</p>
+</dd>
+<dt><strong>PSI_SCRATCH</strong><span class="classifier">StrictStr</span></dt><dd><p>The path to the scratch base directory for Psi4 calculations.</p>
 </dd>
 <dt><strong>solvent</strong><span class="classifier">str</span></dt><dd><p>The name of the solvent.</p>
 </dd>
@@ -4415,6 +4587,16 @@ accessed on 05.09.2025).</p>
 </dl>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidatePsi4.CLEAN_SCRATCH_AFTER_CALCULATION">
+<span class="sig-name descname"><span class="pre">CLEAN_SCRATCH_AFTER_CALCULATION</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidatePsi4.CLEAN_SCRATCH_AFTER_CALCULATION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidatePsi4.PSI_SCRATCH">
+<span class="sig-name descname"><span class="pre">PSI_SCRATCH</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidatePsi4.PSI_SCRATCH" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="bonafide.utils.input_validation.ValidatePsi4._abc_impl">
 <span class="sig-name descname"><span class="pre">_abc_impl</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#bonafide.utils.input_validation.ValidatePsi4._abc_impl" title="Link to this definition">¶</a></dt>
@@ -4856,18 +5038,18 @@ accessed on 05.09.2025).</p>
 <dd><p>Validate <code class="docutils literal notranslate"><span class="pre">XTBHOME</span></code>.</p>
 <p>If set to “auto”, the path is determined automatically by pointing to /share/xtb
 in the xtb installation directory. If the user-provided path does not exist, the
-automatically generated path is used.</p>
+automatically generated path is used. If set to <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>value</strong><span class="classifier">str</span></dt><dd><p>The value to be validated.</p>
+<dt><strong>value</strong><span class="classifier">Optional[str]</span></dt><dd><p>The value to be validated.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>str</dt><dd><p>The validated XTB home path, either the user-provided path or the automatically
-generated one.</p>
+<dt>Optional[str]</dt><dd><p>The validated XTB home path, either the user-provided path, the automatically
+generated one, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 </dl>
 </dd>
@@ -4886,7 +5068,7 @@ generated one.</p>
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">standardize_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/input_validation.html#_StandardizeStrMixin.standardize_strings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.input_validation._StandardizeStrMixin.standardize_strings" title="Link to this definition">¶</a></dt>
 <dd><p>Standardize string inputs by stripping whitespace and converting to lowercase.</p>
 <p>If the value is not a string or the field name is in a predefined blacklist, it is returned
-as is.</p>
+as is (with whitespaces stripped if it is a string).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -5862,6 +6044,8 @@ all weights will be set to <code class="docutils literal notranslate"><span clas
 </dd>
 <dt><strong>charge</strong><span class="classifier">int</span></dt><dd><p>The total charge of the molecule.</p>
 </dd>
+<dt><strong>CLEAN_SCRATCH_AFTER_CALCULATION</strong><span class="classifier">bool</span></dt><dd><p>Whether to clean the scratch directory after the calculation.</p>
+</dd>
 <dt><strong>conformer_name</strong><span class="classifier">str</span></dt><dd><p>The name of the conformer for which the electronic structure is calculated.</p>
 </dd>
 <dt><strong>coordinates</strong><span class="classifier">NDArray[np.float64]</span></dt><dd><p>The cartesian coordinates of the conformer.</p>
@@ -5880,15 +6064,27 @@ all weights will be set to <code class="docutils literal notranslate"><span clas
 </dd>
 <dt><strong>num_threads</strong><span class="classifier">int</span></dt><dd><p>The number of threads to be used in the calculation.</p>
 </dd>
-<dt><strong>state</strong><span class="classifier">str</span></dt><dd><p>The redox state of the molecule, either “n”, “n+1”, or “n-1”.</p>
+<dt><strong>PSI_SCRATCH</strong><span class="classifier">str</span></dt><dd><p>The path to the scratch base directory for Psi4 calculations.</p>
 </dd>
 <dt><strong>solvent</strong><span class="classifier">str</span></dt><dd><p>The solvent to be used in the calculation.</p>
 </dd>
 <dt><strong>solvent_model_solver</strong><span class="classifier">str</span></dt><dd><p>The solver to be used for the solvent model in the calculation.</p>
 </dd>
+<dt><strong>state</strong><span class="classifier">str</span></dt><dd><p>The redox state of the molecule, either “n”, “n+1”, or “n-1”.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.sp_psi4.Psi4SP.CLEAN_SCRATCH_AFTER_CALCULATION">
+<span class="sig-name descname"><span class="pre">CLEAN_SCRATCH_AFTER_CALCULATION</span></span><a class="headerlink" href="#bonafide.utils.sp_psi4.Psi4SP.CLEAN_SCRATCH_AFTER_CALCULATION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bonafide.utils.sp_psi4.Psi4SP.PSI_SCRATCH">
+<span class="sig-name descname"><span class="pre">PSI_SCRATCH</span></span><a class="headerlink" href="#bonafide.utils.sp_psi4.Psi4SP.PSI_SCRATCH" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide.utils.sp_psi4.Psi4SP._get_solvent_input_string">
 <span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">_get_solvent_input_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solvent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/sp_psi4.html#Psi4SP._get_solvent_input_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.sp_psi4.Psi4SP._get_solvent_input_string" title="Link to this definition">¶</a></dt>
@@ -5932,6 +6128,20 @@ all weights will be set to <code class="docutils literal notranslate"><span clas
 <dd class="field-even"><dl class="simple">
 <dt>str</dt><dd><p>A string formatted for Psi4 XYZ input.</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.utils.sp_psi4.Psi4SP._run_clean_up">
+<span class="sig-name descname"><span class="pre">_run_clean_up</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/sp_psi4.html#Psi4SP._run_clean_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.sp_psi4.Psi4SP._run_clean_up" title="Link to this definition">¶</a></dt>
+<dd><p>Remove temporary files from the current working directory and the scratch directory
+after the calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -6151,7 +6361,7 @@ generated.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 14, 2026</div>
+              Last updated on Apr 30, 2026</div>
           </div>
           <div class="right-details">
             
@@ -6302,7 +6512,10 @@ generated.</p>
 </li>
 <li><a class="reference internal" href="#module-bonafide.utils.helper_functions_chemistry">bonafide.utils.helper_functions_chemistry</a><ul>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._check_renumbering_list"><code class="docutils literal notranslate"><span class="pre">_check_renumbering_list()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._get_is_meso"><code class="docutils literal notranslate"><span class="pre">_get_is_meso()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._get_renumbering_list"><code class="docutils literal notranslate"><span class="pre">_get_renumbering_list()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_enumeration"><code class="docutils literal notranslate"><span class="pre">_get_resonance_symmetries_by_enumeration()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_substructure"><code class="docutils literal notranslate"><span class="pre">_get_resonance_symmetries_by_substructure()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._set_atom_bond_properties"><code class="docutils literal notranslate"><span class="pre">_set_atom_bond_properties()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._transfer_atom_bond_properties"><code class="docutils literal notranslate"><span class="pre">_transfer_atom_bond_properties()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.bind_smiles_with_xyz"><code class="docutils literal notranslate"><span class="pre">bind_smiles_with_xyz()</span></code></a></li>
@@ -6311,6 +6524,7 @@ generated.</p>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.get_charge_from_mol_object"><code class="docutils literal notranslate"><span class="pre">get_charge_from_mol_object()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.get_molecular_formula"><code class="docutils literal notranslate"><span class="pre">get_molecular_formula()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.get_ring_classification"><code class="docutils literal notranslate"><span class="pre">get_ring_classification()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.get_symmetric_atom_sites"><code class="docutils literal notranslate"><span class="pre">get_symmetric_atom_sites()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-bonafide.utils.helper_functions_output">bonafide.utils.helper_functions_output</a><ul>
@@ -6365,12 +6579,18 @@ generated.</p>
 </li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry</span></code></a><ul>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry._abc_impl"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.consider_resonance"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.consider_resonance</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.includeAtomMaps"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.includeAtomMaps</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.includeChiralPresence"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.includeChiralPresence</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.includeChirality"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.includeChirality</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.includeIsotopes"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.includeIsotopes</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.model_config"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.model_config</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.reduce_to_canonical"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.reduce_to_canonical</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_ALLOW_CHARGE_SEPARATION"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.resonance_ALLOW_CHARGE_SEPARATION</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_ALLOW_INCOMPLETE_OCTETS"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.resonance_ALLOW_INCOMPLETE_OCTETS</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_KEKULE_ALL"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.resonance_KEKULE_ALL</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_UNCONSTRAINED_ANIONS"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.resonance_UNCONSTRAINED_ANIONS</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateBonafideSymmetry.resonance_UNCONSTRAINED_CATIONS"><code class="docutils literal notranslate"><span class="pre">ValidateBonafideSymmetry.resonance_UNCONSTRAINED_CATIONS</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidateDbstep"><code class="docutils literal notranslate"><span class="pre">ValidateDbstep</span></code></a><ul>
@@ -6649,6 +6869,8 @@ generated.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidatePsi4"><code class="docutils literal notranslate"><span class="pre">ValidatePsi4</span></code></a><ul>
+<li><a class="reference internal" href="#bonafide.utils.input_validation.ValidatePsi4.CLEAN_SCRATCH_AFTER_CALCULATION"><code class="docutils literal notranslate"><span class="pre">ValidatePsi4.CLEAN_SCRATCH_AFTER_CALCULATION</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.input_validation.ValidatePsi4.PSI_SCRATCH"><code class="docutils literal notranslate"><span class="pre">ValidatePsi4.PSI_SCRATCH</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidatePsi4._abc_impl"><code class="docutils literal notranslate"><span class="pre">ValidatePsi4._abc_impl</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidatePsi4.basis"><code class="docutils literal notranslate"><span class="pre">ValidatePsi4.basis</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.input_validation.ValidatePsi4.maxiter"><code class="docutils literal notranslate"><span class="pre">ValidatePsi4.maxiter</span></code></a></li>
@@ -6775,8 +6997,11 @@ generated.</p>
 </li>
 <li><a class="reference internal" href="#module-bonafide.utils.sp_psi4">bonafide.utils.sp_psi4</a><ul>
 <li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP"><code class="docutils literal notranslate"><span class="pre">Psi4SP</span></code></a><ul>
+<li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP.CLEAN_SCRATCH_AFTER_CALCULATION"><code class="docutils literal notranslate"><span class="pre">Psi4SP.CLEAN_SCRATCH_AFTER_CALCULATION</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP.PSI_SCRATCH"><code class="docutils literal notranslate"><span class="pre">Psi4SP.PSI_SCRATCH</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP._get_solvent_input_string"><code class="docutils literal notranslate"><span class="pre">Psi4SP._get_solvent_input_string()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP._get_structure_input_string"><code class="docutils literal notranslate"><span class="pre">Psi4SP._get_structure_input_string()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP._run_clean_up"><code class="docutils literal notranslate"><span class="pre">Psi4SP._run_clean_up()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP.basis"><code class="docutils literal notranslate"><span class="pre">Psi4SP.basis</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP.calculate"><code class="docutils literal notranslate"><span class="pre">Psi4SP.calculate()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.sp_psi4.Psi4SP.maxiter"><code class="docutils literal notranslate"><span class="pre">Psi4SP.maxiter</span></code></a></li>
@@ -6814,7 +7039,7 @@ generated.</p>
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=360bc84d"></script>
+    <script src="_static/documentation_options.js?v=938c9ccc"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

@@ -280,6 +280,8 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">psi4</span>
@@ -309,6 +311,8 @@
 <span class="sd">        The basis set to be used in the calculation.</span>
 <span class="sd">    charge : int</span>
 <span class="sd">        The total charge of the molecule.</span>
+<span class="sd">    CLEAN_SCRATCH_AFTER_CALCULATION : bool</span>
+<span class="sd">        Whether to clean the scratch directory after the calculation.</span>
 <span class="sd">    conformer_name : str</span>
 <span class="sd">        The name of the conformer for which the electronic structure is calculated.</span>
 <span class="sd">    coordinates : NDArray[np.float64]</span>
@@ -327,14 +331,18 @@
 <span class="sd">        The spin multiplicity of the molecule.</span>
 <span class="sd">    num_threads : int</span>
 <span class="sd">        The number of threads to be used in the calculation.</span>
-<span class="sd">    state : str</span>
-<span class="sd">        The redox state of the molecule, either &quot;n&quot;, &quot;n+1&quot;, or &quot;n-1&quot;.</span>
+<span class="sd">    PSI_SCRATCH : str</span>
+<span class="sd">        The path to the scratch base directory for Psi4 calculations.</span>
 <span class="sd">    solvent : str</span>
 <span class="sd">        The solvent to be used in the calculation.</span>
 <span class="sd">    solvent_model_solver : str</span>
 <span class="sd">        The solver to be used for the solvent model in the calculation.</span>
+<span class="sd">    state : str</span>
+<span class="sd">        The redox state of the molecule, either &quot;n&quot;, &quot;n+1&quot;, or &quot;n-1&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">PSI_SCRATCH</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">CLEAN_SCRATCH_AFTER_CALCULATION</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="n">memory</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">num_threads</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">basis</span><span class="p">:</span> <span class="nb">str</span>
@@ -383,52 +391,96 @@
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">_psi4_loggers</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
 
-        <span class="c1"># Set up calculation parameters</span>
-        <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">set_output_file</span><span class="p">(</span><span class="n">ofname</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_out_file_name</span><span class="si">}</span><span class="s2">.out&quot;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">psi4</span><span class="o">.</span><span class="n">set_memory</span><span class="p">(</span><span class="n">inputval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">)</span>
-        <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_threads</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Set scratch directory</span>
+            <span class="n">scratch_folder_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;bonafide-psi4-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conformer_name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_job_scratch</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PSI_SCRATCH</span><span class="p">,</span> <span class="n">scratch_folder_name</span><span class="p">)</span>
 
-        <span class="c1"># Initialize psi4 molecule</span>
-        <span class="n">molecule</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">geom</span><span class="o">=</span><span class="n">structure_input_string</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_scratch</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scratch directory creation at &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_scratch</span><span class="si">}</span><span class="s2">&#39; failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="c1"># Decide if calculation should be restricted or unrestricted</span>
-        <span class="n">ref</span> <span class="o">=</span> <span class="s2">&quot;uhf&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;rhf&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_scratch</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">W_OK</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scratch directory at &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_scratch</span><span class="si">}</span><span class="s2">&#39; is not writable.&quot;</span><span class="p">)</span>
 
-        <span class="c1"># Set options</span>
-        <span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span>
-            <span class="n">options_dict</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="n">ref</span><span class="p">,</span>
-                <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">,</span>
-                <span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxiter</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
+            <span class="n">psi4_io</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">IOManager</span><span class="o">.</span><span class="n">shared_object</span><span class="p">()</span>
+            <span class="n">_previous_scratch</span> <span class="o">=</span> <span class="n">psi4_io</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">()</span>
+            <span class="n">psi4_io</span><span class="o">.</span><span class="n">set_default_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_job_scratch</span><span class="p">)</span>
 
-        <span class="c1"># Handle solvent model</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvent</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
-            <span class="n">solvent_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_solvent_input_string</span><span class="p">(</span>
-                <span class="n">solvent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solvent</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solvent_model_solver</span>
-            <span class="p">)</span>
+            <span class="c1"># Set up calculation parameters</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">set_output_file</span><span class="p">(</span><span class="n">ofname</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_out_file_name</span><span class="si">}</span><span class="s2">.out&quot;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">set_memory</span><span class="p">(</span><span class="n">inputval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">)</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_threads</span><span class="p">)</span>
+
+            <span class="c1"># Initialize psi4 molecule</span>
+            <span class="n">molecule</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">geom</span><span class="o">=</span><span class="n">structure_input_string</span><span class="p">)</span>
+
+            <span class="c1"># Decide if calculation should be restricted or unrestricted</span>
+            <span class="n">ref</span> <span class="o">=</span> <span class="s2">&quot;uhf&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicity</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;rhf&quot;</span>
+
+            <span class="c1"># Set options</span>
             <span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span>
-                <span class="n">options_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pcm&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;pcm_scf_type&quot;</span><span class="p">:</span> <span class="s2">&quot;total&quot;</span><span class="p">,</span> <span class="s2">&quot;pcm__input&quot;</span><span class="p">:</span> <span class="n">solvent_string</span><span class="p">}</span>
+                <span class="n">options_dict</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="n">ref</span><span class="p">,</span>
+                    <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">,</span>
+                    <span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxiter</span><span class="p">,</span>
+                <span class="p">}</span>
             <span class="p">)</span>
 
-        <span class="c1"># Run calculation</span>
-        <span class="n">energy</span><span class="p">,</span> <span class="n">wfn</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">return_wfn</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span> <span class="o">*</span> <span class="n">EH_TO_KJ_MOL</span>
+            <span class="c1"># Handle solvent model</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvent</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+                <span class="n">solvent_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_solvent_input_string</span><span class="p">(</span>
+                    <span class="n">solvent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solvent</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solvent_model_solver</span>
+                <span class="p">)</span>
+                <span class="n">psi4</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span>
+                    <span class="n">options_dict</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;pcm&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;pcm_scf_type&quot;</span><span class="p">:</span> <span class="s2">&quot;total&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;pcm__input&quot;</span><span class="p">:</span> <span class="n">solvent_string</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
 
-        <span class="c1"># Get molden file</span>
-        <span class="k">if</span> <span class="n">write_el_struc_file</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">molden_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_out_file_name</span><span class="si">}</span><span class="s2">.molden&quot;</span>
-            <span class="p">)</span>
-            <span class="n">wfn</span><span class="o">.</span><span class="n">write_molden</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_out_file_name</span><span class="si">}</span><span class="s2">.molden&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">molden_file_path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="c1"># Run calculation</span>
+            <span class="n">energy</span><span class="p">,</span> <span class="n">wfn</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">return_wfn</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span> <span class="o">*</span> <span class="n">EH_TO_KJ_MOL</span>
 
-        <span class="c1"># Remove .clean file(s)</span>
-        <span class="n">clean_up</span><span class="p">(</span><span class="n">to_be_removed</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*.clean&quot;</span><span class="p">,</span> <span class="s2">&quot;*.npz&quot;</span><span class="p">,</span> <span class="s2">&quot;PEDRA.OUT__*&quot;</span><span class="p">,</span> <span class="s2">&quot;cavity.off__*&quot;</span><span class="p">])</span>
+            <span class="c1"># Get molden file</span>
+            <span class="k">if</span> <span class="n">write_el_struc_file</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">molden_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_out_file_name</span><span class="si">}</span><span class="s2">.molden&quot;</span>
+                <span class="p">)</span>
+                <span class="n">wfn</span><span class="o">.</span><span class="n">write_molden</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_out_file_name</span><span class="si">}</span><span class="s2">.molden&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">molden_file_path</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="n">molden_file_path</span></div>
+            <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="n">molden_file_path</span>
+
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">psi4_io</span> <span class="o">=</span> <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">IOManager</span><span class="o">.</span><span class="n">shared_object</span><span class="p">()</span>
+            <span class="n">psi4_io</span><span class="o">.</span><span class="n">set_default_path</span><span class="p">(</span><span class="n">_previous_scratch</span><span class="p">)</span>
+            <span class="n">psi4</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">clean_options</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_run_clean_up</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Psi4SP._run_clean_up">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.sp_psi4.Psi4SP._run_clean_up">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run_clean_up</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove temporary files from the current working directory and the scratch directory</span>
+<span class="sd">        after the calculation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Remove job-specific scratch directory if requested</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CLEAN_SCRATCH_AFTER_CALCULATION</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">scratch</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_job_scratch&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">scratch</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">scratch</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Remove .clean file(s) and others from the current working directory</span>
+        <span class="n">clean_up</span><span class="p">(</span><span class="n">to_be_removed</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*.clean&quot;</span><span class="p">,</span> <span class="s2">&quot;*.npz&quot;</span><span class="p">,</span> <span class="s2">&quot;PEDRA.OUT__*&quot;</span><span class="p">,</span> <span class="s2">&quot;cavity.off__*&quot;</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="Psi4SP._get_structure_input_string">
@@ -515,7 +567,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 14, 2026</div>
+              Last updated on Apr 30, 2026</div>
           </div>
           <div class="right-details">
             
@@ -532,7 +584,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=360bc84d"></script>
+    <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

@@ -350,7 +350,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Standardize string inputs by stripping whitespace and converting to lowercase.</span>
 
 <span class="sd">        If the value is not a string or the field name is in a predefined blacklist, it is returned</span>
-<span class="sd">        as is.</span>
+<span class="sd">        as is (with whitespaces stripped if it is a string).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -364,10 +364,11 @@
 <span class="sd">        Any</span>
 <span class="sd">            The standardized value if it is a string, otherwise the original value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">_black_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;XTBHOME&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">field_name</span> <span class="ow">in</span> <span class="n">_black_list</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">value</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">_black_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;XTBHOME&quot;</span><span class="p">,</span> <span class="s2">&quot;PSI_SCRATCH&quot;</span><span class="p">]</span>
+        <span class="n">_dtype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">field_name</span> <span class="ow">in</span> <span class="n">_black_list</span> <span class="ow">and</span> <span class="n">_dtype</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">_dtype</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">value</span></div>
 </div>
@@ -716,13 +717,35 @@
 <span class="sd">        Whether to include atom mapping numbers when calculating the symmetry feature.</span>
 <span class="sd">    includeChiralPresence : StrictBool</span>
 <span class="sd">        Whether to include the presence of chiral centers when calculating the symmetry feature.</span>
+<span class="sd">    consider_resonance : StrictBool</span>
+<span class="sd">        Whether to consider resonance forms of the molecule when finding out which atoms are</span>
+<span class="sd">        symmetric to each other.</span>
+<span class="sd">    resonance_ALLOW_CHARGE_SEPARATION : StrictBool</span>
+<span class="sd">        Whether to allow resonance forms with charge separation when considering resonance forms of</span>
+<span class="sd">        the molecule.</span>
+<span class="sd">    resonance_ALLOW_INCOMPLETE_OCTETS : StrictBool</span>
+<span class="sd">        Whether to allow resonance forms with incomplete octets when considering resonance forms of</span>
+<span class="sd">        the molecule.</span>
+<span class="sd">    resonance_KEKULE_ALL : StrictBool</span>
+<span class="sd">        Whether to generate all possible Kekule resonance forms when considering resonance forms of</span>
+<span class="sd">        the molecule.</span>
+<span class="sd">    resonance_UNCONSTRAINED_ANIONS : StrictBool</span>
+<span class="sd">        Whether to allow unconstrained anions when considering resonance forms of the molecule.</span>
+<span class="sd">    resonance_UNCONSTRAINED_CATIONS : StrictBool</span>
+<span class="sd">        Whether to allow unconstrained cations when considering resonance forms of the molecule.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">reduce_to_canonical</span><span class="p">:</span> <span class="n">StrictBool</span>
     <span class="n">includeChirality</span><span class="p">:</span> <span class="n">StrictBool</span>
     <span class="n">includeIsotopes</span><span class="p">:</span> <span class="n">StrictBool</span>
     <span class="n">includeAtomMaps</span><span class="p">:</span> <span class="n">StrictBool</span>
-    <span class="n">includeChiralPresence</span><span class="p">:</span> <span class="n">StrictBool</span></div>
+    <span class="n">includeChiralPresence</span><span class="p">:</span> <span class="n">StrictBool</span>
+    <span class="n">consider_resonance</span><span class="p">:</span> <span class="n">StrictBool</span>
+    <span class="n">resonance_ALLOW_CHARGE_SEPARATION</span><span class="p">:</span> <span class="n">StrictBool</span>
+    <span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span><span class="p">:</span> <span class="n">StrictBool</span>
+    <span class="n">resonance_KEKULE_ALL</span><span class="p">:</span> <span class="n">StrictBool</span>
+    <span class="n">resonance_UNCONSTRAINED_ANIONS</span><span class="p">:</span> <span class="n">StrictBool</span>
+    <span class="n">resonance_UNCONSTRAINED_CATIONS</span><span class="p">:</span> <span class="n">StrictBool</span></div>
 
 
 
@@ -2375,22 +2398,28 @@
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    method : StrictStr</span>
-<span class="sd">        The quantum chemistry method.</span>
 <span class="sd">    basis : str</span>
 <span class="sd">        The basis set.</span>
-<span class="sd">    maxiter : int</span>
-<span class="sd">        The maximum number of SCF iterations.</span>
+<span class="sd">    CLEAN_SCRATCH_AFTER_CALCULATION : StrictBool</span>
+<span class="sd">        Whether to clean the scratch directory after the calculation.</span>
+<span class="sd">    method : StrictStr</span>
+<span class="sd">        The quantum chemistry method.</span>
 <span class="sd">    memory : str</span>
 <span class="sd">        The amount of memory, e.g., &quot;2 gb&quot;.</span>
+<span class="sd">    maxiter : int</span>
+<span class="sd">        The maximum number of SCF iterations.</span>
 <span class="sd">    num_threads : int</span>
 <span class="sd">        The number of threads.</span>
+<span class="sd">    PSI_SCRATCH : StrictStr</span>
+<span class="sd">        The path to the scratch base directory for Psi4 calculations.</span>
 <span class="sd">    solvent : str</span>
 <span class="sd">        The name of the solvent.</span>
 <span class="sd">    solvent_model_solver : str</span>
 <span class="sd">        The name of the solver for the solvent model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">PSI_SCRATCH</span><span class="p">:</span> <span class="n">StrictStr</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;/tmp/&quot;</span><span class="p">)</span>
+    <span class="n">CLEAN_SCRATCH_AFTER_CALCULATION</span><span class="p">:</span> <span class="n">StrictBool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">method</span><span class="p">:</span> <span class="n">StrictStr</span>
     <span class="n">basis</span><span class="p">:</span> <span class="n">StrictStr</span>
     <span class="n">maxiter</span><span class="p">:</span> <span class="n">StrictInt</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -2617,33 +2646,50 @@
 <a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.input_validation.ValidateXtb.validate_xtb_home">[docs]</a>
     <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;XTBHOME&quot;</span><span class="p">)</span>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_xtb_home</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_xtb_home</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate ``XTBHOME``.</span>
 
 <span class="sd">        If set to &quot;auto&quot;, the path is determined automatically by pointing to /share/xtb</span>
 <span class="sd">        in the xtb installation directory. If the user-provided path does not exist, the</span>
-<span class="sd">        automatically generated path is used.</span>
+<span class="sd">        automatically generated path is used. If set to ``None``, ``None`` is returned.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        value : str</span>
+<span class="sd">        value : Optional[str]</span>
 <span class="sd">            The value to be validated.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        str</span>
-<span class="sd">            The validated XTB home path, either the user-provided path or the automatically</span>
-<span class="sd">            generated one.</span>
+<span class="sd">        Optional[str]</span>
+<span class="sd">            The validated XTB home path, either the user-provided path, the automatically</span>
+<span class="sd">            generated one, or ``None``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">_val</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">_auto_value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;xtb&quot;</span><span class="p">))))),</span> <span class="s2">&quot;share&quot;</span><span class="p">,</span> <span class="s2">&quot;xtb&quot;</span>
-        <span class="p">)</span>
-        <span class="k">if</span> <span class="n">_val</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">_auto_value</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">_auto_value</span>
-        <span class="k">return</span> <span class="n">value</span></div>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+
+        <span class="n">_val</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">_val</span> <span class="o">!=</span> <span class="s2">&quot;auto&quot;</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+
+        <span class="n">_xtb_path</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;xtb&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_xtb_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_val</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
+                <span class="n">_errmsg</span> <span class="o">=</span> <span class="s2">&quot;XTBHOME set to &#39;auto&#39; but xtb executable not found on PATH&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;XTBHOME path &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39; does not exist and xtb executable was not &quot;</span>
+                    <span class="s2">&quot;found on PATH to derive it automatically&quot;</span>
+                <span class="p">)</span>
+            <span class="k">raise</span> <span class="n">PydanticCustomError</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">_errmsg</span><span class="p">)</span>
+
+        <span class="n">_auto_value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">_xtb_path</span><span class="p">)),</span> <span class="s2">&quot;share&quot;</span><span class="p">,</span> <span class="s2">&quot;xtb&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_auto_value</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">_errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Auto-derived XTBHOME &#39;</span><span class="si">{</span><span class="n">_auto_value</span><span class="si">}</span><span class="s2">&#39; does not exist&quot;</span>
+            <span class="k">raise</span> <span class="n">PydanticCustomError</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">_errmsg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_auto_value</span></div>
 
 
 <div class="viewcode-block" id="ValidateXtb.validate_method">
@@ -2860,7 +2906,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 14, 2026</div>
+              Last updated on Apr 30, 2026</div>
           </div>
           <div class="right-details">
             
@@ -2877,7 +2923,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=360bc84d"></script>
+    <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

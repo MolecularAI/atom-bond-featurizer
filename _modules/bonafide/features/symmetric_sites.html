@@ -280,9 +280,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
-
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.base_featurizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseFeaturizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.helper_functions_chemistry</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_symmetric_atom_sites</span>
 
 
 <div class="viewcode-block" id="Bonafide2DAtomIsSymmetricTo">
@@ -301,6 +300,12 @@
     <span class="n">includeChiralPresence</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="n">includeIsotopes</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="n">reduce_to_canonical</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">consider_resonance</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_ALLOW_CHARGE_SEPARATION</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_KEKULE_ALL</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_UNCONSTRAINED_ANIONS</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_UNCONSTRAINED_CATIONS</span><span class="p">:</span> <span class="nb">bool</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">extraction_mode</span> <span class="o">=</span> <span class="s2">&quot;multi&quot;</span>
@@ -310,27 +315,26 @@
 <a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.symmetric_sites.Bonafide2DAtomIsSymmetricTo.calculate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``bonafide2D-atom-is_symmetric_to`` feature.&quot;&quot;&quot;</span>
-        <span class="c1"># Rank the atoms based on their canonical ranks (symmetry)</span>
-        <span class="n">canonical_rank_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-            <span class="n">Chem</span><span class="o">.</span><span class="n">CanonicalRankAtoms</span><span class="p">(</span>
-                <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
-                <span class="n">breakTies</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                <span class="n">includeChirality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeChirality</span><span class="p">,</span>
-                <span class="n">includeIsotopes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeIsotopes</span><span class="p">,</span>
-                <span class="n">includeAtomMaps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeAtomMaps</span><span class="p">,</span>
-                <span class="n">includeChiralPresence</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeChiralPresence</span><span class="p">,</span>
-            <span class="p">)</span>
+        <span class="c1"># Get the symmetric atom sites</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="n">get_symmetric_atom_sites</span><span class="p">(</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="c1"># Configuration settings for Chem.CanonicalRankAtoms</span>
+            <span class="n">include_chirality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeChirality</span><span class="p">,</span>
+            <span class="n">include_isotopes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeIsotopes</span><span class="p">,</span>
+            <span class="n">include_atom_maps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeAtomMaps</span><span class="p">,</span>
+            <span class="n">include_chiral_presence</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeChiralPresence</span><span class="p">,</span>
+            <span class="c1"># Configuration settings for Chem.ResonanceMolSupplier</span>
+            <span class="n">consider_resonance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">consider_resonance</span><span class="p">,</span>
+            <span class="n">resonance_ALLOW_CHARGE_SEPARATION</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_ALLOW_CHARGE_SEPARATION</span><span class="p">,</span>
+            <span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span><span class="p">,</span>
+            <span class="n">resonance_KEKULE_ALL</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_KEKULE_ALL</span><span class="p">,</span>
+            <span class="n">resonance_UNCONSTRAINED_ANIONS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_UNCONSTRAINED_ANIONS</span><span class="p">,</span>
+            <span class="n">resonance_UNCONSTRAINED_CATIONS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_UNCONSTRAINED_CATIONS</span><span class="p">,</span>
         <span class="p">)</span>
-
-        <span class="c1"># Get dictionary of symmetry equivalent sites</span>
-        <span class="n">sites_</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">atom_idx</span><span class="p">,</span> <span class="n">rank_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">canonical_rank_list</span><span class="p">):</span>
-            <span class="n">sites_</span><span class="p">[</span><span class="n">rank_idx</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atom_idx</span><span class="p">)</span>
-        <span class="n">sites</span> <span class="o">=</span> <span class="p">{</span><span class="n">atom_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">atom_indices</span> <span class="k">for</span> <span class="n">atom_indices</span> <span class="ow">in</span> <span class="n">sites_</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
 
         <span class="c1"># Handle missing indices in initial sites dictionary</span>
         <span class="n">new_sites</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sites</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">rank_idx</span><span class="p">,</span> <span class="n">idx_list</span> <span class="ow">in</span> <span class="n">sites</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">idx_list</span> <span class="ow">in</span> <span class="n">sites</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">continue</span>
 
@@ -367,6 +371,12 @@
     <span class="n">includeChiralPresence</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="n">includeIsotopes</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="n">reduce_to_canonical</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">consider_resonance</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_ALLOW_CHARGE_SEPARATION</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_KEKULE_ALL</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_UNCONSTRAINED_ANIONS</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">resonance_UNCONSTRAINED_CATIONS</span><span class="p">:</span> <span class="nb">bool</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">extraction_mode</span> <span class="o">=</span> <span class="s2">&quot;multi&quot;</span>
@@ -376,26 +386,25 @@
 <a class="viewcode-back" href="../../../bonafide.features.html#bonafide.features.symmetric_sites.Bonafide2DBondIsSymmetricTo.calculate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the ``bonafide2D-bond-is_symmetric_to`` feature.&quot;&quot;&quot;</span>
-        <span class="c1"># Rank the atoms based on their canonical ranks (symmetry)</span>
-        <span class="n">canonical_rank_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-            <span class="n">Chem</span><span class="o">.</span><span class="n">CanonicalRankAtoms</span><span class="p">(</span>
-                <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
-                <span class="n">breakTies</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                <span class="n">includeChirality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeChirality</span><span class="p">,</span>
-                <span class="n">includeIsotopes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeIsotopes</span><span class="p">,</span>
-                <span class="n">includeAtomMaps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeAtomMaps</span><span class="p">,</span>
-                <span class="n">includeChiralPresence</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeChiralPresence</span><span class="p">,</span>
-            <span class="p">)</span>
+        <span class="c1"># Get the symmetric atom sites</span>
+        <span class="n">atom_sites</span> <span class="o">=</span> <span class="n">get_symmetric_atom_sites</span><span class="p">(</span>
+            <span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span>
+            <span class="c1"># Configuration settings for Chem.CanonicalRankAtoms</span>
+            <span class="n">include_chirality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeChirality</span><span class="p">,</span>
+            <span class="n">include_isotopes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeIsotopes</span><span class="p">,</span>
+            <span class="n">include_atom_maps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeAtomMaps</span><span class="p">,</span>
+            <span class="n">include_chiral_presence</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">includeChiralPresence</span><span class="p">,</span>
+            <span class="c1"># Configuration settings for Chem.ResonanceMolSupplier</span>
+            <span class="n">consider_resonance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">consider_resonance</span><span class="p">,</span>
+            <span class="n">resonance_ALLOW_CHARGE_SEPARATION</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_ALLOW_CHARGE_SEPARATION</span><span class="p">,</span>
+            <span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span><span class="p">,</span>
+            <span class="n">resonance_KEKULE_ALL</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_KEKULE_ALL</span><span class="p">,</span>
+            <span class="n">resonance_UNCONSTRAINED_ANIONS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_UNCONSTRAINED_ANIONS</span><span class="p">,</span>
+            <span class="n">resonance_UNCONSTRAINED_CATIONS</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_UNCONSTRAINED_CATIONS</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="c1"># Get dictionary of symmetry equivalent atom sites</span>
-        <span class="n">atom_sites_</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">atom_idx</span><span class="p">,</span> <span class="n">rank_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">canonical_rank_list</span><span class="p">):</span>
-            <span class="n">atom_sites_</span><span class="p">[</span><span class="n">rank_idx</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atom_idx</span><span class="p">)</span>
-        <span class="n">atom_sites</span> <span class="o">=</span> <span class="p">{</span><span class="n">atom_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">atom_indices</span> <span class="k">for</span> <span class="n">atom_indices</span> <span class="ow">in</span> <span class="n">atom_sites_</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
-
-        <span class="c1"># Get dictionary of symmetry equivalent bond sites defined by the atom rank indices</span>
-        <span class="c1"># of their begin and end atoms</span>
+        <span class="c1"># Get dictionary of symmetry equivalent bond sites defined by the representative atom</span>
+        <span class="c1"># indices for the symmetry groups of their begin and end atoms</span>
         <span class="n">bond_sites_</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">():</span>
             <span class="n">rank_begin_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_rank_idx</span><span class="p">(</span><span class="n">rank_dict</span><span class="o">=</span><span class="n">atom_sites</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBeginAtomIdx</span><span class="p">())</span>
@@ -411,7 +420,7 @@
 
         <span class="c1"># Handle missing indices in bond sites dictionary</span>
         <span class="n">new_sites</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bond_sites</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">rank_idx</span><span class="p">,</span> <span class="n">idx_list</span> <span class="ow">in</span> <span class="n">bond_sites</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">idx_list</span> <span class="ow">in</span> <span class="n">bond_sites</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">continue</span>
 
@@ -473,7 +482,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 14, 2026</div>
+              Last updated on Apr 30, 2026</div>
           </div>
           <div class="right-details">
             
@@ -490,7 +499,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=360bc84d"></script>
+    <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

@@ -285,7 +285,9 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">rdDetermineBonds</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">RESONANCE_SYMMETRY_FUNCTIONAL_GROUPS</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.helper_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean_up</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.io_</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_smarts</span>
 
 
 <div class="viewcode-block" id="_get_renumbering_list">
@@ -414,6 +416,142 @@
         <span class="n">_set_atom_bond_properties</span><span class="p">(</span><span class="n">source_obj</span><span class="o">=</span><span class="n">source_bond</span><span class="p">,</span> <span class="n">target_obj</span><span class="o">=</span><span class="n">target_bond</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">target_mol</span></div>
+
+
+
+<div class="viewcode-block" id="_get_is_meso">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry._get_is_meso">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_is_meso</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a molecule is meso based on its InChI information.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : Chem.rdchem.Mol</span>
+<span class="sd">        An RDKit molecule object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        ``True`` if the molecule is meso, otherwise ``False`` (also if RDKit was built without</span>
+<span class="sd">        InChI support or if the analysis fails for any reason).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># RDKit can be built/packaged without InChI support</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.MolKey.InchiInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">InchiInfo</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Do analysis</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">inchi</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToInchi</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">inchi_info</span> <span class="o">=</span> <span class="n">InchiInfo</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span>
+        <span class="n">stereo_info</span> <span class="o">=</span> <span class="n">inchi_info</span><span class="o">.</span><span class="n">get_sp3_stereo</span><span class="p">()</span>
+        <span class="n">is_meso</span> <span class="o">=</span> <span class="n">stereo_info</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">][</span><span class="s2">&quot;non-isotopic&quot;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">is_meso</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">is_meso</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">is_meso</span></div>
+
+
+
+<div class="viewcode-block" id="_get_resonance_symmetries_by_enumeration">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_enumeration">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_resonance_symmetries_by_enumeration</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">flags_enum</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">use_chirality</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate the resonance forms of a molecule and analyze them to find out which atoms are</span>
+<span class="sd">    symmetric to each other through substructure matching.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : Chem.rdchem.Mol</span>
+<span class="sd">        An RDKit molecule object.</span>
+<span class="sd">    flags_enum : int</span>
+<span class="sd">        An integer representing the combination of optional flags for</span>
+<span class="sd">        ``Chem.ResonanceMolSupplier``.</span>
+<span class="sd">    use_chirality : bool</span>
+<span class="sd">        Whether to consider chirality when doing the substructure matching of the resonance forms.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Dict[int, List[int]]</span>
+<span class="sd">        A dictionary with the atom indices as keys and lists of symmetric atom indices as values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get all resonance forms of the molecule</span>
+    <span class="n">resonances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">ResonanceMolSupplier</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">flags_enum</span><span class="p">))</span>
+
+    <span class="c1"># Compare all resonance forms with each other to identify symmetric atoms through substructure</span>
+    <span class="c1"># matching</span>
+    <span class="n">_symmetries</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx0</span><span class="p">,</span> <span class="n">res_mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">resonances</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx1</span><span class="p">,</span> <span class="n">res_mol_2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">resonances</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">idx1</span> <span class="o">&lt;=</span> <span class="n">idx0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">match_indices</span> <span class="o">=</span> <span class="n">res_mol</span><span class="o">.</span><span class="n">GetSubstructMatch</span><span class="p">(</span><span class="n">res_mol_2</span><span class="p">,</span> <span class="n">useChirality</span><span class="o">=</span><span class="n">use_chirality</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">idx_a</span><span class="p">,</span> <span class="n">idx_b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">match_indices</span><span class="p">):</span>
+                <span class="n">_symmetries</span><span class="p">[</span><span class="n">idx_a</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx_b</span><span class="p">)</span>
+                <span class="n">_symmetries</span><span class="p">[</span><span class="n">idx_b</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx_a</span><span class="p">)</span>
+
+    <span class="c1"># Add potentially missing atoms within a group of symmetric atoms and format the data</span>
+    <span class="n">symmetries</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">_symmetries</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">s_idx</span> <span class="ow">in</span> <span class="n">sym</span><span class="p">:</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_symmetries</span><span class="p">[</span><span class="n">s_idx</span><span class="p">])</span>
+
+        <span class="n">new</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">new</span><span class="p">))</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">symmetries</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
+
+    <span class="n">symmetries</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">symmetries</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">symmetries</span></div>
+
+
+
+<div class="viewcode-block" id="_get_resonance_symmetries_by_substructure">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_substructure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_resonance_symmetries_by_substructure</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identify symmetry-equivalent atoms due to resonance based on predefined functional groups.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : Chem.rdchem.Mol</span>
+<span class="sd">        An RDKit molecule object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Dict[int, List[int]]</span>
+<span class="sd">        A dictionary in which the keys are atom indices and the values are lists of atom indices</span>
+<span class="sd">        that are symmetric to the key atom due to resonance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_symmetries</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">smarts</span><span class="p">,</span> <span class="n">match_list</span> <span class="ow">in</span> <span class="n">RESONANCE_SYMMETRY_FUNCTIONAL_GROUPS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Get the SMARTS mol object</span>
+        <span class="n">smarts_mol</span><span class="p">,</span> <span class="n">error_message</span> <span class="o">=</span> <span class="n">read_smarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Do the substructure matching</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smarts_mol</span><span class="p">)</span>
+
+        <span class="c1"># Analyze the matches</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">match_tuple</span> <span class="ow">in</span> <span class="n">match_list</span><span class="p">:</span>
+                <span class="n">target_atom_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">match</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">match_tuple</span><span class="p">]</span>
+                <span class="n">target_atom_indices</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">atom_idx</span> <span class="ow">in</span> <span class="n">target_atom_indices</span><span class="p">:</span>
+                    <span class="n">_symmetries</span><span class="p">[</span><span class="n">atom_idx</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">target_atom_indices</span><span class="p">)</span>
+                    <span class="n">new</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">_symmetries</span><span class="p">[</span><span class="n">atom_idx</span><span class="p">]))</span>
+                    <span class="n">new</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                    <span class="n">_symmetries</span><span class="p">[</span><span class="n">atom_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
+
+    <span class="n">symmetries</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_symmetries</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">symmetries</span></div>
 
 
 
@@ -775,6 +913,141 @@
 
     <span class="k">return</span> <span class="n">formula_str</span></div>
 
+
+
+<div class="viewcode-block" id="get_symmetric_atom_sites">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry.get_symmetric_atom_sites">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_symmetric_atom_sites</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">include_chirality</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">include_isotopes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">include_atom_maps</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">include_chiral_presence</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">consider_resonance</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">resonance_ALLOW_CHARGE_SEPARATION</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">resonance_KEKULE_ALL</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">resonance_UNCONSTRAINED_ANIONS</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">resonance_UNCONSTRAINED_CATIONS</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find out which atoms in a molecule are symmetric to each other.</span>
+
+<span class="sd">    This is achieved by ranking the atoms based on their canonical ranks (symmetry) and then, if</span>
+<span class="sd">    requested, by considering resonance forms of the molecule.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : Chem.rdchem.Mol</span>
+<span class="sd">        An RDKit molecule object.</span>
+<span class="sd">    include_chirality : bool</span>
+<span class="sd">        Whether to include the chiral tag of the atoms when ranking the atoms based on their</span>
+<span class="sd">        canonical ranks.</span>
+<span class="sd">    include_isotopes : bool</span>
+<span class="sd">        Whether to include the isotope information of the atoms when ranking the atoms based on</span>
+<span class="sd">        their canonical ranks.</span>
+<span class="sd">    include_atom_maps : bool</span>
+<span class="sd">        Whether to include the atom map numbers of the atoms when ranking the atoms based on their</span>
+<span class="sd">        canonical ranks.</span>
+<span class="sd">    include_chiral_presence : bool</span>
+<span class="sd">        Whether to include the presence of chiral centers in the molecule when ranking the atoms based</span>
+<span class="sd">        on their canonical ranks.</span>
+<span class="sd">    consider_resonance : bool</span>
+<span class="sd">        Whether to consider resonance forms of the molecule when finding out which atoms are</span>
+<span class="sd">        symmetric to each other.</span>
+<span class="sd">    resonance_ALLOW_CHARGE_SEPARATION : bool</span>
+<span class="sd">        Whether to allow resonance forms with charge separation when considering resonance forms of</span>
+<span class="sd">        the molecule. This does only apply if ``consider_resonance`` is set to ``True``.</span>
+<span class="sd">    resonance_ALLOW_INCOMPLETE_OCTETS : bool</span>
+<span class="sd">        Whether to allow resonance forms with incomplete octets when considering resonance forms of</span>
+<span class="sd">        the molecule. This does only apply if ``consider_resonance`` is set to ``True``.</span>
+<span class="sd">    resonance_KEKULE_ALL : bool</span>
+<span class="sd">        Whether to generate all possible Kekule resonance forms when considering resonance forms of</span>
+<span class="sd">        the molecule. This does only apply if ``consider_resonance`` is set to ``True``.</span>
+<span class="sd">    resonance_UNCONSTRAINED_ANIONS : bool</span>
+<span class="sd">        Whether to allow unconstrained anions when considering resonance forms of the molecule.</span>
+<span class="sd">        This does only apply if ``consider_resonance`` is set to ``True``.</span>
+<span class="sd">    resonance_UNCONSTRAINED_CATIONS : bool</span>
+<span class="sd">        Whether to allow unconstrained cations when considering resonance forms of the molecule.</span>
+<span class="sd">        This does only apply if ``consider_resonance`` is set to ``True``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Dict[int, List[int]]</span>
+<span class="sd">        A dictionary in which the keys are the lowest atom indices from each symmetry-equivalent</span>
+<span class="sd">        group, used to represent the full symmetry information of the molecule, and the values are</span>
+<span class="sd">        lists of atom indices that are symmetric to each other (including the key index itself).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if the molecule is meso; if so, chirality is not considered</span>
+    <span class="k">if</span> <span class="n">include_chirality</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">_get_is_meso</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">include_chirality</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Rank the atoms based on their canonical ranks (symmetry)</span>
+    <span class="n">canonical_rank_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">CanonicalRankAtoms</span><span class="p">(</span>
+            <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+            <span class="n">breakTies</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">includeChirality</span><span class="o">=</span><span class="n">include_chirality</span><span class="p">,</span>
+            <span class="n">includeIsotopes</span><span class="o">=</span><span class="n">include_isotopes</span><span class="p">,</span>
+            <span class="n">includeAtomMaps</span><span class="o">=</span><span class="n">include_atom_maps</span><span class="p">,</span>
+            <span class="n">includeChiralPresence</span><span class="o">=</span><span class="n">include_chiral_presence</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get dictionary of symmetry equivalent sites</span>
+    <span class="n">canonical_sites_</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">atom_idx</span><span class="p">,</span> <span class="n">rank_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">canonical_rank_list</span><span class="p">):</span>
+        <span class="n">canonical_sites_</span><span class="p">[</span><span class="n">rank_idx</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atom_idx</span><span class="p">)</span>
+    <span class="n">canonical_sites</span> <span class="o">=</span> <span class="p">{</span><span class="n">atom_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">atom_indices</span> <span class="k">for</span> <span class="n">atom_indices</span> <span class="ow">in</span> <span class="n">canonical_sites_</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
+
+    <span class="c1"># Consider resonance if requested</span>
+    <span class="k">if</span> <span class="n">consider_resonance</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Specify options for resonance form enumeration</span>
+        <span class="n">flags_enum</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ResonanceFlags</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">resonance_ALLOW_CHARGE_SEPARATION</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">flags_enum</span> <span class="o">|=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ResonanceFlags</span><span class="o">.</span><span class="n">ALLOW_CHARGE_SEPARATION</span>
+        <span class="k">if</span> <span class="n">resonance_ALLOW_INCOMPLETE_OCTETS</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">flags_enum</span> <span class="o">|=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ResonanceFlags</span><span class="o">.</span><span class="n">ALLOW_INCOMPLETE_OCTETS</span>
+        <span class="k">if</span> <span class="n">resonance_KEKULE_ALL</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">flags_enum</span> <span class="o">|=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ResonanceFlags</span><span class="o">.</span><span class="n">KEKULE_ALL</span>
+        <span class="k">if</span> <span class="n">resonance_UNCONSTRAINED_ANIONS</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">flags_enum</span> <span class="o">|=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ResonanceFlags</span><span class="o">.</span><span class="n">UNCONSTRAINED_ANIONS</span>
+        <span class="k">if</span> <span class="n">resonance_UNCONSTRAINED_CATIONS</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">flags_enum</span> <span class="o">|=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ResonanceFlags</span><span class="o">.</span><span class="n">UNCONSTRAINED_CATIONS</span>
+        <span class="n">flags_enum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">flags_enum</span><span class="p">)</span>
+
+        <span class="c1"># Do analysis with Chem.ResonanceMolSupplier</span>
+        <span class="n">resonance_sites</span> <span class="o">=</span> <span class="n">_get_resonance_symmetries_by_enumeration</span><span class="p">(</span>
+            <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">flags_enum</span><span class="o">=</span><span class="n">flags_enum</span><span class="p">,</span> <span class="n">use_chirality</span><span class="o">=</span><span class="n">include_chirality</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Do analysis by substructure matching (cases that are not covered by</span>
+        <span class="c1"># Chem.ResonanceMolSupplier)</span>
+        <span class="n">resonance_sites2</span> <span class="o">=</span> <span class="n">_get_resonance_symmetries_by_substructure</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">)</span>
+
+        <span class="c1"># Combine the data</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">sites</span> <span class="ow">in</span> <span class="n">canonical_sites</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sites</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">sites</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">resonance_sites</span><span class="p">:</span>
+                    <span class="n">new</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">resonance_sites</span><span class="p">[</span><span class="n">site</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">resonance_sites2</span><span class="p">:</span>
+                    <span class="n">new</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">resonance_sites2</span><span class="p">[</span><span class="n">site</span><span class="p">])</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">new</span><span class="p">))</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="n">canonical_sites</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
+
+    <span class="c1"># Remove duplicates</span>
+    <span class="n">sorted_canonical_sites</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">canonical_sites</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">unique_sites</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key_idx</span><span class="p">,</span> <span class="n">atom_list</span> <span class="ow">in</span> <span class="n">sorted_canonical_sites</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">atom_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">atom_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">atom_tuple</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">unique_sites</span><span class="p">[</span><span class="n">key_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">atom_list</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atom_tuple</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">unique_sites</span></div>
+
 </pre></div>
         </article>
       </div>
@@ -793,7 +1066,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 14, 2026</div>
+              Last updated on Apr 30, 2026</div>
           </div>
           <div class="right-details">
             
@@ -810,7 +1083,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=360bc84d"></script>
+    <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

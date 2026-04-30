@@ -304,6 +304,10 @@ combined with the <a class="reference internal" href="bonafide.features.html#mod
 30 for atoms and 52 for bonds) to identify symmetry-equivalent positions or with the structural
 <a class="reference internal" href="bonafide.features.html#module-bonafide.features.distance" title="bonafide.features.distance"><code class="xref py py-mod docutils literal notranslate"><span class="pre">distance</span></code></a> features to explore the vicinity around the identified
 functional group or its structural relation to other parts of the molecule.</p>
+<p>By default, <a class="reference internal" href="bonafide.features.html#module-bonafide.features.symmetric_sites" title="bonafide.features.symmetric_sites"><code class="xref py py-mod docutils literal notranslate"><span class="pre">is_symmetric_to</span></code></a> considers symmetry due to
+<strong>resonance</strong>, that is, the two oxygen atoms of a carboxylate group will be labeled as symmetric.
+The configuration settings under <code class="docutils literal notranslate"><span class="pre">bonafide.symmetry</span></code> allow to modify and customize how resonance
+is handled during the symmetry analysis (see <a class="reference internal" href="config_settings.html"><span class="doc">Configuration</span></a>).</p>
 </section>
 <section id="conceptual-density-functional-theory-c-dft">
 <h2>Conceptual density functional theory (C-DFT)<a class="headerlink" href="#conceptual-density-functional-theory-c-dft" title="Link to this heading">¶</a></h2>
@@ -504,7 +508,7 @@ function that combines the property values of atoms <span class="math notranslat
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 14, 2026</div>
+              Last updated on Apr 30, 2026</div>
           </div>
           <div class="right-details">
             
@@ -542,7 +546,7 @@ function that combines the property values of atoms <span class="math notranslat
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=360bc84d"></script>
+    <script src="_static/documentation_options.js?v=938c9ccc"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

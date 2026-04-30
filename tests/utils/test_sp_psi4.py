@@ -2,7 +2,7 @@
 
 import os
 import shutil
-from typing import Dict, List
+from typing import Dict, Generator, List, Union
 
 import numpy as np
 import pytest
@@ -30,8 +30,11 @@ COORDINATES = np.array(
     ]
 )
 
+PSI_SCRATCH = os.path.join(os.getcwd(), "_psi_scratch_dir")
 
 PSI4_INPUT_PARAMS = {
+    "PSI_SCRATCH": PSI_SCRATCH,
+    "CLEAN_SCRATCH_AFTER_CALCULATION": True,
     "method": "b3lyp-d3(bj)",
     "basis": "6-31g(d)",
     "solvent": "none",
@@ -39,6 +42,8 @@ PSI4_INPUT_PARAMS = {
 }
 
 PSI4_INPUT_PARAMS2 = {
+    "PSI_SCRATCH": PSI_SCRATCH,
+    "CLEAN_SCRATCH_AFTER_CALCULATION": False,
     "method": "pbe0",
     "basis": "def2-msvp",
     "solvent": "n-heptane",
@@ -46,15 +51,26 @@ PSI4_INPUT_PARAMS2 = {
 }
 
 PSI4_INPUT_PARAMS3 = {
+    "PSI_SCRATCH": PSI_SCRATCH,
+    "CLEAN_SCRATCH_AFTER_CALCULATION": True,
     "method": "m06-2x-d3zeroatm",
     "basis": "sto-3g",
     "solvent": " tetrahydrofurane",
     "solvent_model_solver": "cpcm",
 }
 
+
 ####################################
 # Test for the calculate() method. #
 ####################################
+
+
+@pytest.fixture(autouse=True)
+def _remove_scratch_dir() -> Generator[None, None, None]:
+    """Clean up the Psi4 scratch directory."""
+    yield
+    if os.path.isdir(PSI_SCRATCH) is True:
+        shutil.rmtree(PSI_SCRATCH)
 
 
 @pytest.mark.sp_psi4_calculate
@@ -99,7 +115,7 @@ PSI4_INPUT_PARAMS3 = {
 )
 def test_calculate(
     write_el_struc_file: bool,
-    psi4_input_params: Dict[str, str],
+    psi4_input_params: Dict[str, Union[str, bool]],
     _expected_energy: float,
     _expected_strings_in_lines: List[str],
 ) -> None:

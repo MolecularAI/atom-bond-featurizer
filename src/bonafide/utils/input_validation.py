@@ -70,7 +70,7 @@ class _StandardizeStrMixin:
         """Standardize string inputs by stripping whitespace and converting to lowercase.
 
         If the value is not a string or the field name is in a predefined blacklist, it is returned
-        as is.
+        as is (with whitespaces stripped if it is a string).
 
         Parameters
         ----------
@@ -84,10 +84,11 @@ class _StandardizeStrMixin:
         Any
             The standardized value if it is a string, otherwise the original value.
         """
-        _black_list = ["XTBHOME"]
-        if info.field_name in _black_list:
-            return value
-        if type(value) == str:
+        _black_list = ["XTBHOME", "PSI_SCRATCH"]
+        _dtype = type(value)
+        if info.field_name in _black_list and _dtype == str:
+            return value.strip()
+        if _dtype == str:
             return value.strip().lower()
         return value
 
@@ -387,6 +388,22 @@ class ValidateBonafideSymmetry(BaseModel):
         Whether to include atom mapping numbers when calculating the symmetry feature.
     includeChiralPresence : StrictBool
         Whether to include the presence of chiral centers when calculating the symmetry feature.
+    consider_resonance : StrictBool
+        Whether to consider resonance forms of the molecule when finding out which atoms are
+        symmetric to each other.
+    resonance_ALLOW_CHARGE_SEPARATION : StrictBool
+        Whether to allow resonance forms with charge separation when considering resonance forms of
+        the molecule.
+    resonance_ALLOW_INCOMPLETE_OCTETS : StrictBool
+        Whether to allow resonance forms with incomplete octets when considering resonance forms of
+        the molecule.
+    resonance_KEKULE_ALL : StrictBool
+        Whether to generate all possible Kekule resonance forms when considering resonance forms of
+        the molecule.
+    resonance_UNCONSTRAINED_ANIONS : StrictBool
+        Whether to allow unconstrained anions when considering resonance forms of the molecule.
+    resonance_UNCONSTRAINED_CATIONS : StrictBool
+        Whether to allow unconstrained cations when considering resonance forms of the molecule.
     """
 
     reduce_to_canonical: StrictBool
@@ -394,6 +411,12 @@ class ValidateBonafideSymmetry(BaseModel):
     includeIsotopes: StrictBool
     includeAtomMaps: StrictBool
     includeChiralPresence: StrictBool
+    consider_resonance: StrictBool
+    resonance_ALLOW_CHARGE_SEPARATION: StrictBool
+    resonance_ALLOW_INCOMPLETE_OCTETS: StrictBool
+    resonance_KEKULE_ALL: StrictBool
+    resonance_UNCONSTRAINED_ANIONS: StrictBool
+    resonance_UNCONSTRAINED_CATIONS: StrictBool
 
 
 class ValidateDbstep(BaseModel):
@@ -1872,22 +1895,28 @@ class ValidatePsi4(_StandardizeStrMixin, BaseModel):
 
     Attributes
     ----------
-    method : StrictStr
-        The quantum chemistry method.
     basis : str
         The basis set.
-    maxiter : int
-        The maximum number of SCF iterations.
+    CLEAN_SCRATCH_AFTER_CALCULATION : StrictBool
+        Whether to clean the scratch directory after the calculation.
+    method : StrictStr
+        The quantum chemistry method.
     memory : str
         The amount of memory, e.g., "2 gb".
+    maxiter : int
+        The maximum number of SCF iterations.
     num_threads : int
         The number of threads.
+    PSI_SCRATCH : StrictStr
+        The path to the scratch base directory for Psi4 calculations.
     solvent : str
         The name of the solvent.
     solvent_model_solver : str
         The name of the solver for the solvent model.
     """
 
+    PSI_SCRATCH: StrictStr = Field(default="/tmp/")
+    CLEAN_SCRATCH_AFTER_CALCULATION: StrictBool = Field(default=True)
     method: StrictStr
     basis: StrictStr
     maxiter: StrictInt = Field(gt=0)
@@ -2094,33 +2123,50 @@ class ValidateXtb(_StandardizeStrMixin, BaseModel):
 
     @field_validator("XTBHOME")
     @classmethod
-    def validate_xtb_home(cls, value: str) -> str:
+    def validate_xtb_home(cls, value: Optional[str]) -> Optional[str]:
         """Validate ``XTBHOME``.
 
         If set to "auto", the path is determined automatically by pointing to /share/xtb
         in the xtb installation directory. If the user-provided path does not exist, the
-        automatically generated path is used.
+        automatically generated path is used. If set to ``None``, ``None`` is returned.
 
         Parameters
         ----------
-        value : str
+        value : Optional[str]
             The value to be validated.
 
         Returns
         -------
-        str
-            The validated XTB home path, either the user-provided path or the automatically
-            generated one.
+        Optional[str]
+            The validated XTB home path, either the user-provided path, the automatically
+            generated one, or ``None``.
         """
-        _val = value.strip().lower()
-        _auto_value = os.path.join(
-            str(os.path.dirname(os.path.dirname(str(shutil.which("xtb"))))), "share", "xtb"
-        )
-        if _val == "auto":
-            return _auto_value
-        if os.path.exists(value) is False:
-            return _auto_value
-        return value
+        if value is None:
+            return value
+
+        _val = value.lower()
+
+        if _val != "auto" and os.path.exists(value) is True:
+            return value
+
+        _xtb_path = shutil.which(cmd="xtb")
+        if _xtb_path is None:
+            if _val == "auto":
+                _errmsg = "XTBHOME set to 'auto' but xtb executable not found on PATH"
+            else:
+                _errmsg = (
+                    f"XTBHOME path '{value}' does not exist and xtb executable was not "
+                    "found on PATH to derive it automatically"
+                )
+            raise PydanticCustomError("", _errmsg)
+
+        _auto_value = os.path.join(os.path.dirname(os.path.dirname(_xtb_path)), "share", "xtb")
+
+        if os.path.exists(_auto_value) is False:
+            _errmsg = f"Auto-derived XTBHOME '{_auto_value}' does not exist"
+            raise PydanticCustomError("", _errmsg)
+
+        return _auto_value
 
     @field_validator("method")
     @classmethod

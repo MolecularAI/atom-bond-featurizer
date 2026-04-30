@@ -1,4 +1,6 @@
 [
+    "Bonafide2DAtomIsSymmetricTo",
+    "Bonafide2DBondIsSymmetricTo",
     "Morfeus3DBondLocalForceConstant",
     "Morfeus3DBondLocalFrequency",
     "Multiwfn3DAtomCdftCondensedFukuiDual",

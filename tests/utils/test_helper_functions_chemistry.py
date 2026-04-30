@@ -13,6 +13,7 @@ from bonafide.utils.helper_functions_chemistry import (
     get_charge_from_mol_object,
     get_molecular_formula,
     get_ring_classification,
+    get_symmetric_atom_sites,
 )
 
 SMILES_READING_PARAMS = Chem.SmilesParserParams()
@@ -811,3 +812,400 @@ def test_get_molecular_formula(smiles: str, expected_formula: str) -> None:
 
     # Calculate molecular formula
     assert get_molecular_formula(mol) == expected_formula
+
+
+######################################################
+# Tests for the get_symmetric_atom_sites() function. #
+######################################################
+
+_params = [
+    "smiles",
+    "expected_output",
+    "include_chirality",
+    "include_isotopes",
+    "include_atom_maps",
+    "include_chiral_presence",
+    "consider_resonance",
+    "resonance_ALLOW_CHARGE_SEPARATION",
+    "resonance_ALLOW_INCOMPLETE_OCTETS",
+    "resonance_KEKULE_ALL",
+    "resonance_UNCONSTRAINED_ANIONS",
+    "resonance_UNCONSTRAINED_CATIONS",
+]
+
+
+@pytest.mark.get_symmetric_atom_sites
+@pytest.mark.parametrize(
+    ", ".join(_params),
+    [
+        (
+            "O=C([O-])C1=CC=CC=C1",
+            {0: [0, 2], 1: [1], 3: [3], 4: [4, 8], 5: [5, 7], 6: [6]},
+            True,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "O=C([O-])C1=CC=CC=C1",
+            {0: [0], 1: [1], 2: [2], 3: [3], 4: [4, 8], 5: [5, 7], 6: [6]},
+            True,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            False,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "[H]c1c([H])c(C([H])([H])c2c([H])c([H])c([N+](=O)[O-])c(F)c2[N+](=O)[O-])c([N+](=O)"
+            "[O-])c(F)c1[N+](=O)[O-]",
+            {
+                0: [0, 12],
+                1: [1, 11],
+                2: [2, 9],
+                3: [3, 10],
+                4: [4, 8],
+                5: [5],
+                6: [6, 7],
+                13: [13, 29],
+                14: [14, 30],
+                15: [15, 16, 31, 32],
+                17: [17, 27],
+                18: [18, 28],
+                19: [19, 23],
+                20: [20, 24],
+                21: [21, 22, 25, 26],
+            },
+            True,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "C[C@@H](F)N/C(C1=CC=CC=C1)=[NH+]/[C@@H](F)C",  # meso form
+            {
+                0: [0, 14],
+                1: [1, 12],
+                2: [2, 13],
+                3: [3, 11],
+                4: [4],
+                5: [5],
+                6: [6, 10],
+                7: [7, 9],
+                8: [8],
+            },
+            True,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "C[C@@H](F)N/C(C1=CC=CC=C1)=[NH+]/[C@@H](F)C",  # meso form
+            {
+                0: [0, 14],
+                1: [1, 12],
+                2: [2, 13],
+                3: [3, 11],
+                4: [4],
+                5: [5],
+                6: [6, 10],
+                7: [7, 9],
+                8: [8],
+            },
+            False,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "C[C@@H](F)N/C(C1=CC=CC=C1)=[NH+]/[C@@H](F)C",  # meso form
+            {
+                0: [0],
+                1: [1],
+                2: [2],
+                3: [3],
+                4: [4],
+                5: [5],
+                6: [6, 10],
+                7: [7, 9],
+                8: [8],
+                11: [11],
+                12: [12],
+                13: [13],
+                14: [14],
+            },
+            False,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            False,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "C[C@H](F)N/C(C1=CC=CC=C1)=[NH+]/[C@@H](F)C",  # chiral form
+            {
+                0: [0],
+                1: [1],
+                2: [2],
+                3: [3],
+                4: [4],
+                5: [5],
+                6: [6, 10],
+                7: [7, 9],
+                8: [8],
+                11: [11],
+                12: [12],
+                13: [13],
+                14: [14],
+            },
+            True,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "C[C@H](F)N/C(C1=CC=CC=C1)=[NH+]/[C@@H](F)C",  # chiral form
+            {
+                0: [0, 14],
+                1: [1, 12],
+                2: [2, 13],
+                3: [3, 11],
+                4: [4],
+                5: [5],
+                6: [6, 10],
+                7: [7, 9],
+                8: [8],
+            },
+            False,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "CC(S([O-])=O)C(S(=O)([O-])=O)CCC(P([O-])=O)C(P([O-])([O-])=O)C",
+            {
+                0: [0],
+                1: [1],
+                2: [2],
+                3: [3, 4],
+                5: [5],
+                6: [6],
+                7: [7, 8, 9],
+                10: [10],
+                11: [11],
+                12: [12],
+                13: [13],
+                14: [14, 15],
+                16: [16],
+                17: [17],
+                18: [18, 19, 20],
+                21: [21],
+            },
+            True,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "CC(S([O-])=O)C(S(=O)([O-])=O)CCC(P([O-])=O)C(P([O-])([O-])=O)C",
+            {
+                0: [0],
+                1: [1],
+                2: [2],
+                3: [3],
+                4: [4],
+                5: [5],
+                6: [6],
+                7: [7, 9],
+                8: [8],
+                10: [10],
+                11: [11],
+                12: [12],
+                13: [13],
+                14: [14],
+                15: [15],
+                16: [16],
+                17: [17],
+                18: [18, 19],
+                20: [20],
+                21: [21],
+            },
+            True,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            False,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "[H]C([H])([H])C([H])(S(=O)[O-])C([H])(C([H])([H])C([H])([H])C([H])(C([H])(C([H])([H])"
+            "[H])P(=O)([O-])[O-])P([H])(=O)[O-])S(=O)(=O)[O-]",
+            {
+                0: [0, 2, 3],
+                1: [1],
+                4: [4],
+                5: [5],
+                6: [6],
+                7: [7, 8],
+                9: [9],
+                10: [10],
+                11: [11],
+                12: [12, 13],
+                14: [14],
+                15: [15, 16],
+                17: [17],
+                18: [18],
+                19: [19],
+                20: [20],
+                21: [21],
+                22: [22, 23, 24],
+                25: [25],
+                26: [26, 27, 28],
+                29: [29],
+                30: [30],
+                31: [31, 32],
+                33: [33],
+                34: [34, 35, 36],
+            },
+            True,  # include_chirality
+            True,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+        (
+            "[H]C([H])([H])C([H])(S(=O)[O-])C([H])(C([H])([H])C([H])([H])C([H])(C([H])(C([H])([H])"
+            "[H])P(=O)([O-])[O-])P([H])(=O)[O-])S(=O)(=O)[O-]",
+            {
+                0: [0, 2, 3],
+                1: [1],
+                4: [4],
+                5: [5],
+                6: [6],
+                7: [7],
+                8: [8],
+                9: [9],
+                10: [10],
+                11: [11],
+                12: [12, 13],
+                14: [14],
+                15: [15, 16],
+                17: [17],
+                18: [18],
+                19: [19],
+                20: [20],
+                21: [21],
+                22: [22, 23, 24],
+                25: [25],
+                26: [26],
+                27: [27, 28],
+                29: [29],
+                30: [30],
+                31: [31],
+                32: [32],
+                33: [33],
+                34: [34, 35],
+                36: [36],
+            },
+            False,  # include_chirality
+            False,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            False,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
+    ],
+)
+def test_get_symmetric_atom_sites(
+    smiles: str,
+    expected_output: Dict[int, List[int]],
+    include_chirality: bool,
+    include_isotopes: bool,
+    include_atom_maps: bool,
+    include_chiral_presence: bool,
+    consider_resonance: bool,
+    resonance_ALLOW_CHARGE_SEPARATION: bool,
+    resonance_ALLOW_INCOMPLETE_OCTETS: bool,
+    resonance_KEKULE_ALL: bool,
+    resonance_UNCONSTRAINED_ANIONS: bool,
+    resonance_UNCONSTRAINED_CATIONS: bool,
+) -> None:
+    """Test for the ``get_symmetric_atom_sites()`` function."""
+    mol = Chem.MolFromSmiles(smiles, params=SMILES_READING_PARAMS)
+    result = get_symmetric_atom_sites(
+        mol=mol,
+        include_chirality=include_chirality,
+        include_isotopes=include_isotopes,
+        include_atom_maps=include_atom_maps,
+        include_chiral_presence=include_chiral_presence,
+        consider_resonance=consider_resonance,
+        resonance_ALLOW_CHARGE_SEPARATION=resonance_ALLOW_CHARGE_SEPARATION,
+        resonance_ALLOW_INCOMPLETE_OCTETS=resonance_ALLOW_INCOMPLETE_OCTETS,
+        resonance_KEKULE_ALL=resonance_KEKULE_ALL,
+        resonance_UNCONSTRAINED_ANIONS=resonance_UNCONSTRAINED_ANIONS,
+        resonance_UNCONSTRAINED_CATIONS=resonance_UNCONSTRAINED_CATIONS,
+    )
+    assert result == expected_output

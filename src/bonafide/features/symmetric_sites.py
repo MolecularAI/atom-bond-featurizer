@@ -4,9 +4,8 @@ import copy
 from collections import defaultdict
 from typing import Dict, List, Union, cast
 
-from rdkit import Chem
-
 from bonafide.utils.base_featurizer import BaseFeaturizer
+from bonafide.utils.helper_functions_chemistry import get_symmetric_atom_sites
 
 
 class Bonafide2DAtomIsSymmetricTo(BaseFeaturizer):
@@ -23,6 +22,12 @@ class Bonafide2DAtomIsSymmetricTo(BaseFeaturizer):
     includeChiralPresence: bool
     includeIsotopes: bool
     reduce_to_canonical: bool
+    consider_resonance: bool
+    resonance_ALLOW_CHARGE_SEPARATION: bool
+    resonance_ALLOW_INCOMPLETE_OCTETS: bool
+    resonance_KEKULE_ALL: bool
+    resonance_UNCONSTRAINED_ANIONS: bool
+    resonance_UNCONSTRAINED_CATIONS: bool
 
     def __init__(self) -> None:
         self.extraction_mode = "multi"
@@ -30,27 +35,26 @@ class Bonafide2DAtomIsSymmetricTo(BaseFeaturizer):
 
     def calculate(self) -> None:
         """Calculate the ``bonafide2D-atom-is_symmetric_to`` feature."""
-        # Rank the atoms based on their canonical ranks (symmetry)
-        canonical_rank_list = list(
-            Chem.CanonicalRankAtoms(
-                mol=self.mol,
-                breakTies=False,
-                includeChirality=self.includeChirality,
-                includeIsotopes=self.includeIsotopes,
-                includeAtomMaps=self.includeAtomMaps,
-                includeChiralPresence=self.includeChiralPresence,
-            )
+        # Get the symmetric atom sites
+        sites = get_symmetric_atom_sites(
+            mol=self.mol,
+            # Configuration settings for Chem.CanonicalRankAtoms
+            include_chirality=self.includeChirality,
+            include_isotopes=self.includeIsotopes,
+            include_atom_maps=self.includeAtomMaps,
+            include_chiral_presence=self.includeChiralPresence,
+            # Configuration settings for Chem.ResonanceMolSupplier
+            consider_resonance=self.consider_resonance,
+            resonance_ALLOW_CHARGE_SEPARATION=self.resonance_ALLOW_CHARGE_SEPARATION,
+            resonance_ALLOW_INCOMPLETE_OCTETS=self.resonance_ALLOW_INCOMPLETE_OCTETS,
+            resonance_KEKULE_ALL=self.resonance_KEKULE_ALL,
+            resonance_UNCONSTRAINED_ANIONS=self.resonance_UNCONSTRAINED_ANIONS,
+            resonance_UNCONSTRAINED_CATIONS=self.resonance_UNCONSTRAINED_CATIONS,
         )
-
-        # Get dictionary of symmetry equivalent sites
-        sites_ = defaultdict(list)
-        for atom_idx, rank_idx in enumerate(canonical_rank_list):
-            sites_[rank_idx].append(atom_idx)
-        sites = {atom_indices[0]: atom_indices for atom_indices in sites_.values()}
 
         # Handle missing indices in initial sites dictionary
         new_sites = cast(Dict[int, Union[List[int], str]], copy.deepcopy(sites))
-        for rank_idx, idx_list in sites.items():
+        for idx_list in sites.values():
             if len(idx_list) == 1:
                 continue
 
@@ -83,6 +87,12 @@ class Bonafide2DBondIsSymmetricTo(BaseFeaturizer):
     includeChiralPresence: bool
     includeIsotopes: bool
     reduce_to_canonical: bool
+    consider_resonance: bool
+    resonance_ALLOW_CHARGE_SEPARATION: bool
+    resonance_ALLOW_INCOMPLETE_OCTETS: bool
+    resonance_KEKULE_ALL: bool
+    resonance_UNCONSTRAINED_ANIONS: bool
+    resonance_UNCONSTRAINED_CATIONS: bool
 
     def __init__(self) -> None:
         self.extraction_mode = "multi"
@@ -90,26 +100,25 @@ class Bonafide2DBondIsSymmetricTo(BaseFeaturizer):
 
     def calculate(self) -> None:
         """Calculate the ``bonafide2D-bond-is_symmetric_to`` feature."""
-        # Rank the atoms based on their canonical ranks (symmetry)
-        canonical_rank_list = list(
-            Chem.CanonicalRankAtoms(
-                mol=self.mol,
-                breakTies=False,
-                includeChirality=self.includeChirality,
-                includeIsotopes=self.includeIsotopes,
-                includeAtomMaps=self.includeAtomMaps,
-                includeChiralPresence=self.includeChiralPresence,
-            )
+        # Get the symmetric atom sites
+        atom_sites = get_symmetric_atom_sites(
+            mol=self.mol,
+            # Configuration settings for Chem.CanonicalRankAtoms
+            include_chirality=self.includeChirality,
+            include_isotopes=self.includeIsotopes,
+            include_atom_maps=self.includeAtomMaps,
+            include_chiral_presence=self.includeChiralPresence,
+            # Configuration settings for Chem.ResonanceMolSupplier
+            consider_resonance=self.consider_resonance,
+            resonance_ALLOW_CHARGE_SEPARATION=self.resonance_ALLOW_CHARGE_SEPARATION,
+            resonance_ALLOW_INCOMPLETE_OCTETS=self.resonance_ALLOW_INCOMPLETE_OCTETS,
+            resonance_KEKULE_ALL=self.resonance_KEKULE_ALL,
+            resonance_UNCONSTRAINED_ANIONS=self.resonance_UNCONSTRAINED_ANIONS,
+            resonance_UNCONSTRAINED_CATIONS=self.resonance_UNCONSTRAINED_CATIONS,
         )
 
-        # Get dictionary of symmetry equivalent atom sites
-        atom_sites_ = defaultdict(list)
-        for atom_idx, rank_idx in enumerate(canonical_rank_list):
-            atom_sites_[rank_idx].append(atom_idx)
-        atom_sites = {atom_indices[0]: atom_indices for atom_indices in atom_sites_.values()}
-
-        # Get dictionary of symmetry equivalent bond sites defined by the atom rank indices
-        # of their begin and end atoms
+        # Get dictionary of symmetry equivalent bond sites defined by the representative atom
+        # indices for the symmetry groups of their begin and end atoms
         bond_sites_ = defaultdict(list)
         for bond in self.mol.GetBonds():
             rank_begin_idx = self._get_rank_idx(rank_dict=atom_sites, idx=bond.GetBeginAtomIdx())
@@ -125,7 +134,7 @@ class Bonafide2DBondIsSymmetricTo(BaseFeaturizer):
 
         # Handle missing indices in bond sites dictionary
         new_sites = cast(Dict[int, Union[List[int], str]], copy.deepcopy(bond_sites))
-        for rank_idx, idx_list in bond_sites.items():
+        for idx_list in bond_sites.values():
             if len(idx_list) == 1:
                 continue
 

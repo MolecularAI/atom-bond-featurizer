@@ -9,7 +9,9 @@ from mendeleev import element
 from rdkit import Chem
 from rdkit.Chem import rdDetermineBonds
 
+from bonafide.utils.constants import RESONANCE_SYMMETRY_FUNCTIONAL_GROUPS
 from bonafide.utils.helper_functions import clean_up
+from bonafide.utils.io_ import read_smarts
 
 
 def _get_renumbering_list(
@@ -127,6 +129,133 @@ def _transfer_atom_bond_properties(
         _set_atom_bond_properties(source_obj=source_bond, target_obj=target_bond)
 
     return target_mol
+
+
+def _get_is_meso(mol: Chem.rdchem.Mol) -> bool:
+    """Check if a molecule is meso based on its InChI information.
+
+    Parameters
+    ----------
+    mol : Chem.rdchem.Mol
+        An RDKit molecule object.
+
+    Returns
+    -------
+    bool
+        ``True`` if the molecule is meso, otherwise ``False`` (also if RDKit was built without
+        InChI support or if the analysis fails for any reason).
+    """
+    # RDKit can be built/packaged without InChI support
+    try:
+        from rdkit.Chem.MolKey.InchiInfo import InchiInfo
+    except ImportError:
+        return False
+
+    # Do analysis
+    try:
+        inchi = Chem.MolToInchi(mol)
+        inchi_info = InchiInfo(inchi)
+        stereo_info = inchi_info.get_sp3_stereo()
+        is_meso = stereo_info["main"]["non-isotopic"][2]
+        assert isinstance(is_meso, bool)
+    except Exception:
+        is_meso = False
+
+    return is_meso
+
+
+def _get_resonance_symmetries_by_enumeration(
+    mol: Chem.rdchem.Mol, flags_enum: int, use_chirality: bool
+) -> Dict[int, List[int]]:
+    """Enumerate the resonance forms of a molecule and analyze them to find out which atoms are
+    symmetric to each other through substructure matching.
+
+    Parameters
+    ----------
+    mol : Chem.rdchem.Mol
+        An RDKit molecule object.
+    flags_enum : int
+        An integer representing the combination of optional flags for
+        ``Chem.ResonanceMolSupplier``.
+    use_chirality : bool
+        Whether to consider chirality when doing the substructure matching of the resonance forms.
+
+    Returns
+    -------
+    Dict[int, List[int]]
+        A dictionary with the atom indices as keys and lists of symmetric atom indices as values.
+    """
+    # Get all resonance forms of the molecule
+    resonances = list(Chem.ResonanceMolSupplier(mol, flags=flags_enum))
+
+    # Compare all resonance forms with each other to identify symmetric atoms through substructure
+    # matching
+    _symmetries = defaultdict(list)
+    for idx0, res_mol in enumerate(resonances):
+        for idx1, res_mol_2 in enumerate(resonances):
+            if idx1 <= idx0:
+                continue
+            match_indices = res_mol.GetSubstructMatch(res_mol_2, useChirality=use_chirality)
+            for idx_a, idx_b in enumerate(match_indices):
+                _symmetries[idx_a].append(idx_b)
+                _symmetries[idx_b].append(idx_a)
+
+    # Add potentially missing atoms within a group of symmetric atoms and format the data
+    symmetries = {}
+    for idx, sym in _symmetries.items():
+        new = [idx]
+        new.extend(sym)
+
+        for s_idx in sym:
+            new.extend(_symmetries[s_idx])
+
+        new = list(set(new))
+        new.sort()
+        symmetries[idx] = new
+
+    symmetries = dict(sorted(symmetries.items()))
+    return symmetries
+
+
+def _get_resonance_symmetries_by_substructure(mol: Chem.rdchem.Mol) -> Dict[int, List[int]]:
+    """Identify symmetry-equivalent atoms due to resonance based on predefined functional groups.
+
+    Parameters
+    ----------
+    mol : Chem.rdchem.Mol
+        An RDKit molecule object.
+
+    Returns
+    -------
+    Dict[int, List[int]]
+        A dictionary in which the keys are atom indices and the values are lists of atom indices
+        that are symmetric to the key atom due to resonance.
+    """
+    _symmetries = defaultdict(list)
+
+    for smarts, match_list in RESONANCE_SYMMETRY_FUNCTIONAL_GROUPS.items():
+        # Get the SMARTS mol object
+        smarts_mol, error_message = read_smarts(smarts)
+
+        if error_message is not None:
+            continue
+
+        # Do the substructure matching
+        matches = mol.GetSubstructMatches(smarts_mol)
+
+        # Analyze the matches
+        for match in matches:
+            for match_tuple in match_list:
+                target_atom_indices = [match[idx] for idx in match_tuple]
+                target_atom_indices.sort()
+                for atom_idx in target_atom_indices:
+                    _symmetries[atom_idx].extend(target_atom_indices)
+                    new = list(set(_symmetries[atom_idx]))
+                    new.sort()
+                    _symmetries[atom_idx] = new
+
+    symmetries = dict(sorted(_symmetries.items()))
+    return symmetries
 
 
 def bind_smiles_with_xyz(
@@ -469,3 +598,135 @@ def get_molecular_formula(mol: Chem.rdchem.Mol) -> str:
     formula_str = "".join(formula)
 
     return formula_str
+
+
+def get_symmetric_atom_sites(
+    mol: Chem.rdchem.Mol,
+    include_chirality: bool,
+    include_isotopes: bool,
+    include_atom_maps: bool,
+    include_chiral_presence: bool,
+    consider_resonance: bool,
+    resonance_ALLOW_CHARGE_SEPARATION: bool,
+    resonance_ALLOW_INCOMPLETE_OCTETS: bool,
+    resonance_KEKULE_ALL: bool,
+    resonance_UNCONSTRAINED_ANIONS: bool,
+    resonance_UNCONSTRAINED_CATIONS: bool,
+) -> Dict[int, List[int]]:
+    """Find out which atoms in a molecule are symmetric to each other.
+
+    This is achieved by ranking the atoms based on their canonical ranks (symmetry) and then, if
+    requested, by considering resonance forms of the molecule.
+
+    Parameters
+    ----------
+    mol : Chem.rdchem.Mol
+        An RDKit molecule object.
+    include_chirality : bool
+        Whether to include the chiral tag of the atoms when ranking the atoms based on their
+        canonical ranks.
+    include_isotopes : bool
+        Whether to include the isotope information of the atoms when ranking the atoms based on
+        their canonical ranks.
+    include_atom_maps : bool
+        Whether to include the atom map numbers of the atoms when ranking the atoms based on their
+        canonical ranks.
+    include_chiral_presence : bool
+        Whether to include the presence of chiral centers in the molecule when ranking the atoms based
+        on their canonical ranks.
+    consider_resonance : bool
+        Whether to consider resonance forms of the molecule when finding out which atoms are
+        symmetric to each other.
+    resonance_ALLOW_CHARGE_SEPARATION : bool
+        Whether to allow resonance forms with charge separation when considering resonance forms of
+        the molecule. This does only apply if ``consider_resonance`` is set to ``True``.
+    resonance_ALLOW_INCOMPLETE_OCTETS : bool
+        Whether to allow resonance forms with incomplete octets when considering resonance forms of
+        the molecule. This does only apply if ``consider_resonance`` is set to ``True``.
+    resonance_KEKULE_ALL : bool
+        Whether to generate all possible Kekule resonance forms when considering resonance forms of
+        the molecule. This does only apply if ``consider_resonance`` is set to ``True``.
+    resonance_UNCONSTRAINED_ANIONS : bool
+        Whether to allow unconstrained anions when considering resonance forms of the molecule.
+        This does only apply if ``consider_resonance`` is set to ``True``.
+    resonance_UNCONSTRAINED_CATIONS : bool
+        Whether to allow unconstrained cations when considering resonance forms of the molecule.
+        This does only apply if ``consider_resonance`` is set to ``True``.
+
+    Returns
+    -------
+    Dict[int, List[int]]
+        A dictionary in which the keys are the lowest atom indices from each symmetry-equivalent
+        group, used to represent the full symmetry information of the molecule, and the values are
+        lists of atom indices that are symmetric to each other (including the key index itself).
+    """
+    # Check if the molecule is meso; if so, chirality is not considered
+    if include_chirality is True and _get_is_meso(mol=mol) is True:
+        include_chirality = False
+
+    # Rank the atoms based on their canonical ranks (symmetry)
+    canonical_rank_list = list(
+        Chem.CanonicalRankAtoms(
+            mol=mol,
+            breakTies=False,
+            includeChirality=include_chirality,
+            includeIsotopes=include_isotopes,
+            includeAtomMaps=include_atom_maps,
+            includeChiralPresence=include_chiral_presence,
+        )
+    )
+
+    # Get dictionary of symmetry equivalent sites
+    canonical_sites_ = defaultdict(list)
+    for atom_idx, rank_idx in enumerate(canonical_rank_list):
+        canonical_sites_[rank_idx].append(atom_idx)
+    canonical_sites = {atom_indices[0]: atom_indices for atom_indices in canonical_sites_.values()}
+
+    # Consider resonance if requested
+    if consider_resonance is True:
+        # Specify options for resonance form enumeration
+        flags_enum = Chem.ResonanceFlags()
+        if resonance_ALLOW_CHARGE_SEPARATION is True:
+            flags_enum |= Chem.ResonanceFlags.ALLOW_CHARGE_SEPARATION
+        if resonance_ALLOW_INCOMPLETE_OCTETS is True:
+            flags_enum |= Chem.ResonanceFlags.ALLOW_INCOMPLETE_OCTETS
+        if resonance_KEKULE_ALL is True:
+            flags_enum |= Chem.ResonanceFlags.KEKULE_ALL
+        if resonance_UNCONSTRAINED_ANIONS is True:
+            flags_enum |= Chem.ResonanceFlags.UNCONSTRAINED_ANIONS
+        if resonance_UNCONSTRAINED_CATIONS is True:
+            flags_enum |= Chem.ResonanceFlags.UNCONSTRAINED_CATIONS
+        flags_enum = int(flags_enum)
+
+        # Do analysis with Chem.ResonanceMolSupplier
+        resonance_sites = _get_resonance_symmetries_by_enumeration(
+            mol=mol, flags_enum=flags_enum, use_chirality=include_chirality
+        )
+
+        # Do analysis by substructure matching (cases that are not covered by
+        # Chem.ResonanceMolSupplier)
+        resonance_sites2 = _get_resonance_symmetries_by_substructure(mol=mol)
+
+        # Combine the data
+        for idx, sites in canonical_sites.items():
+            new = [x for x in sites]
+            for site in sites:
+                if site in resonance_sites:
+                    new.extend(resonance_sites[site])
+                if site in resonance_sites2:
+                    new.extend(resonance_sites2[site])
+            new = list(set(new))
+            new.sort()
+            canonical_sites[idx] = new
+
+    # Remove duplicates
+    sorted_canonical_sites = dict(sorted(canonical_sites.items()))
+    seen = []
+    unique_sites = {}
+    for key_idx, atom_list in sorted_canonical_sites.items():
+        atom_tuple = tuple(atom_list)
+        if atom_tuple not in seen:
+            unique_sites[key_idx] = atom_list
+            seen.append(atom_tuple)
+
+    return unique_sites

@@ -233,6 +233,12 @@ def test_read_input3(
         ("no_extension", "irrelevant", "file", False, None, None, ValueError),
         ("i_dont_exist.sdf", "irrelevant", "file", False, None, None, FileNotFoundError),
         ("i am not an RDKit mol object", "irrelevant", "mol_object", False, None, None, TypeError),
+        ("CCO", "name_with.", "smiles", False, None, None, ValueError),
+        ("CCO", ".na:me_\0with.", "smiles", False, None, None, ValueError),
+        ("CCO", "name_with/", "smiles", False, None, None, ValueError),
+        ("CCO", "nam:e_with", "smiles", False, None, None, ValueError),
+        ("CCO", "name_with\x00", "smiles", False, None, None, ValueError),
+        ("CCO", "name_\0with", "smiles", False, None, None, ValueError),
     ],
 )
 def test_read_input4(

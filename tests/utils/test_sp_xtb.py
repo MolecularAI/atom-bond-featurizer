@@ -137,21 +137,12 @@ XTB_INPUT_PARAMS5 = {
     "solvent": "octanol",
 }
 
-# Check if xtb is installed
-if shutil.which("xtb") is None:
-    raise EnvironmentError(
-        "xtb executable not found. Please install xtb to run the following tests."
-    )
-
-# Set XTBHOME environment variable required for GFN0-xTB calculations
-os.environ["XTBHOME"] = os.path.join(
-    os.path.dirname(os.path.dirname(shutil.which("xtb"))), "share", "xtb"
-)
-
 
 ####################################
 # Test for the calculate() method. #
 ####################################
+
+_xtb_found = False
 
 
 @pytest.mark.sp_xtb_calculate
@@ -310,8 +301,29 @@ def test_calculate(
     xtb_input_params: Dict[str, str],
     _expected_energy: float,
     _expected_strings_in_lines: List[str],
+    monkeypatch,
 ) -> None:
     """Test for the ``calculate()`` method."""
+    # Check if xtb is installed
+    global _xtb_found
+    if _xtb_found is False:
+        _xtb_path = shutil.which("xtb")
+        if _xtb_path is None:
+            raise EnvironmentError(
+                "xtb executable not found. Please install xtb to run the following tests."
+            )
+        else:
+            _xtb_found = True
+
+    # Set environment variables
+    monkeypatch.setenv(
+        "XTBHOME",
+        os.path.join(os.path.dirname(os.path.dirname(shutil.which("xtb"))), "share", "xtb"),
+    )
+    monkeypatch.setenv("OMP_NUM_THREADS", "1")
+    monkeypatch.setenv("OMP_MAX_ACTIVE_LEVELS", "1")
+    monkeypatch.setenv("MKL_NUM_THREADS", "1")
+
     for charge, multiplicity in [(0, 1), (1, 2)]:
         # Initialize xtb single-point energy calculation class
         sp = XtbSP()

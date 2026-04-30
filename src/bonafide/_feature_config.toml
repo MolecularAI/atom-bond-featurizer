@@ -35,6 +35,12 @@ includeChirality = true
 includeIsotopes = true
 includeAtomMaps = false
 includeChiralPresence = false
+consider_resonance = true
+resonance_ALLOW_CHARGE_SEPARATION = false  # only relevant if consider_resonance is true
+resonance_ALLOW_INCOMPLETE_OCTETS = false  # only relevant if consider_resonance is true
+resonance_KEKULE_ALL = false  # only relevant if consider_resonance is true
+resonance_UNCONSTRAINED_ANIONS = false  # only relevant if consider_resonance is true
+resonance_UNCONSTRAINED_CATIONS = false  # only relevant if consider_resonance is true
 
 [dbstep] ##########################################################################################
 r = 3.5
@@ -244,6 +250,8 @@ step_size = 0.03
 neighbor_distance_cutoff = 0.05
 
 [psi4] ############################################################################################
+PSI_SCRATCH = "/tmp/"
+CLEAN_SCRATCH_AFTER_CALCULATION = true
 method = "b3lyp-d3(bj)"
 basis = "def2-msvp"
 maxiter = 250

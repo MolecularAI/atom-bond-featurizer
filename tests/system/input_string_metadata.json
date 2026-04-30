@@ -98,5 +98,15 @@
         "input_format": "smiles",
         "charge": 0,
         "multiplicity": 1
+    },
+    "O=C([O-])C1=CC(C([O-])=O)=CC(C([O-])=O)=C1": {
+        "input_format": "smiles",
+        "charge": -3,
+        "multiplicity": 1
+    },
+    "C[C@@H](/C=C\\C)NC(N[C@H](C)/C=C\\C)C1=CC=CC=C1": {
+        "input_format": "smiles",
+        "charge": 0,
+        "multiplicity": 1
     }
 }

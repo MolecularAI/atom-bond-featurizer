@@ -1,40 +1,43 @@
 """Constants."""
 
+import os
+from typing import Dict, List, Tuple
+
 from scipy.constants import Avogadro, Boltzmann
 
 # Conversion factor from Hartree to kJ/mol
-EH_TO_KJ_MOL = 2625.49964
+EH_TO_KJ_MOL: float = 2625.49964
 
 # Conversion factor from kcal/mol to kJ/mol
-KCAL_MOL_TO_KJ_MOL = 4.184
+KCAL_MOL_TO_KJ_MOL: float = 4.184
 
 # Conversion factor from kJ/mol to eV
-KJ_MOL_TO_EV = 0.01036427
+KJ_MOL_TO_EV: float = 0.01036427
 
 # Universal gas constant in J/K/mol
-R = Avogadro * Boltzmann
+R: float = Avogadro * Boltzmann
 
 # Allowed feature types within BONAFIDE
-FEATURE_TYPES = ["atom", "bond"]
+FEATURE_TYPES: List[str] = ["atom", "bond"]
 
 # Allowed feature and molecule dimensionalities within BONAFIDE
-DIMENSIONALITIES = ["2D", "3D"]
+DIMENSIONALITIES: List[str] = ["2D", "3D"]
 
 # Allowed extensions for electronic structure data files
-ELECTRONIC_STRUCTURE_DATA_FILE_EXTENSIONS = ["molden", "fchk"]
+ELECTRONIC_STRUCTURE_DATA_FILE_EXTENSIONS: List[str] = ["molden", "fchk"]
 
 # Allowed feature data types within BONAFIDE
-DATA_TYPES = ["int", "float", "str", "bool"]
+DATA_TYPES: List[str] = ["int", "float", "str", "bool"]
 
 # Allowed input and output types
-INPUT_TYPES = ["smiles", "file", "mol_object"]
-OUTPUT_TYPES = ["df", "dict", "mol_object"]
+INPUT_TYPES: List[str] = ["smiles", "file", "mol_object"]
+OUTPUT_TYPES: List[str] = ["df", "dict", "mol_object"]
 
 # Allowed input file extensions
-INPUT_FILE_EXTENSIONS = ["xyz", "sdf"]
+INPUT_FILE_EXTENSIONS: List[str] = ["xyz", "sdf"]
 
 # Energy units
-ENERGY_UNITS = {
+ENERGY_UNITS: Dict[str, List[str]] = {
     "kj_mol": [
         "kjmol",
         "kj mol",
@@ -169,17 +172,17 @@ ENERGY_UNITS = {
 }
 
 # Methods for determining bonds in mol objects generated from XYZ blocks
-DETERMINE_BONDS_METHODS = ["connect_the_dots", "van_der_waals", "hueckel"]
+DETERMINE_BONDS_METHODS: List[str] = ["connect_the_dots", "van_der_waals", "hueckel"]
 
 # Electronic structure engines
-ELECTRONIC_STRUCTURE_ENGINES = ["psi4", "xtb"]
+ELECTRONIC_STRUCTURE_ENGINES: List[str] = ["psi4", "xtb"]
 
 # Implemented redox states
-REDOX_STATES = ["n", "n+1", "n-1", "all"]
-REDOX_STATES2 = ["n", "n+1", "n-1"]
+REDOX_STATES: List[str] = ["n", "n+1", "n-1", "all"]
+REDOX_STATES2: List[str] = ["n", "n+1", "n-1"]
 
 # Available electronegativity scales for calculating the oxidation state
-ELECTRONEGATIVITY_EN_SCALES = [
+ELECTRONEGATIVITY_EN_SCALES: List[str] = [
     "allen",
     "pauling",
     "ghosh",
@@ -192,35 +195,65 @@ ELECTRONEGATIVITY_EN_SCALES = [
 ]
 
 # Available key levels for performing the functional group analysis
-FUNCTIONAL_GROUP_KEY_LEVELS = ["l0", "l1", "l2"]
+FUNCTIONAL_GROUP_KEY_LEVELS: List[str] = ["l0", "l1", "l2"]
+
+# Available functional groups with atom/bond symmetry due to resonance
+# The keys are the SMARTS patterns and the numbers in the tuples are the indices of the atoms/bonds
+# in the SMARTS pattern that are symmetric due to resonance. For example, (1, 2) means that the
+# second and third atom in the tuple obtained from GetSubstructMatches are considered symmetric.
+# Multiple tuples in the list would allow for multiple symmetry groups of atoms within the same
+# functional group (e.g., hydrogens and nitrogens).
+RESONANCE_SYMMETRY_FUNCTIONAL_GROUPS: Dict[str, List[Tuple[int, ...]]] = {
+    "[#15](=[#8])-[#8-]": [(1, 2)],  # Phosphinate
+    "[#15](=[#8])(-[#8-])-[#8-]": [(1, 2, 3)],  # Phosphonate
+    "[#16](=[#8])-[#8-]": [(1, 2)],  # Sulfinate
+    "[#16](=[#8])(=[#8])-[#8-]": [(1, 2, 3)],  # Sulfonate
+}
 
 # Available options for calculating SOAP descriptors with DScribe
-RBF_METHODS_DSCRIBE_SOAP = ["gto", "polynomial"]
-AVERAGE_METHODS_DSCRIBE_SOAP = ["off", "inner", "outer"]
+RBF_METHODS_DSCRIBE_SOAP: List[str] = ["gto", "polynomial"]
+AVERAGE_METHODS_DSCRIBE_SOAP: List[str] = ["off", "inner", "outer"]
 
 # Available options for calculating LMBTR descriptors with DScribe
-GEOMETRY_FUNCTION_METHODS_DSCRIBE_LMBTR = ["distance", "inverse_distance", "angle", "cosine"]
-WEIGHTING_FUNCTION_METHODS_DSCRIBE_LMBTR = ["exp", "unity", "inverse_square", "smooth_cutoff"]
-NORMALIZATION_METHODS_DSCRIBE_LMBTR = ["none", "l2"]
+GEOMETRY_FUNCTION_METHODS_DSCRIBE_LMBTR: List[str] = [
+    "distance",
+    "inverse_distance",
+    "angle",
+    "cosine",
+]
+WEIGHTING_FUNCTION_METHODS_DSCRIBE_LMBTR: List[str] = [
+    "exp",
+    "unity",
+    "inverse_square",
+    "smooth_cutoff",
+]
+NORMALIZATION_METHODS_DSCRIBE_LMBTR: List[str] = ["none", "l2"]
 
 # Available options for calculating features with kallisto
-CNTYPE_METHODS_KALLISTO = ["cov", "exp", "erf"]
-VDWTYPE_METHODS_KALLISTO = ["rahm", "truhlar"]
+CNTYPE_METHODS_KALLISTO: List[str] = ["cov", "exp", "erf"]
+VDWTYPE_METHODS_KALLISTO: List[str] = ["rahm", "truhlar"]
 
 # Available options for calculating features with mendeleev
-METHOD_METHODS_MENDELEEV = ["slater", "clementi"]
+METHOD_METHODS_MENDELEEV: List[str] = ["slater", "clementi"]
 
 # Available options for calculating features with MORFEUS
-RADII_TYPE_METHODS_MORFEUS_BV_CONE_SOLID_ANGLE = ["alvarez", "bondi", "crc", "truhlar"]
-DISTAL_VOLUME_METHODS_MORFEUS_BV = ["sasa"]
-RADII_TYPE_METHODS_MORFEUS_DISPERSION = ["alvarez", "bondi", "crc", "rahm", "truhlar"]
-METHODS_MORFEUS_LOCAL_FORCE = ["compliance", "local_modes"]
-ELECTRONIC_STRUCTURE_DATA_FILE_EXTENSIONS_MORFEUS_LOCAL_FORCE = ["log", "fchk", "hessian"]
-RADII_TYPE_METHODS_MORFEUS_SASA = ["bondi", "crc"]
-PYRAMIDALIZATION_CALCULATION_METHODS_MORFEUS_PYRAMIDALIZATION = ["distance", "connectivity"]
+RADII_TYPE_METHODS_MORFEUS_BV_CONE_SOLID_ANGLE: List[str] = ["alvarez", "bondi", "crc", "truhlar"]
+DISTAL_VOLUME_METHODS_MORFEUS_BV: List[str] = ["sasa"]
+RADII_TYPE_METHODS_MORFEUS_DISPERSION: List[str] = ["alvarez", "bondi", "crc", "rahm", "truhlar"]
+METHODS_MORFEUS_LOCAL_FORCE: List[str] = ["compliance", "local_modes"]
+ELECTRONIC_STRUCTURE_DATA_FILE_EXTENSIONS_MORFEUS_LOCAL_FORCE: List[str] = [
+    "log",
+    "fchk",
+    "hessian",
+]
+RADII_TYPE_METHODS_MORFEUS_SASA: List[str] = ["bondi", "crc"]
+PYRAMIDALIZATION_CALCULATION_METHODS_MORFEUS_PYRAMIDALIZATION: List[str] = [
+    "distance",
+    "connectivity",
+]
 
 # Available real space functions as defined in Multiwfn
-REAL_SPACE_FUNCTIONS_MULTIWFN = {
+REAL_SPACE_FUNCTIONS_MULTIWFN: Dict[str, int] = {
     "electron_density": 1,
     "electron_density_gradient_norm": 2,
     "electron_density_laplacian": 3,
@@ -247,35 +280,44 @@ REAL_SPACE_FUNCTIONS_MULTIWFN = {
 }
 
 # Available options for calculating bond analysis features with Multiwfn
-IGM_TYPES_MULTIWFN_BOND_ANALYSIS = ["hirshfeld", "promolecular"]
-IBIS_GRID_METHODS_MULTIWFN_BOND_ANALYSIS = {"medium": 1, "high": 2, "ultrafine": 3, "perfect": 4}
+IGM_TYPES_MULTIWFN_BOND_ANALYSIS: List[str] = ["hirshfeld", "promolecular"]
+IBIS_GRID_METHODS_MULTIWFN_BOND_ANALYSIS: Dict[str, int] = {
+    "medium": 1,
+    "high": 2,
+    "ultrafine": 3,
+    "perfect": 4,
+}
 
 # Available options for calculating fuzzy space analysis features with Multiwfn
-INTEGRATION_GRID_METHODS_MULTIWFN_FUZZY = {"atomic": 1, "molecular": 2}
-RADIUS_BECKE_PARTITION_METHODS_MULTIWFN_FUZZY = {
+INTEGRATION_GRID_METHODS_MULTIWFN_FUZZY: Dict[str, int] = {"atomic": 1, "molecular": 2}
+RADIUS_BECKE_PARTITION_METHODS_MULTIWFN_FUZZY: Dict[str, int] = {
     "csd_tian_lu": -1,
     "csd": 1,
     "pyykko": 2,
     "suresh": 3,
     "hugo": 4,
 }
-PARTITION_SCHEME_METHODS_MULTIWFN_FUZZY = {"becke": 1, "hirshfeld": 3, "hirshfeld-i": 4}
+PARTITION_SCHEME_METHODS_MULTIWFN_FUZZY: Dict[str, int] = {
+    "becke": 1,
+    "hirshfeld": 3,
+    "hirshfeld-i": 4,
+}
 
 # Available options for calculating population analysis features with Multiwfn
-RADIUS_BECKE_PARTITION_METHODS_MULTIWFN_POPULATION = {
+RADIUS_BECKE_PARTITION_METHODS_MULTIWFN_POPULATION: Dict[str, int] = {
     "csd": 1,
     "csd_tian_lu": 2,
     "pyykko": 3,
     "suresh": 4,
     "hugo": 5,
 }
-ESP_TYPE_MULTIWFN_POPULATION = {
+ESP_TYPE_MULTIWFN_POPULATION: Dict[str, int] = {
     "nuclear_electronic": 1,
     "electronic": 2,
     "transition_electronic": 3,
 }
-ATOMIC_RADII_MULTIWFN_POPULATION = {"automatic": 1, "scaled_uff": 2}
-EEM_PARAMETERS_MULTIWFN_POPULATION = {
+ATOMIC_RADII_MULTIWFN_POPULATION: Dict[str, int] = {"automatic": 1, "scaled_uff": 2}
+EEM_PARAMETERS_MULTIWFN_POPULATION: Dict[str, int] = {
     "hf_sto-3g_mulliken": 1,
     "b3lyp_6-31g*_chelpg": 2,
     "hf_6-31g*_chelpg": 3,
@@ -283,7 +325,7 @@ EEM_PARAMETERS_MULTIWFN_POPULATION = {
 }
 
 # Available options for calculating CDFT features with Multiwfn
-ITERABLE_OPTIONS_MULTIWFN_CDFT = [
+ITERABLE_OPTIONS_MULTIWFN_CDFT: List[str] = [
     "becke",
     "chelpg",
     "cm5",
@@ -304,7 +346,7 @@ ITERABLE_OPTIONS_MULTIWFN_CDFT = [
 ]
 
 # Available solvents in Psi4
-SOLVENTS_PSI4 = [
+SOLVENTS_PSI4: List[str] = [
     "none",
     "acetone",
     "acetonitrile",
@@ -326,15 +368,15 @@ SOLVENTS_PSI4 = [
 ]
 
 # Available solvers for the explicit solvent model in Psi4
-SOLVENT_MODEL_SOLVERS_PSI4 = ["iefpcm", "cpcm"]
+SOLVENT_MODEL_SOLVERS_PSI4: List[str] = ["iefpcm", "cpcm"]
 
 # Strings for checking the xtb version
-XTB_VERSION_STRING = "xtb version 6.7.1"
+XTB_VERSION_STRING: str = "xtb version 6.7.1"
 
 # Available solvent models and solvents in xtb
-SOLVENT_MODELS_XTB = ["none", "alpb", "cosmo"]
+SOLVENT_MODELS_XTB: List[str] = ["none", "alpb", "cosmo"]
 
-SOLVENTS_XTB = [
+SOLVENTS_XTB: List[str] = [
     "acetone",
     "acetonitrile",
     "aniline",
@@ -361,10 +403,10 @@ SOLVENTS_XTB = [
 ]
 
 # Available methods in xtb
-METHODS_XTB = ["gfn1-xtb", "gfn2-xtb", "gfn0-xtb"]
+METHODS_XTB: List[str] = ["gfn1-xtb", "gfn2-xtb", "gfn0-xtb"]
 
 # Elements of the periodic table
-ELEMENT_SYMBOLS = [
+ELEMENT_SYMBOLS: List[str] = [
     "H",
     "He",
     "Li",
@@ -486,7 +528,7 @@ ELEMENT_SYMBOLS = [
 ]
 
 # Environment variables
-PROGRAM_ENVIRONMENT_VARIABLES = {
+PROGRAM_ENVIRONMENT_VARIABLES: Dict[str, List[str]] = {
     "multiwfn": ["OMP_STACKSIZE", "NUM_THREADS"],
     "xtb": [
         "OMP_STACKSIZE",
@@ -498,7 +540,7 @@ PROGRAM_ENVIRONMENT_VARIABLES = {
 }
 
 # Attribute names that cannot be used as keys in the configuration settings
-ATTRIBUTE_BLACK_LIST = [
+ATTRIBUTE_BLACK_LIST: List[str] = [
     "_keep_output_files",
     "_periodic_table",
     "_functional_groups_smarts",
@@ -543,7 +585,7 @@ ATTRIBUTE_BLACK_LIST = [
 ]
 
 # Undesired properties of atoms and bonds
-UNDESIRED_ATOM_BOND_PROPERTIES = [
+UNDESIRED_ATOM_BOND_PROPERTIES: List[str] = [
     "__computedProps",
     "origNoImplicit",
     "isImplicit",
@@ -561,4 +603,23 @@ UNDESIRED_ATOM_BOND_PROPERTIES = [
     "_ringStereoAtoms",
 ]
 
-UNDESIRED_ATOM_BOND_PROPERTIES2 = ["molAtomMapNumber"]
+UNDESIRED_ATOM_BOND_PROPERTIES2: List[str] = ["molAtomMapNumber"]
+
+# Characters that cannot be part of the user-specified namespace as this string is used to create
+# directories and files
+_characters = [
+    os.sep,
+    os.altsep,
+    os.pathsep,
+    os.extsep,
+    "*",
+    "?",
+    '"',
+    "<",
+    ">",
+    "|",
+    "[",
+    "]",
+    "\0",
+]
+FORBIDDEN_NAMESPACE_CHARACTERS: List[str] = [char for char in _characters if char is not None]

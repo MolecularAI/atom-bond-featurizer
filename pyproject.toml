@@ -1,6 +1,6 @@
 [project]
 name = "bonafide"
-version = "0.1.2"
+version = "0.2.0"
 description = "A Python package for calculating features for atoms and bonds in molecules"
 readme = "README.md"
 authors = [

@@ -14,6 +14,7 @@ from bonafide.utils.constants import (
     DETERMINE_BONDS_METHODS,
     ELECTRONIC_STRUCTURE_ENGINES,
     FEATURE_TYPES,
+    FORBIDDEN_NAMESPACE_CHARACTERS,
     INPUT_FILE_EXTENSIONS,
     INPUT_TYPES,
     REDOX_STATES,
@@ -441,6 +442,16 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
         # The input to prune_by_energy is checked in MolVault.prune_ensemble_by_energy()
         self._check_is_of_type(expected_type=str, value=namespace, parameter_name="namespace")
         namespace = namespace.strip()
+
+        for char in FORBIDDEN_NAMESPACE_CHARACTERS:
+            if char in namespace:
+                _errmsg = (
+                    f"Invalid input to 'namespace': must not contain the following characters: "
+                    f"{FORBIDDEN_NAMESPACE_CHARACTERS}."
+                )
+                logging.error(f"'{namespace}' | {self._loc}()\n{_errmsg}")
+                raise ValueError(f"{self._loc}(): {_errmsg}")
+
         self._namespace = namespace
 
         self._check_is_of_type(

@@ -177,5 +177,29 @@
             "21": 1.7290574
         },
         "split_str": false
+    },
+    "Bonafide2DAtomIsSymmetricTo": {
+        "input_string": "O=C([O-])C1=CC(C([O-])=O)=CC(C([O-])=O)=C1",
+        "electronic_structure_data": [],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "5": "3,5,10",
+            "13": "0,2,7,8,12,13",
+            "11": "1,6,11"
+        },
+        "split_str": true
+    },
+    "Bonafide2DBondIsSymmetricTo": {
+        "input_string": "C[C@@H](/C=C\\C)NC(N[C@H](C)/C=C\\C)C1=CC=CC=C1",
+        "electronic_structure_data": [],
+        "energy_data": [],
+        "configuration_settings": [],
+        "expected_data": {
+            "0": "0,8",
+            "10": "2,10",
+            "15": "15,16"
+        },
+        "split_str": true
     }
 }

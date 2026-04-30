@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import logging
 import os
+import shutil
+import uuid
 from typing import TYPE_CHECKING, Any, Optional, Tuple
 
 import psi4
@@ -31,6 +33,8 @@ class Psi4SP(BaseSinglePoint):
         The basis set to be used in the calculation.
     charge : int
         The total charge of the molecule.
+    CLEAN_SCRATCH_AFTER_CALCULATION : bool
+        Whether to clean the scratch directory after the calculation.
     conformer_name : str
         The name of the conformer for which the electronic structure is calculated.
     coordinates : NDArray[np.float64]
@@ -49,14 +53,18 @@ class Psi4SP(BaseSinglePoint):
         The spin multiplicity of the molecule.
     num_threads : int
         The number of threads to be used in the calculation.
-    state : str
-        The redox state of the molecule, either "n", "n+1", or "n-1".
+    PSI_SCRATCH : str
+        The path to the scratch base directory for Psi4 calculations.
     solvent : str
         The solvent to be used in the calculation.
     solvent_model_solver : str
         The solver to be used for the solvent model in the calculation.
+    state : str
+        The redox state of the molecule, either "n", "n+1", or "n-1".
     """
 
+    PSI_SCRATCH: str
+    CLEAN_SCRATCH_AFTER_CALCULATION: bool
     memory: str
     num_threads: int
     basis: str
@@ -103,52 +111,93 @@ class Psi4SP(BaseSinglePoint):
         for name in _psi4_loggers:
             logging.getLogger(name).setLevel(logging.WARNING)
 
-        # Set up calculation parameters
-        psi4.core.set_output_file(ofname=f"{_out_file_name}.out", append=False)
-        psi4.set_memory(inputval=self.memory)
-        psi4.core.set_num_threads(self.num_threads)
+        try:
+            # Set scratch directory
+            scratch_folder_name = f"bonafide-psi4-{self.conformer_name}-{uuid.uuid4().hex[:8]}"
+            self._job_scratch = os.path.join(self.PSI_SCRATCH, scratch_folder_name)
 
-        # Initialize psi4 molecule
-        molecule = psi4.geometry(geom=structure_input_string)
+            try:
+                os.makedirs(name=self._job_scratch, exist_ok=True)
+            except Exception as e:
+                raise OSError(f"Scratch directory creation at '{self._job_scratch}' failed: {e}")
 
-        # Decide if calculation should be restricted or unrestricted
-        ref = "uhf" if self.multiplicity > 1 else "rhf"
+            if not os.access(path=self._job_scratch, mode=os.W_OK):
+                raise OSError(f"Scratch directory at '{self._job_scratch}' is not writable.")
 
-        # Set options
-        psi4.set_options(
-            options_dict={
-                "reference": ref,
-                "basis": self.basis,
-                "maxiter": self.maxiter,
-            }
-        )
+            psi4_io = psi4.core.IOManager.shared_object()
+            _previous_scratch = psi4_io.get_default_path()
+            psi4_io.set_default_path(self._job_scratch)
 
-        # Handle solvent model
-        if self.solvent != "none":
-            solvent_string = self._get_solvent_input_string(
-                solvent=self.solvent, solver=self.solvent_model_solver
-            )
+            # Set up calculation parameters
+            psi4.core.set_output_file(ofname=f"{_out_file_name}.out", append=False)
+            psi4.set_memory(inputval=self.memory)
+            psi4.core.set_num_threads(self.num_threads)
+
+            # Initialize psi4 molecule
+            molecule = psi4.geometry(geom=structure_input_string)
+
+            # Decide if calculation should be restricted or unrestricted
+            ref = "uhf" if self.multiplicity > 1 else "rhf"
+
+            # Set options
             psi4.set_options(
-                options_dict={"pcm": "true", "pcm_scf_type": "total", "pcm__input": solvent_string}
+                options_dict={
+                    "reference": ref,
+                    "basis": self.basis,
+                    "maxiter": self.maxiter,
+                }
             )
 
-        # Run calculation
-        energy, wfn = psi4.energy(self.method, molecule=molecule, return_wfn=True)
-        energy = energy * EH_TO_KJ_MOL
+            # Handle solvent model
+            if self.solvent != "none":
+                solvent_string = self._get_solvent_input_string(
+                    solvent=self.solvent, solver=self.solvent_model_solver
+                )
+                psi4.set_options(
+                    options_dict={
+                        "pcm": "true",
+                        "pcm_scf_type": "total",
+                        "pcm__input": solvent_string,
+                    }
+                )
 
-        # Get molden file
-        if write_el_struc_file is True:
-            molden_file_path = os.path.join(
-                os.path.dirname(os.getcwd()), f"{_out_file_name}.molden"
-            )
-            wfn.write_molden(f"{_out_file_name}.molden")
-        else:
-            molden_file_path = None
+            # Run calculation
+            energy, wfn = psi4.energy(self.method, molecule=molecule, return_wfn=True)
+            energy = energy * EH_TO_KJ_MOL
 
-        # Remove .clean file(s)
+            # Get molden file
+            if write_el_struc_file is True:
+                molden_file_path = os.path.join(
+                    os.path.dirname(os.getcwd()), f"{_out_file_name}.molden"
+                )
+                wfn.write_molden(f"{_out_file_name}.molden")
+            else:
+                molden_file_path = None
+
+            return energy, molden_file_path
+
+        finally:
+            psi4_io = psi4.core.IOManager.shared_object()
+            psi4_io.set_default_path(_previous_scratch)
+            psi4.core.clean_options()
+            self._run_clean_up()
+
+    def _run_clean_up(self) -> None:
+        """Remove temporary files from the current working directory and the scratch directory
+        after the calculation.
+
+        Returns
+        -------
+        None
+        """
+        # Remove job-specific scratch directory if requested
+        if self.CLEAN_SCRATCH_AFTER_CALCULATION is True:
+            scratch = getattr(self, "_job_scratch", None)
+            if scratch:
+                shutil.rmtree(path=scratch, ignore_errors=True)
+
+        # Remove .clean file(s) and others from the current working directory
         clean_up(to_be_removed=["*.clean", "*.npz", "PEDRA.OUT__*", "cavity.off__*"])
-
-        return energy, molden_file_path
 
     @staticmethod
     def _get_structure_input_string(

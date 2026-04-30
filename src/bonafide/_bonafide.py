@@ -499,7 +499,7 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
 
         # Check if provided output directory is writable
         _parent_dir = os.path.dirname(dir_path)
-        if not os.access(_parent_dir, os.W_OK):
+        if not os.access(path=_parent_dir, mode=os.W_OK):
             _errmsg = (
                 f"The directory at '{_parent_dir}' is not writable and can therefore not be used "
                 "as parent directory of the output directory."

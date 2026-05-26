@@ -101,9 +101,9 @@ starting from an XYZ file.
    57
    >>> # Read in the molecule and calculate the features
    >>> f.read_input("diclo.xyz", "diclofenac", input_format="file", read_energy=True, output_directory="diclo_output_files")
-   >>> f.determine_bonds()
    >>> f.set_charge(0)
    >>> f.set_multiplicity(1)
+   >>> f.determine_bonds()
    >>> f.featurize_bonds(bond_indices="all", feature_indices=fidx_list)
 
 *******************

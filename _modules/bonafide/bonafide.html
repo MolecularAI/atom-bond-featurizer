@@ -1069,7 +1069,9 @@
 <span class="sd">        A SMILES string can only be attached to a molecule vault for which the bonds are not</span>
 <span class="sd">        determined yet. This also means that once a SMILES string is attached to a molecule</span>
 <span class="sd">        vault, it cannot be changed anymore. A SMILES string cannot be attached to a molecule vault</span>
-<span class="sd">        hosting a 2D molecule.</span>
+<span class="sd">        hosting a 2D molecule. The charge of the compound in the molecule vault must be set before</span>
+<span class="sd">        using this method. This is because the charge is required for determining the atom</span>
+<span class="sd">        connectivity of the molecule to which the SMILES string is attached.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1141,11 +1143,12 @@
             <span class="n">allowed_values</span><span class="o">=</span><span class="n">DETERMINE_BONDS_METHODS</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="c1"># Check if charge is set if Hueckel method is selected</span>
-        <span class="k">if</span> <span class="n">connectivity_method</span> <span class="o">==</span> <span class="s2">&quot;hueckel&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Check if charge is set</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s2">&quot;Set the charge of the molecule vault with the set_charge() method &quot;</span>
-                <span class="s2">&quot;before determining bonds with the Hueckel method.&quot;</span>
+                <span class="s2">&quot;Set the charge of the molecule vault with the set_charge() method before &quot;</span>
+                <span class="s2">&quot;attaching a SMILES string. This is required for determining the atom connectivity &quot;</span>
+                <span class="s2">&quot;of the molecule to which the SMILES string is attached.&quot;</span>
             <span class="p">)</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_namespace</span><span class="si">}</span><span class="s2">&#39; | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">()</span><span class="se">\n</span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">(): </span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1411,6 +1414,8 @@
 <span class="sd">        ``allow_charged_fragments``, and ``embed_chiral`` influence how the bonds of the</span>
 <span class="sd">        individual RDKit molecule object(s) are.</span>
 
+<span class="sd">        The charge of the compound in the molecule vault must be set before using this method.</span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        connectivity_method : str</span>
@@ -1488,11 +1493,11 @@
             <span class="n">allowed_values</span><span class="o">=</span><span class="n">DETERMINE_BONDS_METHODS</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="c1"># Check if charge is set if Hueckel method is selected</span>
-        <span class="k">if</span> <span class="n">connectivity_method</span> <span class="o">==</span> <span class="s2">&quot;hueckel&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Check if charge is set</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="s2">&quot;Set the charge of the molecule vault with the set_charge() method &quot;</span>
-                <span class="s2">&quot;before determining bonds with the Hueckel method.&quot;</span>
+                <span class="s2">&quot;before determining bonds.&quot;</span>
             <span class="p">)</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_namespace</span><span class="si">}</span><span class="s2">&#39; | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">()</span><span class="se">\n</span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">(): </span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2108,7 +2113,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 30, 2026</div>
+              Last updated on May 26, 2026</div>
           </div>
           <div class="right-details">
             
@@ -2125,7 +2130,7 @@
   </div>
 </div><script src="../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=938c9ccc"></script>
+    <script src="../../_static/documentation_options.js?v=37f418d5"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

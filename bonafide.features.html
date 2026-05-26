@@ -9914,23 +9914,23 @@ under “multiwfn.topology” in the _feature_config.toml file.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceBeginAtom">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide.features.multiwfn_topology_bond.</span></span><span class="sig-name descname"><span class="pre">Multiwfn3DBondTopologyBcpDistanceBeginAtom</span></span><a class="reference internal" href="_modules/bonafide/features/multiwfn_topology_bond.html#Multiwfn3DBondTopologyBcpDistanceBeginAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceBeginAtom" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology" title="bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology"><code class="xref py py-class docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology</span></code></a></p>
+<p>Feature factory for the 3D bond feature “topology_bcp_distance_begin_atom”, calculated
+with multiwfn.</p>
+<p>The index of this feature is 451 (see the <code class="docutils literal notranslate"><span class="pre">list_atom_features()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">list_bond_features()</span></code> method). The corresponding configuration settings can be found
+under “multiwfn.topology” in the _feature_config.toml file.</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceEndAtom">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide.features.multiwfn_topology_bond.</span></span><span class="sig-name descname"><span class="pre">Multiwfn3DBondTopologyBcpDistanceEndAtom</span></span><a class="reference internal" href="_modules/bonafide/features/multiwfn_topology_bond.html#Multiwfn3DBondTopologyBcpDistanceEndAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceEndAtom" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology" title="bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology"><code class="xref py py-class docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology</span></code></a></p>
 <p>Feature factory for the 3D bond feature “topology_bcp_distance_end_atom”, calculated with
 multiwfn.</p>
 <p>The index of this feature is 450 (see the <code class="docutils literal notranslate"><span class="pre">list_atom_features()</span></code> and
-<code class="docutils literal notranslate"><span class="pre">list_bond_features()</span></code> method). The corresponding configuration settings can be found
-under “multiwfn.topology” in the _feature_config.toml file.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceStartAtom">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide.features.multiwfn_topology_bond.</span></span><span class="sig-name descname"><span class="pre">Multiwfn3DBondTopologyBcpDistanceStartAtom</span></span><a class="reference internal" href="_modules/bonafide/features/multiwfn_topology_bond.html#Multiwfn3DBondTopologyBcpDistanceStartAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceStartAtom" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology" title="bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology"><code class="xref py py-class docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology</span></code></a></p>
-<p>Feature factory for the 3D bond feature “topology_bcp_distance_start_atom”, calculated
-with multiwfn.</p>
-<p>The index of this feature is 451 (see the <code class="docutils literal notranslate"><span class="pre">list_atom_features()</span></code> and
 <code class="docutils literal notranslate"><span class="pre">list_bond_features()</span></code> method). The corresponding configuration settings can be found
 under “multiwfn.topology” in the _feature_config.toml file.</p>
 </dd></dl>
@@ -10305,9 +10305,9 @@ on 12.09.2025).</p>
 </dd>
 <dt><strong>to</strong><span class="classifier">str</span></dt><dd><p>Whether to calculate the distance to the “start” or “end” atom of the bond.</p>
 </dd>
-<dt><strong>bond_obj</strong><span class="classifier">Chem.rdchem.Bond</span></dt><dd><p>The RDKit bond object.</p>
+<dt><strong>bond_obj</strong><span class="classifier">Chem.rdchem.Bond</span></dt><dd><p>The RDKit bond object of the bond under consideration.</p>
 </dd>
-<dt><strong>mol_obj</strong><span class="classifier">Chem.rdchem.Mol</span></dt><dd><p>The RDKit molecule object.</p>
+<dt><strong>mol_obj</strong><span class="classifier">Chem.rdchem.Mol</span></dt><dd><p>The RDKit molecule object of the entire molecule.</p>
 </dd>
 </dl>
 </dd>
@@ -10323,23 +10323,54 @@ cartesian coordinates.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._get_relative_bond_position">
-<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">_get_relative_bond_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_atom_coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_atom_coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_start_atom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/features/multiwfn_topology_bond.html#_Multiwfn3DBondTopology._get_relative_bond_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._get_relative_bond_position" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">_get_relative_bond_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">begin_atom_coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_atom_coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_begin_atom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/features/multiwfn_topology_bond.html#_Multiwfn3DBondTopology._get_relative_bond_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._get_relative_bond_position" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the relative position of a bond critical point along its respective bond.</p>
+<p>It is always ensured that the ratio is between 0 and 0.5, meaning that it is always
+calculated with respect to the closest atom of the bond.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>start_atom_coordinates</strong><span class="classifier">NDArray[np.float64]</span></dt><dd><p>The cartesian coordinates of the start atom of the bond.</p>
+<dt><strong>begin_atom_coordinates</strong><span class="classifier">NDArray[np.float64]</span></dt><dd><p>The cartesian coordinates of the start atom of the bond.</p>
 </dd>
 <dt><strong>end_atom_coordinates</strong><span class="classifier">NDArray[np.float64]</span></dt><dd><p>The cartesian coordinates of the end atom of the bond.</p>
 </dd>
-<dt><strong>distance_start_atom</strong><span class="classifier">float</span></dt><dd><p>The distance of the bond critical point to the start atom of the bond.</p>
+<dt><strong>distance_begin_atom</strong><span class="classifier">float</span></dt><dd><p>The distance of the bond critical point to the start atom of the bond.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>float</dt><dd><p>The ratio between the bond length and the distance of the bond critical point to
-the start atom of the bond.</p>
+the bond atom that is closest to it.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._process_xyz_file">
+<span class="sig-name descname"><span class="pre">_process_xyz_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/features/multiwfn_topology_bond.html#_Multiwfn3DBondTopology._process_xyz_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._process_xyz_file" title="Link to this definition">¶</a></dt>
+<dd><p>Read and process a xyz file and ensure that it is compatible with the data of the initial
+mol object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>The path to the xyz file to be processed.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[Optional[NDArray[np.float64]], Optional[str]]</dt><dd><p>A tuple containing:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The coordinates read from the xyz file as a numpy array, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if an error</dt><dd><p>occurred.</p>
+</dd>
+</dl>
+</li>
+<li><p>An error message if an error occurred, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if the processing was successful.</p></li>
+</ul>
 </dd>
 </dl>
 </dd>
@@ -13002,7 +13033,7 @@ file.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 30, 2026</div>
+              Last updated on May 26, 2026</div>
           </div>
           <div class="right-details">
             
@@ -14929,8 +14960,8 @@ file.</p>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpCoordinates"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpCoordinates</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDeltaGHirshfeld"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpDeltaGHirshfeld</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDeltaGPromolecular"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpDeltaGPromolecular</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceBeginAtom"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpDistanceBeginAtom</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceEndAtom"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpDistanceEndAtom</span></code></a></li>
-<li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpDistanceStartAtom"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpDistanceStartAtom</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpElectronDensity"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpElectronDensity</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpElectronDensityAlpha"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpElectronDensityAlpha</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond.Multiwfn3DBondTopologyBcpElectronDensityBeta"><code class="docutils literal notranslate"><span class="pre">Multiwfn3DBondTopologyBcpElectronDensityBeta</span></code></a></li>
@@ -14966,6 +14997,7 @@ file.</p>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology"><code class="docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology</span></code></a><ul>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._get_distance"><code class="docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology._get_distance()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._get_relative_bond_position"><code class="docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology._get_relative_bond_position()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._process_xyz_file"><code class="docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology._process_xyz_file()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._read_cp_prop_file"><code class="docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology._read_cp_prop_file()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology._run_multiwfn"><code class="docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology._run_multiwfn()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.features.multiwfn_topology_bond._Multiwfn3DBondTopology.calculate"><code class="docutils literal notranslate"><span class="pre">_Multiwfn3DBondTopology.calculate()</span></code></a></li>
@@ -15554,7 +15586,7 @@ file.</p>
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=938c9ccc"></script>
+    <script src="_static/documentation_options.js?v=37f418d5"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

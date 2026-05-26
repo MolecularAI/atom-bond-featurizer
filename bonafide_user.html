@@ -471,7 +471,9 @@ molecule vault is determined (required for attaching the SMILES string).</p>
 <p>A SMILES string can only be attached to a molecule vault for which the bonds are not
 determined yet. This also means that once a SMILES string is attached to a molecule
 vault, it cannot be changed anymore. A SMILES string cannot be attached to a molecule vault
-hosting a 2D molecule.</p>
+hosting a 2D molecule. The charge of the compound in the molecule vault must be set before
+using this method. This is because the charge is required for determining the atom
+connectivity of the molecule to which the SMILES string is attached.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -593,6 +595,7 @@ required for the calculation of certain atom and all bond features.</p>
 <p>The optional parameters <code class="docutils literal notranslate"><span class="pre">connectivity_method</span></code>, <code class="docutils literal notranslate"><span class="pre">covalent_radius_factor</span></code>,
 <code class="docutils literal notranslate"><span class="pre">allow_charged_fragments</span></code>, and <code class="docutils literal notranslate"><span class="pre">embed_chiral</span></code> influence how the bonds of the
 individual RDKit molecule object(s) are.</p>
+<p>The charge of the compound in the molecule vault must be set before using this method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -1066,7 +1069,7 @@ default “atom”.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 30, 2026</div>
+              Last updated on May 26, 2026</div>
           </div>
           <div class="right-details">
             
@@ -1124,7 +1127,7 @@ default “atom”.</p>
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=938c9ccc"></script>
+    <script src="_static/documentation_options.js?v=37f418d5"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

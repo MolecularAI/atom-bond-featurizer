@@ -301,12 +301,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.feature_factories</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEATURE_FACTORIES</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.feature_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureOutput</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.helper_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean_up</span><span class="p">,</span> <span class="n">flatten_dict</span><span class="p">,</span> <span class="n">standardize_string</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.helper_functions_chemistry</span><span class="w"> </span><span class="kn">import</span> <span class="n">bind_smiles_with_xyz</span><span class="p">,</span> <span class="n">get_molecular_formula</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.helper_functions_chemistry</span><span class="w"> </span><span class="kn">import</span> <span class="n">bind_smiles_with_xyz</span><span class="p">,</span> <span class="n">get_molecular_formula</span><span class="p">,</span> <span class="n">get_charge_from_mol_object</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.input_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">config_data_validator</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.io_</span><span class="w"> </span><span class="kn">import</span> <span class="n">extract_energy_from_string</span><span class="p">,</span> <span class="n">read_smiles</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.logging_format</span><span class="w"> </span><span class="kn">import</span> <span class="n">IndentationFormatter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.sp_psi4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Psi4SP</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.sp_xtb</span><span class="w"> </span><span class="kn">import</span> <span class="n">XtbSP</span>
+
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span>
@@ -931,13 +932,25 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">(): </span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># Double-check with molecular formula</span>
-        <span class="n">_ref_formula</span> <span class="o">=</span> <span class="n">get_molecular_formula</span><span class="p">(</span><span class="n">ref_mol</span><span class="p">)</span>
-        <span class="n">_smiles_formula</span> <span class="o">=</span> <span class="n">get_molecular_formula</span><span class="p">(</span><span class="n">smiles_mol</span><span class="p">)</span>
+        <span class="n">_ref_formula</span> <span class="o">=</span> <span class="n">get_molecular_formula</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">ref_mol</span><span class="p">)</span>
+        <span class="n">_smiles_formula</span> <span class="o">=</span> <span class="n">get_molecular_formula</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">smiles_mol</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">_ref_formula</span> <span class="o">!=</span> <span class="n">_smiles_formula</span><span class="p">:</span>
             <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Molecular formula of the molecule in the molecule vault (</span><span class="si">{</span><span class="n">_ref_formula</span><span class="si">}</span><span class="s2">) does &quot;</span>
                 <span class="s2">&quot;not match the molecular formula of the molecule represented by the SMILES string &quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">_smiles_formula</span><span class="si">}</span><span class="s2">).&quot;</span>
+            <span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_namespace</span><span class="si">}</span><span class="s2">&#39; | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">()</span><span class="se">\n</span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">(): </span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Double-check with molecular charge</span>
+        <span class="n">_ref_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">charge</span>
+        <span class="n">_smiles_charge</span> <span class="o">=</span> <span class="n">get_charge_from_mol_object</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">smiles_mol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_ref_charge</span> <span class="o">!=</span> <span class="n">_smiles_charge</span><span class="p">:</span>
+            <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Formal charge of the molecule in the molecule vault (</span><span class="si">{</span><span class="n">_ref_charge</span><span class="si">}</span><span class="s2">) does not &quot;</span>
+                <span class="s2">&quot;match the formal charge of the molecule represented by the SMILES string &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">_smiles_charge</span><span class="si">}</span><span class="s2">).&quot;</span>
             <span class="p">)</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_namespace</span><span class="si">}</span><span class="s2">&#39; | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">()</span><span class="se">\n</span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">(): </span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -962,6 +975,7 @@
 
             <span class="c1"># Try to attach the SMILES string to the conformer</span>
             <span class="k">try</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">charge</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># for type checker</span>
                 <span class="n">new_mol</span><span class="p">,</span> <span class="n">error_message</span> <span class="o">=</span> <span class="n">bind_smiles_with_xyz</span><span class="p">(</span>
                     <span class="n">smiles_mol</span><span class="o">=</span><span class="n">_smiles_mol</span><span class="p">,</span>
                     <span class="n">xyz_mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
@@ -1266,6 +1280,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">rdDetermineBonds</span><span class="o">.</span><span class="n">DetermineBonds</span><span class="p">(</span>
                         <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+                        <span class="n">charge</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">charge</span><span class="p">,</span>
                         <span class="n">covFactor</span><span class="o">=</span><span class="n">covalent_radius_factor</span><span class="p">,</span>
                         <span class="n">allowChargedFragments</span><span class="o">=</span><span class="n">allow_charged_fragments</span><span class="p">,</span>
                         <span class="n">embedChiral</span><span class="o">=</span><span class="n">embed_chiral</span><span class="p">,</span>
@@ -1999,7 +2014,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 30, 2026</div>
+              Last updated on May 26, 2026</div>
           </div>
           <div class="right-details">
             
@@ -2016,7 +2031,7 @@
   </div>
 </div><script src="../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=938c9ccc"></script>
+    <script src="../../_static/documentation_options.js?v=37f418d5"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

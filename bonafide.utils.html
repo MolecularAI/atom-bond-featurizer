@@ -1682,6 +1682,34 @@ molecule object.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="bonafide.utils.helper_functions_chemistry.align_coordinates">
+<span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">align_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_be_aligned_coords</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#align_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry.align_coordinates" title="Link to this definition">¶</a></dt>
+<dd><p>Find the optimal rotation matrix and translation vector that aligns the source coordinates
+to the target coordinates using the Kabsch-Umeyama algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>reference_coords</strong><span class="classifier">NDArray[np.float64]</span></dt><dd><p>The target coordinates to which the source coordinates will be aligned.</p>
+</dd>
+<dt><strong>to_be_aligned_coords</strong><span class="classifier">NDArray[np.float64]</span></dt><dd><p>The source coordinates that will be aligned to the target coordinates.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[Optional[NDArray[np.float64]], Optional[NDArray[np.float64]], Optional[str]]</dt><dd><p>A tuple containing:</p>
+<ul class="simple">
+<li><p>The rotation matrix, <code class="docutils literal notranslate"><span class="pre">None</span></code> if the alignment was unsuccessful.</p></li>
+<li><p>The translation vector, <code class="docutils literal notranslate"><span class="pre">None</span></code> if the alignment was unsuccessful.</p></li>
+<li><p>An error message if the alignment was unsuccessful, otherwise <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="bonafide.utils.helper_functions_chemistry.bind_smiles_with_xyz">
 <span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">bind_smiles_with_xyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles_mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xyz_mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connectivity_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covalent_radius_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charge</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#bind_smiles_with_xyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry.bind_smiles_with_xyz" title="Link to this definition">¶</a></dt>
 <dd><p>Redefine an RDKit molecule object created from an XYZ file with a new RDKit molecule object
@@ -1707,8 +1735,7 @@ order of the <code class="docutils literal notranslate"><span class="pre">smiles
 <dt><strong>covalent_radius_factor</strong><span class="classifier">float</span></dt><dd><p>A scaling factor that is applied to the covalent radii of the atoms when determining the
 atom connectivity with the van-der-Waals method.</p>
 </dd>
-<dt><strong>charge</strong><span class="classifier">Optional[int]</span></dt><dd><p>The formal charge of the molecule, which is required when using the Hueckel method for
-determining atom connectivity.</p>
+<dt><strong>charge</strong><span class="classifier">int</span></dt><dd><p>The formal charge of the molecule, which is required for determining atom connectivity.</p>
 </dd>
 </dl>
 </dd>
@@ -6002,7 +6029,7 @@ all weights will be set to <code class="docutils literal notranslate"><span clas
 <p>Extraction of the Multiwfn real space properties.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="bonafide.utils.multiwfn_properties.read_prop_file">
-<span class="sig-prename descclassname"><span class="pre">bonafide.utils.multiwfn_properties.</span></span><span class="sig-name descname"><span class="pre">read_prop_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/multiwfn_properties.html#read_prop_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.multiwfn_properties.read_prop_file" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">bonafide.utils.multiwfn_properties.</span></span><span class="sig-name descname"><span class="pre">read_prop_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translation_vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/multiwfn_properties.html#read_prop_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.multiwfn_properties.read_prop_file" title="Link to this definition">¶</a></dt>
 <dd><p>Read the Multiwfn real space properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -6010,6 +6037,12 @@ all weights will be set to <code class="docutils literal notranslate"><span clas
 <dt><strong>file_content</strong><span class="classifier">List[str]</span></dt><dd><p>The content of the Multiwfn output file as a list of the individual lines of the file.</p>
 </dd>
 <dt><strong>prefix</strong><span class="classifier">str, optional</span></dt><dd><p>A prefix to add to all property names, by default “”.</p>
+</dd>
+<dt><strong>rotation_matrix</strong><span class="classifier">Optional[NDArray[np.float64]], optional</span></dt><dd><p>The rotation matrix to align the coordinates of the bond critical point with the
+coordinates of the mol object.</p>
+</dd>
+<dt><strong>translation_vector</strong><span class="classifier">Optional[NDArray[np.float64]], optional</span></dt><dd><p>The translation vector to align the coordinates of the bond critical point with the
+coordinates of the mol object.</p>
 </dd>
 </dl>
 </dd>
@@ -6361,7 +6394,7 @@ generated.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 30, 2026</div>
+              Last updated on May 26, 2026</div>
           </div>
           <div class="right-details">
             
@@ -6518,6 +6551,7 @@ generated.</p>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._get_resonance_symmetries_by_substructure"><code class="docutils literal notranslate"><span class="pre">_get_resonance_symmetries_by_substructure()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._set_atom_bond_properties"><code class="docutils literal notranslate"><span class="pre">_set_atom_bond_properties()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry._transfer_atom_bond_properties"><code class="docutils literal notranslate"><span class="pre">_transfer_atom_bond_properties()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.align_coordinates"><code class="docutils literal notranslate"><span class="pre">align_coordinates()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.bind_smiles_with_xyz"><code class="docutils literal notranslate"><span class="pre">bind_smiles_with_xyz()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.from_periodic_table"><code class="docutils literal notranslate"><span class="pre">from_periodic_table()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide.utils.helper_functions_chemistry.get_atom_bond_mapping_dicts"><code class="docutils literal notranslate"><span class="pre">get_atom_bond_mapping_dicts()</span></code></a></li>
@@ -7039,7 +7073,7 @@ generated.</p>
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=938c9ccc"></script>
+    <script src="_static/documentation_options.js?v=37f418d5"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

@@ -295,10 +295,12 @@ provides two options to introduce bond information to 3D molecules and conformer
 <p>It is possible to <strong>automatically define chemical bonds</strong> with the <a class="reference internal" href="bonafide_user.html#bonafide.bonafide.AtomBondFeaturizer.determine_bonds" title="bonafide.bonafide.AtomBondFeaturizer.determine_bonds"><code class="xref py py-meth docutils literal notranslate"><span class="pre">determine_bonds()</span></code></a> method after reading a molecule from an XYZ
 file. This method implements RDKit’s <code class="docutils literal notranslate"><span class="pre">rdkit.Chem.rdDetermineBonds.DetermineBonds</span></code> and assigns
 <strong>atom connectivity</strong> and <strong>bond information</strong>. This is done for all conformers in case multiple
-have been provided.</p>
+have been provided. The charge of the molecule must be set before using this method (see the
+<a class="reference internal" href="bonafide_user.html#bonafide.bonafide.AtomBondFeaturizer.determine_bonds" title="bonafide.bonafide.AtomBondFeaturizer.determine_bonds"><code class="xref py py-meth docutils literal notranslate"><span class="pre">determine_bonds()</span></code></a> method).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">bonafide</span><span class="w"> </span><span class="kn">import</span> <span class="n">AtomBondFeaturizer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">AtomBondFeaturizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">read_input</span><span class="p">(</span><span class="s2">&quot;diclo.xyz&quot;</span><span class="p">,</span> <span class="s2">&quot;diclofenac&quot;</span><span class="p">,</span> <span class="n">input_format</span><span class="o">=</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">set_charge</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">determine_bonds</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -311,11 +313,15 @@ the <a class="reference internal" href="bonafide_user.html#bonafide.bonafide.Ato
 exactly defines the chemical bonding between the atoms (within the SMILE system). This is done
 through the <a class="reference internal" href="bonafide_user.html#bonafide.bonafide.AtomBondFeaturizer.attach_smiles" title="bonafide.bonafide.AtomBondFeaturizer.attach_smiles"><code class="xref py py-meth docutils literal notranslate"><span class="pre">attach_smiles()</span></code></a> method. By
 using the default <code class="docutils literal notranslate"><span class="pre">align=True</span></code>, the atom indices (atom order) of the initially read molecule are
-preserved; if set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, the atoms are reordered according to the SMILES string.</p>
+preserved; if set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, the atoms are reordered according to the SMILES string. The
+<a class="reference internal" href="bonafide_user.html#bonafide.bonafide.AtomBondFeaturizer.attach_smiles" title="bonafide.bonafide.AtomBondFeaturizer.attach_smiles"><code class="xref py py-meth docutils literal notranslate"><span class="pre">attach_smiles()</span></code></a> method also requires
+the charge of the molecule to be set beforehand. This is because the charge is required for
+determining the atom connectivity of the molecule to which the SMILES string is attached.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">bonafide</span><span class="w"> </span><span class="kn">import</span> <span class="n">AtomBondFeaturizer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">AtomBondFeaturizer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">read_input</span><span class="p">(</span><span class="s2">&quot;diclo.xyz&quot;</span><span class="p">,</span> <span class="s2">&quot;diclofenac&quot;</span><span class="p">,</span> <span class="n">input_format</span><span class="o">=</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">attach_smiles</span><span class="p">(</span><span class="s2">&quot;O=C(O)Cc1ccccc1Nc1c(Cl)cccc1Cl&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">set_charge</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">attach_smiles</span><span class="p">(</span><span class="s2">&quot;[H]OC(=O)C([H])([H])c1c([H])c([H])c([H])c([H])c1N([H])c1c(Cl)c([H])c([H])c([H])c1Cl&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -356,7 +362,7 @@ preserved; if set to <code class="docutils literal notranslate"><span class="pre
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 30, 2026</div>
+              Last updated on May 26, 2026</div>
           </div>
           <div class="right-details">
             
@@ -393,7 +399,7 @@ preserved; if set to <code class="docutils literal notranslate"><span class="pre
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=938c9ccc"></script>
+    <script src="_static/documentation_options.js?v=37f418d5"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

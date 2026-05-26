@@ -18,13 +18,15 @@ It is possible to **automatically define chemical bonds** with the :meth:`determ
 <bonafide.bonafide.AtomBondFeaturizer.determine_bonds>` method after reading a molecule from an XYZ
 file. This method implements RDKit's ``rdkit.Chem.rdDetermineBonds.DetermineBonds`` and assigns
 **atom connectivity** and **bond information**. This is done for all conformers in case multiple
-have been provided.
+have been provided. The charge of the molecule must be set before using this method (see the
+:meth:`determine_bonds() <bonafide.bonafide.AtomBondFeaturizer.determine_bonds>` method).
 
 .. code:: python
 
    >>> from bonafide import AtomBondFeaturizer
    >>> f = AtomBondFeaturizer()
    >>> f.read_input("diclo.xyz", "diclofenac", input_format="file")
+   >>> f.set_charge(0)
    >>> f.determine_bonds()
 
 Several optional arguments can be passed to modify the exact procedure of bond determination (see
@@ -38,11 +40,15 @@ Alternatively, it is possible to **attach a SMILES string to a 3D conformer ense
 exactly defines the chemical bonding between the atoms (within the SMILE system). This is done
 through the :meth:`attach_smiles() <bonafide.bonafide.AtomBondFeaturizer.attach_smiles>` method. By
 using the default ``align=True``, the atom indices (atom order) of the initially read molecule are
-preserved; if set to ``False``, the atoms are reordered according to the SMILES string.
+preserved; if set to ``False``, the atoms are reordered according to the SMILES string. The
+:meth:`attach_smiles() <bonafide.bonafide.AtomBondFeaturizer.attach_smiles>` method also requires
+the charge of the molecule to be set beforehand. This is because the charge is required for
+determining the atom connectivity of the molecule to which the SMILES string is attached.
 
 .. code:: python
 
    >>> from bonafide import AtomBondFeaturizer
    >>> f = AtomBondFeaturizer()
    >>> f.read_input("diclo.xyz", "diclofenac", input_format="file")
-   >>> f.attach_smiles("O=C(O)Cc1ccccc1Nc1c(Cl)cccc1Cl")
+   >>> f.set_charge(0)
+   >>> f.attach_smiles("[H]OC(=O)C([H])([H])c1c([H])c([H])c([H])c([H])c1N([H])c1c(Cl)c([H])c([H])c([H])c1Cl")

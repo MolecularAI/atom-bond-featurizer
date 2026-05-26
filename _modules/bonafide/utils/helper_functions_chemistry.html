@@ -279,8 +279,9 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mendeleev</span><span class="w"> </span><span class="kn">import</span> <span class="n">element</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">rdDetermineBonds</span>
@@ -288,6 +289,9 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">RESONANCE_SYMMETRY_FUNCTIONAL_GROUPS</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.helper_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean_up</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bonafide.utils.io_</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_smarts</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 
 
 <div class="viewcode-block" id="_get_renumbering_list">
@@ -563,7 +567,7 @@
     <span class="n">align</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">connectivity_method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">covalent_radius_factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">charge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">charge</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Redefine an RDKit molecule object created from an XYZ file with a new RDKit molecule object</span>
 <span class="sd">    created from a SMILES string.</span>
@@ -590,9 +594,8 @@
 <span class="sd">    covalent_radius_factor : float</span>
 <span class="sd">        A scaling factor that is applied to the covalent radii of the atoms when determining the</span>
 <span class="sd">        atom connectivity with the van-der-Waals method.</span>
-<span class="sd">    charge : Optional[int]</span>
-<span class="sd">        The formal charge of the molecule, which is required when using the Hueckel method for</span>
-<span class="sd">        determining atom connectivity.</span>
+<span class="sd">    charge : int</span>
+<span class="sd">        The formal charge of the molecule, which is required for determining atom connectivity.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -634,7 +637,7 @@
         <span class="n">rdDetermineBonds</span><span class="o">.</span><span class="n">DetermineConnectivity</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">useHueckel</span><span class="o">=</span><span class="n">_use_hueckel</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="n">charge</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">rdDetermineBonds</span><span class="o">.</span><span class="n">DetermineConnectivity</span><span class="p">(</span>
-            <span class="n">mol</span><span class="o">=</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">covFactor</span><span class="o">=</span><span class="n">covalent_radius_factor</span><span class="p">,</span> <span class="n">useVdw</span><span class="o">=</span><span class="n">_use_vdw</span>
+            <span class="n">mol</span><span class="o">=</span><span class="n">xyz_mol</span><span class="p">,</span> <span class="n">covFactor</span><span class="o">=</span><span class="n">covalent_radius_factor</span><span class="p">,</span> <span class="n">useVdw</span><span class="o">=</span><span class="n">_use_vdw</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="n">charge</span>
         <span class="p">)</span>
 
     <span class="c1"># Check if number of bonds matches</span>
@@ -787,7 +790,7 @@
 <span class="sd">    int</span>
 <span class="sd">        The formal charge of the molecule.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">(</span><span class="n">mol</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">))</span></div>
 
 
 
@@ -1048,6 +1051,78 @@
 
     <span class="k">return</span> <span class="n">unique_sites</span></div>
 
+
+
+<div class="viewcode-block" id="align_coordinates">
+<a class="viewcode-back" href="../../../bonafide.utils.html#bonafide.utils.helper_functions_chemistry.align_coordinates">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">align_coordinates</span><span class="p">(</span>
+    <span class="n">reference_coords</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">to_be_aligned_coords</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the optimal rotation matrix and translation vector that aligns the source coordinates</span>
+<span class="sd">    to the target coordinates using the Kabsch-Umeyama algorithm.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    reference_coords : NDArray[np.float64]</span>
+<span class="sd">        The target coordinates to which the source coordinates will be aligned.</span>
+<span class="sd">    to_be_aligned_coords : NDArray[np.float64]</span>
+<span class="sd">        The source coordinates that will be aligned to the target coordinates.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[Optional[NDArray[np.float64]], Optional[NDArray[np.float64]], Optional[str]]</span>
+<span class="sd">        A tuple containing:</span>
+
+<span class="sd">        * The rotation matrix, ``None`` if the alignment was unsuccessful.</span>
+<span class="sd">        * The translation vector, ``None`` if the alignment was unsuccessful.</span>
+<span class="sd">        * An error message if the alignment was unsuccessful, otherwise ``None``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Mostly implemented by Claude Sonnet 4.6.</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Center both sets of coordinates</span>
+        <span class="n">reference_centroid</span> <span class="o">=</span> <span class="n">reference_coords</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">to_be_aligned_centroid</span> <span class="o">=</span> <span class="n">to_be_aligned_coords</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">reference_coords_centered</span> <span class="o">=</span> <span class="n">reference_coords</span> <span class="o">-</span> <span class="n">reference_centroid</span>
+        <span class="n">to_be_aligned_coords_centered</span> <span class="o">=</span> <span class="n">to_be_aligned_coords</span> <span class="o">-</span> <span class="n">to_be_aligned_centroid</span>
+
+        <span class="c1"># Compute the covariance matrix</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">to_be_aligned_coords_centered</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">reference_coords_centered</span>
+
+        <span class="c1"># SVD</span>
+        <span class="n">U</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+
+        <span class="c1"># Ensure proper rotation (handle reflection). Use the sign of the determinant rather</span>
+        <span class="c1"># than its raw value to avoid floating-point scaling that would render the rotation</span>
+        <span class="c1"># matrix non-orthonormal.</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">Vt</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span>
+
+        <span class="c1"># Rotation matrix</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">Vt</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D</span> <span class="o">@</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># Translation vector</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">reference_centroid</span> <span class="o">-</span> <span class="n">R</span> <span class="o">@</span> <span class="n">to_be_aligned_centroid</span>
+
+        <span class="c1"># Apply transformation for double-checking</span>
+        <span class="n">to_be_aligned_coords_transformed</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span> <span class="o">@</span> <span class="n">to_be_aligned_coords</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">t</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">_errmsg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;an error occurred during coordinate alignment: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_errmsg</span>
+
+    <span class="c1"># Check transformation</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">to_be_aligned_coords_transformed</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">reference_coords</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;the alignment was unsuccessful: the transformed coordinates do not match the &quot;</span>
+            <span class="s2">&quot;reference coordinates.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_errmsg</span>
+
+    <span class="k">return</span> <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="kc">None</span></div>
+
 </pre></div>
         </article>
       </div>
@@ -1066,7 +1141,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Apr 30, 2026</div>
+              Last updated on May 26, 2026</div>
           </div>
           <div class="right-details">
             
@@ -1083,7 +1158,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
+    <script src="../../../_static/documentation_options.js?v=37f418d5"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

@@ -375,6 +375,7 @@ def test_bonafide(
     input_format = input_metadata["input_format"]
     charge = input_metadata["charge"]
     multiplicity = input_metadata["multiplicity"]
+    helper_smiles = input_metadata.get("helper_smiles", None)
 
     # Extract atom/bond indices
     expected_data = {int(idx): value for idx, value in expected_data.items()}
@@ -392,7 +393,13 @@ def test_bonafide(
 
     # Define bonds if required
     if requires_bond_data is True and input_string.endswith(".xyz"):
-        featurizer.determine_bonds()
+        featurizer.set_charge(charge=charge)
+        # Determine bonds does not work for radical due to the limitations of the underlying RDKit
+        # functionality. Therefore, the bonds are introduced through the SMILES string.
+        if input_string.endswith("/radical_cation-conf_01.xyz"):
+            featurizer.attach_smiles(helper_smiles)
+        else:
+            featurizer.determine_bonds()
 
     # Attach electronic structure data
     if requires_electronic_structure_data is True:

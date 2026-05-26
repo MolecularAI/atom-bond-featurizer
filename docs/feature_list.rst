@@ -511,7 +511,7 @@ Below is a list of **all available features** available in BONAFIDE. The individ
     448,topology_bcp_delta_g_hirshfeld,multiwfn,bond,3D,float,True,True,False,False,multiwfn.topology
     449,topology_bcp_delta_g_promolecular,multiwfn,bond,3D,float,True,True,False,False,multiwfn.topology
     450,topology_bcp_distance_end_atom,multiwfn,bond,3D,float,True,True,False,False,multiwfn.topology
-    451,topology_bcp_distance_start_atom,multiwfn,bond,3D,float,True,True,False,False,multiwfn.topology
+    451,topology_bcp_distance_begin_atom,multiwfn,bond,3D,float,True,True,False,False,multiwfn.topology
     452,topology_bcp_electron_density,multiwfn,bond,3D,float,True,True,False,False,multiwfn.topology
     453,topology_bcp_electron_density_alpha,multiwfn,bond,3D,float,True,True,False,False,multiwfn.topology
     454,topology_bcp_electron_density_beta,multiwfn,bond,3D,float,True,True,False,False,multiwfn.topology

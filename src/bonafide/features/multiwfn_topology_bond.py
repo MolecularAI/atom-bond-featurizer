@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, Any, Dict, List, Tuple, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
 
 import numpy as np
 
 from bonafide.utils.base_featurizer import BaseFeaturizer
 from bonafide.utils.constants import PROGRAM_ENVIRONMENT_VARIABLES
 from bonafide.utils.driver import multiwfn_driver
+from bonafide.utils.helper_functions_chemistry import align_coordinates
+from bonafide.utils.io_ import read_xyz_file
 from bonafide.utils.multiwfn_properties import read_prop_file
 
 if TYPE_CHECKING:
@@ -76,6 +78,22 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
             namespace=self.conformer_name[::-1].split("__", 1)[-1][::-1],
         )
 
+        # The atom coordinates used by Multiwfn are also needed as they can differ from the ones in
+        # the mol object. Therefore, they are written to a file for later retrieval.
+        _output_file_name = f"Multiwfn3DAtomXyzCoordinates__{self.conformer_name}"
+        multiwfn_driver(
+            cmds=[300, 7, -1, f"_xyz_from_multiwfn__{self.conformer_name}.xyz", -10, 0, "q"],
+            input_file_path=str(self.electronic_struc_n),
+            output_file_name=_output_file_name,
+            environment_variables=environment_variables,
+            namespace=self.conformer_name[::-1].split("__", 1)[-1][::-1],
+        )
+
+        # Directly remove the Multiwfn output as it does not contain any relevant data.
+        # The coordinates are written to a separate file.
+        if os.path.isfile(_output_file_name) is True:
+            os.remove(_output_file_name)
+
     def _read_cp_prop_file(self) -> None:
         """Read the output file from Multiwfn and write the results to the ``results`` dictionary.
 
@@ -92,14 +110,53 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
             )
             return
 
+        # Check if the additional atom coordinates files exists
+        _opath2 = f"_xyz_from_multiwfn__{self.conformer_name}.xyz"
+        if os.path.isfile(_opath2) is False:
+            self._err = (
+                f"Multiwfn output file '{_opath2}' not found; probably the calculation "
+                "did not run. Check your input"
+            )
+            return
+
+        # Process the additional xyz file
+        multiwfn_xyz_coords, error_message = self._process_xyz_file(file_path=_opath2)
+        if error_message is not None:
+            self._err = (
+                f"Error processing Multiwfn output file '{_opath2}': {error_message}. The "
+                "coordinates need to be separately processed successfully for this feature to "
+                "be calculated"
+            )
+            return
+
+        os.remove(_opath2)
+
+        assert self.coordinates is not None  # for type checker
+        assert multiwfn_xyz_coords is not None  # for type checker
+        rotation_matrix, translation_vector, error_message = align_coordinates(
+            reference_coords=self.coordinates, to_be_aligned_coords=multiwfn_xyz_coords
+        )
+        if error_message is not None:
+            self._err = (
+                f"Error aligning coordinates from Multiwfn output to the coordinates of the mol "
+                f"object: {error_message}. The coordinates need to be successfully aligned for "
+                "this feature to be calculated"
+            )
+            return
+
         # Rename CPprop.txt file
-        os.rename("CPprop.txt", f"CPprop__{self.conformer_name}.txt")
+        os.rename(src="CPprop.txt", dst=f"CPprop__{self.conformer_name}.txt")
 
         # Open output file and read data
         with open(_opath, "r") as f:
             cp_prop_output = f.readlines()
 
-        all_data = read_prop_file(file_content=cp_prop_output, prefix="bcp_")
+        all_data = read_prop_file(
+            file_content=cp_prop_output,
+            prefix="bcp_",
+            rotation_matrix=rotation_matrix,
+            translation_vector=translation_vector,
+        )
 
         for data in all_data:
             assert isinstance(data["_atoms"], tuple)  # for type checker
@@ -122,18 +179,18 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
                     ]
                 ):
                     # Add data that needs to be separately calculated
-                    distance_start_atom, start_atom_coordinates = self._get_distance(
+                    distance_begin_atom, begin_atom_coordinates = self._get_distance(
                         data=data, to="start", bond_obj=bond, mol_obj=self.mol
                     )
                     distance_end_atom, end_atom_coordinates = self._get_distance(
                         data=data, to="end", bond_obj=bond, mol_obj=self.mol
                     )
                     relative_bond_position = self._get_relative_bond_position(
-                        start_atom_coordinates=start_atom_coordinates,
+                        begin_atom_coordinates=begin_atom_coordinates,
                         end_atom_coordinates=end_atom_coordinates,
-                        distance_start_atom=distance_start_atom,
+                        distance_begin_atom=distance_begin_atom,
                     )
-                    data["bcp_distance_start_atom"] = distance_start_atom
+                    data["bcp_distance_begin_atom"] = distance_begin_atom
                     data["bcp_distance_end_atom"] = distance_end_atom
                     data["bcp_relative_bond_position"] = relative_bond_position
 
@@ -144,6 +201,51 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
                         if feature_id_str not in ["_atoms", "_not_found"]
                     }
                     break
+
+    def _process_xyz_file(
+        self, file_path: str
+    ) -> Tuple[Optional[NDArray[np.float64]], Optional[str]]:
+        """Read and process a xyz file and ensure that it is compatible with the data of the initial
+        mol object.
+
+        Parameters
+        ----------
+        file_path : str
+            The path to the xyz file to be processed.
+
+        Returns
+        -------
+        Tuple[Optional[NDArray[np.float64]], Optional[str]]
+            A tuple containing:
+
+            * The coordinates read from the xyz file as a numpy array, or ``None`` if an error
+                occurred.
+            * An error message if an error occurred, or ``None`` if the processing was successful.
+        """
+        # Read file
+        coords_list, error_message = read_xyz_file(file_path=file_path)
+        if error_message is not None:
+            return None, error_message
+
+        assert coords_list is not None  # for type checker
+        coords = [c for c in coords_list[0].split("\n")[2:] if c.strip() != ""]
+
+        _splitted = np.array([line.split() for line in coords])
+        atom_symbols = _splitted[:, 0]
+
+        # Check if the data was read correctly and matches the mol object
+        if len(atom_symbols) != len(self.elements):
+            _errmsg = (
+                "number of atoms in Multiwfn output does not match number of atoms in mol vault"
+            )
+            return None, _errmsg
+        if not all(atom_symbols == self.elements):
+            _errmsg = "atom symbols in Multiwfn output do not match atom symbols in mol vault"
+            return None, _errmsg
+
+        # Get the coordinates
+        atom_coordinates = _splitted[:, 1:4].astype(float)
+        return atom_coordinates, None
 
     @staticmethod
     def _get_distance(
@@ -158,9 +260,9 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
         to : str
             Whether to calculate the distance to the "start" or "end" atom of the bond.
         bond_obj : Chem.rdchem.Bond
-            The RDKit bond object.
+            The RDKit bond object of the bond under consideration.
         mol_obj : Chem.rdchem.Mol
-            The RDKit molecule object.
+            The RDKit molecule object of the entire molecule.
 
         Returns
         -------
@@ -183,30 +285,35 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
 
     @staticmethod
     def _get_relative_bond_position(
-        start_atom_coordinates: NDArray[np.float64],
+        begin_atom_coordinates: NDArray[np.float64],
         end_atom_coordinates: NDArray[np.float64],
-        distance_start_atom: float,
+        distance_begin_atom: float,
     ) -> float:
         """Calculate the relative position of a bond critical point along its respective bond.
 
+        It is always ensured that the ratio is between 0 and 0.5, meaning that it is always
+        calculated with respect to the closest atom of the bond.
+
         Parameters
         ----------
-        start_atom_coordinates : NDArray[np.float64]
+        begin_atom_coordinates : NDArray[np.float64]
             The cartesian coordinates of the start atom of the bond.
         end_atom_coordinates : NDArray[np.float64]
             The cartesian coordinates of the end atom of the bond.
-        distance_start_atom : float
+        distance_begin_atom : float
             The distance of the bond critical point to the start atom of the bond.
 
         Returns
         -------
         float
             The ratio between the bond length and the distance of the bond critical point to
-            the start atom of the bond.
+            the bond atom that is closest to it.
         """
-        bond_length = np.linalg.norm(end_atom_coordinates - start_atom_coordinates)
-        ratio = distance_start_atom / bond_length
-        return float(ratio)
+        bond_length = np.linalg.norm(end_atom_coordinates - begin_atom_coordinates)
+        ratio = float(distance_begin_atom / bond_length)
+        if ratio > 0.5:
+            ratio = 1 - ratio
+        return ratio
 
 
 class Multiwfn3DBondTopologyBcpAverageLocalIonizationEnergy(_Multiwfn3DBondTopology):
@@ -284,8 +391,8 @@ class Multiwfn3DBondTopologyBcpDistanceEndAtom(_Multiwfn3DBondTopology):
     # This feature is automatically calculated in _Multiwfn3DBondTopology
 
 
-class Multiwfn3DBondTopologyBcpDistanceStartAtom(_Multiwfn3DBondTopology):
-    """Feature factory for the 3D bond feature "topology_bcp_distance_start_atom", calculated
+class Multiwfn3DBondTopologyBcpDistanceBeginAtom(_Multiwfn3DBondTopology):
+    """Feature factory for the 3D bond feature "topology_bcp_distance_begin_atom", calculated
     with multiwfn.
 
     The index of this feature is 451 (see the ``list_atom_features()`` and

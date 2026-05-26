@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Dict, List, Optional, Tuple, Union
+from typing import TYPE_CHECKING, Dict, List, Optional, Tuple, Union
 
+import numpy as np
 from mendeleev import element
 from rdkit import Chem
 from rdkit.Chem import rdDetermineBonds
@@ -12,6 +13,9 @@ from rdkit.Chem import rdDetermineBonds
 from bonafide.utils.constants import RESONANCE_SYMMETRY_FUNCTIONAL_GROUPS
 from bonafide.utils.helper_functions import clean_up
 from bonafide.utils.io_ import read_smarts
+
+if TYPE_CHECKING:
+    from numpy.typing import NDArray
 
 
 def _get_renumbering_list(
@@ -264,7 +268,7 @@ def bind_smiles_with_xyz(
     align: bool,
     connectivity_method: str,
     covalent_radius_factor: float,
-    charge: Optional[int],
+    charge: int,
 ) -> Tuple[Optional[Chem.rdchem.Mol], Optional[str]]:
     """Redefine an RDKit molecule object created from an XYZ file with a new RDKit molecule object
     created from a SMILES string.
@@ -291,9 +295,8 @@ def bind_smiles_with_xyz(
     covalent_radius_factor : float
         A scaling factor that is applied to the covalent radii of the atoms when determining the
         atom connectivity with the van-der-Waals method.
-    charge : Optional[int]
-        The formal charge of the molecule, which is required when using the Hueckel method for
-        determining atom connectivity.
+    charge : int
+        The formal charge of the molecule, which is required for determining atom connectivity.
 
     Returns
     -------
@@ -335,7 +338,7 @@ def bind_smiles_with_xyz(
         rdDetermineBonds.DetermineConnectivity(mol=xyz_mol, useHueckel=_use_hueckel, charge=charge)
     else:
         rdDetermineBonds.DetermineConnectivity(
-            mol=xyz_mol, covFactor=covalent_radius_factor, useVdw=_use_vdw
+            mol=xyz_mol, covFactor=covalent_radius_factor, useVdw=_use_vdw, charge=charge
         )
 
     # Check if number of bonds matches
@@ -482,7 +485,7 @@ def get_charge_from_mol_object(mol: Chem.rdchem.Mol) -> int:
     int
         The formal charge of the molecule.
     """
-    return int(Chem.GetFormalCharge(mol))
+    return int(Chem.GetFormalCharge(mol=mol))
 
 
 def from_periodic_table(
@@ -730,3 +733,72 @@ def get_symmetric_atom_sites(
             seen.append(atom_tuple)
 
     return unique_sites
+
+
+def align_coordinates(
+    reference_coords: NDArray[np.float64], to_be_aligned_coords: NDArray[np.float64]
+) -> Tuple[Optional[NDArray[np.float64]], Optional[NDArray[np.float64]], Optional[str]]:
+    """Find the optimal rotation matrix and translation vector that aligns the source coordinates
+    to the target coordinates using the Kabsch-Umeyama algorithm.
+
+    Parameters
+    ----------
+    reference_coords : NDArray[np.float64]
+        The target coordinates to which the source coordinates will be aligned.
+    to_be_aligned_coords : NDArray[np.float64]
+        The source coordinates that will be aligned to the target coordinates.
+
+    Returns
+    -------
+    Tuple[Optional[NDArray[np.float64]], Optional[NDArray[np.float64]], Optional[str]]
+        A tuple containing:
+
+        * The rotation matrix, ``None`` if the alignment was unsuccessful.
+        * The translation vector, ``None`` if the alignment was unsuccessful.
+        * An error message if the alignment was unsuccessful, otherwise ``None``.
+    """
+    # Mostly implemented by Claude Sonnet 4.6.
+    try:
+        # Center both sets of coordinates
+        reference_centroid = reference_coords.mean(axis=0)
+        to_be_aligned_centroid = to_be_aligned_coords.mean(axis=0)
+
+        reference_coords_centered = reference_coords - reference_centroid
+        to_be_aligned_coords_centered = to_be_aligned_coords - to_be_aligned_centroid
+
+        # Compute the covariance matrix
+        H = to_be_aligned_coords_centered.T @ reference_coords_centered
+
+        # SVD
+        U, _, Vt = np.linalg.svd(H)
+
+        # Ensure proper rotation (handle reflection). Use the sign of the determinant rather
+        # than its raw value to avoid floating-point scaling that would render the rotation
+        # matrix non-orthonormal.
+        d = np.sign(np.linalg.det(Vt.T @ U.T))
+        if d == 0:
+            d = 1.0
+        D = np.diag([1.0, 1.0, d])
+
+        # Rotation matrix
+        R = Vt.T @ D @ U.T
+
+        # Translation vector
+        t = reference_centroid - R @ to_be_aligned_centroid
+
+        # Apply transformation for double-checking
+        to_be_aligned_coords_transformed = (R @ to_be_aligned_coords.T).T + t
+
+    except Exception as e:
+        _errmsg = f"an error occurred during coordinate alignment: {str(e)}"
+        return None, None, _errmsg
+
+    # Check transformation
+    if not np.allclose(a=to_be_aligned_coords_transformed, b=reference_coords, rtol=0.1):
+        _errmsg = (
+            "the alignment was unsuccessful: the transformed coordinates do not match the "
+            "reference coordinates."
+        )
+        return None, None, _errmsg
+
+    return R, t, None

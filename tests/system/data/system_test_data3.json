@@ -4353,9 +4353,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 1.313265,
-            "7": 1.229079,
-            "8": 1.143202
+            "3": 1.313265,
+            "16": 1.229079,
+            "11": 1.143202
         },
         "split_str": false
     },
@@ -4370,9 +4370,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 1.088217,
-            "7": 0.887375,
-            "8": 0.704715
+            "3": 1.088217,
+            "16": 0.887375,
+            "11": 0.704715
         },
         "split_str": false
     },
@@ -4387,9 +4387,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 1.109201,
-            "7": 1.068415,
-            "8": 0.890884
+            "3": 1.109201,
+            "16": 1.068415,
+            "11": 0.890884
         },
         "split_str": false
     },
@@ -4404,9 +4404,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 0.543201,
-            "7": 0.542025,
-            "8": 0.519615
+            "3": 0.543201,
+            "16": 0.542025,
+            "11": 0.519615
         },
         "split_str": false
     },
@@ -4421,9 +4421,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 1.32178,
-            "7": 1.233862,
-            "8": 1.06659
+            "3": 1.32178,
+            "16": 1.233862,
+            "11": 1.06659
         },
         "split_str": false
     },
@@ -4438,9 +4438,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": "0.59801100,-0.46012858,0.18895436",
-            "7": "-1.17345347,-0.24155485,0.49788701",
-            "8": "-2.08188132,0.24200102,-0.09511489"
+            "3": "0.59801100,-0.46012858,0.18895436",
+            "16": "-1.17345347,-0.24155485,0.49788701",
+            "11": "-2.08188132,0.24200102,-0.09511489"
         },
         "split_str": true
     },
@@ -4455,9 +4455,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": "0.5979892,-0.4601877,0.1890808",
-            "7": "-1.1735138,-0.2414854,0.4977738",
-            "8": "-2.0817385,0.2419623,-0.0950954"
+            "3": "0.5979892,-0.4601877,0.1890808",
+            "16": "-1.1735138,-0.2414854,0.4977738",
+            "11": "-2.0817385,0.2419623,-0.0950954"
         },
         "split_str": true
     },
@@ -4472,9 +4472,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 42670.95689,
-            "7": 41317.22949,
-            "8": 40367.90495
+            "3": 42670.95689,
+            "16": 41317.22949,
+            "11": 40367.90495
         },
         "split_str": false
     },
@@ -4489,9 +4489,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": "_inaccessible",
-            "7": "_inaccessible",
-            "8": "_inaccessible"
+            "3": "_inaccessible",
+            "16": "_inaccessible",
+            "11": "_inaccessible"
         },
         "split_str": false
     },
@@ -4506,9 +4506,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 0.27315711,
-            "7": 0.24740532,
-            "8": 0.27199052
+            "3": 0.27315711,
+            "16": 0.24740532,
+            "11": 0.27199052
         },
         "split_str": false
     },
@@ -4523,9 +4523,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 0.0,
-            "7": 0.0,
-            "8": 0.0
+            "3": 0.0,
+            "16": 0.0,
+            "11": 0.0
         },
         "split_str": false
     },
@@ -4540,9 +4540,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 0.27315711,
-            "7": 0.24740532,
-            "8": 0.27199052
+            "3": 0.27315711,
+            "16": 0.24740532,
+            "11": 0.27199052
         },
         "split_str": false
     },
@@ -4557,9 +4557,9 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 0.68173924,
-            "7": 0.7040759,
-            "8": 0.72063352
+            "3": 0.68173924,
+            "16": 0.7040759,
+            "11": 0.72063352
         },
         "split_str": false
     },
@@ -4574,8 +4574,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "9": "-0.856392,1.810298,0.309827",
-            "13": "-0.837562,-3.123254,0.060385"
+            "2": "-0.856392,1.810298,0.309827",
+            "15": "-0.837562,-3.123254,0.060385"
         },
         "split_str": true
     },
@@ -4590,8 +4590,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "9": 2.026469,
-            "13": 3.234172
+            "2": 2.026469,
+            "15": 3.234172
         },
         "split_str": false
     },
@@ -4606,8 +4606,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "9": "-0.129100,0.351304,0.044738",
-            "13": "-0.068333,-0.422070,-0.021503"
+            "2": "-0.129100,0.351304,0.044738",
+            "15": "-0.068333,-0.422070,-0.021503"
         },
         "split_str": true
     },
@@ -4622,8 +4622,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "9": 0.376938,
-            "13": 0.428107
+            "2": 0.376938,
+            "15": 0.428107
         },
         "split_str": false
     },
@@ -4638,8 +4638,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "9": 0.616645,
-            "13": 0.734411
+            "2": 0.616645,
+            "15": 0.734411
         },
         "split_str": false
     },
@@ -4671,8 +4671,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 1.068077287,
-            "8": 1.028472885
+            "3": 1.068077287,
+            "11": 1.028472885
         },
         "split_str": false
     },
@@ -4687,8 +4687,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": "0.971689113914,-0.054664871413,-0.177419321772",
-            "8": "-1.635423818320,1.578277103664,0.119618659696"
+            "3": "0.65789455,-0.35618228,-0.03697194",
+            "11": "-2.35718005,0.31617759,-0.13197858"
         },
         "split_str": true
     },
@@ -4703,8 +4703,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 0.4141312618,
-            "8": 0.2757276226
+            "3": 0.4141312618,
+            "11": 0.2757276226
         },
         "split_str": false
     },
@@ -4719,8 +4719,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 0.2588701298,
-            "8": 0.1957390577
+            "3": 0.2588701298,
+            "11": 0.1957390577
         },
         "split_str": false
     },
@@ -4735,12 +4735,12 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": 1.1304981290032208,
-            "10": 1.455270277538359
+            "5": 0.6990404924520722,
+            "10": 0.7050179802538562
         },
         "split_str": false
     },
-    "Multiwfn3DBondTopologyBcpDistanceStartAtom": {
+    "Multiwfn3DBondTopologyBcpDistanceBeginAtom": {
         "input_string": "radical_cation-conf_01.sdf",
         "electronic_structure_data": [
             [
@@ -4751,8 +4751,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": 1.6209211099727983,
-            "10": 0.653230692695627
+            "5": 0.6415063037598583,
+            "10": 0.38982620284586655
         },
         "split_str": false
     },
@@ -4911,8 +4911,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": 2.84166,
-            "10": 1.448719
+            "9": 2.84166,
+            "6": 1.448719
         },
         "split_str": false
     },
@@ -4927,8 +4927,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": "-0.2775557562E-16, -0.1387778781E-15, -0.5984795992E-16",
-            "8": "-0.2619432449E-15,  0.0000000000E+00, -0.6938893904E-17"
+            "3": "-0.2775557562E-16, -0.1387778781E-15, -0.5984795992E-16",
+            "11": "-0.2619432449E-15,  0.0000000000E+00, -0.6938893904E-17"
         },
         "split_str": true
     },
@@ -4943,8 +4943,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 1.536601761e-16,
-            "8": 2.620351346e-16
+            "3": 1.536601761e-16,
+            "11": 2.620351346e-16
         },
         "split_str": false
     },
@@ -4959,8 +4959,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": 0.4082383255,
-            "10": 0.2760344148
+            "9": 0.4082383255,
+            "6": 0.2760344148
         },
         "split_str": false
     },
@@ -4975,8 +4975,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": 0.1410468193,
-            "10": 0.2972048515
+            "9": 0.1410468193,
+            "6": 0.2972048515
         },
         "split_str": false
     },
@@ -4991,8 +4991,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": "-0.8126751990E+00,-0.6068780220E+00,0.2859860708E+00",
-            "10": "-0.7681206553E+00,-0.7297620582E+00,0.5302066506E+00"
+            "9": "-0.8126751990E+00,-0.6068780220E+00,0.2859860708E+00",
+            "6": "-0.7681206553E+00,-0.7297620582E+00,0.5302066506E+00"
         },
         "split_str": true
     },
@@ -5007,8 +5007,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 5.38425295e-16,
-            "8": 9.681960369e-16
+            "3": 5.38425295e-16,
+            "11": 9.681960369e-16
         },
         "split_str": false
     },
@@ -5023,8 +5023,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": 0.124846538,
-            "10": 0.03411539909
+            "9": 0.124846538,
+            "6": 0.03411539909
         },
         "split_str": false
     },
@@ -5135,8 +5135,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 100.0,
-            "8": 100.0
+            "3": 100.0,
+            "11": 100.0
         },
         "split_str": false
     },
@@ -5151,13 +5151,13 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 100.0,
-            "8": 100.0
+            "3": 100.0,
+            "11": 100.0
         },
         "split_str": false
     },
     "Multiwfn3DBondTopologyBcpRelativeBondPosition": {
-        "input_string": "radical_cation-conf_01.xyz",
+        "input_string": "radical_cation-conf_01.sdf",
         "electronic_structure_data": [
             [
                 "radical_cation-conf_01.fchk",
@@ -5167,8 +5167,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": 1.209302436281783,
-            "10": 0.5966755936937536
+            "5": 0.4785953123160556,
+            "10": 0.35609335460331737
         },
         "split_str": false
     },
@@ -5183,8 +5183,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": -0.3549230675,
-            "10": -0.2780000318
+            "9": -0.3549230675,
+            "6": -0.2780000318
         },
         "split_str": false
     },
@@ -5199,8 +5199,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": -0.2393351757,
-            "10": -0.1766049616
+            "9": -0.2393351757,
+            "6": -0.1766049616
         },
         "split_str": false
     },
@@ -5215,8 +5215,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "5": -0.0009774713095,
-            "10": 0.0002800955069
+            "9": -0.0009774713095,
+            "6": 0.0002800955069
         },
         "split_str": false
     },
@@ -5231,8 +5231,8 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "2": 7153428209.0,
-            "8": 5724599940.0
+            "3": 7153428209.0,
+            "11": 5724599940.0
         },
         "split_str": false
     },

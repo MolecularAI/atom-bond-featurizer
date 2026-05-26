@@ -765,7 +765,9 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
         A SMILES string can only be attached to a molecule vault for which the bonds are not
         determined yet. This also means that once a SMILES string is attached to a molecule
         vault, it cannot be changed anymore. A SMILES string cannot be attached to a molecule vault
-        hosting a 2D molecule.
+        hosting a 2D molecule. The charge of the compound in the molecule vault must be set before
+        using this method. This is because the charge is required for determining the atom
+        connectivity of the molecule to which the SMILES string is attached.
 
         Parameters
         ----------
@@ -837,11 +839,12 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
             allowed_values=DETERMINE_BONDS_METHODS,
         )
 
-        # Check if charge is set if Hueckel method is selected
-        if connectivity_method == "hueckel" and self.mol_vault.charge is None:
+        # Check if charge is set
+        if self.mol_vault.charge is None:
             _errmsg = (
-                "Set the charge of the molecule vault with the set_charge() method "
-                "before determining bonds with the Hueckel method."
+                "Set the charge of the molecule vault with the set_charge() method before "
+                "attaching a SMILES string. This is required for determining the atom connectivity "
+                "of the molecule to which the SMILES string is attached."
             )
             logging.error(f"'{self._namespace}' | {self._loc}()\n{_errmsg}")
             raise ValueError(f"{self._loc}(): {_errmsg}")
@@ -1098,6 +1101,8 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
         ``allow_charged_fragments``, and ``embed_chiral`` influence how the bonds of the
         individual RDKit molecule object(s) are.
 
+        The charge of the compound in the molecule vault must be set before using this method.
+
         Parameters
         ----------
         connectivity_method : str
@@ -1175,11 +1180,11 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
             allowed_values=DETERMINE_BONDS_METHODS,
         )
 
-        # Check if charge is set if Hueckel method is selected
-        if connectivity_method == "hueckel" and self.mol_vault.charge is None:
+        # Check if charge is set
+        if self.mol_vault.charge is None:
             _errmsg = (
                 "Set the charge of the molecule vault with the set_charge() method "
-                "before determining bonds with the Hueckel method."
+                "before determining bonds."
             )
             logging.error(f"'{self._namespace}' | {self._loc}()\n{_errmsg}")
             raise ValueError(f"{self._loc}(): {_errmsg}")

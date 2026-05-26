@@ -7866,7 +7866,7 @@
         },
         "split_str": false
     },
-    "Multiwfn3DBondTopologyBcpDistanceStartAtom": {
+    "Multiwfn3DBondTopologyBcpDistanceBeginAtom": {
         "input_string": "clopidogrel-conf_05.xyz",
         "electronic_structure_data": [
             [
@@ -8293,7 +8293,7 @@
         "energy_data": [],
         "configuration_settings": [],
         "expected_data": {
-            "21": 0.5639368296034787,
+            "21": 0.4360631742725145,
             "13": 0.49267356154809344
         },
         "split_str": false

@@ -147,7 +147,7 @@ class FeatureOutput:
                         }
                     return result_dict
 
-                # Otherwse just return the dict (since this is either a reduced dataframe - one
+                # Otherwise just return the dict (since this is either a reduced dataframe - one
                 # entry per feature - or a single mol object)
                 else:
                     return processed_df.to_dict("index")

@@ -5863,7 +5863,7 @@
         "factory": "Multiwfn3DBondTopologyBcpDistanceEndAtom"
     },
     "451": {
-        "name": "multiwfn3D-bond-topology_bcp_distance_start_atom",
+        "name": "multiwfn3D-bond-topology_bcp_distance_begin_atom",
         "origin": "multiwfn",
         "feature_type": "bond",
         "dimensionality": "3D",
@@ -5873,7 +5873,7 @@
         "requires_charge": false,
         "requires_multiplicity": false,
         "config_path": "multiwfn.topology",
-        "factory": "Multiwfn3DBondTopologyBcpDistanceStartAtom"
+        "factory": "Multiwfn3DBondTopologyBcpDistanceBeginAtom"
     },
     "452": {
         "name": "multiwfn3D-bond-topology_bcp_electron_density",

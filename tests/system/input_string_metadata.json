@@ -62,7 +62,8 @@
     "radical_cation-conf_01.xyz": {
         "input_format": "file",
         "charge": 1,
-        "multiplicity": 2
+        "multiplicity": 2,
+        "helper_smiles": "C1(=S)[N+]([H])C(OC([H])([H])[H])=C(N1C([H])([H])[H])[H]"
     },
     "C1(=S)[N+]([H])C(OC([H])([H])[H])=C(N1C([H])([H])[H])[H]": {
         "input_format": "smiles",

@@ -2,11 +2,13 @@
 
 from typing import Callable, Dict, List, Tuple
 
+import numpy as np
 import pytest
 from mendeleev import element
 from rdkit import Chem
 
 from bonafide.utils.helper_functions_chemistry import (
+    align_coordinates,
     bind_smiles_with_xyz,
     from_periodic_table,
     get_atom_bond_mapping_dicts,
@@ -1209,3 +1211,93 @@ def test_get_symmetric_atom_sites(
         resonance_UNCONSTRAINED_CATIONS=resonance_UNCONSTRAINED_CATIONS,
     )
     assert result == expected_output
+
+
+###############################################
+# Tests for the align_coordinates() function. #
+###############################################
+
+
+@pytest.mark.align_coordinates
+def test_align_coordinates() -> None:
+    """Test for the ``align_coordinates()`` function: identical coordinates (no transformation)."""
+    coords = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]])
+    R, t, error = align_coordinates(reference_coords=coords, to_be_aligned_coords=coords)
+    assert error is None
+    assert R is not None
+    assert t is not None
+    np.testing.assert_allclose(R, np.eye(3), atol=1e-10)
+    np.testing.assert_allclose(t, np.zeros(3), atol=1e-10)
+
+
+@pytest.mark.align_coordinates
+def test_align_coordinates2() -> None:
+    """Test for the ``align_coordinates()`` function: pure translation."""
+    reference = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0], [2.0, 3.0, 1.0]])
+    shifted = reference - np.array([5.0, -3.0, 2.0])
+    R, t, error = align_coordinates(reference_coords=reference, to_be_aligned_coords=shifted)
+    assert error is None
+    transformed = (R @ shifted.T).T + t
+    np.testing.assert_allclose(transformed, reference, atol=1e-8)
+
+
+@pytest.mark.align_coordinates
+def test_align_coordinates3() -> None:
+    """Test for the ``align_coordinates()`` function: 90-degree rotation around z-axis."""
+    reference = np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [-1.0, 0.0, 0.0], [0.0, -1.0, 0.0]])
+
+    # Rotate 90 degrees around z: (x,y,z) -> (-y,x,z)
+    rotated = np.array([[-r[1], r[0], r[2]] for r in reference])
+    R, t, error = align_coordinates(reference_coords=reference, to_be_aligned_coords=rotated)
+
+    assert error is None
+    transformed = (R @ rotated.T).T + t
+    np.testing.assert_allclose(transformed, reference, atol=1e-8)
+
+
+@pytest.mark.align_coordinates
+def test_align_coordinates4() -> None:
+    """Test for the ``align_coordinates()`` function: combined rotation and translation."""
+    reference = np.array(
+        [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0], [1.0, 1.0, 1.0]]
+    )
+
+    # 180-degree rotation around x-axis: (x,y,z) -> (x,-y,-z), then translate by (3,1,2)
+    rotated_translated = np.array([[r[0], -r[1], -r[2]] for r in reference]) + np.array(
+        [3.0, 1.0, 2.0]
+    )
+    R, t, error = align_coordinates(
+        reference_coords=reference, to_be_aligned_coords=rotated_translated
+    )
+
+    assert error is None
+    transformed = (R @ rotated_translated.T).T + t
+    np.testing.assert_allclose(transformed, reference, atol=1e-8)
+
+
+@pytest.mark.align_coordinates
+def test_align_coordinates5() -> None:
+    """Test for the ``align_coordinates()`` function: reflected coordinates (improper rotation)."""
+    reference = np.array(
+        [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0], [1.0, 1.0, 1.0]]
+    )
+
+    # Reflect through xy-plane: (x,y,z) -> (x,y,-z)
+    reflected = reference.copy()
+    reflected[:, 2] *= -1
+    R, _, _ = align_coordinates(reference_coords=reference, to_be_aligned_coords=reflected)
+
+    # Should still produce a proper rotation (det(R) = +1)
+    if R is not None:
+        np.testing.assert_allclose(np.linalg.det(R), 1.0, atol=1e-10)
+
+
+@pytest.mark.align_coordinates
+def test_align_coordinates6() -> None:
+    """Test for the ``align_coordinates()`` function: minimum number of atoms (3)."""
+    reference = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]])
+    shifted = reference + np.array([10.0, -5.0, 3.0])
+    R, t, error = align_coordinates(reference_coords=reference, to_be_aligned_coords=shifted)
+    assert error is None
+    transformed = (R @ shifted.T).T + t
+    np.testing.assert_allclose(transformed, reference, atol=1e-8)

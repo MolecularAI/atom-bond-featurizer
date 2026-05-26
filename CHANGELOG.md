@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 0.2.1
+
+### Changed
+
+-   Both the `attach_smiles()` and `determine_bonds()` method now require the charge of the molecule
+    to be set before using it (through the `set_charge()` method), regardless of the input to their
+    `connectivity_method` parameter. This is to ensure correct utilization of RDKit's
+    `rdkit.Chem.rdDetermineBonds` module. In previous versions, the charge was only required if
+    `connectivity_method="hueckel"` was used.
+
 ## Version 0.2.0
 
 ### Added
@@ -14,7 +24,7 @@
     atoms in 1,4-dinitrobenzene will all be symmetry-equivalent. If set to `False`, the behavior of
     previous versions is reproduced, in which resonance was not considered. Importantly, this does
     not extend to tautomers and open-shell molecules (see https://doi.org/10.1021/acs.jcim.5c00495).
-    The consider resonance functionality was implemented based on RDKit's `ResonanceMolSupplier`,
+    The consider-resonance functionality was implemented based on RDKit's `ResonanceMolSupplier`,
     and the individual configuration options for the enumeration of the resonance forms can also be
     modified if desired (see `_feature_config.toml`). Cases not covered by `ResonanceMolSupplier`
     were implemented by explicit substructure matching. These are:

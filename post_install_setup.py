@@ -31,6 +31,10 @@ def modify_script(path: str) -> None:
     ----------
     path : str
         The path to the qmdesc installation directory.
+
+    Returns
+    -------
+    None
     """
     path = os.path.join(path, "handler.py")
     with open(path, "r") as file:

@@ -1,10 +1,20 @@
 """Extraction of the Multiwfn real space properties."""
 
-from typing import Any, Dict, List, Optional, Tuple, Union
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
+
+import numpy as np
+
+if TYPE_CHECKING:
+    from numpy.typing import NDArray
 
 
 def read_prop_file(
-    file_content: List[str], prefix: str = ""
+    file_content: List[str],
+    prefix: str = "",
+    rotation_matrix: Optional[NDArray[np.float64]] = None,
+    translation_vector: Optional[NDArray[np.float64]] = None,
 ) -> List[Dict[str, Optional[Union[str, float, int, Tuple[int, int], List[str]]]]]:
     """Read the Multiwfn real space properties.
 
@@ -14,6 +24,12 @@ def read_prop_file(
         The content of the Multiwfn output file as a list of the individual lines of the file.
     prefix : str, optional
         A prefix to add to all property names, by default "".
+    rotation_matrix : Optional[NDArray[np.float64]], optional
+        The rotation matrix to align the coordinates of the bond critical point with the
+        coordinates of the mol object.
+    translation_vector : Optional[NDArray[np.float64]], optional
+        The translation vector to align the coordinates of the bond critical point with the
+        coordinates of the mol object.
 
     Returns
     -------
@@ -107,7 +123,11 @@ def read_prop_file(
                     data_dict["_atoms"] = (start_idx, end_idx)
 
                 if "Position (Angstrom):" in line:
-                    data_dict[f"{prefix}coordinates"] = ",".join(splitted[-1].split())
+                    coords = np.array([float(x) for x in splitted[-1].split()])
+                    coords = (rotation_matrix @ coords.T).T + translation_vector
+                    data_dict[f"{prefix}coordinates"] = ",".join(
+                        [str(round(number=x, ndigits=8)) for x in coords]
+                    )
 
             if "Density of all electrons:" in line:
                 data_dict[f"{prefix}electron_density"] = float(splitted[-1])

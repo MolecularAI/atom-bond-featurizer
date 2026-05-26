@@ -63,9 +63,8 @@ def test_determine_bonds(
     _mols = f.mol_vault.mol_objects
     assert all([len(mol.GetBonds()) == 0 for mol in _mols])
 
-    # Set charge if required
-    if connectivity_method == "hueckel":
-        f.set_charge(charge=0)
+    # Set charge
+    f.set_charge(charge=0)
 
     # Determine bonds
     if connectivity_method == "_use_default":
@@ -131,6 +130,8 @@ def test_determine_bonds3(
     f.read_input(input_value="O(C([H])([H])F)[H]", namespace="irrelevant")
     assert f.mol_vault is not None
 
+    f.set_charge(charge=0)
+
     # Determine bonds
     with pytest.raises(ValueError, match="All bonds are already defined."):
         f.determine_bonds()
@@ -161,12 +162,44 @@ def test_determine_bonds4(
     assert f.mol_vault is not None
 
     # Determine bonds before actually testing the method
+    f.set_charge(charge=0)
     f.determine_bonds()
 
     with pytest.raises(
         ValueError,
         match="The bonds of the molecule in the molecule vault are already determined and cannot "
         "be determined again.",
+    ):
+        f.determine_bonds()
+
+    # Check logs
+    assert len(caplog.records) > 0
+    assert any(record.levelno == logging.ERROR for record in caplog.records)
+
+    # Clean up
+    clean_up_logfile()
+
+
+@pytest.mark.determine_bonds
+def test_determine_bonds5(
+    caplog: pytest.LogCaptureFixture,
+    fresh_featurizer: AtomBondFeaturizer,
+    clean_up_logfile: Callable[[str], None],
+    fetch_data_file: Callable[[str], str],
+) -> None:
+    """Test for the ``determine_bonds()`` method: fails because charge is not set."""
+    # Setup featurizer and read input
+    f = fresh_featurizer()
+    assert f.mol_vault is None
+
+    input_string = fetch_data_file(file_name="clopidogrel-conf_01.xyz")
+    f.read_input(input_value=input_string, namespace="irrelevant", input_format="file")
+    assert f.mol_vault is not None
+
+    with pytest.raises(
+        ValueError,
+        match=r"Set the charge of the molecule vault with the set_charge\(\) method before "
+        r"determining bonds\.",
     ):
         f.determine_bonds()
 
@@ -189,10 +222,9 @@ def test_determine_bonds4(
         ("van_der_waals", 1.3, (True,), True, TypeError),
         ("van_der_waals", 1.3, True, None, TypeError),
         ("using_me_as_a_method_would_be_insane", 1.3, True, False, ValueError),
-        ("hueckel", 1.3, True, False, ValueError),
     ],
 )
-def test_determine_bonds5(
+def test_determine_bonds6(
     caplog: pytest.LogCaptureFixture,
     fresh_featurizer: AtomBondFeaturizer,
     clean_up_logfile: Callable[[str], None],
@@ -213,6 +245,8 @@ def test_determine_bonds5(
     assert f.mol_vault is not None
     assert f.mol_vault.bonds_determined is False
 
+    f.set_charge(charge=0)
+
     # Determine bonds
     with pytest.raises(_error_type):
         f.determine_bonds(
@@ -232,7 +266,7 @@ def test_determine_bonds5(
 
 
 @pytest.mark.determine_bonds
-def test_determine_bonds6(
+def test_determine_bonds7(
     caplog: pytest.LogCaptureFixture,
     fresh_featurizer: AtomBondFeaturizer,
     clean_up_logfile: Callable[[str], None],
@@ -254,6 +288,7 @@ def test_determine_bonds6(
     ]
 
     # Determine bonds
+    f.set_charge(charge=0)
     f.determine_bonds()
     assert f.mol_vault.bonds_determined is True
 
@@ -276,7 +311,7 @@ def test_determine_bonds6(
 
 
 @pytest.mark.determine_bonds
-def test_determine_bonds7(
+def test_determine_bonds8(
     caplog: pytest.LogCaptureFixture,
     fresh_featurizer: AtomBondFeaturizer,
     clean_up_logfile: Callable[[str], None],

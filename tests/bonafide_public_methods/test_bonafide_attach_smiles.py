@@ -142,9 +142,8 @@ def test_attach_smiles(
     assert f.mol_vault.smiles is None
     assert f.mol_vault.bonds_determined is False
 
-    # Set charge if required
-    if connectivity_method == "hueckel":
-        f.set_charge(charge=0)
+    # Set charge
+    f.set_charge(charge=0)
 
     # Attach SMILES
     f.attach_smiles(
@@ -224,6 +223,8 @@ def test_attach_smiles3(
     f.read_input(input_value="O(C([H])([H])F)[H]", namespace="irrelevant")
     assert f.mol_vault is not None
 
+    f.set_charge(charge=0)
+
     with pytest.raises(
         ValueError, match="Attaching a SMILES string to a 2D ensemble is not allowed."
     ):
@@ -245,6 +246,48 @@ def test_attach_smiles4(
     clean_up_logfile: Callable[[str], None],
     fetch_data_file: Callable[[str], str],
 ) -> None:
+    """Test for the ``attach_smiles()`` method: fails because charge was not set."""
+    # Setup featurizer and read input
+    f = fresh_featurizer()
+    assert f.mol_vault is None
+
+    input_string = fetch_data_file(file_name="clopidogrel-conf_01.xyz")
+    f.read_input(
+        input_value=input_string,
+        namespace="irrelevant",
+        input_format="file"
+    )
+    assert f.mol_vault is not None
+    assert f.mol_vault.smiles is None
+    assert f.mol_vault.bonds_determined is False
+
+    with pytest.raises(
+        ValueError,
+        match=r"Set the charge of the molecule vault with the set_charge\(\) method before "
+        "attaching a SMILES string. This is required for determining the atom connectivity "
+        "of the molecule to which the SMILES string is attached.",
+    ):
+        f.attach_smiles(
+            smiles="[H]c1sc2c(c1[H])C([H])([H])N([C@]([H])(C(=O)OC([H])([H])[H])c1c"
+            "([H])c([H])c([H])c([H])c1Cl)C([H])([H])C2([H])[H]"
+        )
+    assert f.mol_vault is not None
+
+    # Check logs
+    assert len(caplog.records) > 0
+    assert any(record.levelno == logging.ERROR for record in caplog.records)
+
+    # Clean up
+    clean_up_logfile()
+
+
+@pytest.mark.attach_smiles
+def test_attach_smiles5(
+    caplog: pytest.LogCaptureFixture,
+    fresh_featurizer: AtomBondFeaturizer,
+    clean_up_logfile: Callable[[str], None],
+    fetch_data_file: Callable[[str], str],
+) -> None:
     """Test for the ``attach_smiles()`` method: fails because bonds were already determined."""
     # Setup featurizer and read input
     f = fresh_featurizer()
@@ -252,6 +295,7 @@ def test_attach_smiles4(
 
     input_string = fetch_data_file(file_name="clopidogrel-conf_01.xyz")
     f.read_input(input_value=input_string, namespace="irrelevant", input_format="file")
+    f.set_charge(charge=0)
     assert f.mol_vault is not None
 
     # Determine bonds before attaching the SMILES
@@ -332,18 +376,9 @@ def test_attach_smiles4(
             1.3,
             ValueError,
         ),
-        (
-            "clopidogrel-conf_01.xyz",
-            "[H]c1sc2c(c1[H])C([H])([H])N([C@]([H])(C(=O)OC([H])([H])[H])c1c([H])c([H])c([H])"
-            "c([H])c1Cl)C([H])([H])C2([H])[H]",
-            False,
-            "hueckel",
-            1.3,
-            ValueError,
-        ),
     ],
 )
-def test_attach_smiles5(
+def test_attach_smiles6(
     caplog: pytest.LogCaptureFixture,
     fresh_featurizer: AtomBondFeaturizer,
     clean_up_logfile: Callable[[str], None],
@@ -362,6 +397,7 @@ def test_attach_smiles5(
 
     input_string = fetch_data_file(file_name=input_string)
     f.read_input(input_value=input_string, namespace="irrelevant", input_format="file")
+    f.set_charge(charge=0)
     assert f.mol_vault is not None
 
     # Attach SMILES
@@ -391,7 +427,7 @@ def test_attach_smiles5(
         "in_my_wildest_dreams_i_am_a_smiles",
     ],
 )
-def test_attach_smiles6(
+def test_attach_smiles7(
     caplog: pytest.LogCaptureFixture,
     fresh_featurizer: AtomBondFeaturizer,
     clean_up_logfile: Callable[[str], None],
@@ -407,11 +443,54 @@ def test_attach_smiles6(
 
     input_string = fetch_data_file(file_name="clopidogrel-conf_01.xyz")
     f.read_input(input_value=input_string, namespace="irrelevant", input_format="file")
+    f.set_charge(charge=0)
     assert f.mol_vault is not None
 
     # Attach SMILES
     with pytest.raises(ValueError):
         f.attach_smiles(smiles=smiles)
+
+    # Check logs
+    assert len(caplog.records) > 0
+    assert any(record.levelno == logging.ERROR for record in caplog.records)
+
+    # Clean up
+    clean_up_logfile()
+
+
+@pytest.mark.attach_smiles
+def test_attach_smiles8(
+    caplog: pytest.LogCaptureFixture,
+    fresh_featurizer: AtomBondFeaturizer,
+    clean_up_logfile: Callable[[str], None],
+    fetch_data_file: Callable[[str], str],
+) -> None:
+    """Test for the ``attach_smiles()`` method: fails because charges don't match."""
+    # Setup featurizer and read input
+    f = fresh_featurizer()
+    assert f.mol_vault is None
+
+    input_string = fetch_data_file(file_name="clopidogrel-conf_01.xyz")
+    f.read_input(
+        input_value=input_string,
+        namespace="irrelevant",
+        input_format="file",
+    )
+    f.set_charge(charge=0)
+    assert f.mol_vault is not None
+    assert f.mol_vault.smiles is None
+    assert f.mol_vault.bonds_determined is False
+
+    with pytest.raises(
+        ValueError,
+        match=r"Formal charge of the molecule in the molecule vault \(0\) does not match the "
+        r"formal charge of the molecule represented by the SMILES string \(1\).",
+    ):
+        f.attach_smiles(
+            smiles="[H]C1=C([H])C2=C([S+]1)C([H])([H])C([H])([H])N([C@]([H])(C(=O)OC([H])([H])[H])"
+            "c1c([H])c([H])c([H])c([H])c1Cl)C2([H])[H]"
+        )
+    assert f.mol_vault is not None
 
     # Check logs
     assert len(caplog.records) > 0

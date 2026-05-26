@@ -79,6 +79,15 @@ def get_non_energy_based_reduced_features(
                     "it contains non-numeric values. Check the unreduced features for details."
                 )
 
+        # Check if obtained series is completely empty. If so, fill it with None
+        # This is to avoid that the columns will not show up at all in the final reduced DataFrame
+        if sub_mean.empty:
+            sub_mean = pd.Series({col: None for col in sub_df_.columns})
+        if sub_min.empty:
+            sub_min = pd.Series({col: None for col in sub_df_.columns})
+        if sub_max.empty:
+            sub_max = pd.Series({col: None for col in sub_df_.columns})
+
         mean_features[idx] = sub_mean
         min_features[idx] = sub_min
         max_features[idx] = sub_max
@@ -183,7 +192,7 @@ def get_energy_based_reduced_features(
                 )
                 sub_df_[col] = None
 
-        # Calculate Boltzmann-weighted average for each feature -
+        # Calculate Boltzmann-weighted average for each feature
         boltzmann = sub_df_.apply(
             lambda col: None
             if col.isna().all() is np.True_

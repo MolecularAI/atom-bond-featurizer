@@ -698,10 +698,10 @@ def _run_workflow(
 
     # Preprocessing
     try:
-        featurizer.attach_smiles(smiles=smiles)
-
         featurizer.set_charge(charge=charge)
         featurizer.set_multiplicity(multiplicity=multiplicity)
+
+        featurizer.attach_smiles(smiles=smiles)
 
         featurizer.attach_electronic_structure(electronic_structure_data=el_file_path_n, state="n")
         featurizer.attach_electronic_structure(

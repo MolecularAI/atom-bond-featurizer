@@ -15,7 +15,7 @@ For development work, BONAFIDE should be installed in its development environmen
 conda env create -n bonafide_env_dev -f bonafide_env_dev.yml python=3.12
 conda activate bonafide_env_dev
 pip install kallisto --no-deps
-pip install . -e
+pip install -e .
 python post_install_setup.py
 python check_bonafide_installation.py
 ```

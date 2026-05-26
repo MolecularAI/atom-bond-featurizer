@@ -25,12 +25,13 @@ from bonafide.utils.constants import (
 from bonafide.utils.feature_factories import FEATURE_FACTORIES
 from bonafide.utils.feature_output import FeatureOutput
 from bonafide.utils.helper_functions import clean_up, flatten_dict, standardize_string
-from bonafide.utils.helper_functions_chemistry import bind_smiles_with_xyz, get_molecular_formula
+from bonafide.utils.helper_functions_chemistry import bind_smiles_with_xyz, get_molecular_formula, get_charge_from_mol_object
 from bonafide.utils.input_validation import config_data_validator
 from bonafide.utils.io_ import extract_energy_from_string, read_smiles
 from bonafide.utils.logging_format import IndentationFormatter
 from bonafide.utils.sp_psi4 import Psi4SP
 from bonafide.utils.sp_xtb import XtbSP
+
 
 if TYPE_CHECKING:
     import ipywidgets
@@ -576,13 +577,25 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
             raise ValueError(f"{self._loc}(): {_errmsg}")
 
         # Double-check with molecular formula
-        _ref_formula = get_molecular_formula(ref_mol)
-        _smiles_formula = get_molecular_formula(smiles_mol)
+        _ref_formula = get_molecular_formula(mol=ref_mol)
+        _smiles_formula = get_molecular_formula(mol=smiles_mol)
         if _ref_formula != _smiles_formula:
             _errmsg = (
                 f"Molecular formula of the molecule in the molecule vault ({_ref_formula}) does "
                 "not match the molecular formula of the molecule represented by the SMILES string "
                 f"({_smiles_formula})."
+            )
+            logging.error(f"'{self._namespace}' | {self._loc}()\n{_errmsg}")
+            raise ValueError(f"{self._loc}(): {_errmsg}")
+
+        # Double-check with molecular charge
+        _ref_charge = self.mol_vault.charge
+        _smiles_charge = get_charge_from_mol_object(mol=smiles_mol)
+        if _ref_charge != _smiles_charge:
+            _errmsg = (
+                f"Formal charge of the molecule in the molecule vault ({_ref_charge}) does not "
+                "match the formal charge of the molecule represented by the SMILES string "
+                f"({_smiles_charge})."
             )
             logging.error(f"'{self._namespace}' | {self._loc}()\n{_errmsg}")
             raise ValueError(f"{self._loc}(): {_errmsg}")
@@ -607,6 +620,7 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
 
             # Try to attach the SMILES string to the conformer
             try:
+                assert isinstance(self.mol_vault.charge, int)  # for type checker
                 new_mol, error_message = bind_smiles_with_xyz(
                     smiles_mol=_smiles_mol,
                     xyz_mol=mol,
@@ -902,6 +916,7 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
                 else:
                     rdDetermineBonds.DetermineBonds(
                         mol=mol,
+                        charge=self.mol_vault.charge,
                         covFactor=covalent_radius_factor,
                         allowChargedFragments=allow_charged_fragments,
                         embedChiral=embed_chiral,

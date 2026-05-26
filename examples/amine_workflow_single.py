@@ -214,9 +214,9 @@ def _run_workflow(
         output_directory=compound_name,
     )
 
-    featurizer.attach_smiles(smiles=smiles, align=False)  # use SMILES atom ordering
     featurizer.set_charge(charge=charge)
     featurizer.set_multiplicity(multiplicity=multiplicity)
+    featurizer.attach_smiles(smiles=smiles, align=False)  # use SMILES atom ordering
 
     # Run single-point energy calculations
     featurizer.set_options(("psi4.num_threads", 8))

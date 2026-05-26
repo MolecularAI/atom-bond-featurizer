@@ -494,7 +494,7 @@ FEATURE_FACTORIES = {
     "Multiwfn3DBondTopologyBcpDeltaGHirshfeld": Multiwfn3DBondTopologyBcpDeltaGHirshfeld,
     "Multiwfn3DBondTopologyBcpDeltaGPromolecular": Multiwfn3DBondTopologyBcpDeltaGPromolecular,
     "Multiwfn3DBondTopologyBcpDistanceEndAtom": Multiwfn3DBondTopologyBcpDistanceEndAtom,
-    "Multiwfn3DBondTopologyBcpDistanceStartAtom": Multiwfn3DBondTopologyBcpDistanceStartAtom,
+    "Multiwfn3DBondTopologyBcpDistanceBeginAtom": Multiwfn3DBondTopologyBcpDistanceBeginAtom,
     "Multiwfn3DBondTopologyBcpElectronDensity": Multiwfn3DBondTopologyBcpElectronDensity,
     "Multiwfn3DBondTopologyBcpElectronDensityAlpha": Multiwfn3DBondTopologyBcpElectronDensityAlpha,
     "Multiwfn3DBondTopologyBcpElectronDensityBeta": Multiwfn3DBondTopologyBcpElectronDensityBeta,

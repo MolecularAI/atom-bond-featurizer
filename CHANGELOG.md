@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 0.2.2
+
+### Fixes
+
+-   RDKit's `ResonanceMolSupplier` can produce `None` objects, which is problematic for the
+    `is_symmetric_to` features (see Version 0.2.0). This is, for example, due to valence violations
+    during resonance structure enumeration. All `None` objects are now filtered out during feature
+    calculation.
+
 ## Version 0.2.1
 
 ### Changed

@@ -192,6 +192,10 @@ def _get_resonance_symmetries_by_enumeration(
     # Get all resonance forms of the molecule
     resonances = list(Chem.ResonanceMolSupplier(mol, flags=flags_enum))
 
+    # ResonanceMolSupplier can produce None mol objects (e.g. when an atom valence is violated)
+    # --> remove them
+    resonances = [res_mol for res_mol in resonances if isinstance(res_mol, Chem.rdchem.Mol)]
+
     # Compare all resonance forms with each other to identify symmetric atoms through substructure
     # matching
     _symmetries = defaultdict(list)

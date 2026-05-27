@@ -1179,6 +1179,34 @@ _params = [
             False,  # resonance_UNCONSTRAINED_ANIONS
             False,  # resonance_UNCONSTRAINED_CATIONS
         ),
+        (
+            "CC1=CC=C(S(=NC(C(F)(F)F)=O)(O)=O)C=C1",
+            {
+                0: [0],
+                1: [1],
+                2: [2, 16],
+                3: [3, 15],
+                4: [4],
+                5: [5],
+                6: [6],
+                7: [7],
+                8: [8],
+                9: [9, 10, 11],
+                12: [12],
+                13: [13],
+                14: [14],
+            },
+            False,  # include_chirality
+            False,  # include_isotopes
+            False,  # include_atom_maps
+            False,  # include_chiral_presence
+            True,  # consider_resonance
+            False,  # resonance_ALLOW_CHARGE_SEPARATION
+            False,  # resonance_ALLOW_INCOMPLETE_OCTETS
+            False,  # resonance_KEKULE_ALL
+            False,  # resonance_UNCONSTRAINED_ANIONS
+            False,  # resonance_UNCONSTRAINED_CATIONS
+        ),
     ],
 )
 def test_get_symmetric_atom_sites(

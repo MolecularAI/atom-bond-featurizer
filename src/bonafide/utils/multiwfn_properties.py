@@ -210,8 +210,16 @@ def read_prop_file(
                 data_dict[f"{prefix}electrostatic_potential"] = float(splitted[-1].split("a.u.")[0])
 
             if "Components of gradient in x/y/z are:" in line:
-                splitted = [str(float(x)) for x in lines[line_idx + 1].split()]
-                data_dict[f"{prefix}gradient_components_x_y_z"] = ",".join(splitted)
+                # Multiwfn sometimes misprints this, e.g. "0.2885059650-211". It is not clear what
+                # the correct value is, therefore it is returned as is.
+                splitted = lines[line_idx + 1].split()
+                vals = []
+                for s in splitted:
+                    try:
+                        vals.append(str(float(s)))
+                    except ValueError:
+                        vals.append(s)
+                data_dict[f"{prefix}gradient_components_x_y_z"] = ",".join(vals)
 
             if "Norm of gradient is:" in line:
                 data_dict[f"{prefix}gradient_norm"] = float(splitted[-1])

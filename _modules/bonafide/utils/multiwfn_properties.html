@@ -488,8 +488,16 @@
                 <span class="n">data_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">electrostatic_potential&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;a.u.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 
             <span class="k">if</span> <span class="s2">&quot;Components of gradient in x/y/z are:&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-                <span class="n">splitted</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">line_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
-                <span class="n">data_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">gradient_components_x_y_z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span>
+                <span class="c1"># Multiwfn sometimes misprints this, e.g. &quot;0.2885059650-211&quot;. It is not clear what</span>
+                <span class="c1"># the correct value is, therefore it is returned as is.</span>
+                <span class="n">splitted</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">line_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">splitted</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">data_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">gradient_components_x_y_z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="s2">&quot;Norm of gradient is:&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
                 <span class="n">data_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">gradient_norm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -543,7 +551,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on May 26, 2026</div>
+              Last updated on May 27, 2026</div>
           </div>
           <div class="right-details">
             
@@ -560,7 +568,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=37f418d5"></script>
+    <script src="../../../_static/documentation_options.js?v=000c92bf"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

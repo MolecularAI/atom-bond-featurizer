@@ -485,6 +485,10 @@
     <span class="c1"># Get all resonance forms of the molecule</span>
     <span class="n">resonances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">ResonanceMolSupplier</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">flags_enum</span><span class="p">))</span>
 
+    <span class="c1"># ResonanceMolSupplier can produce None mol objects (e.g. when an atom valence is violated)</span>
+    <span class="c1"># --&gt; remove them</span>
+    <span class="n">resonances</span> <span class="o">=</span> <span class="p">[</span><span class="n">res_mol</span> <span class="k">for</span> <span class="n">res_mol</span> <span class="ow">in</span> <span class="n">resonances</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res_mol</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)]</span>
+
     <span class="c1"># Compare all resonance forms with each other to identify symmetric atoms through substructure</span>
     <span class="c1"># matching</span>
     <span class="n">_symmetries</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
@@ -1141,7 +1145,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on May 26, 2026</div>
+              Last updated on May 27, 2026</div>
           </div>
           <div class="right-details">
             
@@ -1158,7 +1162,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=37f418d5"></script>
+    <script src="../../../_static/documentation_options.js?v=000c92bf"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

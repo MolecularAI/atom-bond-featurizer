@@ -988,13 +988,26 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
         logging.info(f"'{self._namespace}' | {self._loc}() | DONE\n")
 
     def attach_electronic_structure(
-        self, electronic_structure_data: Union[str, List[str]], state: str = "n"
+        self,
+        electronic_structure_data: Union[str, List[str]],
+        state: str = "n",
+        enable_structure_sanity_check: bool = True,
+        structure_sanity_check_relative_tolerance: Union[int, float] = 0.001,
+        structure_sanity_check_absolute_tolerance: Union[int, float] = 0.0001,
     ) -> None:
         """Attach electronic structure data files to a molecule vault hosting a 3D molecule.
 
         The input can either be a single file path or a list of file paths. The ``state`` parameter
         allows to specify to which redox state of the molecule the electronic structure data
         should be attached to.
+
+        Before the final attachment of the electronic structure data, it is ensured that the
+        provided structures match the structures of the conformers already present in the
+        molecule vault (if ``enable_structure_sanity_check`` is ``True``). This structure
+        comparison check can be customized through the
+        ``structure_sanity_check_absolute_tolerance`` and
+        ``structure_sanity_check_relative_tolerance`` parameters. Multiwfn is used to extract
+        the xyz coordinates from the electronic structure data files.
 
         Parameters
         ----------
@@ -1007,6 +1020,17 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
             * "n" (actual molecule),
             * "n+1" (actual molecule plus one electron), or
             * "n-1" (actual molecule minus one electron).
+        enable_structure_sanity_check : bool, optional
+            If ``True``, a structure sanity check is performed before attaching the electronic
+            structure data to the molecule vault, by default ``True``.
+        structure_sanity_check_relative_tolerance : Union[int, float], optional
+            The relative tolerance for the structure sanity check which is used by
+            ``numpy.allclose()``, by default 0.001. Only relevant if
+            ``enable_structure_sanity_check`` is ``True``.
+        structure_sanity_check_absolute_tolerance : Union[int, float], optional
+            The absolute tolerance for the structure sanity check which is used by
+            ``numpy.allclose()``, by default 0.0001. Only relevant if
+            ``enable_structure_sanity_check`` is ``True``.
 
         Returns
         -------
@@ -1015,8 +1039,11 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
         self._loc = f"{self.__class__.__name__}.{get_function_or_method_name()}"
         logging.info(
             f"'{self._namespace}' | {self._loc}() | START\n"
-            f"> 'electronic_structure_data':  {electronic_structure_data}\n"
-            f"> 'state':                      {state}\n"
+            f"> 'electronic_structure_data':                  {electronic_structure_data}\n"
+            f"> 'state':                                      {state}\n"
+            f"> 'enable_structure_sanity_check':              {enable_structure_sanity_check}\n"
+            f"> 'structure_sanity_check_relative_tolerance':  {structure_sanity_check_relative_tolerance}\n"
+            f"> 'structure_sanity_check_absolute_tolerance':  {structure_sanity_check_absolute_tolerance}\n"
             "-----"
         )
 
@@ -1040,6 +1067,38 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
             el_struc_list = [e for e in electronic_structure_data]
 
         self._check_is_of_type(expected_type=str, value=state, parameter_name="state")
+        self._check_is_of_type(
+            expected_type=bool,
+            value=enable_structure_sanity_check,
+            parameter_name="enable_structure_sanity_check",
+        )
+        if enable_structure_sanity_check is True:
+            self._check_is_of_type(
+                expected_type=[int, float],
+                value=structure_sanity_check_relative_tolerance,
+                parameter_name="structure_sanity_check_relative_tolerance",
+            )
+            self._check_is_of_type(
+                expected_type=[int, float],
+                value=structure_sanity_check_absolute_tolerance,
+                parameter_name="structure_sanity_check_absolute_tolerance",
+            )
+
+            if structure_sanity_check_relative_tolerance < 0:
+                _errmsg = (
+                    f"Invalid input to 'structure_sanity_check_relative_tolerance': must be >= 0 but "
+                    f"obtained {structure_sanity_check_relative_tolerance}."
+                )
+                logging.error(f"'{self._namespace}' | {self._loc}()\n{_errmsg}")
+                raise ValueError(f"{self._loc}(): {_errmsg}")
+
+            if structure_sanity_check_absolute_tolerance < 0:
+                _errmsg = (
+                    f"Invalid input to 'structure_sanity_check_absolute_tolerance': must be >= 0 but "
+                    f"obtained {structure_sanity_check_absolute_tolerance}."
+                )
+                logging.error(f"'{self._namespace}' | {self._loc}()\n{_errmsg}")
+                raise ValueError(f"{self._loc}(): {_errmsg}")
 
         # Check state input
         state = self._check_is_str_in_list(
@@ -1080,6 +1139,9 @@ class AtomBondFeaturizer(_AtomBondFeaturizer):
             _el_struc_list=_el_struc_list,  # type: ignore[arg-type]
             _el_struc_types=_el_struc_types,  # type: ignore[arg-type]
             state=state,
+            enable_structure_sanity_check=enable_structure_sanity_check,
+            structure_sanity_check_relative_tolerance=structure_sanity_check_relative_tolerance,
+            structure_sanity_check_absolute_tolerance=structure_sanity_check_absolute_tolerance,
         )
         logging.info(f"'{self._namespace}' | {self._loc}() | DONE\n")
 

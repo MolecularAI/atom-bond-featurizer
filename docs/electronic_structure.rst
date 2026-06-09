@@ -70,11 +70,13 @@ individual states, the *actual molecule* ("n"), its *one-electron reduced* form 
 ``state`` parameter, which defaults to "n". The attached files will then be used accordingly to
 calculate respective features.
 
-.. warning::
+.. note::
 
-   The **atom order** of any electronic structure data file must match the order defined within the
-   molecule vault before attaching the data. If this is not the case, erroneous features will be
-   calculated.
+   The **atom order** and **molecular structure** of any electronic structure data file must match
+   the order/structure defined within the molecule vault before attaching the data. A structure
+   sanity check is performed if the ``enable_structure_sanity_check`` parameter of the
+   :meth:`attach_electronic_structure()<bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure>`
+   method is set to ``True`` (default).
 
 Calculating electronic structure data from scratch
 ==================================================

@@ -20,29 +20,41 @@ warnings.filterwarnings("ignore")
 RDLogger.DisableLog("rdApp.*")
 
 
-@pytest.mark.attach_electronic_structure
+@pytest.mark.attach_electronic_structure_with_multiwfn
 @pytest.mark.parametrize(
-    "input_string, electronic_structure_data, state",
+    "input_string, electronic_structure_data, state, enable_structure_sanity_check",
     [
-        ("clopidogrel-conf_01.xyz", "dummy_electronic_struc_file_01.molden", "n"),
-        ("clopidogrel-conf_01.xyz", ["dummy_electronic_struc_file_01.molden"], "n"),
-        ("clopidogrel-conf_01.xyz", "dummy_electronic_struc_file_01.molden", "n+1"),
-        ("clopidogrel-conf_01.xyz", "dummy_electronic_struc_file_01.molden", "n-1"),
+        ("clopidogrel-conf_01.xyz", "clopidogrel-conf_01.molden", "n", True),
+        ("clopidogrel-conf_01.xyz", ["clopidogrel-conf_01.molden"], "n", True),
+        ("clopidogrel-conf_01.xyz", "clopidogrel-conf_01.molden", "n+1", True),
+        ("clopidogrel-conf_01.xyz", "clopidogrel-conf_01.molden", "n-1", True),
         (
             "radical_cation_e.sdf",
-            ["dummy_electronic_struc_file_01.molden", "dummy_electronic_struc_file_02.molden"],
+            ["radical_cation-conf_00.fchk", "radical_cation-conf_01.fchk"],
             "n",
+            True,
         ),
         (
             "radical_cation_e.sdf",
-            ["dummy_electronic_struc_file_01.molden", "dummy_electronic_struc_file_02.molden"],
+            ["radical_cation-conf_00.fchk", "radical_cation-conf_01.fchk"],
             "n-1",
+            True,
         ),
         (
             "radical_cation_e.sdf",
-            ["dummy_electronic_struc_file_01.molden", "dummy_electronic_struc_file_02.molden"],
+            ["radical_cation-conf_00.fchk", "radical_cation-conf_01.fchk"],
             "n+1",
+            True,
         ),
+        # Works despite the conformers are wrongly ordered because structure sanity check is
+        # disabled
+        (
+            "radical_cation_e.sdf",
+            ["radical_cation-conf_01.fchk", "radical_cation-conf_00.fchk"],
+            "n",
+            False,
+        ),
+        ("clopidogrel-conf_01.xyz", "radical_cation-conf_01.fchk", "n+1", False),
     ],
 )
 def test_attach_electronic_structure(
@@ -53,6 +65,7 @@ def test_attach_electronic_structure(
     input_string: str,
     electronic_structure_data: Union[str, List[str]],
     state: str,
+    enable_structure_sanity_check: bool,
 ) -> None:
     """Test for the ``attach_electronic_structure()`` method: valid examples."""
     # Setup featurizer and read input
@@ -84,15 +97,21 @@ def test_attach_electronic_structure(
         electronic_structure_data = fetch_data_file(file_name=electronic_structure_data)
         _ref_list = [electronic_structure_data]
 
+    _ref_extension = os.path.splitext(_ref_list[0])[1].lower()[1:]
+
     # Attach electronic structure data
-    f.attach_electronic_structure(electronic_structure_data=electronic_structure_data, state=state)
+    f.attach_electronic_structure(
+        electronic_structure_data=electronic_structure_data,
+        state=state,
+        enable_structure_sanity_check=enable_structure_sanity_check,
+    )
 
     if state == "n":
         assert f.mol_vault.electronic_strucs_n == _ref_list
         assert f.mol_vault.electronic_strucs_n_minus1 == []
         assert f.mol_vault.electronic_strucs_n_plus1 == []
 
-        assert f.mol_vault.electronic_struc_types_n == ["molden"] * len(_ref_list)
+        assert f.mol_vault.electronic_struc_types_n == [_ref_extension] * len(_ref_list)
         assert f.mol_vault.electronic_struc_types_n_minus1 == []
         assert f.mol_vault.electronic_struc_types_n_plus1 == []
 
@@ -102,7 +121,7 @@ def test_attach_electronic_structure(
         assert f.mol_vault.electronic_strucs_n_plus1 == []
 
         assert f.mol_vault.electronic_struc_types_n == []
-        assert f.mol_vault.electronic_struc_types_n_minus1 == ["molden"] * len(_ref_list)
+        assert f.mol_vault.electronic_struc_types_n_minus1 == [_ref_extension] * len(_ref_list)
         assert f.mol_vault.electronic_struc_types_n_plus1 == []
 
     if state == "n+1":
@@ -112,11 +131,15 @@ def test_attach_electronic_structure(
 
         assert f.mol_vault.electronic_struc_types_n == []
         assert f.mol_vault.electronic_struc_types_n_minus1 == []
-        assert f.mol_vault.electronic_struc_types_n_plus1 == ["molden"] * len(_ref_list)
+        assert f.mol_vault.electronic_struc_types_n_plus1 == [_ref_extension] * len(_ref_list)
 
     # Check logs
     assert len(caplog.records) > 0
-    assert all(record.levelno == logging.INFO for record in caplog.records)
+
+    if enable_structure_sanity_check is True:
+        assert all(record.levelno == logging.INFO for record in caplog.records)
+    else:
+        assert any(record.levelno == logging.WARNING for record in caplog.records)
 
     # Clean up
     os.rmdir(path="irrelevant_out_dir")
@@ -181,21 +204,41 @@ def test_attach_electronic_structure3(
     clean_up_logfile()
 
 
-@pytest.mark.attach_electronic_structure
+@pytest.mark.attach_electronic_structure_with_multiwfn
 @pytest.mark.parametrize(
-    "electronic_structure_data, state, _preattach, _error_type",
+    "electronic_structure_data, state, structure_sanity_check_relative_tolerance, "
+    "structure_sanity_check_absolute_tolerance, _fetch_file, _preattach, _error_type",
     [
-        (False, "n", False, TypeError),
-        ("dummy_electronic_struc_file_01.molden", ["n", "n+1"], False, TypeError),
-        ("dummy_electronic_struc_file_01.molden", "n-2", False, ValueError),
+        # Wrong data types
+        (False, "n", "_default", "_default", False, False, TypeError),
         (
-            ["dummy_electronic_struc_file_01.molden", "dummy_electronic_struc_file_02.molden"],
+            "clopidogrel-conf_01.molden",
+            ["n", "n+1"],
+            "_default",
+            "_default",
+            True,
+            False,
+            TypeError,
+        ),
+        ("clopidogrel-conf_01.molden", "n-2", "_default", "_default", True, False, ValueError),
+        ("clopidogrel-conf_01.molden", "n", "not_a_number", 0.001, True, False, TypeError),
+        ("clopidogrel-conf_01.molden", "n", 0.001, "not_a_number", True, False, TypeError),
+        ("clopidogrel-conf_01.molden", "n", -0.001, 0.001, True, False, ValueError),
+        ("clopidogrel-conf_01.molden", "n", 0.001, -0.001, True, False, ValueError),
+        # Too many files in list
+        (
+            ["clopidogrel-conf_00.molden", "clopidogrel-conf_01.molden"],
             "n",
+            "_default",
+            "_default",
+            False,
             False,
             ValueError,
         ),
-        ("i_dont_exist.molden", "n", False, FileNotFoundError),
-        ("dummy_electronic_struc_file_02.molden", "n", True, ValueError),
+        # Non-existent file
+        ("i_dont_exist.molden", "n", "_default", "_default", False, False, FileNotFoundError),
+        # Structure sanity check fails (wrong conformer)
+        ("clopidogrel-conf_00.molden", "n", "_default", "_default", True, False, ValueError),
     ],
 )
 def test_attach_electronic_structure4(
@@ -205,6 +248,9 @@ def test_attach_electronic_structure4(
     fetch_data_file: Callable[[str], str],
     electronic_structure_data: Any,
     state: Any,
+    structure_sanity_check_relative_tolerance: Any,
+    structure_sanity_check_absolute_tolerance: Any,
+    _fetch_file: bool,
     _preattach: bool,
     _error_type: Any,
 ) -> None:
@@ -217,16 +263,28 @@ def test_attach_electronic_structure4(
     f.read_input(input_value=_file_path, namespace="irrelevant", input_format="file")
     assert f.mol_vault is not None
 
+    if _fetch_file is True:
+        _fetched_file_path = fetch_data_file(file_name=electronic_structure_data)
+    else:
+        _fetched_file_path = electronic_structure_data
+
     # Preattach electronic structure data if requested
     if _preattach is True:
-        _file_path2 = fetch_data_file(file_name="dummy_electronic_struc_file_01.molden")
+        _file_path2 = fetch_data_file(file_name="clopidogrel-conf_01.molden")
         f.attach_electronic_structure(electronic_structure_data=_file_path2, state="n")
 
     # Attach electronic structure data
-    with pytest.raises(_error_type):
-        f.attach_electronic_structure(
-            electronic_structure_data=electronic_structure_data, state=state
-        )
+    if structure_sanity_check_relative_tolerance == "_default":
+        with pytest.raises(_error_type):
+            f.attach_electronic_structure(electronic_structure_data=_fetched_file_path, state=state)
+    else:
+        with pytest.raises(_error_type):
+            f.attach_electronic_structure(
+                electronic_structure_data=_fetched_file_path,
+                state=state,
+                structure_sanity_check_relative_tolerance=structure_sanity_check_relative_tolerance,
+                structure_sanity_check_absolute_tolerance=structure_sanity_check_absolute_tolerance,
+            )
 
     if _preattach is False:
         assert f.mol_vault.electronic_strucs_n == []
@@ -254,7 +312,7 @@ def test_attach_electronic_structure4(
     clean_up_logfile()
 
 
-@pytest.mark.attach_electronic_structure
+@pytest.mark.attach_electronic_structure_with_multiwfn
 def test_attach_electronic_structure5(
     caplog: pytest.LogCaptureFixture,
     fresh_featurizer: AtomBondFeaturizer,
@@ -271,7 +329,7 @@ def test_attach_electronic_structure5(
     assert f.mol_vault is not None
 
     # Attach electronic structure data
-    _path = fetch_data_file(file_name="dummy_electronic_struc_file_01.molden")
+    _path = fetch_data_file(file_name="radical_cation-conf_00.fchk")
     electronic_structure_data = [_path, None]
     f.attach_electronic_structure(electronic_structure_data=electronic_structure_data, state="n+1")
 
@@ -281,7 +339,7 @@ def test_attach_electronic_structure5(
 
     assert f.mol_vault.electronic_struc_types_n == []
     assert f.mol_vault.electronic_struc_types_n_minus1 == []
-    assert f.mol_vault.electronic_struc_types_n_plus1 == ["molden", None]
+    assert f.mol_vault.electronic_struc_types_n_plus1 == ["fchk", None]
 
     # Check logs
     assert len(caplog.records) > 0

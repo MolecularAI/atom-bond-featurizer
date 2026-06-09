@@ -56,4 +56,4 @@ jobs:
     - name: Run pytest
       shell: bash -el {0}
       run: |
-        pytest -s tests/ -m "not get_fmo_energies_multiwfn and not multiwfn_driver"
+        pytest -s tests/ -m "not get_fmo_energies_multiwfn and not multiwfn_driver and not attach_electronic_structure_with_multiwfn and not calculate_electronic_structure_with_multiwfn"

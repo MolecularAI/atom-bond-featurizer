@@ -1,4 +1,6 @@
-"""BONAFIDE base class with all private methods."""
+"""BONAFIDE base class with the abstract implementations of all public as well as all private
+methods.
+"""
 
 from __future__ import annotations
 
@@ -25,13 +27,16 @@ from bonafide.utils.constants import (
 from bonafide.utils.feature_factories import FEATURE_FACTORIES
 from bonafide.utils.feature_output import FeatureOutput
 from bonafide.utils.helper_functions import clean_up, flatten_dict, standardize_string
-from bonafide.utils.helper_functions_chemistry import bind_smiles_with_xyz, get_molecular_formula, get_charge_from_mol_object
+from bonafide.utils.helper_functions_chemistry import (
+    bind_smiles_with_xyz,
+    get_charge_from_mol_object,
+    get_molecular_formula,
+)
 from bonafide.utils.input_validation import config_data_validator
 from bonafide.utils.io_ import extract_energy_from_string, read_smiles
 from bonafide.utils.logging_format import IndentationFormatter
 from bonafide.utils.sp_psi4 import Psi4SP
 from bonafide.utils.sp_xtb import XtbSP
-
 
 if TYPE_CHECKING:
     import ipywidgets
@@ -65,7 +70,7 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
     def list_bond_features(self, **kwargs: Any) -> pd.DataFrame: ...
 
     @abstractmethod
-    def print_options(self, origin: Optional[Union[str, List[str]]]) -> None: ...
+    def print_options(self, origin: Optional[Union[str, List[str]]] = None) -> None: ...
 
     @abstractmethod
     def set_options(self, configs: Union[Tuple[str, Any], List[Tuple[str, Any]]]) -> None: ...
@@ -75,18 +80,18 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
         self,
         input_value: Union[str, Chem.rdchem.Mol],
         namespace: str,
-        input_format: str,
-        read_energy: bool,
-        prune_by_energy: Optional[Tuple[Union[int, float], str]],
-        output_directory: Optional[str],
+        input_format: str = "smiles",
+        read_energy: bool = False,
+        prune_by_energy: Optional[Tuple[Union[int, float], str]] = None,
+        output_directory: Optional[str] = None,
     ) -> None: ...
 
     @abstractmethod
     def show_molecule(
         self,
-        index_type: Optional[str],
-        in_3D: bool,
-        image_size: Tuple[int, int],
+        index_type: Optional[str] = "atom",
+        in_3D: bool = False,
+        image_size: Tuple[int, int] = (500, 500),
     ) -> Union[PngImagePlugin.PngImageFile, ipywidgets.VBox]: ...
 
     @abstractmethod
@@ -99,31 +104,44 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
     def attach_smiles(
         self,
         smiles: str,
-        align: bool,
-        connectivity_method: str,
-        covalent_radius_factor: Union[int, float],
+        align: bool = True,
+        connectivity_method: str = "connect_the_dots",
+        covalent_radius_factor: Union[int, float] = 1.3,
+    ) -> None: ...
+
+    @abstractmethod
+    def attach_energy(
+        self,
+        energy_data: Union[Tuple[Union[int, float], str], List[Tuple[Union[int, float], str]]],
+        state: str = "n",
+        prune_by_energy: Optional[Tuple[Union[int, float], str]] = None,
     ) -> None: ...
 
     @abstractmethod
     def attach_electronic_structure(
-        self, electronic_structure_data: Union[str, List[str]], state: str
+        self,
+        electronic_structure_data: Union[str, List[str]],
+        state: str = "n",
+        enable_structure_sanity_check: bool = True,
+        structure_sanity_check_relative_tolerance: Union[int, float] = 0.001,
+        structure_sanity_check_absolute_tolerance: Union[int, float] = 0.0001,
     ) -> None: ...
 
     @abstractmethod
     def determine_bonds(
         self,
-        connectivity_method: str,
-        covalent_radius_factor: Union[int, float],
-        allow_charged_fragments: bool,
-        embed_chiral: bool,
+        connectivity_method: str = "connect_the_dots",
+        covalent_radius_factor: Union[int, float] = 1.3,
+        allow_charged_fragments: bool = True,
+        embed_chiral: bool = True,
     ) -> None: ...
 
     @abstractmethod
     def calculate_electronic_structure(
         self,
         engine: str,
-        redox: str,
-        prune_by_energy: Optional[Tuple[Union[int, float], str]],
+        redox: str = "n",
+        prune_by_energy: Optional[Tuple[Union[int, float], str]] = None,
     ) -> None: ...
 
     @abstractmethod
@@ -143,22 +161,28 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
     @abstractmethod
     def return_atom_features(
         self,
-        atom_indices: Union[str, int, List[int]],
-        output_format: str,
-        reduce: bool,
-        temperature: Union[int, float],
-        ignore_invalid: bool,
+        atom_indices: Union[str, int, List[int]] = "all",
+        output_format: str = "df",
+        reduce: bool = False,
+        temperature: Union[int, float] = 298.15,
+        ignore_invalid: bool = True,
     ) -> Union[pd.DataFrame, Dict[int, Dict[str, Any]], List[Chem.rdchem.Mol], Chem.rdchem.Mol]: ...
 
     @abstractmethod
     def return_bond_features(
         self,
-        bond_indices: Union[str, int, List[int]],
-        output_format: str,
-        reduce: bool,
-        temperature: Union[int, float],
-        ignore_invalid: bool,
+        bond_indices: Union[str, int, List[int]] = "all",
+        output_format: str = "df",
+        reduce: bool = False,
+        temperature: Union[int, float] = 298.15,
+        ignore_invalid: bool = True,
     ) -> Union[pd.DataFrame, Dict[int, Dict[str, Any]], List[Chem.rdchem.Mol], Chem.rdchem.Mol]: ...
+
+    @abstractmethod
+    def clear_atom_feature_cache(self, origin: Optional[Union[str, List[str]]] = None) -> None: ...
+
+    @abstractmethod
+    def clear_bond_feature_cache(self, origin: Optional[Union[str, List[str]]] = None) -> None: ...
 
     @abstractmethod
     def add_custom_featurizer(self, custom_metadata: Dict[str, Any]) -> None: ...
@@ -787,9 +811,12 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
         _el_struc_list: List[str],
         _el_struc_types: List[str],
         state: str,
+        enable_structure_sanity_check: bool,
+        structure_sanity_check_relative_tolerance: float,
+        structure_sanity_check_absolute_tolerance: float,
     ) -> None:
         """Execute the attachment of electronic structure data file(s) to a molecule vault hosting
-        a 3D molecule.
+        a 3D molecule including the sanity check.
 
         Parameters
         ----------
@@ -806,6 +833,13 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
             The redox state of the electronic structure data to be attached. Can either be "n"
             (actual molecule), "n+1" (actual molecule plus one electron), or "n-1" (actual molecule
             minus one electron).
+        enable_structure_sanity_check : bool
+            Whether to perform a sanity check of the structure provided with the electronic
+            structure data.
+        structure_sanity_check_relative_tolerance : float
+            The relative tolerance for the structure sanity check.
+        structure_sanity_check_absolute_tolerance : float
+            The absolute tolerance for the structure sanity check.
 
         Returns
         -------
@@ -819,6 +853,10 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
 
                 # Check if the file exists
                 if not os.path.exists(el_struc_file):
+                    # Avoid leaving the MolVault in a partially-attached state when raising
+                    _el_struc_list.clear()
+                    _el_struc_types.clear()
+
                     _errmsg = (
                         f"Invalid input to 'electronic_structure_data': path to the input file at "
                         f"'{el_struc_file}' is invalid."
@@ -828,12 +866,6 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
 
                 file_path = os.path.join(os.getcwd(), el_struc_file)
 
-                logging.info(
-                    f"'{self._namespace}' | {self._loc}()\nElectronic structure data "
-                    f"(*.{file_type} file) was attached to conformer with index {idx} for "
-                    f"state '{state}'.",
-                )
-
                 # Check file type
                 _file_type = standardize_string(inp_data=file_type)
                 if _file_type not in ELECTRONIC_STRUCTURE_DATA_FILE_EXTENSIONS:
@@ -842,6 +874,44 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
                         f"type '{file_type}' may lead to unexpected behavior or errors during "
                         "feature calculation. Ensure that the obtained results are valid. BONAFIDE "
                         "was developed and extensively tested with 'molden' and 'fchk' files."
+                    )
+
+                # Make a sanity check of the structure to be attached against the already present
+                # one if requested
+                if enable_structure_sanity_check is True:
+                    error_message = self._attach_electronic_structure_sanity_check(
+                        conformer_idx=idx,
+                        electronic_structure_data_file_path=file_path,
+                        structure_sanity_check_absolute_tolerance=structure_sanity_check_absolute_tolerance,
+                        structure_sanity_check_relative_tolerance=structure_sanity_check_relative_tolerance,
+                    )
+                    if error_message is not None:
+                        # Avoid leaving the MolVault in a partially-attached state when raising
+                        _el_struc_list.clear()
+                        _el_struc_types.clear()
+
+                        _errmsg = (
+                            f"The structure sanity check of the electronic structure data file "
+                            f"failed for conformer with index {idx} for state '{state}': "
+                            f"{error_message}. The conformer is therefore set to be invalid."
+                        )
+                        self.mol_vault.is_valid[idx] = False
+                        logging.error(f"'{self._namespace}' | {self._loc}()\n{_errmsg}")
+                        raise ValueError(f"{self._loc}(): {_errmsg}")
+
+                    logging.info(
+                        f"'{self._namespace}' | {self._loc}()\nElectronic structure data "
+                        f"(*.{file_type} file) was validated and attached to conformer with index "
+                        f"{idx} for state '{state}'.",
+                    )
+
+                else:
+                    logging.warning(
+                        f"'{self._namespace}' | {self._loc}()\nElectronic structure data "
+                        f"(*.{file_type} file) was attached to conformer with index {idx} for "
+                        f"state '{state}' without a sanity check of the structure. Ensure that "
+                        "the attached structure is valid and consistent with the already "
+                        "present one."
                     )
 
             else:
@@ -1019,7 +1089,7 @@ class _AtomBondFeaturizer(ABC, _AtomBondFeaturizerUtils):
                 f"state '{state}'. The calculated energy data for all conformers is automatically "
                 f"attached to the molecule vault for state '{state}'."
             )
-            self.attach_energy(energy_data=energies, state=state)  # type: ignore[attr-defined]
+            self.attach_energy(energy_data=energies, state=state)  # type: ignore[arg-type]
             self._loc = _init_log
 
             # Automatically attach electronic structure to the molecule vault

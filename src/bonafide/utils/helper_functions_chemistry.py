@@ -740,7 +740,11 @@ def get_symmetric_atom_sites(
 
 
 def align_coordinates(
-    reference_coords: NDArray[np.float64], to_be_aligned_coords: NDArray[np.float64]
+    reference_coords: NDArray[np.float64],
+    to_be_aligned_coords: NDArray[np.float64],
+    relative_tolerance: float,
+    absolute_tolerance: float,
+    check: bool,
 ) -> Tuple[Optional[NDArray[np.float64]], Optional[NDArray[np.float64]], Optional[str]]:
     """Find the optimal rotation matrix and translation vector that aligns the source coordinates
     to the target coordinates using the Kabsch-Umeyama algorithm.
@@ -751,6 +755,13 @@ def align_coordinates(
         The target coordinates to which the source coordinates will be aligned.
     to_be_aligned_coords : NDArray[np.float64]
         The source coordinates that will be aligned to the target coordinates.
+    relative_tolerance : float
+        The relative tolerance for checking the success of the alignment.
+    absolute_tolerance : float
+        The absolute tolerance for checking the success of the alignment.
+    check : bool
+        Whether to check the success of the alignment by applying the transformation and comparing
+        the transformed coordinates to the reference coordinates.
 
     Returns
     -------
@@ -790,19 +801,23 @@ def align_coordinates(
         # Translation vector
         t = reference_centroid - R @ to_be_aligned_centroid
 
-        # Apply transformation for double-checking
-        to_be_aligned_coords_transformed = (R @ to_be_aligned_coords.T).T + t
-
     except Exception as e:
         _errmsg = f"an error occurred during coordinate alignment: {str(e)}"
         return None, None, _errmsg
 
-    # Check transformation
-    if not np.allclose(a=to_be_aligned_coords_transformed, b=reference_coords, rtol=0.1):
-        _errmsg = (
-            "the alignment was unsuccessful: the transformed coordinates do not match the "
-            "reference coordinates."
-        )
+    if check is False:
+        return R, t, None
+
+    # Apply and check transformation if requested
+    to_be_aligned_coords_transformed = (R @ to_be_aligned_coords.T).T + t
+
+    if not np.allclose(
+        a=to_be_aligned_coords_transformed,
+        b=reference_coords,
+        rtol=relative_tolerance,
+        atol=absolute_tolerance,
+    ):
+        _errmsg = "the two sets of coordinates cannot be aligned within the specified tolerances"
         return None, None, _errmsg
 
     return R, t, None

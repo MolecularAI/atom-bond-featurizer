@@ -91,8 +91,8 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
 
         # Directly remove the Multiwfn output as it does not contain any relevant data.
         # The coordinates are written to a separate file.
-        if os.path.isfile(_output_file_name) is True:
-            os.remove(_output_file_name)
+        if os.path.isfile(f"{_output_file_name}.out") is True:
+            os.remove(f"{_output_file_name}.out")
 
     def _read_cp_prop_file(self) -> None:
         """Read the output file from Multiwfn and write the results to the ``results`` dictionary.
@@ -133,8 +133,15 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
 
         assert self.coordinates is not None  # for type checker
         assert multiwfn_xyz_coords is not None  # for type checker
+
+        # The check can be skipped as this was already checked during the attachment of the
+        # electronic structure data
         rotation_matrix, translation_vector, error_message = align_coordinates(
-            reference_coords=self.coordinates, to_be_aligned_coords=multiwfn_xyz_coords
+            reference_coords=self.coordinates,
+            to_be_aligned_coords=multiwfn_xyz_coords,
+            relative_tolerance=0.1,  # only dummy value, will not be used
+            absolute_tolerance=0.1,  # only dummy value, will not be used
+            check=False,
         )
         if error_message is not None:
             self._err = (
@@ -205,8 +212,7 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
     def _process_xyz_file(
         self, file_path: str
     ) -> Tuple[Optional[NDArray[np.float64]], Optional[str]]:
-        """Read and process a xyz file and ensure that it is compatible with the data of the initial
-        mol object.
+        """Read and process an xyz file.
 
         Parameters
         ----------
@@ -219,7 +225,7 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
             A tuple containing:
 
             * The coordinates read from the xyz file as a numpy array, or ``None`` if an error
-                occurred.
+              occurred.
             * An error message if an error occurred, or ``None`` if the processing was successful.
         """
         # Read file
@@ -228,22 +234,10 @@ class _Multiwfn3DBondTopology(BaseFeaturizer):
             return None, error_message
 
         assert coords_list is not None  # for type checker
-        coords = [c for c in coords_list[0].split("\n")[2:] if c.strip() != ""]
-
-        _splitted = np.array([line.split() for line in coords])
-        atom_symbols = _splitted[:, 0]
-
-        # Check if the data was read correctly and matches the mol object
-        if len(atom_symbols) != len(self.elements):
-            _errmsg = (
-                "number of atoms in Multiwfn output does not match number of atoms in mol vault"
-            )
-            return None, _errmsg
-        if not all(atom_symbols == self.elements):
-            _errmsg = "atom symbols in Multiwfn output do not match atom symbols in mol vault"
-            return None, _errmsg
 
         # Get the coordinates
+        coords = [c for c in coords_list[0].split("\n")[2:] if c.strip() != ""]
+        _splitted = np.array([line.split() for line in coords])
         atom_coordinates = _splitted[:, 1:4].astype(float)
         return atom_coordinates, None
 

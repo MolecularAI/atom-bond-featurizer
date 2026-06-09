@@ -1250,10 +1250,16 @@ def test_get_symmetric_atom_sites(
 def test_align_coordinates() -> None:
     """Test for the ``align_coordinates()`` function: identical coordinates (no transformation)."""
     coords = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]])
-    R, t, error = align_coordinates(reference_coords=coords, to_be_aligned_coords=coords)
+    R, t, error = align_coordinates(
+        reference_coords=coords,
+        to_be_aligned_coords=coords,
+        relative_tolerance=0.00001,
+        absolute_tolerance=1e-8,
+        check=True,
+    )
     assert error is None
-    assert R is not None
-    assert t is not None
+    assert isinstance(R, np.ndarray) and R.shape == (3, 3)
+    assert isinstance(t, np.ndarray) and t.shape == (3,)
     np.testing.assert_allclose(R, np.eye(3), atol=1e-10)
     np.testing.assert_allclose(t, np.zeros(3), atol=1e-10)
 
@@ -1263,7 +1269,13 @@ def test_align_coordinates2() -> None:
     """Test for the ``align_coordinates()`` function: pure translation."""
     reference = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0], [2.0, 3.0, 1.0]])
     shifted = reference - np.array([5.0, -3.0, 2.0])
-    R, t, error = align_coordinates(reference_coords=reference, to_be_aligned_coords=shifted)
+    R, t, error = align_coordinates(
+        reference_coords=reference,
+        to_be_aligned_coords=shifted,
+        relative_tolerance=0.00001,
+        absolute_tolerance=1e-8,
+        check=True,
+    )
     assert error is None
     transformed = (R @ shifted.T).T + t
     np.testing.assert_allclose(transformed, reference, atol=1e-8)
@@ -1276,7 +1288,13 @@ def test_align_coordinates3() -> None:
 
     # Rotate 90 degrees around z: (x,y,z) -> (-y,x,z)
     rotated = np.array([[-r[1], r[0], r[2]] for r in reference])
-    R, t, error = align_coordinates(reference_coords=reference, to_be_aligned_coords=rotated)
+    R, t, error = align_coordinates(
+        reference_coords=reference,
+        to_be_aligned_coords=rotated,
+        relative_tolerance=0.00001,
+        absolute_tolerance=1e-8,
+        check=True,
+    )
 
     assert error is None
     transformed = (R @ rotated.T).T + t
@@ -1295,7 +1313,11 @@ def test_align_coordinates4() -> None:
         [3.0, 1.0, 2.0]
     )
     R, t, error = align_coordinates(
-        reference_coords=reference, to_be_aligned_coords=rotated_translated
+        reference_coords=reference,
+        to_be_aligned_coords=rotated_translated,
+        relative_tolerance=0.00001,
+        absolute_tolerance=1e-8,
+        check=True,
     )
 
     assert error is None
@@ -1313,7 +1335,13 @@ def test_align_coordinates5() -> None:
     # Reflect through xy-plane: (x,y,z) -> (x,y,-z)
     reflected = reference.copy()
     reflected[:, 2] *= -1
-    R, _, _ = align_coordinates(reference_coords=reference, to_be_aligned_coords=reflected)
+    R, _, _ = align_coordinates(
+        reference_coords=reference,
+        to_be_aligned_coords=reflected,
+        relative_tolerance=0.00001,
+        absolute_tolerance=1e-8,
+        check=True,
+    )
 
     # Should still produce a proper rotation (det(R) = +1)
     if R is not None:
@@ -1325,7 +1353,44 @@ def test_align_coordinates6() -> None:
     """Test for the ``align_coordinates()`` function: minimum number of atoms (3)."""
     reference = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]])
     shifted = reference + np.array([10.0, -5.0, 3.0])
-    R, t, error = align_coordinates(reference_coords=reference, to_be_aligned_coords=shifted)
+    R, t, error = align_coordinates(
+        reference_coords=reference,
+        to_be_aligned_coords=shifted,
+        relative_tolerance=0.00001,
+        absolute_tolerance=1e-8,
+        check=True,
+    )
     assert error is None
     transformed = (R @ shifted.T).T + t
     np.testing.assert_allclose(transformed, reference, atol=1e-8)
+
+
+@pytest.mark.align_coordinates
+@pytest.mark.parametrize("check", [True, False])
+def test_align_coordinates7(check: bool) -> None:
+    """Test for the ``align_coordinates()`` function: alignment fails."""
+    reference = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]])
+
+    # Distorted: add noise to reference so inter-point distances differ
+    rng = np.random.default_rng(seed=42)
+    distorted = reference + rng.uniform(low=0.5, high=2.0, size=reference.shape)
+
+    R, t, error = align_coordinates(
+        reference_coords=reference,
+        to_be_aligned_coords=distorted,
+        relative_tolerance=0.00001,
+        absolute_tolerance=1e-8,
+        check=check,
+    )
+
+    if check:
+        assert R is None
+        assert t is None
+        assert isinstance(error, str)
+        assert error.startswith(
+            "the two sets of coordinates cannot be aligned within the specified tolerances"
+        )
+    else:
+        assert error is None
+        assert isinstance(R, np.ndarray) and R.shape == (3, 3)
+        assert isinstance(t, np.ndarray) and t.shape == (3,)

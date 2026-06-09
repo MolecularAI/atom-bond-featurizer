@@ -60,6 +60,12 @@ with open(os.path.join(_base, "input_string_metadata.json"), "r") as f:
 with open(os.path.join(os.path.dirname(bonafide.__file__), "_feature_info.json"), "r") as f:
     FEATURE_INFO = json.load(f)
 
+# The electronic structure data of these features cannot be checked because they are Hessian files
+ATTACH_ELECTRONIC_STRUCTURE_SANITY_CHECK_WHITE_LIST = [
+    "Morfeus3DBondLocalForceConstant",
+    "Morfeus3DBondLocalFrequency",
+]
+
 ##########################
 # Load test data file(s) #
 ##########################
@@ -403,15 +409,22 @@ def test_bonafide(
 
     # Attach electronic structure data
     if requires_electronic_structure_data is True:
+        _check_struc = True
+        if factory_name in ATTACH_ELECTRONIC_STRUCTURE_SANITY_CHECK_WHITE_LIST:
+            _check_struc = False
+
         if len(electronic_structure_data) == 0:
             raise ValueError(
                 f"Feature '{factory_name}' requires electronic structure data, but none was "
                 "provided."
             )
+
         for entry in electronic_structure_data:
             _file_path = fetch_data_file(file_name=entry[0])
             featurizer.attach_electronic_structure(
-                electronic_structure_data=_file_path, state=entry[1]
+                electronic_structure_data=_file_path,
+                state=entry[1],
+                enable_structure_sanity_check=_check_struc,
             )
 
     # Attach energy data

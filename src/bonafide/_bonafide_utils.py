@@ -4,11 +4,17 @@ from __future__ import annotations
 
 import copy
 import logging
+import os
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union, cast
 
+import numpy as np
 from rdkit import Chem
 
+from bonafide.utils.constants import PROGRAM_ENVIRONMENT_VARIABLES
+from bonafide.utils.driver import multiwfn_driver
 from bonafide.utils.helper_functions import standardize_string
+from bonafide.utils.helper_functions_chemistry import align_coordinates
+from bonafide.utils.io_ import read_xyz_file
 
 if TYPE_CHECKING:
     from bonafide.utils.molecule_vault import MolVault
@@ -508,3 +514,122 @@ class _AtomBondFeaturizerUtils:
                 section[root_key] = self._feature_config[key_list[0]][root_key]
 
         return section
+
+    def _attach_electronic_structure_sanity_check(
+        self,
+        conformer_idx: int,
+        electronic_structure_data_file_path: str,
+        structure_sanity_check_relative_tolerance: float,
+        structure_sanity_check_absolute_tolerance: float,
+    ) -> Optional[str]:
+        """Execute a sanity check before attaching the electronic structure.
+
+        It is checked that
+
+        * the number of atoms in the electronic structure data file matches the number of atoms of
+          the molecule in the molecule vault,
+        * the atom symbols in the electronic structure data file match the atom symbols of the
+          molecule in the molecule vault, and
+        * the coordinates of the atoms in the electronic structure data file match the coordinates
+          of the molecule in the molecule vault within a certain relative and absolute tolerance.
+
+        Parameters
+        ----------
+        conformer_idx : int
+            The index of the conformer.
+        electronic_structure_data_file_path : str
+            The file path to the electronic structure data file under consideration.
+        structure_sanity_check_relative_tolerance : float
+            The relative tolerance for the structure sanity check.
+        structure_sanity_check_absolute_tolerance : float
+            The absolute tolerance for the structure sanity check.
+
+        Returns
+        -------
+        Optional[str]
+            An error message if the sanity check fails, otherwise ``None``.
+        """
+        # Get Multiwfn environment variables (must be fetched directly from the config file)
+        try:
+            environment_variables = {
+                var: self._feature_config["multiwfn"].get(var, None)
+                for var in PROGRAM_ENVIRONMENT_VARIABLES["multiwfn"]
+            }
+        except Exception:
+            environment_variables = {}
+
+        assert self.mol_vault is not None  # for type checker
+
+        # Get a xyz file from the electronic structure data file
+        _pid = os.getpid()  # just to make sure that the file name is unique
+        _conformer_name = self.mol_vault.conformer_names[conformer_idx]
+        _output_file_name = f"Multiwfn3DAtomXyzCoordinates__{_conformer_name}__{_pid}"
+        _xyz_file_name = f"_xyz_from_multiwfn__{_conformer_name}__{_pid}.xyz"
+
+        try:
+            multiwfn_driver(
+                cmds=[300, 7, -1, _xyz_file_name, -10, 0, "q"],
+                input_file_path=electronic_structure_data_file_path,
+                output_file_name=_output_file_name,
+                environment_variables=environment_variables,
+                namespace=_conformer_name[::-1].split("__", 1)[-1][::-1],
+            )
+
+            # Directly remove the Multiwfn output as it does not contain any relevant data.
+            # The coordinates are written to a separate file.
+            if os.path.isfile(f"{_output_file_name}.out") is True:
+                os.remove(f"{_output_file_name}.out")
+
+            # Read xyz file
+            coords_list, error_message = read_xyz_file(file_path=_xyz_file_name)
+            if error_message is not None:
+                return error_message
+
+            assert coords_list is not None  # for type checker
+            coords = [c for c in coords_list[0].split("\n")[2:] if c.strip() != ""]
+
+            _splitted = np.array([line.split() for line in coords])
+            atom_symbols = _splitted[:, 0]
+
+            # Check the data
+            assert self.mol_vault.elements is not None  # for type checker
+            _ref = len(self.mol_vault.elements)
+            _new = len(atom_symbols)
+            if _new != _ref:
+                _errmsg = (
+                    f"number of atoms found in the electronic structure data file ({_new}) does "
+                    f"not match the number of atoms of the molecule in the mol vault ({_ref})"
+                )
+                return _errmsg
+            if not all(atom_symbols == self.mol_vault.elements):
+                _errmsg = (
+                    "the atom symbols found in the electronic structure data file "
+                    f"({list(atom_symbols)}) do not match the atom symbols of the molecule in the mol "
+                    f"vault ({list(self.mol_vault.elements)})"
+                )
+                return _errmsg
+
+            # Get and check the coordinates
+            atom_coordinates = _splitted[:, 1:4].astype(float)
+            reference_coordinates = (
+                self.mol_vault.mol_objects[conformer_idx].GetConformer(0).GetPositions()
+            )
+
+            error_message = None
+            _, _, error_message = align_coordinates(
+                reference_coords=reference_coordinates,
+                to_be_aligned_coords=atom_coordinates,
+                relative_tolerance=structure_sanity_check_relative_tolerance,
+                absolute_tolerance=structure_sanity_check_absolute_tolerance,
+                check=True,
+            )
+            return error_message
+
+        finally:
+            # Remove the xyz file that was created for the sanity check
+            if os.path.isfile(_xyz_file_name) is True:
+                os.remove(_xyz_file_name)
+
+            # Double-check that output file is removed too
+            if os.path.isfile(f"{_output_file_name}.out") is True:
+                os.remove(f"{_output_file_name}.out")

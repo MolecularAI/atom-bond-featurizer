@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore")
 RDLogger.DisableLog("rdApp.*")
 
 
-@pytest.mark.calculate_electronic_structure
+@pytest.mark.calculate_electronic_structure_with_multiwfn
 @pytest.mark.parametrize(
     "input_file, n_conformers, engine_name, redox_state",
     [
@@ -88,14 +88,20 @@ def test_calculate_electronic_structure(
     assert f.mol_vault.electronic_struc_types_n_plus1 == []
 
     # Mock the actual single-point energy calculation and the generated electronic structure file
-    _mock_el_struc_file = os.path.join(
-        os.getcwd(), "irrelevant_out_dir", "dummy_el_struc_file.molden"
-    )
-    with open(_mock_el_struc_file, "w") as file:
-        file.write("Nothing to see here.\n")
+    if input_file == "clopidogrel-conf_01.xyz":
+        _mocked_electronic_strucs = [fetch_data_file(file_name="clopidogrel-conf_01.molden")]
+    elif input_file == "clopidogrel.xyz":
+        _mocked_electronic_strucs = [
+            fetch_data_file(file_name="clopidogrel-conf_00.molden"),
+            fetch_data_file(file_name="clopidogrel-conf_01.molden"),
+            fetch_data_file(file_name="clopidogrel-conf_02.molden"),
+            fetch_data_file(file_name="clopidogrel-conf_03.molden"),
+            fetch_data_file(file_name="clopidogrel-conf_04.molden"),
+            fetch_data_file(file_name="clopidogrel-conf_05.molden"),
+            fetch_data_file(file_name="clopidogrel-conf_06.molden"),
+        ]
 
     _mocked_energies = [(-123.123, "kj_mol")] * n_conformers
-    _mocked_electronic_strucs = [_mock_el_struc_file] * n_conformers
     _mocked_is_valid_list = [True] * n_conformers
     _expected_electronic_struc_types = ["molden"] * n_conformers
 
@@ -360,7 +366,7 @@ def test_calculate_electronic_structure4(
     clean_up_logfile()
 
 
-@pytest.mark.calculate_electronic_structure
+@pytest.mark.calculate_electronic_structure_with_multiwfn
 @pytest.mark.parametrize(
     "prune_by_energy, _expected_pruning_mask",
     [
@@ -406,11 +412,15 @@ def test_calculate_electronic_structure5(
     assert f.mol_vault.electronic_struc_types_n_plus1 == []
 
     # Mock the actual single-point energy calculation and the generated electronic structure file
-    _mock_el_struc_file = os.path.join(
-        os.getcwd(), "irrelevant_out_dir", "dummy_el_struc_file.molden"
-    )
-    with open(_mock_el_struc_file, "w") as file:
-        file.write("Nothing to see here.\n")
+    _mocked_electronic_strucs = [
+        fetch_data_file(file_name="clopidogrel-conf_00.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_01.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_02.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_03.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_04.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_05.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_06.molden"),
+    ]
 
     _mocked_energies = [
         (-123.123, "kj_mol"),
@@ -422,7 +432,6 @@ def test_calculate_electronic_structure5(
         (-45.123, "kj_mol"),
     ]
     _mocked_energies_read = True
-    _mocked_electronic_strucs = [_mock_el_struc_file] * 7
     _expected_electronic_struc_types = ["molden"] * 7
 
     assert f.mol_vault.is_valid == [True] * 7
@@ -557,7 +566,7 @@ def _vault_testing(
         )
 
 
-@pytest.mark.calculate_electronic_structure
+@pytest.mark.calculate_electronic_structure_with_multiwfn
 @pytest.mark.parametrize(
     "engine_name, redox_state, _preattach_to_state, _preattach_what",
     [
@@ -611,11 +620,19 @@ def test_calculate_electronic_structure6(
     f.set_charge(charge=0)
     f.set_multiplicity(multiplicity=1)
 
+    _preattached_file_path = [
+        fetch_data_file(file_name="clopidogrel-conf_00.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_01.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_02.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_03.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_04.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_05.molden"),
+        fetch_data_file(file_name="clopidogrel-conf_06.molden"),
+    ]
+
     if _preattach_what == "el_struc":
-        _preattched_file_path = fetch_data_file(file_name="dummy_electronic_struc_file_01.molden")
-        _preattched_file_path = [_preattched_file_path] * 7
         f.attach_electronic_structure(
-            electronic_structure_data=_preattched_file_path, state=_preattach_to_state
+            electronic_structure_data=_preattached_file_path, state=_preattach_to_state
         )
     elif _preattach_what == "energies":
         _preattached_energies = [(-42.42, "kj_mol")] * 7
@@ -630,16 +647,12 @@ def test_calculate_electronic_structure6(
         vault=f.mol_vault,
         _preattach_to_state=_preattach_to_state,
         _preattach_what=_preattach_what,
-        _file_path=_preattched_file_path if _preattach_what == "el_struc" else [],
+        _file_path=_preattached_file_path if _preattach_what == "el_struc" else [],
         _energies=_preattached_energies if _preattach_what == "energies" else [],
     )
 
     # Mock the actual single-point energy calculation and the generated electronic structure file
-    _mock_el_struc_file = os.path.join(
-        os.getcwd(), "irrelevant_out_dir", "dummy_el_struc_file.molden"
-    )
-    with open(_mock_el_struc_file, "w") as file:
-        file.write("Nothing to see here.\n")
+    _mocked_electronic_strucs = _preattached_file_path
 
     _mocked_energies = [
         (-123.123, "kj_mol"),
@@ -650,7 +663,6 @@ def test_calculate_electronic_structure6(
         (-123.123, "kj_mol"),
         (-45.123, "kj_mol"),
     ]
-    _mocked_electronic_strucs = [_mock_el_struc_file] * 7
     _expected_electronic_struc_types = ["molden"] * 7
 
     if engine_name.strip().lower() == "psi4":
@@ -674,7 +686,7 @@ def test_calculate_electronic_structure6(
             vault=f.mol_vault,
             _preattach_to_state=_preattach_to_state,
             _preattach_what=_preattach_what,
-            _file_path=_preattched_file_path if _preattach_what == "el_struc" else [],
+            _file_path=_preattached_file_path if _preattach_what == "el_struc" else [],
             _energies=_preattached_energies if _preattach_what == "energies" else [],
         )
     elif redox_state == _preattach_to_state:
@@ -718,7 +730,7 @@ def test_calculate_electronic_structure6(
     clean_up_logfile()
 
 
-@pytest.mark.calculate_electronic_structure
+@pytest.mark.calculate_electronic_structure_with_multiwfn
 @pytest.mark.parametrize(
     "input_file, charge, multiplicity, redox_state, engine_name, options, _expected_energies",
     [

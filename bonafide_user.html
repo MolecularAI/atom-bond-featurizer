@@ -393,11 +393,18 @@ must inherit from <code class="docutils literal notranslate"><span class="pre">B
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure">
-<span class="sig-name descname"><span class="pre">attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_structure_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_structure_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_structure_sanity_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_relative_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_absolute_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure" title="Link to this definition">¶</a></dt>
 <dd><p>Attach electronic structure data files to a molecule vault hosting a 3D molecule.</p>
 <p>The input can either be a single file path or a list of file paths. The <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter
 allows to specify to which redox state of the molecule the electronic structure data
 should be attached to.</p>
+<p>Before the final attachment of the electronic structure data, it is ensured that the
+provided structures match the structures of the conformers already present in the
+molecule vault (if <code class="docutils literal notranslate"><span class="pre">enable_structure_sanity_check</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>). This structure
+comparison check can be customized through the
+<code class="docutils literal notranslate"><span class="pre">structure_sanity_check_absolute_tolerance</span></code> and
+<code class="docutils literal notranslate"><span class="pre">structure_sanity_check_relative_tolerance</span></code> parameters. Multiwfn is used to extract
+the xyz coordinates from the electronic structure data files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -410,6 +417,17 @@ either be</p>
 <li><p>“n+1” (actual molecule plus one electron), or</p></li>
 <li><p>“n-1” (actual molecule minus one electron).</p></li>
 </ul>
+</dd>
+<dt><strong>enable_structure_sanity_check</strong><span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a structure sanity check is performed before attaching the electronic
+structure data to the molecule vault, by default <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>structure_sanity_check_relative_tolerance</strong><span class="classifier">Union[int, float], optional</span></dt><dd><p>The relative tolerance for the structure sanity check which is used by
+<code class="docutils literal notranslate"><span class="pre">numpy.allclose()</span></code>, by default 0.001. Only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_structure_sanity_check</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>structure_sanity_check_absolute_tolerance</strong><span class="classifier">Union[int, float], optional</span></dt><dd><p>The absolute tolerance for the structure sanity check which is used by
+<code class="docutils literal notranslate"><span class="pre">numpy.allclose()</span></code>, by default 0.0001. Only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_structure_sanity_check</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd>
 </dl>
 </dd>
@@ -1069,7 +1087,7 @@ default “atom”.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on May 27, 2026</div>
+              Last updated on Jun 09, 2026</div>
           </div>
           <div class="right-details">
             
@@ -1127,7 +1145,7 @@ default “atom”.</p>
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=000c92bf"></script>
+    <script src="_static/documentation_options.js?v=a47416a6"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

@@ -1298,13 +1298,26 @@
 <div class="viewcode-block" id="AtomBondFeaturizer.attach_electronic_structure">
 <a class="viewcode-back" href="../../bonafide_user.html#bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">attach_electronic_structure</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">electronic_structure_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;n&quot;</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">electronic_structure_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+        <span class="n">state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;n&quot;</span><span class="p">,</span>
+        <span class="n">enable_structure_sanity_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">structure_sanity_check_relative_tolerance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+        <span class="n">structure_sanity_check_absolute_tolerance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Attach electronic structure data files to a molecule vault hosting a 3D molecule.</span>
 
 <span class="sd">        The input can either be a single file path or a list of file paths. The ``state`` parameter</span>
 <span class="sd">        allows to specify to which redox state of the molecule the electronic structure data</span>
 <span class="sd">        should be attached to.</span>
+
+<span class="sd">        Before the final attachment of the electronic structure data, it is ensured that the</span>
+<span class="sd">        provided structures match the structures of the conformers already present in the</span>
+<span class="sd">        molecule vault (if ``enable_structure_sanity_check`` is ``True``). This structure</span>
+<span class="sd">        comparison check can be customized through the</span>
+<span class="sd">        ``structure_sanity_check_absolute_tolerance`` and</span>
+<span class="sd">        ``structure_sanity_check_relative_tolerance`` parameters. Multiwfn is used to extract</span>
+<span class="sd">        the xyz coordinates from the electronic structure data files.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1317,6 +1330,17 @@
 <span class="sd">            * &quot;n&quot; (actual molecule),</span>
 <span class="sd">            * &quot;n+1&quot; (actual molecule plus one electron), or</span>
 <span class="sd">            * &quot;n-1&quot; (actual molecule minus one electron).</span>
+<span class="sd">        enable_structure_sanity_check : bool, optional</span>
+<span class="sd">            If ``True``, a structure sanity check is performed before attaching the electronic</span>
+<span class="sd">            structure data to the molecule vault, by default ``True``.</span>
+<span class="sd">        structure_sanity_check_relative_tolerance : Union[int, float], optional</span>
+<span class="sd">            The relative tolerance for the structure sanity check which is used by</span>
+<span class="sd">            ``numpy.allclose()``, by default 0.001. Only relevant if</span>
+<span class="sd">            ``enable_structure_sanity_check`` is ``True``.</span>
+<span class="sd">        structure_sanity_check_absolute_tolerance : Union[int, float], optional</span>
+<span class="sd">            The absolute tolerance for the structure sanity check which is used by</span>
+<span class="sd">            ``numpy.allclose()``, by default 0.0001. Only relevant if</span>
+<span class="sd">            ``enable_structure_sanity_check`` is ``True``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1325,8 +1349,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_loc</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">get_function_or_method_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_namespace</span><span class="si">}</span><span class="s2">&#39; | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">() | START</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;&gt; &#39;electronic_structure_data&#39;:  </span><span class="si">{</span><span class="n">electronic_structure_data</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;&gt; &#39;state&#39;:                      </span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;&gt; &#39;electronic_structure_data&#39;:                  </span><span class="si">{</span><span class="n">electronic_structure_data</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;&gt; &#39;state&#39;:                                      </span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;&gt; &#39;enable_structure_sanity_check&#39;:              </span><span class="si">{</span><span class="n">enable_structure_sanity_check</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;&gt; &#39;structure_sanity_check_relative_tolerance&#39;:  </span><span class="si">{</span><span class="n">structure_sanity_check_relative_tolerance</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;&gt; &#39;structure_sanity_check_absolute_tolerance&#39;:  </span><span class="si">{</span><span class="n">structure_sanity_check_absolute_tolerance</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="s2">&quot;-----&quot;</span>
         <span class="p">)</span>
 
@@ -1350,6 +1377,38 @@
             <span class="n">el_struc_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">electronic_structure_data</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_is_of_type</span><span class="p">(</span><span class="n">expected_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">parameter_name</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_is_of_type</span><span class="p">(</span>
+            <span class="n">expected_type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">enable_structure_sanity_check</span><span class="p">,</span>
+            <span class="n">parameter_name</span><span class="o">=</span><span class="s2">&quot;enable_structure_sanity_check&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">enable_structure_sanity_check</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_is_of_type</span><span class="p">(</span>
+                <span class="n">expected_type</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">structure_sanity_check_relative_tolerance</span><span class="p">,</span>
+                <span class="n">parameter_name</span><span class="o">=</span><span class="s2">&quot;structure_sanity_check_relative_tolerance&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_is_of_type</span><span class="p">(</span>
+                <span class="n">expected_type</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">structure_sanity_check_absolute_tolerance</span><span class="p">,</span>
+                <span class="n">parameter_name</span><span class="o">=</span><span class="s2">&quot;structure_sanity_check_absolute_tolerance&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">structure_sanity_check_relative_tolerance</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Invalid input to &#39;structure_sanity_check_relative_tolerance&#39;: must be &gt;= 0 but &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;obtained </span><span class="si">{</span><span class="n">structure_sanity_check_relative_tolerance</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_namespace</span><span class="si">}</span><span class="s2">&#39; | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">()</span><span class="se">\n</span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">(): </span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">structure_sanity_check_absolute_tolerance</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Invalid input to &#39;structure_sanity_check_absolute_tolerance&#39;: must be &gt;= 0 but &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;obtained </span><span class="si">{</span><span class="n">structure_sanity_check_absolute_tolerance</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_namespace</span><span class="si">}</span><span class="s2">&#39; | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">()</span><span class="se">\n</span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">(): </span><span class="si">{</span><span class="n">_errmsg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># Check state input</span>
         <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_is_str_in_list</span><span class="p">(</span>
@@ -1390,6 +1449,9 @@
             <span class="n">_el_struc_list</span><span class="o">=</span><span class="n">_el_struc_list</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
             <span class="n">_el_struc_types</span><span class="o">=</span><span class="n">_el_struc_types</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
             <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span>
+            <span class="n">enable_structure_sanity_check</span><span class="o">=</span><span class="n">enable_structure_sanity_check</span><span class="p">,</span>
+            <span class="n">structure_sanity_check_relative_tolerance</span><span class="o">=</span><span class="n">structure_sanity_check_relative_tolerance</span><span class="p">,</span>
+            <span class="n">structure_sanity_check_absolute_tolerance</span><span class="o">=</span><span class="n">structure_sanity_check_absolute_tolerance</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_namespace</span><span class="si">}</span><span class="s2">&#39; | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_loc</span><span class="si">}</span><span class="s2">() | DONE</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
@@ -2113,7 +2175,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on May 27, 2026</div>
+              Last updated on Jun 09, 2026</div>
           </div>
           <div class="right-details">
             
@@ -2130,7 +2192,7 @@
   </div>
 </div><script src="../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=000c92bf"></script>
+    <script src="../../_static/documentation_options.js?v=a47416a6"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

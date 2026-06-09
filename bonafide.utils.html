@@ -1683,7 +1683,7 @@ molecule object.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="bonafide.utils.helper_functions_chemistry.align_coordinates">
-<span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">align_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_be_aligned_coords</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#align_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry.align_coordinates" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">bonafide.utils.helper_functions_chemistry.</span></span><span class="sig-name descname"><span class="pre">align_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_be_aligned_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute_tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/utils/helper_functions_chemistry.html#align_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.utils.helper_functions_chemistry.align_coordinates" title="Link to this definition">¶</a></dt>
 <dd><p>Find the optimal rotation matrix and translation vector that aligns the source coordinates
 to the target coordinates using the Kabsch-Umeyama algorithm.</p>
 <dl class="field-list simple">
@@ -1692,6 +1692,13 @@ to the target coordinates using the Kabsch-Umeyama algorithm.</p>
 <dt><strong>reference_coords</strong><span class="classifier">NDArray[np.float64]</span></dt><dd><p>The target coordinates to which the source coordinates will be aligned.</p>
 </dd>
 <dt><strong>to_be_aligned_coords</strong><span class="classifier">NDArray[np.float64]</span></dt><dd><p>The source coordinates that will be aligned to the target coordinates.</p>
+</dd>
+<dt><strong>relative_tolerance</strong><span class="classifier">float</span></dt><dd><p>The relative tolerance for checking the success of the alignment.</p>
+</dd>
+<dt><strong>absolute_tolerance</strong><span class="classifier">float</span></dt><dd><p>The absolute tolerance for checking the success of the alignment.</p>
+</dd>
+<dt><strong>check</strong><span class="classifier">bool</span></dt><dd><p>Whether to check the success of the alignment by applying the transformation and comparing
+the transformed coordinates to the reference coordinates.</p>
 </dd>
 </dl>
 </dd>
@@ -6394,7 +6401,7 @@ generated.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on May 27, 2026</div>
+              Last updated on Jun 09, 2026</div>
           </div>
           <div class="right-details">
             
@@ -7073,7 +7080,7 @@ generated.</p>
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=000c92bf"></script>
+    <script src="_static/documentation_options.js?v=a47416a6"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

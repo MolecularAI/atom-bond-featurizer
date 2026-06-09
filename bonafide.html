@@ -3567,11 +3567,18 @@ must inherit from <code class="docutils literal notranslate"><span class="pre">B
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure">
-<span class="sig-name descname"><span class="pre">attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_structure_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_structure_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_structure_sanity_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_relative_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_absolute_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/bonafide.html#AtomBondFeaturizer.attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure" title="Link to this definition">¶</a></dt>
 <dd><p>Attach electronic structure data files to a molecule vault hosting a 3D molecule.</p>
 <p>The input can either be a single file path or a list of file paths. The <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter
 allows to specify to which redox state of the molecule the electronic structure data
 should be attached to.</p>
+<p>Before the final attachment of the electronic structure data, it is ensured that the
+provided structures match the structures of the conformers already present in the
+molecule vault (if <code class="docutils literal notranslate"><span class="pre">enable_structure_sanity_check</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>). This structure
+comparison check can be customized through the
+<code class="docutils literal notranslate"><span class="pre">structure_sanity_check_absolute_tolerance</span></code> and
+<code class="docutils literal notranslate"><span class="pre">structure_sanity_check_relative_tolerance</span></code> parameters. Multiwfn is used to extract
+the xyz coordinates from the electronic structure data files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -3584,6 +3591,17 @@ either be</p>
 <li><p>“n+1” (actual molecule plus one electron), or</p></li>
 <li><p>“n-1” (actual molecule minus one electron).</p></li>
 </ul>
+</dd>
+<dt><strong>enable_structure_sanity_check</strong><span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a structure sanity check is performed before attaching the electronic
+structure data to the molecule vault, by default <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>structure_sanity_check_relative_tolerance</strong><span class="classifier">Union[int, float], optional</span></dt><dd><p>The relative tolerance for the structure sanity check which is used by
+<code class="docutils literal notranslate"><span class="pre">numpy.allclose()</span></code>, by default 0.001. Only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_structure_sanity_check</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+<dt><strong>structure_sanity_check_absolute_tolerance</strong><span class="classifier">Union[int, float], optional</span></dt><dd><p>The absolute tolerance for the structure sanity check which is used by
+<code class="docutils literal notranslate"><span class="pre">numpy.allclose()</span></code>, by default 0.0001. Only relevant if
+<code class="docutils literal notranslate"><span class="pre">enable_structure_sanity_check</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd>
 </dl>
 </dd>
@@ -4209,7 +4227,8 @@ default “atom”.</p>
 </section>
 <section id="module-bonafide._bonafide">
 <span id="id1"></span><h2>bonafide._bonafide<a class="headerlink" href="#module-bonafide._bonafide" title="Link to this heading">¶</a></h2>
-<p>BONAFIDE base class with all private methods.</p>
+<p>BONAFIDE base class with the abstract implementations of all public as well as all private
+methods.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bonafide._bonafide.</span></span><span class="sig-name descname"><span class="pre">_AtomBondFeaturizer</span></span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer" title="Link to this definition">¶</a></dt>
@@ -4226,9 +4245,9 @@ default “atom”.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer._attach_electronic_structure">
-<span class="sig-name descname"><span class="pre">_attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_struc_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_el_struc_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_el_struc_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer._attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer._attach_electronic_structure" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_struc_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_el_struc_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_el_struc_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_structure_sanity_check</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_relative_tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_absolute_tolerance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer._attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer._attach_electronic_structure" title="Link to this definition">¶</a></dt>
 <dd><p>Execute the attachment of electronic structure data file(s) to a molecule vault hosting
-a 3D molecule.</p>
+a 3D molecule including the sanity check.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -4244,6 +4263,13 @@ electronic structure data files (file extensions).</p>
 <dt><strong>state</strong><span class="classifier">str</span></dt><dd><p>The redox state of the electronic structure data to be attached. Can either be “n”
 (actual molecule), “n+1” (actual molecule plus one electron), or “n-1” (actual molecule
 minus one electron).</p>
+</dd>
+<dt><strong>enable_structure_sanity_check</strong><span class="classifier">bool</span></dt><dd><p>Whether to perform a sanity check of the structure provided with the electronic
+structure data.</p>
+</dd>
+<dt><strong>structure_sanity_check_relative_tolerance</strong><span class="classifier">float</span></dt><dd><p>The relative tolerance for the structure sanity check.</p>
+</dd>
+<dt><strong>structure_sanity_check_absolute_tolerance</strong><span class="classifier">float</span></dt><dd><p>The absolute tolerance for the structure sanity check.</p>
 </dd>
 </dl>
 </dd>
@@ -4702,22 +4728,37 @@ feature calculation.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.attach_electronic_structure">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_structure_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.attach_electronic_structure" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">attach_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electronic_structure_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_structure_sanity_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_relative_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_absolute_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.attach_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.attach_electronic_structure" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.attach_energy">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">attach_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_by_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.attach_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.attach_energy" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.attach_smiles">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">attach_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connectivity_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covalent_radius_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.attach_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.attach_smiles" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">attach_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connectivity_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'connect_the_dots'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covalent_radius_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.attach_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.attach_smiles" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.calculate_electronic_structure">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">calculate_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_by_energy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.calculate_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.calculate_electronic_structure" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">calculate_electronic_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redox</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_by_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.calculate_electronic_structure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.calculate_electronic_structure" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.clear_atom_feature_cache">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">clear_atom_feature_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.clear_atom_feature_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.clear_atom_feature_cache" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.clear_bond_feature_cache">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">clear_bond_feature_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.clear_bond_feature_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.clear_bond_feature_cache" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.determine_bonds">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">determine_bonds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connectivity_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covalent_radius_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_charged_fragments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_chiral</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.determine_bonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.determine_bonds" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">determine_bonds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connectivity_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'connect_the_dots'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covalent_radius_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_charged_fragments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_chiral</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.determine_bonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.determine_bonds" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -4747,22 +4788,22 @@ feature calculation.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.print_options">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">print_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.print_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.print_options" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">print_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.print_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.print_options" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.read_input">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">read_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_by_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.read_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.read_input" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">read_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'smiles'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_by_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.read_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.read_input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.return_atom_features">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">return_atom_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_invalid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.return_atom_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.return_atom_features" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">return_atom_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'df'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_invalid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.return_atom_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.return_atom_features" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.return_bond_features">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">return_bond_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_invalid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.return_bond_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.return_bond_features" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">return_bond_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'df'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_invalid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.return_bond_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.return_bond_features" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -4782,7 +4823,7 @@ feature calculation.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bonafide._bonafide._AtomBondFeaturizer.show_molecule">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">show_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_3D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.show_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.show_molecule" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">show_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'atom'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(500,</span> <span class="pre">500)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide.html#_AtomBondFeaturizer.show_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide._AtomBondFeaturizer.show_molecule" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -4805,6 +4846,41 @@ feature calculation.</p>
 <dt class="sig sig-object py" id="bonafide._bonafide_utils._AtomBondFeaturizerUtils._atom_feature_indices_3D">
 <span class="sig-name descname"><span class="pre">_atom_feature_indices_3D</span></span><a class="headerlink" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils._atom_feature_indices_3D" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bonafide._bonafide_utils._AtomBondFeaturizerUtils._attach_electronic_structure_sanity_check">
+<span class="sig-name descname"><span class="pre">_attach_electronic_structure_sanity_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conformer_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electronic_structure_data_file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_relative_tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_sanity_check_absolute_tolerance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bonafide/_bonafide_utils.html#_AtomBondFeaturizerUtils._attach_electronic_structure_sanity_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils._attach_electronic_structure_sanity_check" title="Link to this definition">¶</a></dt>
+<dd><p>Execute a sanity check before attaching the electronic structure.</p>
+<p>It is checked that</p>
+<ul class="simple">
+<li><p>the number of atoms in the electronic structure data file matches the number of atoms of
+the molecule in the molecule vault,</p></li>
+<li><p>the atom symbols in the electronic structure data file match the atom symbols of the
+molecule in the molecule vault, and</p></li>
+<li><p>the coordinates of the atoms in the electronic structure data file match the coordinates
+of the molecule in the molecule vault within a certain relative and absolute tolerance.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>conformer_idx</strong><span class="classifier">int</span></dt><dd><p>The index of the conformer.</p>
+</dd>
+<dt><strong>electronic_structure_data_file_path</strong><span class="classifier">str</span></dt><dd><p>The file path to the electronic structure data file under consideration.</p>
+</dd>
+<dt><strong>structure_sanity_check_relative_tolerance</strong><span class="classifier">float</span></dt><dd><p>The relative tolerance for the structure sanity check.</p>
+</dd>
+<dt><strong>structure_sanity_check_absolute_tolerance</strong><span class="classifier">float</span></dt><dd><p>The absolute tolerance for the structure sanity check.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Optional[str]</dt><dd><p>An error message if the sanity check fails, otherwise <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="bonafide._bonafide_utils._AtomBondFeaturizerUtils._bond_feature_indices_2D">
@@ -5256,7 +5332,7 @@ end time, and feature type.</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on May 27, 2026</div>
+              Last updated on Jun 09, 2026</div>
           </div>
           <div class="right-details">
             
@@ -5339,8 +5415,11 @@ end time, and feature type.</p>
 <li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer._setup_output_directory"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer._setup_output_directory()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.add_custom_featurizer"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.add_custom_featurizer()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.attach_electronic_structure"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.attach_electronic_structure()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.attach_energy"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.attach_energy()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.attach_smiles"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.attach_smiles()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.calculate_electronic_structure"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.calculate_electronic_structure()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.clear_atom_feature_cache"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.clear_atom_feature_cache()</span></code></a></li>
+<li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.clear_bond_feature_cache"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.clear_bond_feature_cache()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.determine_bonds"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.determine_bonds()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.featurize_atoms"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.featurize_atoms()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide._AtomBondFeaturizer.featurize_bonds"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizer.featurize_bonds()</span></code></a></li>
@@ -5363,6 +5442,7 @@ end time, and feature type.</p>
 <li><a class="reference internal" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizerUtils</span></code></a><ul>
 <li><a class="reference internal" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils._atom_feature_indices_2D"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizerUtils._atom_feature_indices_2D</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils._atom_feature_indices_3D"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizerUtils._atom_feature_indices_3D</span></code></a></li>
+<li><a class="reference internal" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils._attach_electronic_structure_sanity_check"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizerUtils._attach_electronic_structure_sanity_check()</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils._bond_feature_indices_2D"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizerUtils._bond_feature_indices_2D</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils._bond_feature_indices_3D"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizerUtils._bond_feature_indices_3D</span></code></a></li>
 <li><a class="reference internal" href="#bonafide._bonafide_utils._AtomBondFeaturizerUtils._check_atom_indices"><code class="docutils literal notranslate"><span class="pre">_AtomBondFeaturizerUtils._check_atom_indices()</span></code></a></li>
@@ -5411,7 +5491,7 @@ end time, and feature type.</p>
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=000c92bf"></script>
+    <script src="_static/documentation_options.js?v=a47416a6"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

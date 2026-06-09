@@ -337,11 +337,13 @@ individual states, the <em>actual molecule</em> (“n”), its <em>one-electron 
 <em>one-electron oxidized</em> form (“n-1”), separately by passing the respective string identifier to the
 <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter, which defaults to “n”. The attached files will then be used accordingly to
 calculate respective features.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The <strong>atom order</strong> of any electronic structure data file must match the order defined within the
-molecule vault before attaching the data. If this is not the case, erroneous features will be
-calculated.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <strong>atom order</strong> and <strong>molecular structure</strong> of any electronic structure data file must match
+the order/structure defined within the molecule vault before attaching the data. A structure
+sanity check is performed if the <code class="docutils literal notranslate"><span class="pre">enable_structure_sanity_check</span></code> parameter of the
+<a class="reference internal" href="bonafide_user.html#bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure" title="bonafide.bonafide.AtomBondFeaturizer.attach_electronic_structure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">attach_electronic_structure()</span></code></a>
+method is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default).</p>
 </div>
 </section>
 <section id="calculating-electronic-structure-data-from-scratch">
@@ -428,7 +430,7 @@ cheminformatics package (see the <a class="reference external" href="https://dig
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on May 27, 2026</div>
+              Last updated on Jun 09, 2026</div>
           </div>
           <div class="right-details">
             
@@ -469,7 +471,7 @@ cheminformatics package (see the <a class="reference external" href="https://dig
   </div>
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=000c92bf"></script>
+    <script src="_static/documentation_options.js?v=a47416a6"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

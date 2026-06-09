@@ -374,8 +374,8 @@
 
         <span class="c1"># Directly remove the Multiwfn output as it does not contain any relevant data.</span>
         <span class="c1"># The coordinates are written to a separate file.</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">_output_file_name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">_output_file_name</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_output_file_name</span><span class="si">}</span><span class="s2">.out&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_output_file_name</span><span class="si">}</span><span class="s2">.out&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="_Multiwfn3DBondTopology._read_cp_prop_file">
@@ -419,8 +419,15 @@
 
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>  <span class="c1"># for type checker</span>
         <span class="k">assert</span> <span class="n">multiwfn_xyz_coords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>  <span class="c1"># for type checker</span>
+
+        <span class="c1"># The check can be skipped as this was already checked during the attachment of the</span>
+        <span class="c1"># electronic structure data</span>
         <span class="n">rotation_matrix</span><span class="p">,</span> <span class="n">translation_vector</span><span class="p">,</span> <span class="n">error_message</span> <span class="o">=</span> <span class="n">align_coordinates</span><span class="p">(</span>
-            <span class="n">reference_coords</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">to_be_aligned_coords</span><span class="o">=</span><span class="n">multiwfn_xyz_coords</span>
+            <span class="n">reference_coords</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span><span class="p">,</span>
+            <span class="n">to_be_aligned_coords</span><span class="o">=</span><span class="n">multiwfn_xyz_coords</span><span class="p">,</span>
+            <span class="n">relative_tolerance</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># only dummy value, will not be used</span>
+            <span class="n">absolute_tolerance</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># only dummy value, will not be used</span>
+            <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">error_message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_err</span> <span class="o">=</span> <span class="p">(</span>
@@ -494,8 +501,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_process_xyz_file</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read and process a xyz file and ensure that it is compatible with the data of the initial</span>
-<span class="sd">        mol object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read and process an xyz file.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -508,7 +514,7 @@
 <span class="sd">            A tuple containing:</span>
 
 <span class="sd">            * The coordinates read from the xyz file as a numpy array, or ``None`` if an error</span>
-<span class="sd">                occurred.</span>
+<span class="sd">              occurred.</span>
 <span class="sd">            * An error message if an error occurred, or ``None`` if the processing was successful.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Read file</span>
@@ -517,22 +523,10 @@
             <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">error_message</span>
 
         <span class="k">assert</span> <span class="n">coords_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>  <span class="c1"># for type checker</span>
-        <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coords_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
-
-        <span class="n">_splitted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">])</span>
-        <span class="n">atom_symbols</span> <span class="o">=</span> <span class="n">_splitted</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-
-        <span class="c1"># Check if the data was read correctly and matches the mol object</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">atom_symbols</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">):</span>
-            <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s2">&quot;number of atoms in Multiwfn output does not match number of atoms in mol vault&quot;</span>
-            <span class="p">)</span>
-            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_errmsg</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">atom_symbols</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">):</span>
-            <span class="n">_errmsg</span> <span class="o">=</span> <span class="s2">&quot;atom symbols in Multiwfn output do not match atom symbols in mol vault&quot;</span>
-            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_errmsg</span>
 
         <span class="c1"># Get the coordinates</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coords_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+        <span class="n">_splitted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">])</span>
         <span class="n">atom_coordinates</span> <span class="o">=</span> <span class="n">_splitted</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">atom_coordinates</span><span class="p">,</span> <span class="kc">None</span></div>
 
@@ -1315,7 +1309,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on May 27, 2026</div>
+              Last updated on Jun 09, 2026</div>
           </div>
           <div class="right-details">
             
@@ -1332,7 +1326,7 @@
   </div>
 </div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../../_static/documentation_options.js?v=000c92bf"></script>
+    <script src="../../../_static/documentation_options.js?v=a47416a6"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

@@ -1029,7 +1029,7 @@ class MolVault:
                 rel_energy = rel_energies[conformer_idx]
                 print(f"Relative energy:    {round(rel_energy, 2)} kJ/mol")
                 print(
-                    f"Energy rank index:  {np.argsort(rel_energies).tolist().index(conformer_idx)}"
+                    f"Energy rank index:  {np.argsort(a=rel_energies).tolist().index(conformer_idx)}"
                 )
 
             if len(self.boltzmann_weights) != 0:

@@ -2,7 +2,7 @@
 
 ![image](docs/_static/doc_image_light.png)
 
-![Version Badge](https://img.shields.io/badge/Version-0.2.3-%231d7b87)
+![Version Badge](https://img.shields.io/badge/Version-0.2.4-%231d7b87)
 [![DOI](https://img.shields.io/badge/DOI-10.26434/chemrxiv.15001386/v1-%231d7b87)](https://doi.org/10.26434/chemrxiv.15001386/v1)
 ![Maturity](https://img.shields.io/badge/Maturity%20level-ML--1-%231d7b87)
 ![Mypy](https://github.com/MolecularAI/atom-bond-featurizer/actions/workflows/mypy_analysis.yml/badge.svg?branch=main)
@@ -21,11 +21,11 @@ For any further details, please visit the
 
 ## Requirements
 
--   Python 3.12
--   Conda (for environment management)
--   Key dependencies: alfabet, ase, dbstep, dscribe, kallisto, mendeleev, morfeus-ml, numpy, pandas,
-    py3Dmol, qmdesc, rdkit, scipy
--   Optional external programs: Multiwfn, Psi4, xtb
+- Python 3.12
+- Conda (for environment management)
+- Key dependencies: alfabet, ase, dbstep, dscribe, kallisto, mendeleev, morfeus-ml, numpy, pandas,
+  py3Dmol, qmdesc, rdkit, scipy
+- Optional external programs: Multiwfn, Psi4, xtb
 
 For further details, please see the
 [installation guide](https://molecularai.github.io/atom-bond-featurizer/installation.html) and the
@@ -55,9 +55,9 @@ For more details and examples, see the [examples](examples/) folder and the
 
 ## Reference and Contributors
 
--   Lukas Sigmund
--   Michele Assante
--   Matt Ball
+- Lukas Sigmund
+- Michele Assante
+- Matt Ball
 
 For any further details, please refer to our
 [preprint](https://chemrxiv.org/doi/full/10.26434/chemrxiv.15001386/v1).

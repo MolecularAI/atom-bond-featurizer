@@ -604,8 +604,8 @@ class _AtomBondFeaturizerUtils:
             if not all(atom_symbols == self.mol_vault.elements):
                 _errmsg = (
                     "the atom symbols found in the electronic structure data file "
-                    f"({list(atom_symbols)}) do not match the atom symbols of the molecule in the mol "
-                    f"vault ({list(self.mol_vault.elements)})"
+                    f"({[str(s) for s in atom_symbols]}) do not match the atom symbols of the "
+                    f"molecule in the mol vault ({[str(e) for e in self.mol_vault.elements]})"
                 )
                 return _errmsg
 

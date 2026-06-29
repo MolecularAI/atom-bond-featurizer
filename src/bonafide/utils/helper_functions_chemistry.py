@@ -326,7 +326,7 @@ def bind_smiles_with_xyz(
     params.makeBondsGeneric = True
 
     # Helper mol object for doing the substructure matching
-    smiles_mol_helper = Chem.AdjustQueryProperties(smiles_mol, params)
+    smiles_mol_helper = Chem.AdjustQueryProperties(mol=smiles_mol, params=params)
 
     # Reset atom properties of the helper smiles mol to only have the atom types and
     # connectivity for substructure matching
@@ -358,11 +358,8 @@ def bind_smiles_with_xyz(
         )
         return None, _errmsg
 
-    # Reference xyz_mol for storing the initial atom order
-    xyz_mol_ref = Chem.Mol(xyz_mol)
-
     # Renumber the atoms of the XYZ mol to match the order of the smiles_mol
-    xyz_mol = Chem.AdjustQueryProperties(xyz_mol, params)
+    xyz_mol = Chem.AdjustQueryProperties(mol=xyz_mol, params=params)
 
     # In case of the Hueckel method, the substructure matching needs to be inverted as
     # it is not working the other way round
@@ -389,18 +386,10 @@ def bind_smiles_with_xyz(
     smiles_mol.AddConformer(xyz_mol.GetConformer(0))
     smiles_mol = _transfer_atom_bond_properties(source_mol=xyz_mol, target_mol=smiles_mol)
 
-    # Apply the atom order of xyz_mol_ref (restore the initial atom order)
+    # Restore the initial atom order of the xyz_mol if requested
+    # E.g., renumbering_list = [3, 2, 0, 1] --> inverse renumbering_list = [2, 3, 1, 0]
     if align is True:
-        renumbering_list = _get_renumbering_list(
-            template=xyz_mol_ref, to_be_renumbered=smiles_mol_helper
-        )
-        # Check if the renumbering list is valid
-        error_message = _check_renumbering_list(
-            renum_list=renumbering_list, num_atoms=xyz_mol.GetNumAtoms()
-        )
-        if error_message is not None:
-            return None, error_message
-
+        renumbering_list = np.argsort(a=renumbering_list).tolist()
         smiles_mol = Chem.RenumberAtoms(smiles_mol, renumbering_list)
 
     # Clean up (after Hueckel calculation)

@@ -41,7 +41,7 @@ INPUT_FILE = os.path.join("data", "mol_data_100.csv")
 MOL_DATA_FOLDER = ...
 FEATURE_OUTPUT_FILE = "results_all_3D_features.pkl"
 
-# Removed features (as they cannot be routinely calculated for atoms of a molecule):
+# Removed features (as they cannot be routinely calculated for all atoms of a molecule):
 # 170: morfeus3D-atom-cone_angle
 # 171: morfeus3D-atom-cone_angle_solid
 # 172: morfeus3D-atom-cone_angle_solid_g_parameter

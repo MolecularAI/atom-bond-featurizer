@@ -1,3 +1,5 @@
+"""Test functions for the ``LogFileAnalyzer`` class."""
+
 from typing import Callable, Optional
 
 import pandas as pd
@@ -9,8 +11,7 @@ from bonafide import LogFileAnalyzer
 @pytest.mark.log_file_analysis
 @pytest.mark.parametrize("log_level", [None, "ERROR", "warniNG", "debug"])
 def test_get_level_log_messages(
-    fetch_data_file: Callable[[str], str],
-    log_level: Optional[str],
+    fetch_data_file: Callable[[str], str], log_level: Optional[str]
 ) -> None:
     """Test for the ``get_level_log_messages()`` method."""
     a = LogFileAnalyzer(fetch_data_file("bonafide_example_log.log"))

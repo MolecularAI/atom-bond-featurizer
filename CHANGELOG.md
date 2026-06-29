@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 0.2.4
+
+### Fixes
+
+- There was a bug in the `attach_smiles()` method when run with `align=True` which potentially
+  resulted in erroneous atom orders within the final RDKit mol object used for featurization for
+  certain molecules.
+
 ## Version 0.2.3
 
 ### Added

@@ -911,8 +911,8 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">atom_symbols</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">elements</span><span class="p">):</span>
                 <span class="n">_errmsg</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="s2">&quot;the atom symbols found in the electronic structure data file &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">atom_symbols</span><span class="p">)</span><span class="si">}</span><span class="s2">) do not match the atom symbols of the molecule in the mol &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;vault (</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">atom_symbols</span><span class="p">]</span><span class="si">}</span><span class="s2">) do not match the atom symbols of the &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;molecule in the mol vault (</span><span class="si">{</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">mol_vault</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
                 <span class="p">)</span>
                 <span class="k">return</span> <span class="n">_errmsg</span>
 
@@ -960,7 +960,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Jun 09, 2026</div>
+              Last updated on Jun 29, 2026</div>
           </div>
           <div class="right-details">
             
@@ -977,7 +977,7 @@
   </div>
 </div><script src="../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=a47416a6"></script>
+    <script src="../../_static/documentation_options.js?v=6ffd866b"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
